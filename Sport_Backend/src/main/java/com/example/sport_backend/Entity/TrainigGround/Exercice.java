@@ -1,11 +1,10 @@
 package com.example.sport_backend.Entity.TrainigGround;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,5 +26,15 @@ public class Exercice {
     String mainFocus;
     String ageGroup;
     Integer groupSize;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    TrainingSession trainingSession;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<MediaExercice> mediaExercices;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Focus> focusList;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Tag> tagList;
+
 
 }
