@@ -30,6 +30,6 @@ public class TrainingSession {
     String address;
     @ManyToOne
     User user;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "trainingSession")
     private List<Exercice> exercices;
 }

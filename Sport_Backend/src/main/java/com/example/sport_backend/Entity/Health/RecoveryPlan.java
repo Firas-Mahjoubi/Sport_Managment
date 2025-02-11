@@ -32,4 +32,6 @@ public class RecoveryPlan {
     String adjustments;
     @Enumerated(EnumType.STRING)
     PlanStatus planStatus;
+    @OneToOne(mappedBy="recoveryplan")
+    private Injury injury ;
 }
