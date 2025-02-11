@@ -1,5 +1,6 @@
 package com.example.sport_backend.Entity.Health;
 
+import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Entity.Enum.Serverity;
 import com.example.sport_backend.Entity.Enum.Status;
 import com.example.sport_backend.Entity.Enum.Type;
@@ -32,4 +33,10 @@ public class Injury {
     @Enumerated(EnumType.STRING)
     ZoneAffectee zoneAffectee;
     String cause;
+
+    @OneToOne
+    private RecoveryPlan recoveryplan;
+
+    @ManyToOne
+    Player player;
 }

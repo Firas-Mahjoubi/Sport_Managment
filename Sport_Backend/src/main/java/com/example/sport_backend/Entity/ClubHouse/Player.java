@@ -1,8 +1,12 @@
 package com.example.sport_backend.Entity.ClubHouse;
 
+import com.example.sport_backend.Entity.Health.HealthRecord;
+import com.example.sport_backend.Entity.Health.Injury;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -20,4 +24,10 @@ public class Player {
     String performanceStats;
     @ManyToOne
     Team team;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="player")
+    private Set<Injury> Injurys;
+    @OneToOne
+    private HealthRecord healthrecord;
+
 }
