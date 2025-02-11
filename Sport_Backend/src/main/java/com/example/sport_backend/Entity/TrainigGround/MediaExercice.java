@@ -1,9 +1,6 @@
 package com.example.sport_backend.Entity.TrainigGround;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -20,4 +17,7 @@ public class MediaExercice {
     Long id;
     String type;
     String filePath;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    Exercice exercice;
 }
