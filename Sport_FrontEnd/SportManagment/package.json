@@ -21,6 +21,7 @@
     "@kurkle/color": "^0.3.4",
     "bootstrap": "^5.3.3",
     "rxjs": "~7.8.0",
+    "sport-managment": "file:",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },
