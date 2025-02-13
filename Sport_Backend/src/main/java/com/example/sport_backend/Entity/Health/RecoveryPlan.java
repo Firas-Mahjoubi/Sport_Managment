@@ -13,25 +13,31 @@ import java.time.LocalDate;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level= AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class RecoveryPlan {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
     String planDescription;
     LocalDate startDate;
     LocalDate estimatedEndDate;
     LocalDate actualEndDate;
+
     Float progress;
     Integer sessionFrequency;
     Integer sessionDuration;
+
     @Enumerated(EnumType.STRING)
     PlanType planType;
+
     LocalDate nextReviewDate;
     String adjustments;
+
     @Enumerated(EnumType.STRING)
     PlanStatus planStatus;
-    @OneToOne(mappedBy="recoveryplan")
-    private Injury injury ;
+
+    @OneToOne(mappedBy = "recoveryPlan")
+    private Injury injury;
 }
