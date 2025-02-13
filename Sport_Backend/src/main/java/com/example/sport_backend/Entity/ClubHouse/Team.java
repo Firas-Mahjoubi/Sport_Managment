@@ -28,7 +28,7 @@ public class Team {
     Club club;
     @OneToMany(mappedBy = "team")
     List<Player>players;
-    @OneToOne
-    Tactic tactic;
+    @OneToMany(mappedBy = "team", cascade = CascadeType.PERSIST)
+    List<Tactic> tactics;
 
 }
