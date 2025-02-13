@@ -25,9 +25,12 @@ public class Player {
     @ManyToOne
     Team team;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="player")
-    private Set<Injury> Injurys;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+    private Set<Injury> injuries;
+
     @OneToOne
-    private HealthRecord healthrecord;
+    @JoinColumn(name = "health_record_id")
+    private HealthRecord healthRecord;
 
 }

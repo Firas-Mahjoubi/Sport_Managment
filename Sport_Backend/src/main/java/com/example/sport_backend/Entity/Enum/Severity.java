@@ -1,5 +1,7 @@
 package com.example.sport_backend.Entity.Enum;
 
-public enum Serverity {
+public enum Severity {
+
     LEGER, MODERE, GRAVE
+
 }
