@@ -1,11 +1,11 @@
-package com.example.sport_backend.Entity.Matches;
+package com.example.sport_backend.Entity.Matchs;
 
-import com.example.sport_backend.Entity.ClubHouse.Player;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -19,10 +19,5 @@ public class LineUp {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     Long id;
     String formation;
-    @ElementCollection
-    private List<Long> playerNumbers;
-@OneToOne
-    Match match;
-
 
 }
