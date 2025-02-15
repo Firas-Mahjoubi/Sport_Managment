@@ -34,7 +34,7 @@ public class Team {
     @OneToMany(mappedBy = "team")
             @JsonIgnore
     List<Player>players;
-    @OneToOne
-    Tactic tactic;
+    @OneToMany(mappedBy = "team", cascade = CascadeType.PERSIST)
+    List<Tactic> tactics;
 
 }
