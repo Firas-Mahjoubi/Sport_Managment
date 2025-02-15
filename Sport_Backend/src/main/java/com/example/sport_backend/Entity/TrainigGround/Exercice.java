@@ -18,8 +18,8 @@ public class Exercice {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     Long id;
     String name;
+    Boolean visibility;
     String description;
-    String visibility;
     Integer fitnessLevel;
     Integer techniqueLevel;
     Integer tacticLevel;
@@ -27,13 +27,12 @@ public class Exercice {
     String ageGroup;
     Integer groupSize;
 
+
     @ManyToOne(cascade = CascadeType.ALL)
     TrainingSession trainingSession;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "exercice")
     private List<MediaExercice> mediaExercices;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Focus> focusList;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "exercice")
     private List<Tag> tagList;
 
 

@@ -22,8 +22,19 @@ public class Tactic {
     String description;
     String formation;
     String trainingFocus;
-    @OneToOne
-    Team team;
-    @OneToMany(mappedBy = "tactic")
-    List<MediaTactic>mediaTactics;
+    @ManyToOne
+    @JoinColumn(name = "team_id", nullable = true)
+    private Team team;
+
+    @OneToMany(mappedBy = "tactic", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PlayerMovement> playerMovements;
+
+    @OneToMany(mappedBy = "tactic", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BallMovement> ballMovements;
+
+    @OneToMany(mappedBy = "tactic", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MediaTactic> mediaTactics;
+
+    @OneToMany(mappedBy = "tactic", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TacticSimulation> simulations;
 }

@@ -1,4 +1,4 @@
-package com.example.sport_backend.Entity.AdvancedPlanning;
+package com.example.sport_backend.Entity.Tactic;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,13 +11,15 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @Entity
-public class Ressources {
+public class Waypoint {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    Long id;
-    String RessourceName;
-    Integer RessourceNumber;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+     Long id;
+
+     Double x;
+     Double y;
+     Double timestamp;
 
     @ManyToOne
-    Event event;
+     PlayerMovement playerMovement;
 }
