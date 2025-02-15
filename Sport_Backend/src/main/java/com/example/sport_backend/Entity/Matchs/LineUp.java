@@ -1,11 +1,13 @@
-package com.example.sport_backend.Entity.Matchs;
+package com.example.sport_backend.Entity.Matches;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.sport_backend.Entity.ClubHouse.Player;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,5 +21,21 @@ public class LineUp {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     Long id;
     String formation;
+    @ElementCollection
+    @Size(max = 11)
+    private List<Long> homeTeamplayerNumbers;
+    @ElementCollection
+    @Size(max = 7)
+    private List<Long> homeTeamplayerSubsNumbers;
+    @ElementCollection
+    @Size(max = 11)
+    private  List<Long> awayTeamPlayerNumbers;
+    @ElementCollection
+    @Size(max = 7)
+    private List<Long> awayTeamPlayerSubsNumbers;
+@OneToOne
+        @JsonIgnore
+    Match match;
+
 
 }
