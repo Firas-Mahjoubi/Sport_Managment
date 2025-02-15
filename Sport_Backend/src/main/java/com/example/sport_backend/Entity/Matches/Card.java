@@ -21,6 +21,7 @@ public class Card {
     CardType cardType;
     Integer CardTime;
     Integer numberOfPlayer;
+    Boolean forHomeTeam;
     @ManyToOne
             @JsonIgnore
     Match match;
