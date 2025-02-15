@@ -1,9 +1,9 @@
 package com.example.sport_backend.Repositories.ClubHouse;
 
-import com.example.sport_backend.Entity.ClubHouse.User;
+import com.example.sport_backend.Entity.ClubHouse.Club;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepositories extends JpaRepository<User, Long> {
+public interface clubRepo extends JpaRepository<Club,Long> {
 }
