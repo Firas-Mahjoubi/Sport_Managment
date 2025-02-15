@@ -1,7 +1,6 @@
 package com.example.sport_backend.ServiceImpl.Tactic;
 
 
-public class TacticServiceIMPL {
 
 
 import com.example.sport_backend.Entity.ClubHouse.Team;
