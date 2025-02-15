@@ -30,5 +30,8 @@ public class Team {
     List<Player>players;
     @OneToMany(mappedBy = "team", cascade = CascadeType.PERSIST)
     List<Tactic> tactics;
+    public void setTactic(Tactic tactic) {
+        this.tactics = (List<Tactic>) tactic;
+    }
 
 }
