@@ -1,11 +1,10 @@
-package com.example.sport_backend.Entity.Matchs;
+package com.example.sport_backend.Entity.ClubHouse;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,9 +13,11 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @Entity
-public class Substitution {
+public class League {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     Long id;
-    Integer minuteOfPlay;
+    String name;
+    @OneToMany(mappedBy = "league")
+    List<Club> clubs;
 }

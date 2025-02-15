@@ -1,4 +1,4 @@
-package com.example.sport_backend.Entity.Matchs;
+package com.example.sport_backend.Entity.Matches;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,8 +7,6 @@ import jakarta.persistence.Id;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @ToString
@@ -16,12 +14,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @Entity
-public class Seson {
+public class Performence {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     Long id;
-    String name;
-    LocalDate startDate;
-    LocalDate endDate;
-
+    Integer rating;
+    String comments;
 }
