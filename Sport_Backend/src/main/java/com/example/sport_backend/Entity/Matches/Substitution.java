@@ -1,9 +1,7 @@
-package com.example.sport_backend.Entity.Matchs;
+package com.example.sport_backend.Entity.Matches;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.sport_backend.Entity.ClubHouse.Player;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -14,10 +12,13 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @Entity
-public class Card {
+public class Substitution {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     Long id;
-    String cardType;
     Integer minuteOfPlay;
+    Integer PlayerInNumber;
+    Integer PlayerOutNumber;
+    @ManyToOne
+    Match match;
 }
