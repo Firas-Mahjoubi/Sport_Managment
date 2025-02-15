@@ -26,10 +26,10 @@ public class Tactic {
     @JoinColumn(name = "team_id", nullable = true)
     private Team team;
 
-    @OneToMany(mappedBy = "tactic", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "tactic", cascade = CascadeType.ALL)
     private List<PlayerMovement> playerMovements;
 
-    @OneToMany(mappedBy = "tactic", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "tactic", cascade = CascadeType.ALL)
     private List<BallMovement> ballMovements;
 
     @OneToMany(mappedBy = "tactic", cascade = CascadeType.ALL, orphanRemoval = true)
