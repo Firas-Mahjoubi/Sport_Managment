@@ -1,5 +1,8 @@
 package com.example.sport_backend.ServiceImpl.Tactic;
 
+
+
+
 import com.example.sport_backend.Entity.ClubHouse.Team;
 import com.example.sport_backend.Entity.Tactic.Tactic;
 import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
@@ -60,4 +63,5 @@ public class TacticServiceIMPL implements ITacticService {
     public List<Tactic> getTacticsByTeam(Long teamId) {
         return tacticRepositories.findByTeamId(teamId);
     }
+
 }
