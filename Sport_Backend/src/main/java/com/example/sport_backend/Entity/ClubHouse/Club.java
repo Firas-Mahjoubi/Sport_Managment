@@ -20,9 +20,11 @@ public class Club {
     Long id;
     String name;
     String location;
+    String StadiumName;
     LocalDate foundationYear;
     String clubLogo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="club")
-     List<Team>teams;
-
+    @OneToMany(mappedBy = "club")
+    List<Team>teams;
+    @ManyToOne
+    League league;
 }
