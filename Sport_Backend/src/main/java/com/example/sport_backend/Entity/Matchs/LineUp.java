@@ -1,11 +1,14 @@
 package com.example.sport_backend.Entity.Matchs;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.sport_backend.Entity.ClubHouse.Player;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.Cascade;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,5 +22,19 @@ public class LineUp {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     Long id;
     String formation;
+    @ElementCollection
+    @Size(max = 11)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL) // Apply cascading here too if needed
+    private List<Long> TeamplayerNumbers;
+    @ElementCollection
+    @Size(max = 7)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL) // Use Hibernate's Cascade if needed (for complex cases)
+
+    private List<Long> TeamplayerSubsNumbers;
+   private Boolean isHomeTeam;
+    @OneToOne
+    @JsonIgnore
+    Match match;
+
 
 }
