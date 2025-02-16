@@ -17,10 +17,12 @@ import java.util.Set;
 @Entity
 public class Player {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String name;
+    String FirstName;
+    String LastName;
     String position;
+    Integer playerNumber;
     String performanceStats;
     @ManyToOne
     Team team;
