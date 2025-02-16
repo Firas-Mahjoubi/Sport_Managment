@@ -13,10 +13,10 @@ public interface GoalRepo extends JpaRepository<Goal,Long> {
             "JOIN g.match m " +
             "JOIN m.teams t " +
             "JOIN t.players p " +
-            "WHERE p.Firs = :firstName " +
+            "WHERE p.FirstName = :firstName " +
             "AND p.LastName = :lastName " +
             "AND t.name = :teamName " +
-            "AND g.ScorerNumber = p.playerNumber")
+            "AND g.scorerNumber = p.playerNumber")
     Long countGoalsByPlayerAndTeam(
             @Param("firstName") String firstName,
             @Param("lastName") String lastName,

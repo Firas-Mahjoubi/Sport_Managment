@@ -1,6 +1,6 @@
 package com.example.sport_backend.Repositories.matches;
 
-import com.example.sport_backend.Entity.Matches.Card;
+import com.example.sport_backend.Entity.Matchs.Card;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

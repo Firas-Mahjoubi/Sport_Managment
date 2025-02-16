@@ -1,7 +1,7 @@
 package com.example.sport_backend.Controllers.Matches;
 
-import com.example.sport_backend.Entity.Matches.Card;
-import com.example.sport_backend.Entity.Matches.Match;
+import com.example.sport_backend.Entity.Matchs.Card;
+import com.example.sport_backend.Entity.Matchs.Match;
 import com.example.sport_backend.Repositories.matches.CardRepo;
 import com.example.sport_backend.Repositories.matches.MatchesRepo;
 import com.example.sport_backend.ServiceImpl.Matches.CardService;

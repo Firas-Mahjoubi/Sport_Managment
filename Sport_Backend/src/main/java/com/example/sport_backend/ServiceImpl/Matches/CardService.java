@@ -2,22 +2,21 @@ package com.example.sport_backend.ServiceImpl.Matches;
 
 import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Entity.ClubHouse.Team;
-import com.example.sport_backend.Entity.Matches.Card;
-import com.example.sport_backend.Entity.Matches.Match;
-import com.example.sport_backend.Repositories.ClubHouse.TeamRepo;
+import com.example.sport_backend.Entity.Matchs.Card;
+import com.example.sport_backend.Entity.Matchs.Match;
+import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
 import com.example.sport_backend.Repositories.matches.CardRepo;
 import com.example.sport_backend.Repositories.matches.MatchesRepo;
-import com.example.sport_backend.ServiceInterface.Matches.ICardService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @AllArgsConstructor
 @Service
-public class CardService implements ICardService {
+public class CardService {
     private final CardRepo cardRepo;
     private final MatchesRepo matchRepo;
-    private  final  TeamRepo teamRepo;
+    private  final TeamRepositories teamRepo;
     @Transactional
     public Card addCard(long matchId, boolean isHomeTeam, int playerNumber, Card card) {
         // Fetch the match
