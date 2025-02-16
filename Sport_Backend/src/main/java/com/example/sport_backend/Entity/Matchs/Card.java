@@ -1,5 +1,6 @@
 package com.example.sport_backend.Entity.Matchs;
 
+import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,4 +26,7 @@ public class Card {
     @ManyToOne
     @JsonIgnore
     Match match;
+    @ManyToOne
+    @JsonIgnore
+    Player cardTaker;
 }

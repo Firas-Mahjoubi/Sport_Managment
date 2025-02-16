@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -23,16 +24,14 @@ public class LineUp {
     String formation;
     @ElementCollection
     @Size(max = 11)
-    private List<Long> homeTeamplayerNumbers;
+    @Cascade(org.hibernate.annotations.CascadeType.ALL) // Apply cascading here too if needed
+    private List<Long> TeamplayerNumbers;
     @ElementCollection
     @Size(max = 7)
-    private List<Long> homeTeamplayerSubsNumbers;
-    @ElementCollection
-    @Size(max = 11)
-    private  List<Long> awayTeamPlayerNumbers;
-    @ElementCollection
-    @Size(max = 7)
-    private List<Long> awayTeamPlayerSubsNumbers;
+    @Cascade(org.hibernate.annotations.CascadeType.ALL) // Use Hibernate's Cascade if needed (for complex cases)
+
+    private List<Long> TeamplayerSubsNumbers;
+   private Boolean isHomeTeam;
     @OneToOne
     @JsonIgnore
     Match match;
