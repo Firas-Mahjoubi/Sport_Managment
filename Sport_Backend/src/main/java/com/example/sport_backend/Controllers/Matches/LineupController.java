@@ -1,6 +1,6 @@
 package com.example.sport_backend.Controllers.Matches;
 
-import com.example.sport_backend.Entity.Matches.LineUp;
+import com.example.sport_backend.Entity.Matchs.LineUp;
 import com.example.sport_backend.ServiceImpl.Matches.LineupService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class LineupController {
             @RequestBody LineUp lineUp) {
 
         // Call the service to create the lineup
-        LineUp createdLineUp = lineUpService.createTeamLineUp(matchId, isHomeTeam, lineUp);
+        LineUp createdLineUp = lineUpService.createTeamLineUp(matchId, isHomeTeam);
         return ResponseEntity.ok(createdLineUp);
     }
 }

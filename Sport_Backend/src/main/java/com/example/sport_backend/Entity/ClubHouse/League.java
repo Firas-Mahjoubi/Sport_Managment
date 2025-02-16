@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -14,17 +13,11 @@ import java.util.List;
 @NoArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @Entity
-public class Club {
+public class League {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     Long id;
     String name;
-    String location;
-    String StadiumName;
-    LocalDate foundationYear;
-    String clubLogo;
-    @OneToMany(mappedBy = "club")
-    List<Team>teams;
-    @ManyToOne
-    League league;
+    @OneToMany(mappedBy = "league")
+    List<Club> clubs;
 }
