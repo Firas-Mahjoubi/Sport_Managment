@@ -1,4 +1,4 @@
-package com.example.sport_backend.Entity.Matches;
+package com.example.sport_backend.Entity.Matchs;
 
 import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,8 +33,8 @@ public class LineUp {
     @ElementCollection
     @Size(max = 7)
     private List<Long> awayTeamPlayerSubsNumbers;
-@OneToOne
-        @JsonIgnore
+    @OneToOne
+    @JsonIgnore
     Match match;
 
 

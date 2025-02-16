@@ -1,9 +1,6 @@
 package com.example.sport_backend.Entity.Matchs;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -21,4 +18,6 @@ public class Goal {
     String goalType;
     String assistType;
     Integer minuteOfPlay;
+    @ManyToOne
+    Match match;
 }
