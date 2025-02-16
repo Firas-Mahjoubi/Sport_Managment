@@ -1,13 +1,11 @@
 package com.example.sport_backend.ServiceImpl.Matches;
-import com.example.sport_backend.Entity.ClubHouse.Player;
 
 import com.example.sport_backend.Entity.ClubHouse.Team;
-import com.example.sport_backend.Entity.Matches.LineUp;
-import com.example.sport_backend.Entity.Matches.Match;
-import com.example.sport_backend.Repositories.ClubHouse.TeamRepo;
+import com.example.sport_backend.Entity.Matchs.LineUp;
+import com.example.sport_backend.Entity.Matchs.Match;
+import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
 import com.example.sport_backend.Repositories.matches.LineUpRepo;
 import com.example.sport_backend.Repositories.matches.MatchesRepo;
-import com.example.sport_backend.ServiceInterface.Matches.IlineupService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,10 +15,10 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class LineupService implements IlineupService {
+public class LineupService {
     private final LineUpRepo lineUpRepo;
     private final MatchesRepo matchRepo;
-    private final TeamRepo teamRepo;
+    private final TeamRepositories teamRepo;
 
 
     @Transactional
