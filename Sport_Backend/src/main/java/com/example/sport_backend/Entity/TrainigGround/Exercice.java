@@ -1,5 +1,7 @@
 package com.example.sport_backend.Entity.TrainigGround;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -26,14 +28,14 @@ public class Exercice {
     String mainFocus;
     String ageGroup;
     Integer groupSize;
+    List<String> tags;
 
-
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     TrainingSession trainingSession;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "exercice")
     private List<MediaExercice> mediaExercices;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "exercice")
-    private List<Tag> tagList;
 
 
 }

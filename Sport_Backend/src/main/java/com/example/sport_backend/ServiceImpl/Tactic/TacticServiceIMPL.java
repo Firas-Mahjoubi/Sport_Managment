@@ -46,11 +46,6 @@ public class TacticServiceIMPL implements ITacticService {
     }
 
 
-
-
-
-
-
     @Override
     public List<Tactic> getAllTactics() {
         return tacticRepositories.findAll();
