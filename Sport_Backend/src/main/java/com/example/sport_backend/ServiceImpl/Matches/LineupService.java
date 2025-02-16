@@ -16,13 +16,13 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Service
 public class LineupService {
+
     private final LineUpRepo lineUpRepo;
     private final MatchesRepo matchRepo;
     private final TeamRepositories teamRepo;
 
-
     @Transactional
-    public LineUp createTeamLineUp(Long matchId, boolean isHomeTeam) {
+    public LineUp createTeamLineUp(Long matchId, boolean isHomeTeam, LineUp lineUpRequest) {
         // Fetch the match by ID
         Match match = matchRepo.findById(matchId)
                 .orElseThrow(() -> new RuntimeException("Match not found"));
@@ -51,20 +51,21 @@ public class LineupService {
                 .map(player -> (long) player.getPlayerNumber())  // Convert Integer to Long
                 .collect(Collectors.toList());
 
-        // Create the LineUp object and set match details
+        // Create the LineUp object using the request data
         LineUp lineUp = new LineUp();
-        lineUp.setMatch(match);
+        lineUp.setMatch(match);  // Set the match for the lineup
+        lineUp.setFormation(lineUpRequest.getFormation());  // Set the formation from the request
 
+        // If it's the home team, set the player numbers and substitute numbers for the home team
         if (isHomeTeam) {
-            lineUp.setHomeTeamplayerNumbers(playerNumbers);
-            lineUp.setHomeTeamplayerSubsNumbers(subsNumbers);
+            lineUp.setTeamplayerNumbers(playerNumbers);  // Set main 11 players
+            lineUp.setTeamplayerSubsNumbers(subsNumbers);  // Set substitute players
         } else {
-            lineUp.setAwayTeamPlayerNumbers(playerNumbers);
-            lineUp.setAwayTeamPlayerSubsNumbers(subsNumbers);
+            lineUp.setTeamplayerNumbers(playerNumbers);  // Set main 11 players for away team
+            lineUp.setTeamplayerSubsNumbers(subsNumbers);  // Set substitute players for away team
         }
 
-        // Save the LineUp object
+        // Save and return the LineUp object
         return lineUpRepo.save(lineUp);
     }
-
 }

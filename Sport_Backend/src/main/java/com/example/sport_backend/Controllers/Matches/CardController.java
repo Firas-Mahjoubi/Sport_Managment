@@ -18,6 +18,25 @@ public class CardController {
     public Card addCard(@PathVariable Long matchId, @RequestParam boolean isHomeTeam, @RequestBody Card card) {
         return cardService.addCard(matchId, isHomeTeam, card.getNumberOfPlayer(), card);
     }
+    @GetMapping("/red-cards")
+    public Long getRedCardsForPlayer(
+            @RequestParam String firstName,
+            @RequestParam String lastName,
+            @RequestParam String teamName) {
+        return cardService.countRedCardsForPlayer(firstName, lastName, teamName);
+    }
+
+    @GetMapping("/yellow-cards")
+    public Long getYellowCardsForPlayer(
+            @RequestParam String firstName,
+            @RequestParam String lastName,
+            @RequestParam String teamName) {
+        return cardService.countYellowCardsForPlayer(firstName, lastName, teamName);
+    }
+    @DeleteMapping("/deleteCard/{cardId}")
+    public void deleteCard(@PathVariable Long cardId) {
+        cardService.deleteCard(cardId);
+    }
 
 
 
