@@ -7,6 +7,7 @@ import com.example.sport_backend.ServiceInterface.ClubHouse.IClubService;
 import java.util.List;
 
 public class ClubServiceIMPL implements IClubService {
+
     public ClubRepo clubRepo;
 
 
