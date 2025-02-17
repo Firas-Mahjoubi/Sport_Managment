@@ -4,13 +4,16 @@ import com.example.sport_backend.Entity.Health.HealthRecord;
 import com.example.sport_backend.Repositories.Health.HealthRepositories;
 import com.example.sport_backend.ServiceInterface.Health.IHealthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+@Service
 public class HealthServiceIMPL  implements IHealthService {
 
 
-
+@Autowired
     private HealthRepositories healthRepositories;
 
 

@@ -5,6 +5,7 @@ import com.example.sport_backend.Entity.Enum.Severity;
 import com.example.sport_backend.Entity.Enum.Status;
 import com.example.sport_backend.Entity.Enum.Type;
 import com.example.sport_backend.Entity.Enum.ZoneAffectee;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -29,7 +30,7 @@ public class Injury {
     Type type;
 
     @Enumerated(EnumType.STRING)
-    Severity severity; // Correction ici
+    Severity severity;
 
     String description;
 
@@ -41,9 +42,14 @@ public class Injury {
 
     String cause;
 
+
+@JsonIgnore
     @OneToOne
     @JoinColumn(name = "recovery_plan_id")
     private RecoveryPlan recoveryPlan;
+
+
+
 
     @ManyToOne
     @JoinColumn(name = "player_id", nullable = false)
