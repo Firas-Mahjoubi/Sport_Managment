@@ -1,12 +1,15 @@
 package com.example.sport_backend.Entity.TrainigGround;
 
+import com.example.sport_backend.Entity.ClubHouse.Team;
 import com.example.sport_backend.Entity.ClubHouse.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -24,12 +27,15 @@ public class TrainingSession {
     String description;
     String target;
     LocalDate date;
-    Time startTime;
-    Time endTime;
+    LocalDateTime startTime;
+    LocalDateTime endTime;
     String location;
     String address;
-    @ManyToOne
-    User user;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "trainingSession")
     private List<Exercice> exercices;
+
+    @OneToOne(mappedBy="trainingsession")
+    Team team;
+
 }

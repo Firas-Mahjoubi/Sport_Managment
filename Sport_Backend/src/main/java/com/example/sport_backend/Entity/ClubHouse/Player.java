@@ -13,7 +13,7 @@ import java.util.Set;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level= AccessLevel.PRIVATE)
 @Entity
 public class Player {
     @Id

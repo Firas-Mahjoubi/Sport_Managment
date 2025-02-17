@@ -27,8 +27,6 @@ public class User {
     Role role;
     @ManyToOne
     Team team;
-    @OneToMany(mappedBy = "user")
-    List<TrainingSession>trainingSessions;
 
 
 

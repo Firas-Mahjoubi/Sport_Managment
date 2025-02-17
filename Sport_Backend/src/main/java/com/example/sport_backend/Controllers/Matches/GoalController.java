@@ -1,17 +1,20 @@
 package com.example.sport_backend.Controllers.Matches;
 
-import com.example.sport_backend.Entity.Matches.Goal;
+import com.example.sport_backend.Entity.Matchs.Goal;
 import com.example.sport_backend.ServiceImpl.Matches.GoalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 @RequiredArgsConstructor
 @RestController
 public class GoalController {
     private final GoalService goalService;
+
+    @DeleteMapping("/deleteGaol/{goalId}")
+    public void deleteGoal(@PathVariable Long goalId) {
+        goalService.deleteGoal(goalId);
+    }
     @GetMapping("/count")
     public ResponseEntity<Long> getGoalsByPlayerAndTeam(
             @RequestParam String firstName,
@@ -27,10 +30,11 @@ public class GoalController {
                                         @RequestBody Goal goal,
                                         @RequestParam boolean isHomeGoal) {
         // Call the service to add the goal and pass the necessary information
-        Goal savedGoal = goalService.addGoal(matchId, goal.getScorerNumber(), goal.getAssisterNumber(),
+        Goal savedGoal = goalService.addGoal(matchId, goal.getScorerNumber(),
                 goal.getTiming(), isHomeGoal);
 
         // Return the saved goal as a response
         return ResponseEntity.ok(savedGoal);
     }
 }
+
