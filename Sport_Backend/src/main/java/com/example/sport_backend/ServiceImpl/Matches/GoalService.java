@@ -1,26 +1,23 @@
 package com.example.sport_backend.ServiceImpl.Matches;
 
+
+import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Entity.ClubHouse.Team;
-import com.example.sport_backend.Entity.Matches.Goal;
-import com.example.sport_backend.Entity.Matches.Match;
+import com.example.sport_backend.Entity.Matchs.Goal;
+import com.example.sport_backend.Entity.Matchs.Match;
+import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
 import com.example.sport_backend.Repositories.matches.GoalRepo;
 import com.example.sport_backend.Repositories.matches.MatchesRepo;
-import com.example.sport_backend.Repositories.ClubHouse.TeamRepo; // Import the Team repository
-import com.example.sport_backend.ServiceInterface.Matches.IGoalService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 @AllArgsConstructor
 @Service
-public class GoalService implements IGoalService {
+public class GoalService  {
     private final GoalRepo goalRepo;
     private final MatchesRepo matchRepo;
-    private final TeamRepo teamRepo;
+    private final TeamRepositories teamRepo;
 
 
 
@@ -29,34 +26,40 @@ public class GoalService implements IGoalService {
         return goalRepo.countGoalsByPlayerAndTeam(firstName, lastName, teamName);
     }
     @Transactional
-    public Goal addGoal(Long matchId, Integer scorerNumber, Integer assisterNumber, Integer timing, boolean isHomeGoal) {
+    public void deleteGoal(Long goalId) {
+        // Retrieve the goal to be deleted
+        Goal goal = goalRepo.findById(goalId)
+                .orElseThrow(() -> new RuntimeException("Goal not found with ID: " + goalId));
+
+        // Get the match and determine if it was a home or away goal
+        Match match = goal.getMatch();
+        boolean isHomeGoal = match.getHomeTeam().equals(goal.getScorer().getTeam().getName());
+
+        // Delete the goal
+        goalRepo.delete(goal);
+
+        // Update the match result after goal deletion
+        updateMatchResultAfterDeletion(match, isHomeGoal);
+    }
+
+    @Transactional
+    public Goal addGoal(Long matchId, Integer scorerNumber, Integer timing, boolean isHomeGoal) {
         // Retrieve the match
         Match match = matchRepo.findById(matchId)
                 .orElseThrow(() -> new RuntimeException("Match not found"));
 
-        // Retrieve the scoring team (home or away) based on the team name stored in the match
+        // Retrieve the scoring team (home or away)
         Team scoringTeam = getTeamByName(isHomeGoal ? match.getHomeTeam() : match.getAwayTeam());
 
-        // Validate that the scorer is in the scoring team
-        boolean scorerExists = scoringTeam.getPlayers() != null && scoringTeam.getPlayers().stream()
-                .anyMatch(player -> player.getPlayerNumber().equals(scorerNumber));
-        if (!scorerExists) {
-            throw new RuntimeException("Scorer with number " + scorerNumber + " not found in team " + scoringTeam.getName());
-        }
-
-        // Validate that the assister (if provided) is in the scoring team
-        if (assisterNumber != null) {
-            boolean assisterExists = scoringTeam.getPlayers() != null && scoringTeam.getPlayers().stream()
-                    .anyMatch(player -> player.getPlayerNumber().equals(assisterNumber));
-            if (!assisterExists) {
-                throw new RuntimeException("Assister with number " + assisterNumber + " not found in team " + scoringTeam.getName());
-            }
-        }
+        // Find the player who scored
+        Player scorer = scoringTeam.getPlayers().stream()
+                .filter(player -> player.getPlayerNumber().equals(scorerNumber))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Scorer with number " + scorerNumber + " not found in team " + scoringTeam.getName()));
 
         // Create and save the goal
         Goal goal = new Goal();
-        goal.setScorerNumber(scorerNumber);
-        goal.setAssisterNumber(assisterNumber);  // If assister is null, this will remain null
+        goal.setScorer(scorer);
         goal.setTiming(timing);
         goal.setMatch(match);
         goalRepo.save(goal);
@@ -66,6 +69,7 @@ public class GoalService implements IGoalService {
 
         return goal;
     }
+
     private Team getTeamByName(String teamName) {
         return teamRepo.findByName(teamName)
                 .orElseThrow(() -> new RuntimeException("Team not found: " + teamName));
@@ -94,6 +98,29 @@ public class GoalService implements IGoalService {
         matchRepo.save(match);
     }
 
+    private void updateMatchResultAfterDeletion(Match match, boolean isHomeGoal) {
+        if (match.getResult() == null || match.getResult().isEmpty()) {
+            match.setResult("0-0");
+        }
+
+        // Parse the current match result
+        String[] resultParts = match.getResult().split("-");
+        int homeGoals = Integer.parseInt(resultParts[0]);
+        int awayGoals = Integer.parseInt(resultParts[1]);
+
+        // Decrement goals accordingly
+        if (isHomeGoal) {
+            homeGoals--;
+        } else {
+            awayGoals--;
+        }
+
+        // Update the match result
+        match.setResult(homeGoals + "-" + awayGoals);
+        matchRepo.save(match);
+    }
+
 
 
 }
+

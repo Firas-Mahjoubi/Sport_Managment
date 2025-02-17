@@ -1,6 +1,6 @@
 package com.example.sport_backend.Repositories.matches;
 
-import com.example.sport_backend.Entity.Matches.Goal;
+import com.example.sport_backend.Entity.Matchs.Goal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,9 +16,10 @@ public interface GoalRepo extends JpaRepository<Goal,Long> {
             "WHERE p.FirstName = :firstName " +
             "AND p.LastName = :lastName " +
             "AND t.name = :teamName " +
-            "AND g.ScorerNumber = p.playerNumber")
+            "AND g.scorer = p")
     Long countGoalsByPlayerAndTeam(
             @Param("firstName") String firstName,
             @Param("lastName") String lastName,
             @Param("teamName") String teamName);
+
 }

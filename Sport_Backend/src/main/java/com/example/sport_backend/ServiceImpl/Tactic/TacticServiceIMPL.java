@@ -1,8 +1,5 @@
 package com.example.sport_backend.ServiceImpl.Tactic;
 
-
-
-
 import com.example.sport_backend.Entity.ClubHouse.Team;
 import com.example.sport_backend.Entity.Tactic.Tactic;
 import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
@@ -15,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -42,19 +40,11 @@ public class TacticServiceIMPL implements ITacticService {
     @Override
     @Transactional
     public void deleteTactic(Long id) {
-        Tactic tactic = tacticRepositories.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Tactic not found!"));
 
-        // Remove the tactic from the associated team's list
-        if (tactic.getTeam() != null) {
-            Team team = tactic.getTeam();
-            team.getTactics().remove(tactic);
-            teamRepositories.save(team); // Update the team so it no longer references the tactic
-        }
+            tacticRepositories.deleteById(id);
 
-        // Now delete the tactic
-        tacticRepositories.deleteById(id);
     }
+
 
     @Override
     public List<Tactic> getAllTactics() {
@@ -65,5 +55,4 @@ public class TacticServiceIMPL implements ITacticService {
     public List<Tactic> getTacticsByTeam(Long teamId) {
         return tacticRepositories.findByTeamId(teamId);
     }
-
 }

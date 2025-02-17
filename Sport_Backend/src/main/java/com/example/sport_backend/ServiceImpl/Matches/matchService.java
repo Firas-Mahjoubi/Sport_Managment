@@ -1,25 +1,24 @@
 package com.example.sport_backend.ServiceImpl.Matches;
 
+
 import com.example.sport_backend.Entity.ClubHouse.League;
 import com.example.sport_backend.Entity.ClubHouse.Team;
 import com.example.sport_backend.Entity.Enum.Categories;
-import com.example.sport_backend.Entity.Matches.Match;
+import com.example.sport_backend.Entity.Matchs.Match;
 import com.example.sport_backend.Repositories.matches.MatchesRepo;
-import com.example.sport_backend.ServiceInterface.Matches.ImatchService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class matchService implements ImatchService {
+public class matchService  {
     private final MatchesRepo matchesRepo;
 
     public List<Match> generateSeasonMatches(League league, LocalDate startDate) {
@@ -126,4 +125,4 @@ public class matchService implements ImatchService {
             return year + "/" + (year + 1);
         }
     }
-}   
+}

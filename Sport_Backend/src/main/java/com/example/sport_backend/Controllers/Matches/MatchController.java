@@ -1,13 +1,13 @@
 package com.example.sport_backend.Controllers.Matches;
 
 import com.example.sport_backend.Entity.ClubHouse.League;
-import com.example.sport_backend.Entity.Matches.Goal;
-import com.example.sport_backend.Entity.Matches.Match;
+import com.example.sport_backend.Entity.Matchs.Match;
 import com.example.sport_backend.Repositories.ClubHouse.LeagueRepo;
 import com.example.sport_backend.ServiceImpl.Matches.matchService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 public class MatchController {
     private final LeagueRepo leagueRepository;
-    private final matchService matchService;
+    private final com.example.sport_backend.ServiceImpl.Matches.matchService matchService;
     @GetMapping("/generate/{leagueName}")
     public List<Match> generateMatches(@PathVariable String leagueName) {
 
