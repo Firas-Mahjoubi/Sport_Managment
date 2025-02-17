@@ -1,5 +1,6 @@
 package com.example.sport_backend.Entity.TrainigGround;
 
+import com.example.sport_backend.Entity.ClubHouse.Team;
 import com.example.sport_backend.Entity.ClubHouse.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -33,4 +34,8 @@ public class TrainingSession {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "trainingSession")
     private List<Exercice> exercices;
+
+    @OneToOne(mappedBy="trainingsession")
+    Team team;
+
 }
