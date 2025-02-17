@@ -15,6 +15,8 @@ import java.util.List;
 @RequestMapping("/api/ball-movements")
 @CrossOrigin(origins = "*")
 public class BallMovementController {
+
+
     @PostMapping("add")
     public BallMovement addBallMovement(@RequestBody BallMovement movement) {
         return ballMovementService.addBallMovement(movement);
