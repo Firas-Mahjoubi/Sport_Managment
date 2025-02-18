@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class GoalController {
     private final GoalService goalService;
+
+    @DeleteMapping("/deleteGaol/{goalId}")
+    public void deleteGoal(@PathVariable Long goalId) {
+        goalService.deleteGoal(goalId);
+    }
     @GetMapping("/count")
     public ResponseEntity<Long> getGoalsByPlayerAndTeam(
             @RequestParam String firstName,
