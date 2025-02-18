@@ -1,5 +1,6 @@
 package com.example.sport_backend.Entity.TrainigGround;
 
+import com.example.sport_backend.Entity.ClubHouse.Team;
 import com.example.sport_backend.Entity.ClubHouse.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -33,7 +34,6 @@ public class TrainingSession {
     LocalDateTime startTime;
     LocalDateTime endTime;
     String location;
-
     // ✅ Participants Section
     Integer attendingPlayers;
     Integer questionablePlayers;
