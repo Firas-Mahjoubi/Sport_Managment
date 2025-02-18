@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-//@CrossOrigin(origins = "http://localhost:4200") // Autoriser Angular
+@CrossOrigin(origins = "http://localhost:4200") // Permet les requêtes depuis Angular
 @RequestMapping("/api/health")
 public class HealthController {
 
@@ -40,7 +40,7 @@ public class HealthController {
         return healthService.createHealthRecord(healthRecord);
     }
 
-    @PutMapping("updateHealthRecord(/{id}")
+    @PutMapping("updateHealthRecord/{id}")
     public HealthRecord updateHealthRecord(@PathVariable Long id, @RequestBody HealthRecord healthRecord) {
         return healthService.updateHealthRecord(id, healthRecord);
     }
@@ -52,3 +52,8 @@ public class HealthController {
         healthService.deleteHealthRecord(id);
     }
 }
+
+
+
+
+
