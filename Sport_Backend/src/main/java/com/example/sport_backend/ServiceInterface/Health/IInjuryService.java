@@ -12,4 +12,9 @@ public interface IInjuryService {
     Injury createInjury(Injury injury);
     Injury updateInjury(Long id, Injury injury);
     void deleteInjury(Long id);
+
+    public Injury assignInjuryToHealthRecord(Long playerId, Injury injury);
+   public void unassignInjuryFromPlayer(Long injuryId);
+
+
 }

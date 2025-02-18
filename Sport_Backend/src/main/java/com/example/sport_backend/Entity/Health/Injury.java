@@ -43,15 +43,11 @@ public class Injury {
     String cause;
 
 
-@JsonIgnore
-    @OneToOne
-    @JoinColumn(name = "recovery_plan_id")
+    @JsonIgnore
+    @OneToOne(mappedBy = "injury", cascade = CascadeType.ALL)
     private RecoveryPlan recoveryPlan;
 
-
-
-
-    @ManyToOne
-    @JoinColumn(name = "player_id", nullable = false)
+     @ManyToOne
+    @JoinColumn(name = "player_id", nullable = true)
     private Player player;
 }
