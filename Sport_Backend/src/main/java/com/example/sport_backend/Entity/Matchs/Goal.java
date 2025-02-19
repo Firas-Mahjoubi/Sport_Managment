@@ -1,9 +1,8 @@
 package com.example.sport_backend.Entity.Matchs;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.sport_backend.Entity.ClubHouse.Player;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -16,9 +15,25 @@ import lombok.experimental.FieldDefaults;
 @Entity
 public class Goal {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    Long id;
-    String goalType;
-    String assistType;
-    Integer minuteOfPlay;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Integer scorerNumber;  // Player's number (scorer)
+
+    private Integer timing;  // Goal timing in match
+
+    @ManyToOne
+    @JsonIgnore
+    private Match match;  // The match to which the goal belongs
+
+    @ManyToOne
+    @JsonIgnore
+    private Player scorer;  // The player who scored the goal (can be null)
+
+    public void setScorer(Player scorer) {
+        if (scorer != null) {
+            this.scorer = scorer;
+            this.scorerNumber = scorer.getPlayerNumber();  // Assume Player has a getNumber method
+        }
+    }
 }
