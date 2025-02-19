@@ -2,6 +2,7 @@ package com.example.sport_backend.ServiceImpl.ClubHouse;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,18 @@ public class EmailService {
 
     public EmailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
+    }
+    public void sendResetPasswordEmail(String toEmail, String resetLink) {
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(toEmail);
+            message.setSubject("Password Reset Request");
+            message.setText("Click the following link to reset your password: " + resetLink);
+            mailSender.send(message);
+            System.out.println("Password reset email sent successfully to: " + toEmail);
+        } catch (Exception e) {
+            System.err.println("Error sending reset password email: " + e.getMessage());
+        }
     }
 
     public void sendVerificationEmail(String toEmail, String verificationLink) {
