@@ -1,9 +1,6 @@
 package com.example.sport_backend.Entity.TrainigGround;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -16,8 +13,13 @@ import lombok.experimental.FieldDefaults;
 @Entity
 public class MediaExercice {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String type;
-    String filePath;
+
+    String mediaType; // "image" ou "video"
+    String mediaUrl;  // URL de stockage du fichier
+
+    @ManyToOne
+    @JoinColumn(name = "exercice_id", nullable = false)
+    private Exercice exercice;
 }
