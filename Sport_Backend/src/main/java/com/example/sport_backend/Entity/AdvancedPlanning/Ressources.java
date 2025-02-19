@@ -17,7 +17,7 @@ public class Ressources {
     Long id;
     String RessourceName;
     Integer RessourceNumber;
-    Boolean EstDisponible;
+    Boolean EstDisponible ;
     @ManyToOne
     Event event;
 }
