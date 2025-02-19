@@ -1,7 +1,10 @@
 package com.example.sport_backend.Entity.ClubHouse;
 
 import com.example.sport_backend.Entity.Enum.Categories;
+import com.example.sport_backend.Entity.Matchs.Match;
 import com.example.sport_backend.Entity.Tactic.Tactic;
+import com.example.sport_backend.Entity.TrainigGround.TrainingSession;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -20,15 +23,21 @@ public class Team {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     Long id;
     String name;
+    String Stadium;
     @Enumerated(EnumType.STRING)
     Categories categories;
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "teams")
+    List<Match> matches;
     @OneToMany(mappedBy = "team")
     List<User>users;
     @ManyToOne
     Club club;
     @OneToMany(mappedBy = "team")
+    @JsonIgnore
     List<Player>players;
+    @OneToMany(mappedBy = "team", cascade = CascadeType.PERSIST)
+    List<Tactic> tactics;
     @OneToOne
-    Tactic tactic;
+    TrainingSession trainingsession;
 
 }
