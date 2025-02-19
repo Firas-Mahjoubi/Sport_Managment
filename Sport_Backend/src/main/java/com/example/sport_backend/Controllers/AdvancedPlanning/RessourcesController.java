@@ -1,7 +1,6 @@
 package com.example.sport_backend.Controllers.AdvancedPlanning;
 
 
-import com.example.sport_backend.Entity.AdvancedPlanning.Event;
 import com.example.sport_backend.Entity.AdvancedPlanning.Ressources;
 import com.example.sport_backend.ServiceImpl.AdvancedPlanning.RessourcesServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,6 +39,11 @@ public class RessourcesController {
     @DeleteMapping("removeRessourceById/{idRessource}")
 
     public void removeRessource(@PathVariable long idRessource) {ressourcesService.removeRessources(idRessource);
+    }
+
+    @PutMapping("/affecter/{ressourceId}/{eventId}")
+    public Ressources affecterRessource(@PathVariable Long ressourceId, @PathVariable Long eventId) {
+        return ressourcesService.affecterRessourceAEvent(ressourceId, eventId);
     }
 
 }
