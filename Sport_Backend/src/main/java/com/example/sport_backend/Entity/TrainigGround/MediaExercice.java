@@ -13,11 +13,13 @@ import lombok.experimental.FieldDefaults;
 @Entity
 public class MediaExercice {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String type;
-    String filePath;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    Exercice exercice;
+    String mediaType; // "image" ou "video"
+    String mediaUrl;  // URL de stockage du fichier
+
+    @ManyToOne
+    @JoinColumn(name = "exercice_id", nullable = false)
+    private Exercice exercice;
 }

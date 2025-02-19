@@ -11,5 +11,6 @@ public interface RessourcesInterface {
     Ressources updateRessources (Ressources ressources);
     Ressources getRessources (Long idRessources);
     void removeRessources (long idRessources);
+    Ressources affecterRessourceAEvent(Long ressourceId, Long eventId);
 
 }
