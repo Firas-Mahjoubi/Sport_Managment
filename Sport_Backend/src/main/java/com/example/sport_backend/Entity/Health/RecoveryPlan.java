@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+
 public class RecoveryPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +39,7 @@ public class RecoveryPlan {
     @Enumerated(EnumType.STRING)
     PlanStatus planStatus;
 
-    @OneToOne(mappedBy = "recoveryPlan")
+    @OneToOne
+    @JoinColumn(name = "injury_id")
     private Injury injury;
 }
