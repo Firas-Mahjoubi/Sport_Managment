@@ -20,4 +20,5 @@ public class Ressources {
     Long id;
     String RessourceName;
     Integer RessourceNumber;
+    Boolean EstDisponible ;
 }
