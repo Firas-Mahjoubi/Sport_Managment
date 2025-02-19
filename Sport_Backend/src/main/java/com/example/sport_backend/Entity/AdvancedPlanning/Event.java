@@ -1,17 +1,14 @@
 package com.example.sport_backend.Entity.AdvancedPlanning;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.sport_backend.Entity.Enum.TypeEvent;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
@@ -22,7 +19,11 @@ public class Event {
     Long id;
     String nameEvent;
     String description;
-    String typeEvent;
-    LocalDate date;
+    LocalDateTime date;
     String address;
+    @Enumerated(EnumType.STRING)
+    TypeEvent typeEvent;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="event")
+    private Set<Ressources> Ressources;
+
 }
