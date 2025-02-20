@@ -35,7 +35,7 @@ public class Match {
     @Column(nullable = false)
     Integer gameWeek;  // New field for storing the game week
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     List<Team> teams;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "match")
