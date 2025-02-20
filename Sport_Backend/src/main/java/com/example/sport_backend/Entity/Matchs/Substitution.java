@@ -1,5 +1,6 @@
 package com.example.sport_backend.Entity.Matchs;
-
+import com.example.sport_backend.Entity.Matchs.LineUp;
+import com.example.sport_backend.Entity.Matchs.Match;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -9,15 +10,23 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level= AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Substitution {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    Integer minuteOfPlay;
-    Integer PlayerInNumber;
-    Integer PlayerOutNumber;
+
+    Integer minuteOfPlay;  // The minute of the substitution
+    Integer playerInNumber;  // The player number of the player coming in
+    Integer playerOutNumber;  // The player number of the player going out
+    Boolean isHomeTeam;
+
     @ManyToOne
-    Match match;
+    @JoinColumn(name = "line_up_id")  // Reference to the LineUp
+    LineUp lineUp;  // The associated lineup for the substitution
+
+    @ManyToOne
+    @JoinColumn(name = "match_id")  // Reference to the match
+    Match match;  // The match associated with the substitution
 }
