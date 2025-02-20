@@ -1,0 +1,69 @@
+package com.example.sport_backend.Controllers.Health;
+
+
+import com.example.sport_backend.Entity.Health.RecoveryPlan;
+import com.example.sport_backend.ServiceInterface.Health.IRecoveryPlanService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/recovery-plans")
+@CrossOrigin(origins = "http://localhost:4200") // Permet les requêtes depuis Angular
+public class RecoveryPlanController {
+
+    @Autowired
+    private IRecoveryPlanService recoveryPlanService;
+
+
+
+    @GetMapping("getAllRecoveryPlans")
+    public List<RecoveryPlan> getAllRecoveryPlans() {
+        return recoveryPlanService.getAllRecoveryPlans();
+    }
+
+
+    @GetMapping("getRecoveryPlanById/{id}")
+    public RecoveryPlan getRecoveryPlanById(@PathVariable Long id) {
+        return recoveryPlanService.getRecoveryPlanById(id);
+    }
+
+
+
+    @PostMapping("createRecoveryPlan")
+    public RecoveryPlan createRecoveryPlan(@RequestBody RecoveryPlan recoveryPlan) {
+        return recoveryPlanService.createRecoveryPlan(recoveryPlan);
+    }
+
+
+    @PutMapping("updateRecoveryPlan/{id}")
+    public RecoveryPlan updateRecoveryPlan(@PathVariable Long id, @RequestBody RecoveryPlan recoveryPlan) {
+        return recoveryPlanService.updateRecoveryPlan(id, recoveryPlan);
+    }
+
+
+    @DeleteMapping("deleteRecoveryPlan/{id}")
+    public void deleteRecoveryPlan(@PathVariable Long id) {
+        recoveryPlanService.deleteRecoveryPlan(id);
+    }
+
+
+    @PostMapping("/assign/recoveryPlan/{injuryId}")
+    public ResponseEntity<RecoveryPlan> assignRecoveryPlan(
+            @PathVariable Long injuryId,
+            @RequestBody RecoveryPlan recoveryPlan) {
+        return ResponseEntity.ok(recoveryPlanService.assignRecoveryPlanToInjury(injuryId, recoveryPlan));
+    }
+
+
+    @PutMapping("/unassign/recoveryPlan/{recoveryPlanId}")
+    public ResponseEntity<Void> unassignRecoveryPlan(@PathVariable Long recoveryPlanId) {
+        recoveryPlanService.unassignRecoveryPlanFromInjury(recoveryPlanId);
+        return ResponseEntity.noContent().build();
+    }
+
+
+}
+
