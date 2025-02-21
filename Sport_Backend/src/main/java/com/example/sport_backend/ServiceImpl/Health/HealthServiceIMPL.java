@@ -3,12 +3,13 @@ package com.example.sport_backend.ServiceImpl.Health;
 import com.example.sport_backend.Entity.Health.HealthRecord;
 import com.example.sport_backend.Repositories.Health.HealthRepositories;
 import com.example.sport_backend.ServiceInterface.Health.IHealthService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
+@RequiredArgsConstructor
 @Service
 public class HealthServiceIMPL  implements IHealthService {
 
