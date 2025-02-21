@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class InjuryServiceIMPL implements IInjuryService {
