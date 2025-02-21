@@ -3,6 +3,7 @@ package com.example.sport_backend.ServiceImpl.AdvancedPlanning;
 
 import com.example.sport_backend.Entity.AdvancedPlanning.Event;
 import com.example.sport_backend.Entity.AdvancedPlanning.Ressources;
+import com.example.sport_backend.Repositories.AdvancedPlanning.EventRepository;
 import com.example.sport_backend.Repositories.AdvancedPlanning.RessourcesRepository;
 import com.example.sport_backend.ServiceInterface.AdvancedPlanning.RessourcesInterface;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class RessourcesServiceImpl implements RessourcesInterface {
-
+    EventRepository eventRepository;
     RessourcesRepository ressourcesRepository;
     @Override
     public Ressources addRessources(Ressources ressources) {
@@ -37,4 +38,19 @@ public class RessourcesServiceImpl implements RessourcesInterface {
 
     @Override
     public void removeRessources(long idRessources) {ressourcesRepository.deleteById(idRessources);}
+
+    public Ressources affecterRessourceAEvent(Long ressourceId, Long eventId) {
+        Ressources ressource = ressourcesRepository.findById(ressourceId)
+                .orElseThrow(() -> new RuntimeException("Ressource non trouvée avec ID : " + ressourceId));
+
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new RuntimeException("Event non trouvé avec ID : " + eventId));
+
+
+        ressource.setEvent(event);
+
+
+        return ressourcesRepository.save(ressource);
+    }
+
 }
