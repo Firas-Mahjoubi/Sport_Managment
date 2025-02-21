@@ -14,7 +14,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/injuries")
-@CrossOrigin(origins = "http://localhost:4200") // Permet les requêtes depuis Angular
+@CrossOrigin(origins = "*") // Allow CORS for frontend access
+// Permet les requêtes depuis Angular
 public class InjuryController {
 
 
@@ -24,7 +25,7 @@ public class InjuryController {
     private IInjuryService injuryService;
 
 
-    @GetMapping("getAllInjuries")
+    @GetMapping("/getAllInjuries")
     public List<Injury> getAllInjuries() {
         return injuryService.getAllInjuries();
     }
@@ -39,6 +40,7 @@ public class InjuryController {
         return injuryService.createInjury(injury);
     }
 
+
     @PutMapping("updateInjury/{id}")
     public Injury updateInjury(@PathVariable Long id, @RequestBody Injury injury) {
         return injuryService.updateInjury(id, injury);
@@ -50,25 +52,22 @@ public class InjuryController {
     }
 
 
+
     @PostMapping("/assign/injury/{playerId}")
     public ResponseEntity<Injury> assignInjury(
-            @PathVariable Long playerId,
-            @RequestBody Injury injury) {
-        return ResponseEntity.ok(injuryService.assignInjuryToHealthRecord(playerId, injury));
-    }
+          @PathVariable Long playerId,
+          @RequestBody Injury injury) {
+      return ResponseEntity.ok(injuryService.assignInjuryToHealthRecord(playerId, injury));
+   }
 
-    @PutMapping("/unassign/injury/{injuryId}")
+   @PutMapping("/unassign/injury/{injuryId}")
     public ResponseEntity<Void> unassignInjury(@PathVariable Long injuryId) {
-        try {
+      try {
             injuryService.unassignInjuryFromPlayer(injuryId);
             return ResponseEntity.noContent().build();  // Pas de contenu mais succès
-        } catch (RuntimeException e) {
+       } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // Erreur si la blessure n'existe pas
-        }
+       }
     }
-
-
-
-
 
 }

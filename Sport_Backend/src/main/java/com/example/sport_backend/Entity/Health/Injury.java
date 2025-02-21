@@ -19,6 +19,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+
 public class Injury {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

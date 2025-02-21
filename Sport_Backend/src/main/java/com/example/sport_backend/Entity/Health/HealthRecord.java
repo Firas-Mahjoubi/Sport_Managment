@@ -41,7 +41,7 @@ public class HealthRecord {
 
     String commentaire;
 
-    @JsonIgnore
+
     @OneToOne(mappedBy = "healthRecord")
     private Player player;
 }
