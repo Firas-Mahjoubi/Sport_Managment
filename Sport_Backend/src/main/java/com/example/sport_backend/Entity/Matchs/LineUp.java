@@ -34,6 +34,9 @@ public class LineUp {
    private Boolean isHomeTeam;
     @OneToOne
     @JsonIgnore
+    @JoinColumn(name = "match_id") // No unique constraint by default
+
+
     Match match;
 
 

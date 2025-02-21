@@ -1,6 +1,5 @@
 package com.example.sport_backend.ServiceImpl.Matches;
 
-
 import com.example.sport_backend.Entity.ClubHouse.League;
 import com.example.sport_backend.Entity.ClubHouse.Team;
 import com.example.sport_backend.Entity.Enum.Categories;
@@ -12,13 +11,13 @@ import org.springframework.stereotype.Service;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class matchService  {
+public class matchService {
     private final MatchesRepo matchesRepo;
 
     public List<Match> generateSeasonMatches(League league, LocalDate startDate) {
@@ -30,7 +29,7 @@ public class matchService  {
                 .flatMap(club -> club.getTeams().stream())
                 .collect(Collectors.toList());
 
-        // Categorizing teams
+        // Categorizing teams (if necessary)
         List<Team> seniorTeams = teams.stream()
                 .filter(team -> team.getCategories() == Categories.SENIOR)
                 .collect(Collectors.toList());
@@ -39,12 +38,13 @@ public class matchService  {
                 .filter(team -> team.getCategories() == Categories.JUNIOR)
                 .collect(Collectors.toList());
 
+        // Generate matches for senior teams and then junior teams
         int gameWeek = 1;
         gameWeek = generateMatchesForCategory(seniorTeams, startDate, gameWeek, matches);
         gameWeek = generateMatchesForCategory(juniorTeams, startDate, gameWeek, matches);
 
-        // Sort matches by gameWeek before saving
-        matches.sort(Comparator.comparingInt(Match::getGameWeek));
+        // Shuffle matches for a random schedule (optional)
+        Collections.shuffle(matches);
 
         // Save generated matches
         matchesRepo.saveAll(matches);
@@ -56,46 +56,29 @@ public class matchService  {
         int totalTeams = teams.size();
         if (totalTeams < 2) return gameWeek; // Not enough teams to create matches
 
-        // Create a list of team indices for round-robin scheduling
-        List<Integer> teamIndices = new ArrayList<>();
+        // Calculate the number of matches per game week
+        int matchesPerGameWeek = totalTeams / 2;
+        int matchCount = 0;
+
+        // Generate the full home-and-away fixture list in one loop
         for (int i = 0; i < totalTeams; i++) {
-            teamIndices.add(i);
-        }
+            for (int j = i + 1; j < totalTeams; j++) {
+                Team homeTeam = teams.get(i);
+                Team awayTeam = teams.get(j);
 
-        // Iterate through each game week for the first half of the season
-        for (int week = 0; week < totalTeams - 1; week++) {
-            // Schedule matches for the current game week
-            for (int i = 0; i < totalTeams / 2; i++) {
-                Team homeTeam = teams.get(teamIndices.get(i));
-                Team awayTeam = teams.get(teamIndices.get(totalTeams - 1 - i));
+                // Home match
+                matches.add(createMatch(homeTeam, awayTeam, startDate, gameWeek));
 
-                // Home match for home team
-                matches.add(createMatch(homeTeam, awayTeam, startDate.plusWeeks(gameWeek - 1), gameWeek));
+                // Reverse fixture
+                matches.add(createMatch(awayTeam, homeTeam, startDate.plusWeeks(teams.size() / 2), gameWeek));
+
+                matchCount += 2;
+
+                // Increment the game week after every matchesPerGameWeek matches
+                if (matchCount % matchesPerGameWeek == 0) {
+                    gameWeek++;
+                }
             }
-
-            // Rotate teams for the next game week (round-robin)
-            teamIndices.add(1, teamIndices.remove(teamIndices.size() - 1));
-
-            // Increment game week
-            gameWeek++;
-        }
-
-        // Generate reverse fixtures for the second half of the season
-        for (int week = 0; week < totalTeams - 1; week++) {
-            // Schedule matches for the current game week
-            for (int i = 0; i < totalTeams / 2; i++) {
-                Team awayTeam = teams.get(teamIndices.get(i)); // Swap home and away
-                Team homeTeam = teams.get(teamIndices.get(totalTeams - 1 - i)); // Swap home and away
-
-                // Away match for home team (reverse fixture)
-                matches.add(createMatch(homeTeam, awayTeam, startDate.plusWeeks(gameWeek - 1), gameWeek));
-            }
-
-            // Rotate teams for the next game week (round-robin)
-            teamIndices.add(1, teamIndices.remove(teamIndices.size() - 1));
-
-            // Increment game week
-            gameWeek++;
         }
 
         return gameWeek;
@@ -125,4 +108,5 @@ public class matchService  {
             return year + "/" + (year + 1);
         }
     }
+
 }
