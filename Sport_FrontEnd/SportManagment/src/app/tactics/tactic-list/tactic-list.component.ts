@@ -3,7 +3,7 @@ import { TacticService, Tactic } from '../../services/tactic.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTacticDialogComponent } from '../create-tactic-dialog/create-tactic-dialog.component';
-
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-tactic-list',
   templateUrl: './tactic-list.component.html',
@@ -11,11 +11,14 @@ import { CreateTacticDialogComponent } from '../create-tactic-dialog/create-tact
 })
 export class TacticListComponent implements OnInit {
   tactics: Tactic[] = [];
+  filteredTactics: Tactic[] = [];
+  searchQuery: string = "";
 
   constructor(
     private tacticService: TacticService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cdRef: ChangeDetectorRef
   ) {}
   ngOnInit(): void {
     this.loadTactics();
@@ -24,9 +27,13 @@ export class TacticListComponent implements OnInit {
   loadTactics(): void {
     this.tacticService.getAllTactics().subscribe((data) => {
       this.tactics = data;
+      this.filteredTactics = [...this.tactics]; // Initially show all tactics
+      console.log("Loaded tactics:", this.tactics);
     });
   }
-
+  trackById(index: number, tactic: Tactic): number {
+    return tactic.id!;
+  }
   openTacticFolder(id: number): void {
     this.router.navigate([`/tactics/${id}`]);
  
@@ -37,6 +44,22 @@ export class TacticListComponent implements OnInit {
         this.tactics = this.tactics.filter(t => t.id !== id);
       });
     }
+  }
+  filterTactics(): void {
+    const query = this.searchQuery.toLowerCase().trim();
+    console.log("Search Query:", query);
+
+    if (query === '') {
+      this.filteredTactics = [...this.tactics]; // Reset when empty
+      console.log("Reset filter, showing all tactics.");
+    } else {
+      this.filteredTactics = this.tactics.filter(tactic =>
+        tactic.name.toLowerCase().includes(query)  // Ensure case-insensitive filtering
+      );
+      console.log("Filtered tactics:", this.filteredTactics);
+    }
+
+    this.cdRef.detectChanges(); // <-- Force UI update
   }
   renameTactic(tactic: Tactic): void {
     const newName = prompt("Nouveau nom du dossier :", tactic.name);
