@@ -8,6 +8,9 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TacticModule } from './tactics/tactics.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TacticModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
