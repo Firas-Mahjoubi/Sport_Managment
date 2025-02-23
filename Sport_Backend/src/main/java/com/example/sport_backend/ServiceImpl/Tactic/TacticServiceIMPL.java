@@ -21,7 +21,10 @@ public class TacticServiceIMPL implements ITacticService {
     private TacticRepositories tacticRepositories;
     private TeamRepositories teamRepositories;
     @Override
-    public Tactic createTactic(Tactic tactic) {
+    @Transactional
+    public Tactic createTactic(Tactic tactic , long idTeam) {
+        Team team = teamRepositories.findById(idTeam).orElse(null);
+        tactic.setTeam(team);
         return tacticRepositories.save(tactic);
     }
 
