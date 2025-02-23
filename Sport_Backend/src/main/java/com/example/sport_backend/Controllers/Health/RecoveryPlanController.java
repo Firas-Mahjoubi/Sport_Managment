@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/recovery-plans")
-@CrossOrigin(origins = "http://localhost:4200") // Permet les requêtes depuis Angular
+@CrossOrigin(origins = "*") // Allow CORS for frontend access
 public class RecoveryPlanController {
 
     @Autowired
@@ -50,17 +50,17 @@ public class RecoveryPlanController {
     }
 
 
-    @PostMapping("/assign/recoveryPlan/{injuryId}")
+   @PostMapping("/assign/recoveryPlan/{injuryId}")
     public ResponseEntity<RecoveryPlan> assignRecoveryPlan(
-            @PathVariable Long injuryId,
-            @RequestBody RecoveryPlan recoveryPlan) {
+          @PathVariable Long injuryId,
+           @RequestBody RecoveryPlan recoveryPlan) {
         return ResponseEntity.ok(recoveryPlanService.assignRecoveryPlanToInjury(injuryId, recoveryPlan));
-    }
+   }
 
 
     @PutMapping("/unassign/recoveryPlan/{recoveryPlanId}")
     public ResponseEntity<Void> unassignRecoveryPlan(@PathVariable Long recoveryPlanId) {
-        recoveryPlanService.unassignRecoveryPlanFromInjury(recoveryPlanId);
+     recoveryPlanService.unassignRecoveryPlanFromInjury(recoveryPlanId);
         return ResponseEntity.noContent().build();
     }
 

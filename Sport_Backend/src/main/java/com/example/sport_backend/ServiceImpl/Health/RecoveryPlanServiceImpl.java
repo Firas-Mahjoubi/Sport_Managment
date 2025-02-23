@@ -8,6 +8,7 @@ import com.example.sport_backend.ServiceInterface.Health.IRecoveryPlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class RecoveryPlanServiceImpl  implements IRecoveryPlanService {
     public RecoveryPlan createRecoveryPlan(RecoveryPlan recoveryPlan) {
         return recoveryPlanRepositories.save(recoveryPlan);
     }
+
 
     @Override
     public RecoveryPlan updateRecoveryPlan(Long id, RecoveryPlan newRecoveryPlan) {
@@ -73,6 +75,7 @@ public class RecoveryPlanServiceImpl  implements IRecoveryPlanService {
 
 
     //Désaffecter un Plan de Récupération (RecoveryPlan) d'une Blessure
+    @Transactional
     public void unassignRecoveryPlanFromInjury(Long recoveryPlanId) {
         RecoveryPlan recoveryPlan = recoveryPlanRepositories.findById(recoveryPlanId)
                 .orElseThrow(() -> new RuntimeException("Plan de récupération introuvable"));
