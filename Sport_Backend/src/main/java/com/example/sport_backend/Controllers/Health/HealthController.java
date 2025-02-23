@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200") // Permet les requêtes depuis Angular
+@CrossOrigin(origins = "*") // Allow CORS for frontend access
 @RequestMapping("/api/health")
 public class HealthController {
 

@@ -14,31 +14,43 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level= AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Team {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
     String name;
     String Stadium;
+    String logoUrl;
+
+
     @Enumerated(EnumType.STRING)
     Categories categories;
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "teams")
-    List<Match> matches;
-    @OneToMany(mappedBy = "team")
-    List<User>users;
-    @ManyToOne
-    Club club;
-    @OneToMany(mappedBy = "team")
-    @JsonIgnore
-    List<Player>players;
-    @OneToMany(mappedBy = "team", cascade = CascadeType.PERSIST)
-    List<Tactic> tactics;
-    @OneToOne
-    TrainingSession trainingsession;
 
+    @ManyToMany(mappedBy = "teams") // ❌ Removed CascadeType.ALL (Avoids unwanted deletions)
+    @JsonIgnore // ✅ Prevents infinite recursion
+    List<Match> matches;
+
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    List<User> users;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+            @JsonIgnore
+    Club club;
+
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    List<Player> players;
+
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    List<Tactic> tactics;
+
+    @OneToOne
+    TrainingSession trainingSession;
 }
