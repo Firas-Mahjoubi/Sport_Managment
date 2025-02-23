@@ -4,6 +4,7 @@ import com.example.sport_backend.Entity.Matchs.Match;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.engine.internal.Cascade;
 
 @Getter
 @Setter
@@ -22,11 +23,11 @@ public class Substitution {
     Integer playerOutNumber;  // The player number of the player going out
     Boolean isHomeTeam;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "line_up_id")  // Reference to the LineUp
     LineUp lineUp;  // The associated lineup for the substitution
 
-    @ManyToOne
+    @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name = "match_id")  // Reference to the match
     Match match;  // The match associated with the substitution
 }
