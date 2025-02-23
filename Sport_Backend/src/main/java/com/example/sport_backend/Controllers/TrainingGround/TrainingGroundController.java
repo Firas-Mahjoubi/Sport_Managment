@@ -8,9 +8,12 @@ import com.example.sport_backend.Entity.TrainigGround.Tag;
 import com.example.sport_backend.Entity.TrainigGround.TrainingSession;
 import com.example.sport_backend.ServiceInterface.TrainingGround.ItrainingGroundService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -104,6 +107,5 @@ public class TrainingGroundController {
     public void deleteMedia(@PathVariable Long id) {
         itrainingGroundService.deleteMedia(id);
     }
-
 
 }
