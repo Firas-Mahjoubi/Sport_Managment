@@ -20,8 +20,10 @@
     "@angular/router": "^16.2.0",
     "@kurkle/color": "^0.3.4",
     "bootstrap": "^5.3.3",
+    "ngx-editor": "^16.0.0",
     "rxjs": "~7.8.0",
     "sport-managment": "file:",
+    "trusted-types": "^2.0.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },
