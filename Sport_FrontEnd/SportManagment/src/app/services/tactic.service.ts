@@ -15,7 +15,7 @@ export interface Tactic {
   providedIn: 'root'
 })
 export class TacticService {
-  private apiUrl = 'http://localhost:8080/api/tactics';
+  private apiUrl = 'http://localhost:8088/api/tactics';
 
   constructor(private http: HttpClient) {}
 
