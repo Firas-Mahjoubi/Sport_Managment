@@ -13,6 +13,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatchesHomeComponent } from './matches/matches-home/matches-home.component';
 import { GameweekSliderComponent } from './matches/gameweek-slider/gameweek-slider.component';
 import { NavbarComponent } from './matches/navbar/navbar.component';
+import { TrainingSessionComponent } from './components/training-session/training-session.component';
+import { ExerciseComponent } from './components/exercise/exercise.component';
+import { TrainingSessionExerciceComponent } from './components/training-session-exercice/training-session-exercice.component';
+import { TrainingSessionFormComponent } from './components/training-session-form/training-session-form.component';
+import { TrainingGroundNavbarComponent } from './components/training-ground-navbar/training-ground-navbar.component';
+import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +28,13 @@ import { NavbarComponent } from './matches/navbar/navbar.component';
     AuthComponent,
     MatchesHomeComponent,
     GameweekSliderComponent,
-    NavbarComponent
+    NavbarComponent,
+    TrainingSessionComponent,
+    ExerciseComponent,
+    TrainingSessionExerciceComponent,
+    TrainingSessionFormComponent,
+    TrainingGroundNavbarComponent,
+    ExerciseFormComponent
   ],
   imports: [
     BrowserModule,
