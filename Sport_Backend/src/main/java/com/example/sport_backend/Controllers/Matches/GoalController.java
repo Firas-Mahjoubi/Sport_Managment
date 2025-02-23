@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin(origins = "*")
+
 public class GoalController {
     private final GoalService goalService;
 
