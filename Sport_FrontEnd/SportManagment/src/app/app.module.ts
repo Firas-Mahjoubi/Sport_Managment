@@ -8,6 +8,8 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TacticModule } from './tactics/tactics.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatchesHomeComponent } from './matches/matches-home/matches-home.component';
 import { GameweekSliderComponent } from './matches/gameweek-slider/gameweek-slider.component';
 import { NavbarComponent } from './matches/navbar/navbar.component';
@@ -27,7 +29,9 @@ import { NavbarComponent } from './matches/navbar/navbar.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TacticModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
