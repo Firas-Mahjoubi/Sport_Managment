@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/matches/substitutions")
+@CrossOrigin(origins = "*")
+
 public class SubstitutionController {
 
     private final SubstitutionService substitutionService;

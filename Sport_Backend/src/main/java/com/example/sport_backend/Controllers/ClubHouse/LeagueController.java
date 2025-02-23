@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class LeagueController {
+public class  LeagueController {
     private LeagueServiceIMPL leagueServiceIMPL;
 
     @GetMapping("/getallleague")

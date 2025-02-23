@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/lineups")
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
+
 public class LineupController {
 
     private final LineupService lineUpService;

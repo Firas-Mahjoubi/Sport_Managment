@@ -1,5 +1,6 @@
 package com.example.sport_backend.Entity.ClubHouse;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -9,7 +10,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
@@ -23,7 +23,9 @@ public class Club {
     String StadiumName;
     LocalDate foundationYear;
     String clubLogo;
-    @OneToMany(mappedBy = "club")
+    @OneToMany(mappedBy = "club", fetch = FetchType.LAZY)
+    @JsonIgnore
+
     List<Team>teams;
     @ManyToOne
     League league;
