@@ -1,0 +1,17 @@
+<div class="tactic-form">
+    <h2>{{ tacticId ? 'Edit' : 'Create' }} Tactic</h2>
+  
+    <form [formGroup]="tacticForm" (ngSubmit)="submitForm()">
+      <label>Name:</label>
+      <input type="text" formControlName="name" required>
+  
+      <label>Description:</label>
+      <textarea formControlName="description" required></textarea>
+  
+      <label>Team ID:</label>
+      <input type="number" formControlName="teamId" required>
+  
+      <button type="submit">{{ tacticId ? 'Update' : 'Create' }}</button>
+    </form>
+  </div>
+  
