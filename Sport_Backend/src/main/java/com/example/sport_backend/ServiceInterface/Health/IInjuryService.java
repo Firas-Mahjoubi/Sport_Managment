@@ -8,8 +8,18 @@ public interface IInjuryService {
 
 
     List<Injury> getAllInjuries();
+
     Injury getInjuryById(Long id);
+
     Injury createInjury(Injury injury);
+
     Injury updateInjury(Long id, Injury injury);
+
     void deleteInjury(Long id);
+
+    public Injury assignInjuryToHealthRecord(Long playerId, Injury injury);
+
+    public void unassignInjuryFromPlayer(Long injuryId);
+
+
 }

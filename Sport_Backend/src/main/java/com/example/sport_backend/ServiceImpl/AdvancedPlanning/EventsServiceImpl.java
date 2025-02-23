@@ -35,5 +35,5 @@ public class EventsServiceImpl implements EventsInterface {
     }
 
     @Override
-    public void removeEvent(long idEvent) {eventRepository.deleteById(idEvent);}
+    public void removeEvent(long idEvent) {}
 }

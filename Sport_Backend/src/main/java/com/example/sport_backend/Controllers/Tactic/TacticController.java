@@ -13,9 +13,9 @@ import java.util.List;
 @CrossOrigin(origins = "*") // Allow CORS for frontend access
 
 public class TacticController {
-    @PostMapping("createTactic")
-    public Tactic createTactic(@RequestBody Tactic tactic) {
-        return tacticService.createTactic(tactic);
+    @PostMapping("createTactic/{idTeam}")
+    public Tactic createTactic(@RequestBody Tactic tactic ,@PathVariable long idTeam) {
+        return tacticService.createTactic(tactic, idTeam);
     }
     @PutMapping("/updateTactic/{id}")
     public Tactic updateTactic(@PathVariable Long id,@RequestBody Tactic updatedTactic) {
@@ -25,7 +25,7 @@ public class TacticController {
     public void deleteTactic(@PathVariable Long id) {
         tacticService.deleteTactic(id);
     }
-    @GetMapping("/all")
+    @GetMapping("")
     public List<Tactic> getAllTactics() {
         return tacticService.getAllTactics();
     }
@@ -33,6 +33,7 @@ public class TacticController {
     public List<Tactic> getTacticsByTeam(@PathVariable Long teamId) {
         return tacticService.getTacticsByTeam(teamId);
     }
+
 
     private final ITacticService tacticService;
 }
