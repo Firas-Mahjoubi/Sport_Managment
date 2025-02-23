@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class HealthRecord {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -40,7 +41,7 @@ public class HealthRecord {
 
     String commentaire;
 
-    @JsonIgnore
+
     @OneToOne(mappedBy = "healthRecord")
     private Player player;
 }

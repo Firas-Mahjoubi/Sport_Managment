@@ -1,20 +1,25 @@
 package com.example.sport_backend.ServiceImpl.Health;
 
+import com.example.sport_backend.Entity.Health.Injury;
 import com.example.sport_backend.Entity.Health.RecoveryPlan;
+import com.example.sport_backend.Repositories.Health.InjuryRepositories;
 import com.example.sport_backend.Repositories.Health.RecoveryPlanRepositories;
 import com.example.sport_backend.ServiceInterface.Health.IRecoveryPlanService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
+@RequiredArgsConstructor
 @Service
 public class RecoveryPlanServiceImpl  implements IRecoveryPlanService {
 
 
     @Autowired
     private RecoveryPlanRepositories recoveryPlanRepositories;
+    private final InjuryRepositories injuryRepositories;
 
 
     @Override
@@ -32,6 +37,7 @@ public class RecoveryPlanServiceImpl  implements IRecoveryPlanService {
     public RecoveryPlan createRecoveryPlan(RecoveryPlan recoveryPlan) {
         return recoveryPlanRepositories.save(recoveryPlan);
     }
+
 
     @Override
     public RecoveryPlan updateRecoveryPlan(Long id, RecoveryPlan newRecoveryPlan) {
@@ -54,4 +60,31 @@ public class RecoveryPlanServiceImpl  implements IRecoveryPlanService {
     public void deleteRecoveryPlan(Long id) {
         recoveryPlanRepositories.deleteById(id);
     }
+
+
+//Affecter une Blessure (Injury) à un Dossier Médical (HealthRecord)
+    public RecoveryPlan assignRecoveryPlanToInjury(Long injuryId, RecoveryPlan recoveryPlan) {
+        Injury injury = injuryRepositories.findById(injuryId)
+                .orElseThrow(() -> new RuntimeException("Blessure introuvable"));
+
+        recoveryPlan.setInjury(injury);
+        injury.setRecoveryPlan(recoveryPlan); // Ajoute cette ligne !
+
+        return recoveryPlanRepositories.save(recoveryPlan);
+    }
+
+
+    //Désaffecter un Plan de Récupération (RecoveryPlan) d'une Blessure
+    @Transactional
+    public void unassignRecoveryPlanFromInjury(Long recoveryPlanId) {
+        RecoveryPlan recoveryPlan = recoveryPlanRepositories.findById(recoveryPlanId)
+                .orElseThrow(() -> new RuntimeException("Plan de récupération introuvable"));
+
+        recoveryPlan.setInjury(null);
+        recoveryPlanRepositories.save(recoveryPlan);
+    }
+
+
+
+
 }

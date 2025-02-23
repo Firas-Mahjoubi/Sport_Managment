@@ -19,6 +19,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+
 public class Injury {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,15 +44,11 @@ public class Injury {
     String cause;
 
 
-@JsonIgnore
-    @OneToOne
-    @JoinColumn(name = "recovery_plan_id")
+    @JsonIgnore
+    @OneToOne(mappedBy = "injury", cascade = CascadeType.ALL)
     private RecoveryPlan recoveryPlan;
 
-
-
-
-    @ManyToOne
-    @JoinColumn(name = "player_id", nullable = false)
+     @ManyToOne
+    @JoinColumn(name = "player_id", nullable = true)
     private Player player;
 }
