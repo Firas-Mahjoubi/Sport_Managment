@@ -4,10 +4,14 @@ import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Repositories.ClubHouse.PlayerRepo;
 import com.example.sport_backend.ServiceInterface.ClubHouse.IPlayerService;
 import com.example.sport_backend.ServiceInterface.ClubHouse.ITeamService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class PlayerServiceIMPL implements IPlayerService {
+
+
+
     public PlayerRepo playerRepo;
 
     @Override
@@ -22,6 +26,7 @@ public class PlayerServiceIMPL implements IPlayerService {
 
     @Override
     public Player addPlayer(Player player) {
+
         return playerRepo.save(player);
     }
 

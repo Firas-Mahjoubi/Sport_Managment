@@ -2,12 +2,16 @@ package com.example.sport_backend.Controllers.ClubHouse;
 
 import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.ServiceImpl.ClubHouse.PlayerServiceIMPL;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 public class PlayerController {
+
     private PlayerServiceIMPL playerServiceIMPL;
+
 
     @GetMapping("/getallplayers")
     public List<Player> getAllPlayers() {

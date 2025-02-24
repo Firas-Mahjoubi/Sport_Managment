@@ -6,20 +6,17 @@ import java.util.List;
 
 public interface IRecoveryPlanService {
 
-
     List<RecoveryPlan> getAllRecoveryPlans();
 
     RecoveryPlan getRecoveryPlanById(Long id);
 
-    RecoveryPlan createRecoveryPlan(RecoveryPlan recoveryPlan);
+    RecoveryPlan createRecoveryPlan(Long injuryId, Long playerId, RecoveryPlan recoveryPlan);
 
-    RecoveryPlan updateRecoveryPlan(Long id, RecoveryPlan recoveryPlan);
+    // RecoveryPlan updateRecoveryPlan(Long injuryId, Long playerId, Long recoveryPlanId, RecoveryPlan recoveryPlan);
 
-    void deleteRecoveryPlan(Long id);
+    void deleteRecoveryPlan(Long injuryId, Long playerId, Long recoveryPlanId);
 
-    public RecoveryPlan assignRecoveryPlanToInjury(Long injuryId, RecoveryPlan recoveryPlan);
+    public RecoveryPlan updateRecoveryPlan(Long recoveryPlanId, RecoveryPlan newRecoveryPlan);
 
-    public void unassignRecoveryPlanFromInjury(Long recoveryPlanId);
+    public List<RecoveryPlan> getRecoveryPlansByPlayerId(Long playerId);
 }
-
-
