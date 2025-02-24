@@ -81,7 +81,6 @@ export class AuthComponent {
       this.messageColor = 'red';
       return;
     }
-
     this.http.post("http://localhost:8088/api/auth/forgot-password", { email }).subscribe({
       next: (response: any) => {
         console.log("API Response:", response);  // 🔍 Debugging Purpose
