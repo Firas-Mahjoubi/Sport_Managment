@@ -4,9 +4,14 @@ import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Repositories.ClubHouse.PlayerRepo;
 import com.example.sport_backend.ServiceInterface.ClubHouse.IPlayerService;
 import com.example.sport_backend.ServiceInterface.ClubHouse.ITeamService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
+@AllArgsConstructor
+@Slf4j
 public class PlayerServiceIMPL implements IPlayerService {
     public PlayerRepo playerRepo;
 

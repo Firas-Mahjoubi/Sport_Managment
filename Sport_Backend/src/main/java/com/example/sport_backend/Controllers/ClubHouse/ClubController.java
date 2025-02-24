@@ -3,6 +3,7 @@ package com.example.sport_backend.Controllers.ClubHouse;
 
 import com.example.sport_backend.Entity.ClubHouse.Club;
 import com.example.sport_backend.ServiceImpl.ClubHouse.ClubServiceIMPL;
+import com.example.sport_backend.ServiceInterface.ClubHouse.IClubService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,29 +14,35 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class ClubController {
-    private  ClubServiceIMPL ClubServiceIMPL;
 
     @GetMapping("/getAllClubs")
     public List<Club> getAllClubs() {
-        return ClubServiceIMPL.getAllClubs();
+        return iClubService.getAllClubs();
     }
-@GetMapping("/getclub/{id}")
+
+    @GetMapping("/getClubById/{id}")
     public Club getClubById(@PathVariable Long id) {
-        return ClubServiceIMPL.getClubById(id);
+        return iClubService.getClubById(id);
     }
 
-    @DeleteMapping("/deleteclub/{id}")
-    public void deleteClub(Long id) {
-        ClubServiceIMPL.deleteClub(id);
+    @DeleteMapping("/deleteClub/{id}")
+    public void deleteClub(@PathVariable Long id) {
+        iClubService.deleteClub(id);
     }
 
-    @PostMapping("/addclub")
+    @PostMapping("/addClub")
     public Club addClub(@RequestBody Club club) {
-        return ClubServiceIMPL.addClub(club);
+        return iClubService.addClub(club);
     }
 
-    @PutMapping("/updateclub/{id}")
-    public Club updateClub(@PathVariable Long id, @RequestBody Club club) {
-        return ClubServiceIMPL.updateClub(id, club);
+    @PutMapping("/updateClub/{id}")
+    public Club updateClub(@PathVariable Long id,@RequestBody Club club) {
+        return iClubService.updateClub(id, club);
     }
+
+    @Autowired
+    private final IClubService iClubService;
+
+
+
 }

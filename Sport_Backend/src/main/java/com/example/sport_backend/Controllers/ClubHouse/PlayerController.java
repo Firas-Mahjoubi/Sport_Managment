@@ -2,35 +2,40 @@ package com.example.sport_backend.Controllers.ClubHouse;
 
 import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.ServiceImpl.ClubHouse.PlayerServiceIMPL;
+import com.example.sport_backend.ServiceInterface.ClubHouse.IPlayerService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RestController
+@RequiredArgsConstructor
 public class PlayerController {
-    private PlayerServiceIMPL playerServiceIMPL;
+    @Autowired
+    private IPlayerService iPlayerService;
 
     @GetMapping("/getallplayers")
     public List<Player> getAllPlayers() {
-        return playerServiceIMPL.getAllPlayers();
+        return iPlayerService.getAllPlayers();
     }
 
     @GetMapping("/getplayer/{id}")
     public Player getPlayerById(@PathVariable Long id) {
-        return playerServiceIMPL.getPlayerById(id);
+        return iPlayerService.getPlayerById(id);
     }
 
     @PostMapping("/addplayer")
     public Player addPlayer(@RequestBody Player player) {
-        return playerServiceIMPL.addPlayer(player);
+        return iPlayerService.addPlayer(player);
     }
 
     @DeleteMapping("/deleteplayer/{id}")
     public void deletePlayer(@PathVariable Long id) {
-        playerServiceIMPL.deletePlayer(id);
+        iPlayerService.deletePlayer(id);
     }
 
     @PutMapping("/updateplayer/{id}")
     public Player updatePlayer(@PathVariable Long id, @RequestBody Player player) {
-        return playerServiceIMPL.updatePlayer(id, player);
+        return iPlayerService.updatePlayer(id, player);
     }
 }
