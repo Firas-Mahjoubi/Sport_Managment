@@ -20,8 +20,9 @@ public class HealthRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
 
+    Long id;
+    String name;
     LocalDate date;
 
     @Enumerated(EnumType.STRING)
@@ -42,6 +43,8 @@ public class HealthRecord {
     String commentaire;
 
 
-    @OneToOne(mappedBy = "healthRecord")
+    @OneToOne(mappedBy = "healthRecord", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Player player;
+
 }

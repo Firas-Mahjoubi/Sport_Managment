@@ -48,6 +48,7 @@ public class Injury {
     @OneToOne(mappedBy = "injury", cascade = CascadeType.ALL)
     private RecoveryPlan recoveryPlan;
 
+    @JsonIgnore
      @ManyToOne
     @JoinColumn(name = "player_id", nullable = true)
     private Player player;

@@ -31,8 +31,9 @@ public class Player {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private Set<Injury> injuries;
 
+
     @OneToOne
-    @JoinColumn(name = "health_record_id")
+    @JoinColumn(name = "health_record_id", unique = true )
     private HealthRecord healthRecord;
 
 }

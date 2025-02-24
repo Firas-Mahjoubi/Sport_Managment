@@ -1,6 +1,8 @@
 package com.example.sport_backend.ServiceInterface.Health;
 
 import com.example.sport_backend.Entity.Health.Injury;
+import com.example.sport_backend.Entity.Health.InjuryHistory;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -11,15 +13,21 @@ public interface IInjuryService {
 
     Injury getInjuryById(Long id);
 
-    Injury createInjury(Injury injury);
 
-    Injury updateInjury(Long id, Injury injury);
+   // Injury createInjury(Injury injury);
+    Injury createInjury(Long playerId, Injury injury);
 
-    void deleteInjury(Long id);
+    //Injury updateInjury(Long id, Injury injury);
+     public Injury updateInjury(Long id, Injury newInjury);
+    //public Injury updateInjury(Long playerId, Long injuryId, Injury newInjury);
 
-    public Injury assignInjuryToHealthRecord(Long playerId, Injury injury);
+    List<Injury> getInjuriesByPlayer(Long playerId);
 
-    public void unassignInjuryFromPlayer(Long injuryId);
+
+    void archiveAndRemoveInjury(Long injuryId);
+
+    List<InjuryHistory> getInjuryHistoryByPlayer(Long playerId);
+
 
 
 }
