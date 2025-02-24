@@ -50,6 +50,6 @@ public class Injury {
 
     @JsonIgnore
      @ManyToOne
-    @JoinColumn(name = "player_id", nullable = true)
+    @JoinColumn(name = "player_id", nullable = false)
     private Player player;
 }
