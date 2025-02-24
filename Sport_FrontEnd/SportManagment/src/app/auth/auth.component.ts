@@ -81,7 +81,6 @@ export class AuthComponent {
       this.messageColor = 'red';
       return;
     }
-  
     this.http.post("http://localhost:8088/api/auth/forgot-password", { email }).subscribe({
       next: (response: any) => {
         console.log("API Response:", response);  // 🔍 Debugging Purpose
@@ -100,8 +99,8 @@ export class AuthComponent {
       }
     });
   }
-  
-  
+
+
 
   onResetPassword() {
     this.http.post("http://localhost:8088/api/auth/reset-password", this.resetForm.value).subscribe({
@@ -110,7 +109,7 @@ export class AuthComponent {
         if (response && response.message) {
           this.message = response.message;
           this.messageColor = 'green';
-  
+
           // Redirect back to login after successful reset
           setTimeout(() => this.toggleResetPassword(false), 2000);
         } else {
@@ -125,6 +124,6 @@ export class AuthComponent {
       }
     });
   }
-  
-  
+
+
 }

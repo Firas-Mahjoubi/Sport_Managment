@@ -31,8 +31,12 @@ public class TrainingSession {
     String intensity;  // Low, Medium, High
     String category;   // Attacking, Tactical, Physical
     LocalDate date;
-    LocalDateTime startTime;
-    LocalDateTime endTime;
+    String startTime;  // Change from LocalDateTime to String
+    String endTime;    // Change from LocalDateTime to String
+
+
+    //LocalDateTime startTime;
+    //LocalDateTime endTime;
     String location;
     // ✅ Participants Section
     Integer attendingPlayers;
