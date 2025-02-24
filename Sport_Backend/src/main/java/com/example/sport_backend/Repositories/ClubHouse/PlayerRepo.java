@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PlayerRepo extends JpaRepository<Player,Long> {
@@ -18,5 +19,7 @@ public interface PlayerRepo extends JpaRepository<Player,Long> {
             @Param("matchId") Long matchId,
             @Param("teamName") String teamName,  // Using team name instead of ID
             @Param("playerNumber") Integer playerNumber);
+
+
 
 }
