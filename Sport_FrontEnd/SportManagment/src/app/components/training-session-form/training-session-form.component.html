@@ -1,88 +1,79 @@
-<div class="container mt-4">
-    <h2 class="text-center">Create Training Session</h2>
-  
-    <form (ngSubmit)="saveSession()">
-      <div class="form-group">
-        <label>Session Name *</label>
-        <input type="text" class="form-control" [(ngModel)]="trainingSession.name" name="name" required>
-      </div>
-  
-      <div class="form-group mt-3">
-        <label>Intensity</label>
-        <select class="form-control" [(ngModel)]="trainingSession.intensity" name="intensity">
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select>
-      </div>
-  
-      <div class="form-group mt-3">
-        <label>Category</label>
-        <select class="form-control" [(ngModel)]="trainingSession.category" name="category">
-          <option value="Attacking">Attacking</option>
-          <option value="Tactical">Tactical</option>
-          <option value="Physical">Physical</option>
-        </select>
-      </div>
-  
-      <div class="form-group mt-3">
-        <label>Date *</label>
-        <input type="date" class="form-control" [(ngModel)]="trainingSession.date" name="date" required>
-      </div>
-  
-      <div class="form-group mt-3">
-        <label>Start Time *</label>
-        <input type="time" class="form-control" [(ngModel)]="trainingSession.startTime" name="startTime" required>
-      </div>
-  
-      <div class="form-group mt-3">
-        <label>End Time *</label>
-        <input type="time" class="form-control" [(ngModel)]="trainingSession.endTime" name="endTime" required>
-      </div>
-  
-      <div class="form-group mt-3">
-        <label>Location</label>
-        <input type="text" class="form-control" [(ngModel)]="trainingSession.location" name="location">
-      </div>
-  
-      <!-- ✅ Players Attendance Section -->
-      <div class="row mt-3">
-        <div class="col-md-4">
-          <label>Attending Players</label>
-          <input type="number" class="form-control" [(ngModel)]="trainingSession.attendingPlayers" name="attendingPlayers">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Session Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://source.unsplash.com/1600x900/?sports,training') no-repeat center center/cover;
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+            margin-top: 50px;
+        }
+        .btn-primary {
+            width: 100%;
+            font-size: 18px;
+        }
+        .form-check-input:checked {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="form-container">
+            <h2 class="text-center mb-4">Create Training Session</h2>
+            <form (ngSubmit)="saveSession()">
+                <div class="form-group">
+                    <label>Session Name *</label>
+                    <input type="text" class="form-control" [(ngModel)]="trainingSession.name" name="name" required>
+                </div>
+                <div class="form-group mt-3">
+                    <label>Intensity</label>
+                    <select class="form-control" [(ngModel)]="trainingSession.intensity" name="intensity">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <div class="form-group mt-3">
+                    <label>Category</label>
+                    <select class="form-control" [(ngModel)]="trainingSession.category" name="category">
+                        <option value="Attacking">Attacking</option>
+                        <option value="Tactical">Tactical</option>
+                        <option value="Physical">Physical</option>
+                    </select>
+                </div>
+                <div class="form-group mt-3">
+                    <label>Date *</label>
+                    <input type="date" class="form-control" [(ngModel)]="trainingSession.date" name="date" required>
+                </div>
+                <div class="form-group mt-3">
+                    <label>Start Time *</label>
+                    <input type="time" class="form-control" [(ngModel)]="trainingSession.startTime" name="startTime" required>
+                </div>
+                <div class="form-group mt-3">
+                    <label>End Time *</label>
+                    <input type="time" class="form-control" [(ngModel)]="trainingSession.endTime" name="endTime" required>
+                </div>
+                <div class="form-group mt-3">
+                    <label>Location</label>
+                    <input type="text" class="form-control" [(ngModel)]="trainingSession.location" name="location">
+                </div>
+               
+                <button type="submit" class="btn btn-primary mt-3">Save Session</button>
+            </form>
         </div>
-        <div class="col-md-4">
-          <label>Questionable Players</label>
-          <input type="number" class="form-control" [(ngModel)]="trainingSession.questionablePlayers" name="questionablePlayers">
-        </div>
-        <div class="col-md-4">
-          <label>Absent Players</label>
-          <input type="number" class="form-control" [(ngModel)]="trainingSession.absentPlayers" name="absentPlayers">
-        </div>
-      </div>
-  
-      <!-- ✅ Notes Section -->
-      <div class="form-group mt-3">
-        <label>Before Session Notes</label>
-        <textarea class="form-control" rows="3" [(ngModel)]="trainingSession.beforeSessionNotes" name="beforeSessionNotes"></textarea>
-      </div>
-  
-      <div class="form-group mt-3">
-        <label>After Session Notes</label>
-        <textarea class="form-control" rows="3" [(ngModel)]="trainingSession.afterSessionNotes" name="afterSessionNotes"></textarea>
-      </div>
-  
-      <!-- ✅ Add Exercises Section -->
-      <div class="form-group mt-3">
-        <label>Exercises</label>
-        <div *ngFor="let exercise of exercises" class="form-check">
-          <input class="form-check-input" type="checkbox" [value]="exercise.id" [(ngModel)]="selectedExercises" name="exercises">
-          <label class="form-check-label">{{ exercise.name }}</label>
-        </div>
-      </div>
-  
-      <!-- ✅ Submit Button -->
-      <button type="submit" class="btn btn-primary mt-3">Save Session</button>
-    </form>
-  </div>
-  
+    </div>
+</body>
+</html>
