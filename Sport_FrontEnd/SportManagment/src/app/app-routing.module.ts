@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: '**', redirectTo: 'auth' } // Redirect unknown routes to login
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],  
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
