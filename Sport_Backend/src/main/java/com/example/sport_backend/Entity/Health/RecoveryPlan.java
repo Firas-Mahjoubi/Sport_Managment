@@ -1,5 +1,6 @@
 package com.example.sport_backend.Entity.Health;
 
+import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Entity.Enum.PlanStatus;
 import com.example.sport_backend.Entity.Enum.PlanType;
 import jakarta.persistence.*;
@@ -42,4 +43,17 @@ public class RecoveryPlan {
     @OneToOne
     @JoinColumn(name = "injury_id")
     private Injury injury;
+
+    @ManyToOne
+    @JoinColumn(name = "player_id", nullable = false)
+    private Player player; // Association avec Player
+
+
+    // Le playerId est juste utilisé pour la création et n'est pas persisté dans la DB
+    @Transient
+    private Long playerId;
+
+
+
+
 }
