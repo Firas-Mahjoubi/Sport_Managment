@@ -51,7 +51,6 @@ public class RecoveryPlanServiceImpl implements IRecoveryPlanService {
 
 
 
-    // Créer un Plan de Récupération en fonction de l'ID de la Blessure et de l'ID du Joueur
     @Override
     public RecoveryPlan createRecoveryPlan(Long injuryId, Long playerId, RecoveryPlan recoveryPlan) {
         Injury injury = injuryRepositories.findById(injuryId)
@@ -62,11 +61,12 @@ public class RecoveryPlanServiceImpl implements IRecoveryPlanService {
 
         // Associer la blessure et le joueur au plan de récupération
         recoveryPlan.setInjury(injury);
-        injury.setPlayer(player);  // On s'assure que la blessure est associée au joueur
+        recoveryPlan.setPlayer(player);  // Assurez-vous que player est bien lié
 
         // Sauvegarder le plan de récupération
         return recoveryPlanRepositories.save(recoveryPlan);
     }
+
 
     @Override
     public RecoveryPlan updateRecoveryPlan(Long recoveryPlanId, RecoveryPlan newRecoveryPlan) {
@@ -92,7 +92,6 @@ public class RecoveryPlanServiceImpl implements IRecoveryPlanService {
     }
 
 
-    // Supprimer un Plan de Récupération pour un Joueur et une Blessure spécifiques
     @Transactional
     @Override
     public void deleteRecoveryPlan(Long injuryId, Long playerId, Long recoveryPlanId) {
@@ -105,6 +104,9 @@ public class RecoveryPlanServiceImpl implements IRecoveryPlanService {
         Player player = playerRepositories.findById(playerId)
                 .orElseThrow(() -> new RuntimeException("Joueur introuvable"));
 
+        // Vérification des IDs et des associations
+        System.out.println("Suppression du RecoveryPlan - injuryId: " + injuryId + ", playerId: " + playerId + ", recoveryPlanId: " + recoveryPlanId);
+
         // Vérifier que le plan correspond bien à la blessure et au joueur
         if (!recoveryPlan.getInjury().equals(injury) || !recoveryPlan.getInjury().getPlayer().equals(player)) {
             throw new RuntimeException("Le Plan de récupération ne correspond pas à cette blessure et joueur.");
@@ -112,6 +114,7 @@ public class RecoveryPlanServiceImpl implements IRecoveryPlanService {
 
         recoveryPlanRepositories.delete(recoveryPlan);
     }
+
 
     @Override
     public List<RecoveryPlan> getRecoveryPlansByPlayerId(Long playerId) {
