@@ -59,8 +59,8 @@ export class AuthComponent {
 
   onSubmit() {
     const url = this.isLogin
-      ? "http://localhost:8080/api/auth/login"
-      : "http://localhost:8080/api/auth/register";
+      ? "http://localhost:8088/api/auth/login"
+      : "http://localhost:8088/api/auth/register";
 
     this.http.post(url, this.authForm.value).subscribe({
       next: (response: any) => {
@@ -82,7 +82,7 @@ export class AuthComponent {
       return;
     }
   
-    this.http.post("http://localhost:8080/api/auth/forgot-password", { email }).subscribe({
+    this.http.post("http://localhost:8088/api/auth/forgot-password", { email }).subscribe({
       next: (response: any) => {
         console.log("API Response:", response);  // 🔍 Debugging Purpose
         if (response && response.message) {
@@ -104,7 +104,7 @@ export class AuthComponent {
   
 
   onResetPassword() {
-    this.http.post("http://localhost:8080/api/auth/reset-password", this.resetForm.value).subscribe({
+    this.http.post("http://localhost:8088/api/auth/reset-password", this.resetForm.value).subscribe({
       next: (response: any) => {
         console.log("Response received:", response); // Debugging
         if (response && response.message) {
