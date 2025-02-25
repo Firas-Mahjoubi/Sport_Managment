@@ -15,6 +15,7 @@ public class LeagueController {
    @Autowired
     private ILeagueService iLeagueService;
 
+
     @GetMapping("/getallleague")
     public List<League> getAllLeagues() {
         return iLeagueService.getAllLeagues();

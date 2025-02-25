@@ -1,0 +1,58 @@
+/* 🔥 Background Image */
+.exercise-form-container {
+  background: url('https://source.unsplash.com/1600x900/?sports,training') center/cover no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+/* 📌 Form Card */
+.exercise-form-card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+}
+
+/* 🎨 Form Fields */
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  transition: 0.3s;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+/* 🚀 Save Button */
+.btn-save {
+  background-color: #28a745;
+  color: white;
+  font-size: 18px;
+  padding: 12px;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+.btn-save:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* 🔥 Tag Checkboxes */
+.form-check-input {
+  transform: scale(1.2);
+  margin-right: 10px;
+}
+
+.form-check-label {
+  font-size: 16px;
+  font-weight: bold;
+}

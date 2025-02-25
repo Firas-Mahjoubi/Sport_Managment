@@ -5,16 +5,47 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { AuthComponent } from './auth/auth.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { TacticModule } from './tactics/tactics.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatchesHomeComponent } from './matches/matches-home/matches-home.component';
+import { GameweekSliderComponent } from './matches/gameweek-slider/gameweek-slider.component';
+import { NavbarComponent } from './matches/navbar/navbar.component';
+import { TrainingSessionComponent } from './components/training-session/training-session.component';
+import { ExerciseComponent } from './components/exercise/exercise.component';
+import { TrainingSessionExerciceComponent } from './components/training-session-exercice/training-session-exercice.component';
+import { TrainingSessionFormComponent } from './components/training-session-form/training-session-form.component';
+import { TrainingGroundNavbarComponent } from './components/training-ground-navbar/training-ground-navbar.component';
+import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
+import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
-    DashboardComponent
+    DashboardComponent,
+    AuthComponent,
+    MatchesHomeComponent,
+    GameweekSliderComponent,
+    NavbarComponent,
+    TrainingSessionComponent,
+    ExerciseComponent,
+    TrainingSessionExerciceComponent,
+    TrainingSessionFormComponent,
+    TrainingGroundNavbarComponent,
+    ExerciseFormComponent,
+    ExerciseListComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    TacticModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

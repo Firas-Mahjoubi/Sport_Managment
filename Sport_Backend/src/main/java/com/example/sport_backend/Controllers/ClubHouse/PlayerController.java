@@ -14,6 +14,7 @@ public class PlayerController {
     @Autowired
     private IPlayerService iPlayerService;
 
+
     @GetMapping("/getallplayers")
     public List<Player> getAllPlayers() {
         return iPlayerService.getAllPlayers();
