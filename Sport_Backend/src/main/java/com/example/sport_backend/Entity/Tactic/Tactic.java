@@ -1,6 +1,8 @@
 package com.example.sport_backend.Entity.Tactic;
 
 import com.example.sport_backend.Entity.ClubHouse.Team;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -24,17 +26,22 @@ public class Tactic {
     String trainingFocus;
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = true)
+    @JsonIgnore
     private Team team;
 
     @OneToMany(mappedBy = "tactic", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<PlayerMovement> playerMovements;
 
     @OneToMany(mappedBy = "tactic", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<BallMovement> ballMovements;
 
     @OneToMany(mappedBy = "tactic", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<MediaTactic> mediaTactics;
 
     @OneToMany(mappedBy = "tactic", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<TacticSimulation> simulations;
 }

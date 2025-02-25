@@ -1,6 +1,7 @@
 package com.example.sport_backend.Entity.Matchs;
 
 import com.example.sport_backend.Entity.ClubHouse.Team;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -12,15 +13,17 @@ import java.util.regex.Pattern;
 
 @Getter
 @Setter
-@ToString
+
 @AllArgsConstructor
 @NoArgsConstructor
+
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @Entity
 @Table(name = "game_match")
 public class Match {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+
     Long id;
     String homeTeam;
     String awayTeam;
@@ -32,10 +35,12 @@ public class Match {
     @Column(nullable = false)
     String season;
 
+
     @Column(nullable = false)
     Integer gameWeek;  // New field for storing the game week
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+            @JsonIgnore
     List<Team> teams;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "match")
@@ -60,6 +65,7 @@ public class Match {
         }
     }
 
+
     @PrePersist
     @PreUpdate
     public void setSeasonAutomatically() {
@@ -73,4 +79,5 @@ public class Match {
             }
         }
     }
+
 }

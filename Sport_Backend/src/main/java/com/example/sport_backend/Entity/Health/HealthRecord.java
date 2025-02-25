@@ -17,10 +17,12 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class HealthRecord {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
 
+    Long id;
+    String name;
     LocalDate date;
 
     @Enumerated(EnumType.STRING)
@@ -40,7 +42,12 @@ public class HealthRecord {
 
     String commentaire;
 
+
+
+    @OneToOne
+    @JoinColumn(name = "player_id", unique = true) // Ajout de la clé étrangère
     @JsonIgnore
-    @OneToOne(mappedBy = "healthRecord")
     private Player player;
+
+
 }
