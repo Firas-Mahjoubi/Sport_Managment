@@ -10,6 +10,7 @@ import { ExerciseComponent } from './components/exercise/exercise.component';
 import{TrainingSessionExerciceComponent} from './components/training-session-exercice/training-session-exercice.component';
 import {TrainingSessionFormComponent} from './components/training-session-form/training-session-form.component';
 import {ExerciseFormComponent} from './components/exercise-form/exercise-form.component';
+import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'exercises', component: ExerciseComponent },//exervise routes
   { path: 'add-exercise', component: ExerciseFormComponent },
   { path: 'edit-exercise/:id', component: ExerciseFormComponent },
+  { path: 'aexercise', component: ExerciseListComponent },
   { path: 'matches', component: MatchesHomeComponent },
   { path: 'gameweeks', component: GameweekSliderComponent },
   { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
