@@ -27,6 +27,9 @@ public class RecoveryPlan {
     LocalDate estimatedEndDate;
     LocalDate actualEndDate;
 
+
+
+
     Float progress;
     Integer sessionFrequency;
     Integer sessionDuration;
@@ -44,14 +47,11 @@ public class RecoveryPlan {
     @JoinColumn(name = "injury_id")
     private Injury injury;
 
-    @ManyToOne
-    @JoinColumn(name = "player_id", nullable = false)
-    private Player player; // Association avec Player
 
+    @OneToOne
+    @JoinColumn(name = "player_id")
+    private Player player;
 
-    // Le playerId est juste utilisé pour la création et n'est pas persisté dans la DB
-    @Transient
-    private Long playerId;
 
 
 
