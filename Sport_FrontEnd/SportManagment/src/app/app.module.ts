@@ -20,6 +20,17 @@ import { TrainingSessionFormComponent } from './components/training-session-form
 import { TrainingGroundNavbarComponent } from './components/training-ground-navbar/training-ground-navbar.component';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
+import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
+import { InjuryEditComponent } from './Health/injury-edit/injury-edit.component';
+import { InjuryListComponent } from './Health/injury-list/injury-list.component';
+import { InjuryShowComponent } from './Health/injury-show/injury-show.component';
+import { ListInjuryArchiveComponent } from './Health/list-injury-archive/list-injury-archive.component';
+import { ListHealthrecordsComponent } from './Health/healthrecord/list-healthrecords/list-healthrecords.component';
+import { AddHealthrecordComponent } from './Health/healthrecord/add-healthrecord/add-healthrecord.component';
+import { EditHealthrecordComponent } from './Health/healthrecord/edit-healthrecord/edit-healthrecord.component';
+import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthrecord/show-healthrecord.component';
+
+
 
 @NgModule({
   declarations: [
@@ -36,7 +47,18 @@ import { ExerciseListComponent } from './components/exercise-list/exercise-list.
     TrainingSessionFormComponent,
     TrainingGroundNavbarComponent,
     ExerciseFormComponent,
-    ExerciseListComponent
+    ExerciseListComponent,
+    InjuryAddComponent,
+    InjuryEditComponent,
+    InjuryListComponent,
+    InjuryShowComponent,
+    ListInjuryArchiveComponent,
+    ListHealthrecordsComponent,
+    AddHealthrecordComponent,
+    EditHealthrecordComponent,
+    ShowHealthrecordComponent,
+
+
   ],
   imports: [
     BrowserModule,
