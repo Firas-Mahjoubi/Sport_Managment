@@ -15,4 +15,8 @@ public interface InjuryHistoryRepositories extends JpaRepository<InjuryHistory, 
     @Query("SELECT h FROM InjuryHistory h WHERE h.player.id = :playerId")
     List<InjuryHistory> findByPlayerId(@Param("playerId") Long playerId);
 
+
+    @Query("SELECT ih FROM InjuryHistory ih ORDER BY ih.date DESC")
+    List<InjuryHistory> findAllArchivedInjuries();
+
 }

@@ -25,6 +25,7 @@ public class RecoveryPlan {
     String planDescription;
     LocalDate startDate;
     LocalDate estimatedEndDate;
+
     LocalDate actualEndDate;
 
 
@@ -43,14 +44,12 @@ public class RecoveryPlan {
     @Enumerated(EnumType.STRING)
     PlanStatus planStatus;
 
-    @OneToOne
-    @JoinColumn(name = "injury_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "injury_id", nullable = false, unique = true)
     private Injury injury;
 
 
-    @OneToOne
-    @JoinColumn(name = "player_id")
-    private Player player;
+
 
 
 

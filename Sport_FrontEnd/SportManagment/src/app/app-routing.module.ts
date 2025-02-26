@@ -11,24 +11,53 @@ import{TrainingSessionExerciceComponent} from './components/training-session-exe
 import {TrainingSessionFormComponent} from './components/training-session-form/training-session-form.component';
 import {ExerciseFormComponent} from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
+import { InjuryListComponent } from './Health/injury-list/injury-list.component';
+import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
+import { InjuryEditComponent } from './Health/injury-edit/injury-edit.component';
+import { InjuryShowComponent } from './Health/injury-show/injury-show.component';
+import { ListHealthrecordsComponent } from './Health/healthrecord/list-healthrecords/list-healthrecords.component';
+import { AddHealthrecordComponent } from './Health/healthrecord/add-healthrecord/add-healthrecord.component';
+import { EditHealthrecordComponent } from './Health/healthrecord/edit-healthrecord/edit-healthrecord.component';
+import { ShowHealthrecordComponent } from './Health/show-healthrecord/show-healthrecord.component';
 
 const routes: Routes = [
-  { path: 'auth', component: AuthComponent },
-  { path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
-  {path: 'dashboard', component:DashboardComponent},
-  {path: 'main', component:LandingPageComponent},
-  { path: 'training-sessions', component: TrainingSessionComponent },//Training routes
-  { path: 'training-sessions-exercice', component: TrainingSessionExerciceComponent },
-  { path: 'training-sessions/new', component: TrainingSessionFormComponent }, // ✅ Add New
-  { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent }, // ✅ Edit
-  { path: 'exercises', component: ExerciseComponent },//exervise routes
-  { path: 'add-exercise', component: ExerciseFormComponent },
-  { path: 'edit-exercise/:id', component: ExerciseFormComponent },
-  { path: 'aexercise', component: ExerciseListComponent },
-  { path: 'matches', component: MatchesHomeComponent },
-  { path: 'gameweeks', component: GameweekSliderComponent },
-  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
-  { path: '**', redirectTo: 'auth' } // Redirect unknown routes to login
+
+  //{ path: 'auth', component: AuthComponent },
+  //{ path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
+ // {path: 'dashboard', component:DashboardComponent},
+ // {path: 'main', component:LandingPageComponent},
+ // { path: 'training-sessions', component: TrainingSessionComponent },//Training routes
+//  { path: 'training-sessions-exercice', component: TrainingSessionExerciceComponent },
+ // { path: 'training-sessions/new', component: TrainingSessionFormComponent }, // ✅ Add New
+ // { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent }, // ✅ Edit
+  //{ path: 'exercises', component: ExerciseComponent },//exervise routes
+ // { path: 'add-exercise', component: ExerciseFormComponent },
+ // { path: 'edit-exercise/:id', component: ExerciseFormComponent },
+ // { path: 'aexercise', component: ExerciseListComponent },
+ // { path: 'matches', component: MatchesHomeComponent },
+ // { path: 'gameweeks', component: GameweekSliderComponent },
+  //{ path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
+ // { path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
+
+
+
+
+//skander turkiiiiii injury
+{ path: 'health/injury', component: InjuryListComponent },
+{ path: 'health/injury/add', component: InjuryAddComponent },
+{ path: 'health/injury/edit/:id', component: InjuryEditComponent },
+{ path: 'health/injury/show/:id', component: InjuryShowComponent },
+
+
+
+//skander turkiiiiii health record
+
+{ path: 'health/health-records', component: ListHealthrecordsComponent }, //
+{ path: 'health/health-records/add', component: AddHealthrecordComponent }, //
+{ path: 'health/health-records/edit/:id', component: EditHealthrecordComponent },
+{ path: 'health/health-records/show/:id', component: ShowHealthrecordComponent }
+
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
