@@ -42,11 +42,13 @@ public class HealthController {
         return healthService.updateHealthRecord(id, healthRecord);
     }
 
-    // Supprimer un enregistrement de santé par ID
+
     @DeleteMapping("deleteHealthRecord/{id}")
     public void deleteHealthRecord(@PathVariable Long id) {
         healthService.deleteHealthRecord(id);
     }
+
+
 
 
 

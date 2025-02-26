@@ -29,5 +29,7 @@ public interface IInjuryService {
     List<InjuryHistory> getInjuryHistoryByPlayer(Long playerId);
 
 
-
+    List<InjuryHistory> getAllArchivedInjuries();
 }
+
+

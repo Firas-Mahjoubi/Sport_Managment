@@ -1,5 +1,6 @@
 package com.example.sport_backend.Controllers.Health;
 
+import com.example.sport_backend.Entity.Health.Injury;
 import com.example.sport_backend.Entity.Health.RecoveryPlan;
 import com.example.sport_backend.ServiceInterface.Health.IRecoveryPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +17,28 @@ public class RecoveryPlanController {
     @Autowired
     private IRecoveryPlanService recoveryPlanService;
 
-    @GetMapping("getAllRecoveryPlans")
+    // ✅ GET ALL
+    @GetMapping("/getAllRecoveryPlans")
     public List<RecoveryPlan> getAllRecoveryPlans() {
         return recoveryPlanService.getAllRecoveryPlans();
     }
 
-    @GetMapping("getRecoveryPlanById/{id}")
+    // ✅ GET BY ID
+    @GetMapping("/getRecoveryPlanById/{id}")
     public RecoveryPlan getRecoveryPlanById(@PathVariable Long id) {
         return recoveryPlanService.getRecoveryPlanById(id);
     }
 
-    @PostMapping("createRecoveryPlan/{injuryId}/{playerId}")
-    public RecoveryPlan createRecoveryPlan(@PathVariable Long injuryId, @PathVariable Long playerId, @RequestBody RecoveryPlan recoveryPlan) {
-        return recoveryPlanService.createRecoveryPlan(injuryId, playerId, recoveryPlan);
+    @PostMapping("/createRecoveryPlan/{injuryId}")
+    public RecoveryPlan createRecoveryPlan(
+            @PathVariable Long injuryId,
+            @RequestBody RecoveryPlan recoveryPlan) {
+        return recoveryPlanService.createRecoveryPlan(injuryId, recoveryPlan);
     }
 
-    @PutMapping("/updateRecoveryPlan/{recoveryPlanId}")
+
+    // ✅ POST (Mettre à jour un Recovery Plan) 🔥 Respecte ta logique !
+    @PostMapping("/updateRecoveryPlan/{recoveryPlanId}")
     public ResponseEntity<RecoveryPlan> updateRecoveryPlan(
             @PathVariable Long recoveryPlanId,
             @RequestBody RecoveryPlan newRecoveryPlan) {
@@ -39,16 +46,26 @@ public class RecoveryPlanController {
         return ResponseEntity.ok(updatedRecoveryPlan);
     }
 
-
-    @DeleteMapping("deleteRecoveryPlan/{injuryId}/{playerId}/{recoveryPlanId}")
-    public void deleteRecoveryPlan(@PathVariable Long injuryId, @PathVariable Long playerId, @PathVariable Long recoveryPlanId) {
-        recoveryPlanService.deleteRecoveryPlan(injuryId, playerId, recoveryPlanId);
+    @DeleteMapping("/deleteRecoveryPlan/{injuryId}/{recoveryPlanId}")
+    public ResponseEntity<?> deleteRecoveryPlan(
+            @PathVariable Long injuryId,
+            @PathVariable Long recoveryPlanId) {
+        recoveryPlanService.deleteRecoveryPlan(injuryId, recoveryPlanId);
+        return ResponseEntity.ok("Plan de récupération supprimé avec succès.");
     }
 
+
+    // ✅ GET (Récupérer tous les plans d’un joueur)
     @GetMapping("/getRecoveryPlansByPlayerId/{playerId}")
     public ResponseEntity<List<RecoveryPlan>> getRecoveryPlansByPlayerId(@PathVariable Long playerId) {
         List<RecoveryPlan> recoveryPlans = recoveryPlanService.getRecoveryPlansByPlayerId(playerId);
         return ResponseEntity.ok(recoveryPlans);
+    }
+
+    @GetMapping("/getInjuriesByPlayerId/{playerId}")
+    public ResponseEntity<List<Injury>> getInjuriesByPlayerId(@PathVariable Long playerId) {
+        List<Injury> injuries = recoveryPlanService.getInjuriesByPlayerId(playerId);
+        return ResponseEntity.ok(injuries);
     }
 
 }
