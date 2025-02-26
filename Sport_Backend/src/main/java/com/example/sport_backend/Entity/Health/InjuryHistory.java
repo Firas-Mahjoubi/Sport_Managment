@@ -40,6 +40,8 @@ public class InjuryHistory {
     @JoinColumn(name = "player_id", nullable = false)
     private Player player;
 
+
+
     public InjuryHistory(Injury injury) {
         this.date = injury.getDate();
         this.description = injury.getDescription();
