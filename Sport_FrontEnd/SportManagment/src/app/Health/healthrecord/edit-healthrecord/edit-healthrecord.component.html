@@ -1,1 +1,91 @@
-<p>edit-healthrecord works!</p>
+<p *ngIf="isLoading" class="text-center mt-4">
+  <span class="spinner-border text-warning"></span> Chargement...
+</p>
+
+<p *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</p>
+
+<div *ngIf="!isLoading && !errorMessage" class="container mt-4">
+  <div class="card shadow-lg">
+    <div class="card-header bg-warning text-dark">
+      <h4 class="mb-0">
+        ✏️ Modifier un Health Record
+      </h4>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <!-- 🏷️ Nom -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Nom</label>
+            <input type="text" class="form-control" formControlName="name">
+            <small *ngIf="editForm.get('name')?.invalid&& editForm.get('name')?.touched" class="text-danger">Champ obligatoire</small>
+          </div>
+
+          <!-- 📅 Date -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-control" formControlName="date">
+            <small *ngIf="editForm.get('date')?.invalid && editForm.get('date')?.touched" class="text-danger">Champ obligatoire</small>
+          </div>
+
+          <!-- 🔋 Fatigue -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Fatigue</label>
+            <select class="form-select" formControlName="fatigue">
+              <option *ngFor="let f of fatigueEnum" [value]="f">{{ f }}</option>
+            </select>
+          </div>
+
+          <!-- 🏋️ État Physique -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">État Physique</label>
+            <select class="form-select" formControlName="etatPhysique">
+              <option *ngFor="let etat of etatPhysiqueEnum" [value]="etat">{{ etat }}</option>
+            </select>
+          </div>
+
+          <!-- 🤕 Douleurs -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Douleurs Musculaires</label>
+            <select class="form-select" formControlName="douleursMusculaires">
+              <option *ngFor="let douleur of douleursEnum" [value]="douleur">{{ douleur }}</option>
+            </select>
+          </div>
+
+          <!-- 🔥 Intensité -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Intensité</label>
+            <select class="form-select" formControlName="intensite">
+              <option *ngFor="let intens of intensiteEnum" [value]="intens">{{ intens }}</option>
+            </select>
+          </div>
+
+          <!-- ⚽ Statut du Joueur -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Statut Joueur</label>
+            <select class="form-select" formControlName="statusJoueur">
+              <option value="ACTIF">Actif</option>
+              <option value="BLESSE">Blessé</option>
+              <option value="REPOS">Repos</option>
+            </select>
+          </div>
+
+          <!-- 📝 Commentaire -->
+          <div class="col-md-12 mb-3">
+            <label class="form-label">Commentaire</label>
+            <textarea class="form-control" rows="3" formControlName="commentaire"></textarea>
+          </div>
+        </div>
+
+        <!-- ✅ Boutons -->
+        <div class="text-center">
+          <button type="submit" class="btn btn-warning me-2" [disabled]="editForm.invalid">
+            💾 Enregistrer
+          </button>
+          <a routerLink="/health/health-records" class="btn btn-secondary">❌ Annuler</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
