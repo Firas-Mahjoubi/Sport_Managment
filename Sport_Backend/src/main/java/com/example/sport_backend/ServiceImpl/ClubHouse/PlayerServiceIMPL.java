@@ -45,4 +45,11 @@ public class PlayerServiceIMPL implements IPlayerService {
        player.setId(id);
         return playerRepo.save(player);
     }
+
+
+    // ✅ Récupérer uniquement les joueurs qui n'ont pas encore de HealthRecord
+    @Override
+    public List<Player> getPlayersWithoutHealthRecord() {
+        return playerRepo.findPlayersWithoutHealthRecord();
+    }
 }

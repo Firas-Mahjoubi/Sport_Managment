@@ -8,8 +8,6 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -45,11 +43,10 @@ public class HealthRecord {
     String commentaire;
 
 
-    @OneToOne(cascade = CascadeType.DETACH)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "player_id", unique = true) // Ajout de la clé étrangère
     @JsonIgnore
     private Player player;
-
 
 
 

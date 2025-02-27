@@ -22,10 +22,11 @@ export enum DouleursMusculaires {
 }
 
 export enum Intensite {
-  BASSE = 'BASSE',
+  FAIBLE = 'FAIBLE',
   MOYENNE = 'MOYENNE',
-  HAUTE = 'HAUTE'
+  HAUTE = 'HAUTE'  // 🔄 Changement ici (remplace INTENSE par HAUTE)
 }
+
 
 export enum StatusJoueur {
   ACTIF = 'ACTIF',
@@ -43,5 +44,5 @@ export interface HealthRecord {
   intensite: Intensite;
   statusJoueur: StatusJoueur;
   commentaire: string;
-  player?: Player; // Association avec un joueur
+  player?: Player | null;  // 👈 Autoriser `null`
 }

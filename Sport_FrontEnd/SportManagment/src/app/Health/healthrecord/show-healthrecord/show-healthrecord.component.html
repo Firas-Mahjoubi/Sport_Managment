@@ -1,1 +1,38 @@
-<p>show-healthrecord works!</p>
+<div class="container mt-4">
+  <div class="card shadow-lg p-4">
+    <div class="card-body">
+      <h2 class="card-title text-primary text-center mb-4">Détails du Health Record</h2>
+
+      <!-- ✅ Affichage du chargement -->
+      <div *ngIf="loading" class="alert alert-info d-flex align-items-center">
+        <span class="spinner-border spinner-border-sm me-2"></span> Chargement en cours...
+      </div>
+
+      <!-- ✅ Affichage d'une erreur -->
+      <div *ngIf="errorMessage" class="alert alert-danger text-center">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ errorMessage }}
+      </div>
+
+      <!-- ✅ Affichage des détails du Health Record -->
+      <div *ngIf="healthRecord">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>Nom :</strong> {{ healthRecord.name }}</li>
+          <li class="list-group-item"><strong>Date :</strong> {{ healthRecord.date }}</li>
+          <li class="list-group-item"><strong>Fatigue :</strong> {{ healthRecord.fatigue }}</li>
+          <li class="list-group-item"><strong>État Physique :</strong> {{ healthRecord.etatPhysique }}</li>
+          <li class="list-group-item"><strong>Douleurs Musculaires :</strong> {{ healthRecord.douleursMusculaires }}</li>
+          <li class="list-group-item"><strong>Intensité :</strong> {{ healthRecord.intensite }}</li>
+          <li class="list-group-item"><strong>Statut du Joueur :</strong> {{ healthRecord.statusJoueur }}</li>
+          <li class="list-group-item"><strong>Commentaire :</strong> {{ healthRecord.commentaire }}</li>
+        </ul>
+      </div>
+
+      <!-- ✅ Bouton Retour -->
+      <div class="text-center mt-4">
+        <button class="btn btn-outline-primary" (click)="goBack()">
+          ⬅ Retour
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
