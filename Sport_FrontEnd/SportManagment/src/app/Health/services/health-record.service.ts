@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 import { HealthRecord } from '../models/HealthRecord';
+import { Player } from '../models/player';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,12 @@ export class HealthRecordService {
     return this.http.get<HealthRecord>(`${this.apiUrl}/getHealthRecordById/${id}`);
   }
 
-  // ➕ Ajouter un HealthRecord pour un joueur spécifique
+  // ✅ Récupérer le joueur lié à un HealthRecord
+  getPlayerByHealthRecord(healthRecordId: number): Observable<Player> {
+    return this.http.get<Player>(`${this.apiUrl}/getPlayerByHealthRecord/${healthRecordId}`);
+  }
+
+  // ➕ Créer un HealthRecord
   createHealthRecord(playerId: number, healthRecord: HealthRecord): Observable<HealthRecord> {
     return this.http.post<HealthRecord>(`${this.apiUrl}/createHealthRecord/${playerId}`, healthRecord);
   }

@@ -1,1 +1,90 @@
-<p>list-healthrecords works!</p>
+<div class="container mt-4">
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h4 class="mb-0">
+        <i class="fas fa-heartbeat"></i> Liste des Health Records
+      </h4>
+      <a [routerLink]="['/health/health-records/add']" class="btn btn-success">
+        <i class="fas fa-plus"></i> Ajouter un Record
+      </a>
+    </div>
+
+    <div class="card-body">
+      <!-- 🔍 Barre de recherche et sélection du joueur -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="🔎 Rechercher..."
+            [(ngModel)]="searchTerm"
+            (input)="filterRecords()">
+        </div>
+
+        <div class="col-md-4">
+          <select class="form-select" [(ngModel)]="selectedPlayer" (change)="filterRecords()">
+            <option value="all">👥 Tous les joueurs</option>
+            <option *ngFor="let player of players" [value]="player.id">
+              {{ player.firstName }} {{ player.lastName }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 🏥 Tableau des Health Records -->
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th>👤 Joueur</th>
+              <th>📅 Date</th>
+              <th>⚡ Fatigue</th>
+              <th>🏃‍♂️ État Physique</th>
+              <th>🤕 Douleurs</th>
+              <th>🔥 Intensité</th>
+              <th>📌 Statut</th>
+              <th>⚙️ Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let record of filteredRecords">
+
+              <ng-template #noPlayer>
+                <td class="text-muted">Aucun joueur</td>
+              </ng-template>
+
+              <td>{{ record.name }}</td>
+              <td>{{ record.date | date:'dd/MM/yyyy' }}</td>
+              <td>
+                <span class="badge bg-success" *ngIf="record.fatigue === 'FAIBLE'">Faible</span>
+                <span class="badge bg-warning" *ngIf="record.fatigue === 'MOYENNE'">Moyenne</span>
+                <span class="badge bg-danger" *ngIf="record.fatigue === 'ELEVEE'">Élevée</span>
+              </td>
+              <td>{{ record.etatPhysique }}</td>
+              <td>{{ record.douleursMusculaires }}</td>
+              <td>{{ record.intensite }}</td>
+              <td>
+                <span class="badge bg-success" *ngIf="record.statusJoueur === 'ACTIF'">Actif</span>
+                <span class="badge bg-danger" *ngIf="record.statusJoueur === 'BLESSE'">Blessé</span>
+                <span class="badge bg-secondary" *ngIf="record.statusJoueur === 'REPOS'">Repos</span>
+              </td>
+
+              <!-- Actions -->
+              <td class="d-flex">
+                <a [routerLink]="['/health/health-records/show', record.id]" class="btn btn-info btn-sm me-2">
+                  <i class="fas fa-eye"></i>
+                </a>
+                <a [routerLink]="['/health/health-records/edit', record.id]" class="btn btn-warning btn-sm me-2">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <button class="btn btn-danger btn-sm" (click)="deleteHealthRecord(record.id)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
