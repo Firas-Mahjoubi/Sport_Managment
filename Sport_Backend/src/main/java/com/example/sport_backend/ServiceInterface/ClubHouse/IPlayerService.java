@@ -10,4 +10,8 @@ public interface IPlayerService {
     public Player addPlayer(Player player);
     public void deletePlayer(Long id);
     public Player updatePlayer(Long id, Player player);
+
+
+    // ✅ Ajouter la méthode pour récupérer les joueurs sans HealthRecord
+    List<Player> getPlayersWithoutHealthRecord();
 }
