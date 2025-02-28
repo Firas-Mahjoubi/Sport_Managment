@@ -6,7 +6,6 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import {MatchesHomeComponent} from "./matches/matches-home/matches-home.component";
 import {GameweekSliderComponent} from "./matches/gameweek-slider/gameweek-slider.component";
 import {MatchDetailsComponent} from "./matches/match-details/match-details.component";
-import {DashboardComponent} from "./admin/dashboard/dashboard.component";
 import {SidebarComponent} from "./matches/sidebar/sidebar.component";
 import { TrainingSessionComponent } from './components/training-session/training-session.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
