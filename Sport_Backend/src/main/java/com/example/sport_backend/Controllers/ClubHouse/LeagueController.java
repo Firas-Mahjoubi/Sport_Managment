@@ -9,8 +9,10 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
+
 public class  LeagueController {
-    private LeagueServiceIMPL leagueServiceIMPL;
+    private final LeagueServiceIMPL leagueServiceIMPL;
 
     @GetMapping("/getallleague")
     public List<League> getAllLeagues() {

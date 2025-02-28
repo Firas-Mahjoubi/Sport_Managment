@@ -4,6 +4,7 @@ import com.example.sport_backend.Entity.ClubHouse.League;
 import com.example.sport_backend.Entity.ClubHouse.Team;
 import com.example.sport_backend.Entity.Enum.Categories;
 import com.example.sport_backend.Entity.Matchs.Match;
+import com.example.sport_backend.Entity.Matchs.MatchDetailsResponseDto;
 import com.example.sport_backend.Entity.Matchs.MatchResponseDto;
 import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
 import com.example.sport_backend.Repositories.matches.MatchesRepo;
@@ -103,6 +104,48 @@ public class matchService {
                     );
                 }, Collectors.toList())));
     }
+
+    public MatchDetailsResponseDto getMatchById(Long matchId) {
+        Optional<Match> matchOpt = matchesRepo.findById(matchId);
+
+        if (matchOpt.isEmpty()) {
+            throw new RuntimeException("Match not found with ID: " + matchId);
+        }
+
+        Match match = matchOpt.get();
+
+        // Fetch home and away teams
+        Team homeTeam = teamRepo.findByName(match.getHomeTeam()).orElse(null);
+        Team awayTeam = teamRepo.findByName(match.getAwayTeam()).orElse(null);
+
+        // Fetch team logos
+        String homeTeamLogo = (homeTeam != null) ? homeTeam.getLogoUrl() : "default-home-logo.png";
+        String awayTeamLogo = (awayTeam != null) ? awayTeam.getLogoUrl() : "default-away-logo.png";
+
+        // Fetch the league details (assuming a team belongs to one club, which belongs to one league)
+        League league = (homeTeam != null && homeTeam.getClub() != null) ? homeTeam.getClub().getLeague() : null;
+
+        String leagueName = (league != null) ? league.getName() : "Unknown League";
+        String leagueLogo = (league != null) ? league.getLogourl() : "default-league-logo.png";
+        String leagueNation = (league != null) ? league.getNation() : "Unknown Nation";
+
+        return new MatchDetailsResponseDto(
+                match.getId(),
+                match.getHomeTeam(),
+                match.getAwayTeam(),
+                homeTeamLogo,
+                awayTeamLogo,
+                match.getStadium(),
+                match.getResult(),
+                match.getGameWeek(),
+                match.getSeason(),
+                LocalDateTime.of(match.getDate(), match.getStartTime().toLocalTime()),
+                leagueName,
+                leagueLogo,
+                leagueNation
+        );
+    }
+
 
 
     private static int generateMatchesForCategory(List<Team> teams, LocalDate startDate, int gameWeek, List<Match> matches) {

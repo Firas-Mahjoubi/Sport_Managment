@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatchesHomeComponent } from './matches/matches-home/matches-home.component';
 import { GameweekSliderComponent } from './matches/gameweek-slider/gameweek-slider.component';
 import { NavbarComponent } from './matches/navbar/navbar.component';
+import { MatchDetailsComponent } from './matches/match-details/match-details.component';
+import { SidebarComponent } from './matches/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NavbarComponent } from './matches/navbar/navbar.component';
     AuthComponent,
     MatchesHomeComponent,
     GameweekSliderComponent,
-    NavbarComponent
+    NavbarComponent,
+    MatchDetailsComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
