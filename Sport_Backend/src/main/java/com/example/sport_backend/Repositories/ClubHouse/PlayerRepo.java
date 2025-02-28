@@ -25,4 +25,10 @@ public interface PlayerRepo extends JpaRepository<Player,Long> {
             @Param("teamName") String teamName,  // Using team name instead of ID
             @Param("playerNumber") Integer playerNumber);
 
+
+    // ✅ Sélectionner les joueurs qui ne sont pas dans la table HealthRecord
+    @Query("SELECT p FROM Player p WHERE p.id NOT IN (SELECT h.player.id FROM HealthRecord h WHERE h.player IS NOT NULL)")
+    List<Player> findPlayersWithoutHealthRecord();
+
+
 }
