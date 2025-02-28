@@ -3,11 +3,14 @@ package com.example.sport_backend.ServiceImpl.ClubHouse;
 import com.example.sport_backend.Entity.ClubHouse.League;
 import com.example.sport_backend.Repositories.ClubHouse.LeagueRepo;
 import com.example.sport_backend.ServiceInterface.ClubHouse.ILeagueService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@AllArgsConstructor
+@Service
 public class LeagueServiceIMPL implements ILeagueService {
-    public LeagueRepo leagueRepo;
+    public  LeagueRepo leagueRepo;
 
     @Override
     public List<League> getAllLeagues() {

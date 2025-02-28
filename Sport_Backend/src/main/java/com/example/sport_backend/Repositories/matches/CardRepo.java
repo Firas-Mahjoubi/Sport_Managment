@@ -2,13 +2,18 @@ package com.example.sport_backend.Repositories.matches;
 
 import com.example.sport_backend.Entity.Matchs.Card;
 import com.example.sport_backend.Entity.Matchs.CardType;
+import com.example.sport_backend.Entity.Matchs.Match;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CardRepo extends JpaRepository<Card,Long> {
+    List<Card> findByMatch(Match match);
+
 
     @Query("SELECT COUNT(c) FROM Card c " +
             "JOIN c.cardTaker p " +
