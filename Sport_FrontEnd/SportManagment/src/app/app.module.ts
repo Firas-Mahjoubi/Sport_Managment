@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatchesHomeComponent } from './matches/matches-home/matches-home.component';
 import { GameweekSliderComponent } from './matches/gameweek-slider/gameweek-slider.component';
 import { NavbarComponent } from './matches/navbar/navbar.component';
+import { MatchDetailsComponent } from './matches/match-details/match-details.component';
+import { SidebarComponent } from './matches/sidebar/sidebar.component';
 import { TrainingSessionComponent } from './components/training-session/training-session.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
 import { TrainingSessionExerciceComponent } from './components/training-session-exercice/training-session-exercice.component';
@@ -41,6 +43,8 @@ import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthreco
     MatchesHomeComponent,
     GameweekSliderComponent,
     NavbarComponent,
+    MatchDetailsComponent,
+    SidebarComponent
     TrainingSessionComponent,
     ExerciseComponent,
     TrainingSessionExerciceComponent,
@@ -57,6 +61,7 @@ import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthreco
     AddHealthrecordComponent,
     EditHealthrecordComponent,
     ShowHealthrecordComponent,
+
 
 
   ],

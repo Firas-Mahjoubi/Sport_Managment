@@ -1,11 +1,14 @@
 package com.example.sport_backend.Controllers.Matches;
 
 import com.example.sport_backend.Entity.Matchs.LineUp;
+import com.example.sport_backend.Entity.Matchs.PlayerInfoDTO;
 import com.example.sport_backend.ServiceImpl.Matches.LineupService;
 import com.example.sport_backend.ServiceImpl.Matches.LineupService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.AllArgsConstructor;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/lineups")
@@ -28,4 +31,12 @@ public class LineupController {
         // Return the created LineUp
         return ResponseEntity.ok(createdLineUp);
     }
+    @GetMapping("/getlineupPlayers/{matchId}")
+    public Map<Long, PlayerInfoDTO> getPlayerDetailsForLineup(
+            @PathVariable Long matchId,
+            @RequestParam boolean isHomeTeam) {
+        return lineUpService.getPlayerNamesForLineup(matchId, isHomeTeam);
+    }
+
+
 }
