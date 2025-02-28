@@ -44,7 +44,7 @@ import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthreco
     GameweekSliderComponent,
     NavbarComponent,
     MatchDetailsComponent,
-    SidebarComponent
+    SidebarComponent,
     TrainingSessionComponent,
     ExerciseComponent,
     TrainingSessionExerciceComponent,
