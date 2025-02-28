@@ -122,21 +122,35 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<Map<String, String>> register(@Valid @RequestBody User user, BindingResult result) {
-        if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body(Map.of("message", result.getFieldError().getDefaultMessage()));
-        }
-
+    public ResponseEntity<Map<String, String>> register(@RequestBody User user) {
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
         if (existingUser.isPresent()) {
-            return ResponseEntity.badRequest().body(Map.of("message", "Erreur : Cet email est déjà utilisé !"));
+            return ResponseEntity.badRequest().body(Map.of("message", "Error: Email already exists!"));
         }
 
+        // Encrypt password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        // Generate Verification Token
+        String verificationToken = UUID.randomUUID().toString();
+        user.setVerificationToken(verificationToken);
+        user.setVerified(false);
+
         userRepository.save(user);
 
-        return ResponseEntity.ok(Map.of("message", "Utilisateur enregistré avec succès ! Vérifiez votre email."));
+        // Debugging Logs
+        System.out.println("✅ User saved successfully: " + user.getEmail());
+        System.out.println("✅ Sending verification email...");
+
+        // Send verification email
+        String verificationLink = "http://localhost:8088/api/auth/verify?token=" + verificationToken;
+        emailService.sendVerificationEmail(user.getEmail(), verificationLink);
+
+        System.out.println("✅ Verification email sent successfully!");
+
+        return ResponseEntity.ok(Map.of("message", "User registered successfully! Please check your email for verification."));
     }
+
 
 
     @GetMapping("/verify")
