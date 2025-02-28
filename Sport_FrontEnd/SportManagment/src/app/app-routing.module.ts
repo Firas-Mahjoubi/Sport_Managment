@@ -5,6 +5,9 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import {MatchesHomeComponent} from "./matches/matches-home/matches-home.component";
 import {GameweekSliderComponent} from "./matches/gameweek-slider/gameweek-slider.component";
+import {MatchDetailsComponent} from "./matches/match-details/match-details.component";
+import {DashboardComponent} from "./admin/dashboard/dashboard.component";
+import {SidebarComponent} from "./matches/sidebar/sidebar.component";
 import { TrainingSessionComponent } from './components/training-session/training-session.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
 import{TrainingSessionExerciceComponent} from './components/training-session-exercice/training-session-exercice.component';
@@ -38,6 +41,15 @@ const routes: Routes = [
   { path: 'aexercise', component: ExerciseListComponent },
   { path: 'matches', component: MatchesHomeComponent },
   { path: 'gameweeks', component: GameweekSliderComponent },
+
+  { path: 'match/:matchId', component: MatchDetailsComponent },
+  { path: 'Dashboard', component: DashboardComponent },
+  {path :'DashboardSidebar',component:SidebarComponent},
+
+
+
+
+
   { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
   { path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
