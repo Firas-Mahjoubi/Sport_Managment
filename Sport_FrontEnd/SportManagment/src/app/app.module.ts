@@ -22,6 +22,10 @@ import { TrainingSessionFormComponent } from './components/training-session-form
 import { TrainingGroundNavbarComponent } from './components/training-ground-navbar/training-ground-navbar.component';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
+
+import { ExerciseLibraryComponent } from './components/exercise-library/exercise-library.component';
+import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
+
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
 import { InjuryEditComponent } from './Health/injury-edit/injury-edit.component';
 import { InjuryListComponent } from './Health/injury-list/injury-list.component';
@@ -31,6 +35,7 @@ import { ListHealthrecordsComponent } from './Health/healthrecord/list-healthrec
 import { AddHealthrecordComponent } from './Health/healthrecord/add-healthrecord/add-healthrecord.component';
 import { EditHealthrecordComponent } from './Health/healthrecord/edit-healthrecord/edit-healthrecord.component';
 import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthrecord/show-healthrecord.component';
+
 
 
 
@@ -52,6 +57,9 @@ import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthreco
     TrainingGroundNavbarComponent,
     ExerciseFormComponent,
     ExerciseListComponent,
+    ExerciseLibraryComponent,
+    TrainingSessionViewComponent
+
     InjuryAddComponent,
     InjuryEditComponent,
     InjuryListComponent,
@@ -61,6 +69,7 @@ import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthreco
     AddHealthrecordComponent,
     EditHealthrecordComponent,
     ShowHealthrecordComponent,
+
 
 
 
