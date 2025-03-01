@@ -58,7 +58,7 @@ import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthreco
     ExerciseFormComponent,
     ExerciseListComponent,
     ExerciseLibraryComponent,
-    TrainingSessionViewComponent
+    TrainingSessionViewComponent,
 
     InjuryAddComponent,
     InjuryEditComponent,
