@@ -11,7 +11,8 @@ import{TrainingSessionExerciceComponent} from './components/training-session-exe
 import {TrainingSessionFormComponent} from './components/training-session-form/training-session-form.component';
 import {ExerciseFormComponent} from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
-
+import { ExerciseLibraryComponent } from './components/exercise-library/exercise-library.component';
+import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
   { path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
@@ -21,10 +22,12 @@ const routes: Routes = [
   { path: 'training-sessions-exercice', component: TrainingSessionExerciceComponent },
   { path: 'training-sessions/new', component: TrainingSessionFormComponent }, // ✅ Add New
   { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent }, // ✅ Edit
+  { path: 'training-session/:id', component: TrainingSessionViewComponent },
   { path: 'exercises', component: ExerciseComponent },//exervise routes
   { path: 'add-exercise', component: ExerciseFormComponent },
   { path: 'edit-exercise/:id', component: ExerciseFormComponent },
   { path: 'aexercise', component: ExerciseListComponent },
+  { path: 'exercicse-lib', component: ExerciseLibraryComponent },
   { path: 'matches', component: MatchesHomeComponent },
   { path: 'gameweeks', component: GameweekSliderComponent },
   { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module

@@ -23,4 +23,19 @@ export class ExerciseListComponent implements OnInit {
       (error) => { console.error('Error loading exercises:', error); }
     );
   }
+
+  deleteExercise(id: number): void {
+    if (confirm('Are you sure you want to delete this exercise?')) {
+      this.exerciseService.deleteExercise(id).subscribe(
+        () => {
+          alert('Exercise deleted successfully!');
+          this.loadExercises(); // Reload list after deletion
+        },
+        (error) => {
+          console.error('Error deleting exercise:', error);
+          alert('Failed to delete exercise.');
+        }
+      );
+    }
+  }
 }

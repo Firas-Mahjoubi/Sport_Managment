@@ -35,4 +35,6 @@ public class Player {
     @JoinColumn(name = "health_record_id")
     private HealthRecord healthRecord;
 
+
+
 }
