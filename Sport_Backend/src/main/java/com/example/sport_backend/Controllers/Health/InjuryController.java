@@ -2,6 +2,7 @@ package com.example.sport_backend.Controllers.Health;
 
 
 import com.example.sport_backend.Entity.Health.Injury;
+import com.example.sport_backend.Entity.Health.InjuryHistory;
 import com.example.sport_backend.ServiceImpl.ClubHouse.PlayerServiceIMPL;
 import com.example.sport_backend.ServiceImpl.Health.InjuryServiceIMPL;
 import com.example.sport_backend.ServiceInterface.Health.IInjuryService;
@@ -20,8 +21,6 @@ public class InjuryController {
 
 
     @Autowired
-
-
     private IInjuryService injuryService;
 
 
@@ -30,44 +29,64 @@ public class InjuryController {
         return injuryService.getAllInjuries();
     }
 
+
     @GetMapping("getInjuryById/{id}")
     public Injury getInjuryById(@PathVariable Long id) {
         return injuryService.getInjuryById(id);
     }
 
-    @PostMapping("createInjury")
-    public Injury createInjury(@RequestBody Injury injury) {
-        return injuryService.createInjury(injury);
-    }
 
-
-    @PutMapping("updateInjury/{id}")
-    public Injury updateInjury(@PathVariable Long id, @RequestBody Injury injury) {
-        return injuryService.updateInjury(id, injury);
-    }
-
-    @DeleteMapping("deleteInjury/{id}")
-    public void deleteInjury(@PathVariable Long id) {
-        injuryService.deleteInjury(id);
+    @PostMapping("createInjury/{playerId}")
+    public ResponseEntity<Injury> createInjury(@PathVariable Long playerId, @RequestBody Injury injury) {
+        Injury createdInjury = injuryService.createInjury(playerId, injury);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdInjury);
     }
 
 
 
-    @PostMapping("/assign/injury/{playerId}")
-    public ResponseEntity<Injury> assignInjury(
-          @PathVariable Long playerId,
-          @RequestBody Injury injury) {
-      return ResponseEntity.ok(injuryService.assignInjuryToHealthRecord(playerId, injury));
-   }
-
-   @PutMapping("/unassign/injury/{injuryId}")
-    public ResponseEntity<Void> unassignInjury(@PathVariable Long injuryId) {
-      try {
-            injuryService.unassignInjuryFromPlayer(injuryId);
-            return ResponseEntity.noContent().build();  // Pas de contenu mais succès
-       } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // Erreur si la blessure n'existe pas
-       }
+    @PutMapping("/updateInjury/{id}")
+    public ResponseEntity<Injury> updateInjury(@PathVariable Long id, @RequestBody Injury newInjury) {
+        return ResponseEntity.ok(injuryService.updateInjury(id, newInjury));
     }
+
+
+
+
+
+
+
+    @GetMapping("/player/{playerId}/injuries")
+    public List<Injury> getInjuriesByPlayer(@PathVariable Long playerId) {
+        return injuryService.getInjuriesByPlayer(playerId);
+    }
+
+    @DeleteMapping("/injury/{injuryId}/archive")
+    public ResponseEntity<?> archiveAndRemoveInjury(@PathVariable Long injuryId) {
+        try {
+            injuryService.archiveAndRemoveInjury(injuryId);
+            return ResponseEntity.ok().body("{\"message\": \"Blessure archivée et supprimée avec succès !\"}");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"error\": \"" + e.getMessage() + "\"}");
+        }
+    }
+
+
+    @GetMapping("/player/{playerId}/injury-history")
+    public List<InjuryHistory> getInjuryHistoryByPlayer(@PathVariable Long playerId) {
+        return injuryService.getInjuryHistoryByPlayer(playerId);
+    }
+
+
+    @GetMapping("/archived-injuries")
+    public ResponseEntity<List<InjuryHistory>> getArchivedInjuries() {
+        return ResponseEntity.ok(injuryService.getAllArchivedInjuries());
+    }
+
+
+
+
+
+
 
 }
