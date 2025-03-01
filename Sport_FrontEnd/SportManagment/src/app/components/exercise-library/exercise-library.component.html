@@ -1,0 +1,31 @@
+<div class="library-container">
+    <div class="header">
+      <h2>📚 Drill Library</h2>
+      <button class="btn btn-primary" routerLink="/add-exercise">+ Create Drill</button>
+    </div>
+  
+    <div class="controls">
+      <input type="text" class="form-control search-bar" placeholder="🔍 Search drills..." [(ngModel)]="searchQuery">
+      <select class="form-control sort-select" [(ngModel)]="sortBy">
+        <option value="mostRecent">Most Recent</option>
+        <option value="popular">Most Popular</option>
+      </select>
+    </div>
+  
+    <div class="exercise-grid">
+      <div class="exercise-card" *ngFor="let exercise of filteredExercises">
+        <div class="image-container">
+          <img [src]="exercise.imageUrl ? exercise.imageUrl : defaultImage" alt="Exercise">
+          <div class="quick-actions">
+            <i class="fas fa-plus-circle"></i>
+            <i class="fas fa-heart"></i>
+          </div>
+        </div>
+        <div class="card-body">
+          <h5>{{ exercise.name }}</h5>
+          <p class="author">By Coach</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

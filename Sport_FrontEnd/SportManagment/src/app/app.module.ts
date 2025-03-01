@@ -20,6 +20,8 @@ import { TrainingSessionFormComponent } from './components/training-session-form
 import { TrainingGroundNavbarComponent } from './components/training-ground-navbar/training-ground-navbar.component';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
+import { ExerciseLibraryComponent } from './components/exercise-library/exercise-library.component';
+import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ExerciseListComponent } from './components/exercise-list/exercise-list.
     TrainingSessionFormComponent,
     TrainingGroundNavbarComponent,
     ExerciseFormComponent,
-    ExerciseListComponent
+    ExerciseListComponent,
+    ExerciseLibraryComponent,
+    TrainingSessionViewComponent
   ],
   imports: [
     BrowserModule,
