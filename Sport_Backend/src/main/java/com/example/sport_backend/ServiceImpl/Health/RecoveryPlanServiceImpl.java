@@ -7,6 +7,7 @@ import com.example.sport_backend.Repositories.ClubHouse.PlayerRepo;
 import com.example.sport_backend.Repositories.Health.InjuryRepositories;
 import com.example.sport_backend.Repositories.Health.RecoveryPlanRepositories;
 import com.example.sport_backend.ServiceInterface.Health.IRecoveryPlanService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,16 +17,12 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class RecoveryPlanServiceImpl implements IRecoveryPlanService {
 
-    @Autowired
-    private RecoveryPlanRepositories recoveryPlanRepositories;
-
-    @Autowired
-    private InjuryRepositories injuryRepositories;
-
-    @Autowired
-    private PlayerRepo playerRepositories;
+    private final RecoveryPlanRepositories recoveryPlanRepositories;
+    private final InjuryRepositories injuryRepositories;
+    private final PlayerRepo playerRepositories;
 
     @Override
     public List<RecoveryPlan> getAllRecoveryPlans() {
@@ -47,11 +44,17 @@ public class RecoveryPlanServiceImpl implements IRecoveryPlanService {
     @Override
     public RecoveryPlan createRecoveryPlan(Long injuryId, RecoveryPlan recoveryPlan) {
         Injury injury = injuryRepositories.findById(injuryId)
-                .orElseThrow(() -> new RuntimeException("Blessure introuvable"));
+                .orElseThrow(() -> new EntityNotFoundException("Injury not found with id: " + injuryId));
+
+        if (injury.getRecoveryPlan() != null) {
+            throw new IllegalStateException("Cette blessure a déjà un plan de récupération.");
+        }
 
         recoveryPlan.setInjury(injury);
+        recoveryPlan.setId(null);
         return recoveryPlanRepositories.save(recoveryPlan);
     }
+
 
 
 

@@ -5,12 +5,16 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import {MatchesHomeComponent} from "./matches/matches-home/matches-home.component";
 import {GameweekSliderComponent} from "./matches/gameweek-slider/gameweek-slider.component";
+import { authGuard, roleGuard } from './auth.guard';
 import {MatchDetailsComponent} from "./matches/match-details/match-details.component";
+
 //--------------------Training-groud -------------------------//
 import {SidebarComponent} from "./matches/sidebar/sidebar.component";
 import { TrainingSessionComponent } from './components/training-session-Assign-exercice/training-session.component';
-
 import{TrainingSessionExerciceComponent} from './components/training-session/training-session-exercice.component';
+import { TrainingSessionComponent } from './components/training-session/training-session.component';
+import { ExerciseComponent } from './components/exercise/exercise.component';
+import{TrainingSessionExerciceComponent} from './components/training-session-exercice/training-session-exercice.component';
 import {TrainingSessionFormComponent} from './components/training-session-form/training-session-form.component';
 import {ExerciseFormComponent} from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
@@ -27,14 +31,30 @@ import { EditHealthrecordComponent } from './Health/healthrecord/edit-healthreco
 
 import { ListInjuryArchiveComponent } from './Health/list-injury-archive/list-injury-archive.component';
 import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthrecord/show-healthrecord.component';
+
 import { HomeComponent } from './components/home/home.component';
+
+import {AdminSidebarComponent} from "./admin/admin-sidebar/admin-sidebar.component";
+import {AdminHeaderComponent} from "./admin/admin-header/admin-header.component";
+import {AdminMatchComponent} from "./matches/admin-match/admin-match.component";
+import {AdminGoalComponent} from "./matches/admin-goal/admin-goal.component";
+import {AdminCardComponent} from "./matches/admin-card/admin-card.component";
+
+import { AddRecoveryplanComponent } from './Health/recoveyplans/add-recoveryplan/add-recoveryplan.component';
+
+import { ListPlayerComponent } from './Health/recoveyplans/list-player/list-player.component';
+import { ListRecoveryPlanComponent } from './Health/recoveyplans/list-recoveryplan/list-recoveryplan.component';
+import { EditRecoveryplanComponent } from './Health/recoveyplans/edit-recoveryplan/edit-recoveryplan.component';
+import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoveryplan/show-recoveryplan.component';
+
+
 
 const routes: Routes = [
 
   { path: '', component: HomeComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
-  {path: 'dashboard', component:DashboardComponent},
+  {path: 'dashboard', component:DashboardComponent, canActivate: [roleGuard(['ADMIN'])]}, // Protect dashboard route
   {path: 'main', component:LandingPageComponent},
   //--------------------Training-groud -------------------------//
   { path: 'training-sessions-exercice', component: TrainingSessionComponent },
@@ -43,6 +63,7 @@ const routes: Routes = [
   { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent }, 
   { path: 'training-session/:id', component: TrainingSessionViewComponent },
 
+
   { path: 'add-exercise', component: ExerciseFormComponent },
   { path: 'edit-exercise/:id', component: ExerciseFormComponent },
   { path: 'exercise-list', component: ExerciseListComponent },
@@ -50,9 +71,23 @@ const routes: Routes = [
   //---------------------------------------------//
 
   { path: 'matches', component: MatchesHomeComponent },
+
+ { path: 'gameweeks', component: GameweekSliderComponent },
+
   { path: 'gameweeks', component: GameweekSliderComponent },
+  { path: 'adminMatch', component: AdminMatchComponent },
+
 
   { path: 'match/:matchId', component: MatchDetailsComponent },
+  { path: 'Dashboard', component: DashboardComponent },
+  {path :'DashboardSidebar',component:AdminSidebarComponent},
+  {path :'DashboardHeader',component:AdminHeaderComponent},
+  { path: 'admin-goals/:matchId', component: AdminGoalComponent },
+  { path: 'admin-cards/:matchId', component: AdminCardComponent },
+
+
+
+
   
   {path :'DashboardSidebar',component:SidebarComponent},
 
@@ -60,8 +95,9 @@ const routes: Routes = [
 
 
 
+
   { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
-  { path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
+ { path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
 
 
@@ -81,6 +117,21 @@ const routes: Routes = [
 { path: 'health/health-records/add', component: AddHealthrecordComponent }, //
 { path: 'health/health-records/edit/:id', component: EditHealthrecordComponent },
 { path: 'health/health-records/show/:id', component: ShowHealthrecordComponent },
+
+
+
+//skander turkiiiiii recoveryplan
+
+
+{ path: 'add-recoveryplan', component: AddRecoveryplanComponent },
+{ path: 'edit-recoveryplan/:injuryId/:planId', component: EditRecoveryplanComponent },
+{
+  path: 'show-recoveryplan/:injuryId/:planId',component: ShowRecoveryplanComponent},
+
+{ path: 'list-recoveryplan/:playerId', component: ListRecoveryPlanComponent },
+
+{ path: 'list-player', component: ListPlayerComponent },
+
 
 
 ];
