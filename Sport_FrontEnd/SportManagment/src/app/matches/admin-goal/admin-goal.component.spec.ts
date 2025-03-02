@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SidebarComponent } from './sidebar.component';
+import { AdminGoalComponent } from './admin-goal.component';
 
-describe('SidebarComponent', () => {
-  let component: SidebarComponent;
-  let fixture: ComponentFixture<SidebarComponent>;
+describe('AdminGoalComponent', () => {
+  let component: AdminGoalComponent;
+  let fixture: ComponentFixture<AdminGoalComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SidebarComponent]
+      declarations: [AdminGoalComponent]
     });
-    fixture = TestBed.createComponent(SidebarComponent);
+    fixture = TestBed.createComponent(AdminGoalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
