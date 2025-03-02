@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("teams")
+@CrossOrigin("*")
 public class TeamController {
     @Autowired
 private ITeamService iTeamService;

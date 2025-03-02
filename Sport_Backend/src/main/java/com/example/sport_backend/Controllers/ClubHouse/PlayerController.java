@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("players")
+@CrossOrigin("*")
 public class PlayerController {
     @Autowired
     private IPlayerService iPlayerService;

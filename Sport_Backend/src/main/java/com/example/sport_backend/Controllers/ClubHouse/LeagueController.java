@@ -11,6 +11,8 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("leagues")
+@CrossOrigin("*")
 public class LeagueController {
    @Autowired
     private ILeagueService iLeagueService;
