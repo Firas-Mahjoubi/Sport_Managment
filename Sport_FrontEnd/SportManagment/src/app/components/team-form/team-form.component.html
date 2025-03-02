@@ -1,0 +1,32 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">{{ isEditMode ? 'Modifier' : 'Ajouter' }} une Équipe</h2>
+
+  <form (ngSubmit)="saveTeam()" class="p-4 border rounded shadow bg-light">
+    <div class="mb-3">
+      <label class="form-label">Nom</label>
+      <input type="text" class="form-control" [(ngModel)]="team.name" name="name" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Stadium</label>
+      <input type="text" class="form-control" [(ngModel)]="team.stadium" name="stadium" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Logo URL</label>
+      <input type="text" class="form-control" [(ngModel)]="team.logoUrl" name="logoUrl">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Catégorie</label>
+      <select class="form-control" [(ngModel)]="team.category" name="category" required>
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">
+      <i class="bi" [ngClass]="isEditMode ? 'bi-pencil' : 'bi-plus-circle'"></i>
+      {{ isEditMode ? 'Modifier' : 'Ajouter' }}
+    </button>
+  </form>
+</div>

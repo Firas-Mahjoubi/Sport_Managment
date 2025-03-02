@@ -1,0 +1,34 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Liste des Joueurs</h2>
+
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Position</th>
+        <th>Numéro</th>
+        <th>Stats</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let player of players">
+        <td>{{ player.firstName }}</td>
+        <td>{{ player.lastName }}</td>
+        <td>{{ player.position }}</td>
+        <td>{{ player.playerNumber }}</td>
+        <td>{{ player.performanceStats }}</td>
+        <td class="text-center">
+          <div class="d-flex justify-content-center gap-2">
+            
+            <button class="btn btn-danger btn-sm" *ngIf="player.id" (click)="deletePlayer(player.id)">
+              <i class="bi bi-trash"></i> Supprimer
+            </button>
+            
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

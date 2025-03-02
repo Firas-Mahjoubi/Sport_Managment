@@ -1,0 +1,32 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Ajouter un Joueur</h2>
+
+  <form (ngSubmit)="addPlayer()" class="p-4 border rounded shadow bg-light">
+    <div class="mb-3">
+      <label class="form-label">Prénom</label>
+      <input type="text" class="form-control" [(ngModel)]="player.firstName" name="firstName" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Nom</label>
+      <input type="text" class="form-control" [(ngModel)]="player.lastName" name="lastName" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Position</label>
+      <input type="text" class="form-control" [(ngModel)]="player.position" name="position" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Numéro du Joueur</label>
+      <input type="number" class="form-control" [(ngModel)]="player.playerNumber" name="playerNumber" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Stats</label>
+      <input type="text" class="form-control" [(ngModel)]="player.performanceStats" name="performanceStats">
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Ajouter</button>
+  </form>
+</div>

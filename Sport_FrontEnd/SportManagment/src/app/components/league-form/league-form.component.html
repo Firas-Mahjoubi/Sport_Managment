@@ -1,0 +1,12 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Ajouter une Ligue</h2>
+
+  <form (ngSubmit)="addLeague()" class="p-4 border rounded shadow bg-light">
+    <div class="mb-3">
+      <label class="form-label">Nom</label>
+      <input type="text" class="form-control" [(ngModel)]="league.name" name="name" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Ajouter</button>
+  </form>
+</div>
