@@ -1,5 +1,6 @@
 package com.example.sport_backend.Entity.Health;
 
+import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Entity.Enum.PlanStatus;
 import com.example.sport_backend.Entity.Enum.PlanType;
 import jakarta.persistence.*;
@@ -19,12 +20,16 @@ import java.time.LocalDate;
 public class RecoveryPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+   private Long id;
 
     String planDescription;
     LocalDate startDate;
     LocalDate estimatedEndDate;
+
     LocalDate actualEndDate;
+
+
+
 
     Float progress;
     Integer sessionFrequency;
@@ -39,7 +44,16 @@ public class RecoveryPlan {
     @Enumerated(EnumType.STRING)
     PlanStatus planStatus;
 
-    @OneToOne
-    @JoinColumn(name = "injury_id")
+   @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "injury_id", nullable = false, unique = true)
     private Injury injury;
+
+
+
+
+
+
+
+
+
 }

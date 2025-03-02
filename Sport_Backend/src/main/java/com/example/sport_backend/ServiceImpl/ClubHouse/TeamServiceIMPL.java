@@ -3,9 +3,14 @@ package com.example.sport_backend.ServiceImpl.ClubHouse;
 import com.example.sport_backend.Entity.ClubHouse.Team;
 import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
 import com.example.sport_backend.ServiceInterface.ClubHouse.ITeamService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
+@AllArgsConstructor
+@Slf4j
 public class TeamServiceIMPL implements ITeamService {
     public TeamRepositories teamRepositories;
 

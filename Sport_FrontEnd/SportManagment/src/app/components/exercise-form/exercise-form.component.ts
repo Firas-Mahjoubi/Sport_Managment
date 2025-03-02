@@ -87,12 +87,12 @@ export class ExerciseFormComponent implements OnInit {
     if (this.isEditing) {
       this.exerciseService.updateExercise(this.exerciseId!, this.exercise).subscribe(() => {
         alert('Exercise Updated Successfully');
-        this.router.navigate(['/exercises']);
+        this.router.navigate(['/aexercise']);
       });
     } else {
       this.exerciseService.createExercise(this.exercise).subscribe(() => {
         alert('Exercise Created Successfully');
-        this.router.navigate(['/exercises']);
+        this.router.navigate(['/aexercise']);
       });
     }
   }
