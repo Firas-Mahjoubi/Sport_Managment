@@ -12,6 +12,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -48,6 +50,9 @@ public class Injury {
     @JsonIgnore
     @OneToOne(mappedBy = "injury", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private RecoveryPlan recoveryPlan;
+
+
+
 
 
      @ManyToOne

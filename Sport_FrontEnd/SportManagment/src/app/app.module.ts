@@ -35,6 +35,20 @@ import { ListHealthrecordsComponent } from './Health/healthrecord/list-healthrec
 import { AddHealthrecordComponent } from './Health/healthrecord/add-healthrecord/add-healthrecord.component';
 import { EditHealthrecordComponent } from './Health/healthrecord/edit-healthrecord/edit-healthrecord.component';
 import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthrecord/show-healthrecord.component';
+import { AddRecoveryplanComponent } from './Health/recoveyplans/add-recoveryplan/add-recoveryplan.component';
+import { EditRecoveryplanComponent } from './Health/recoveyplans/edit-recoveryplan/edit-recoveryplan.component';
+
+import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoveryplan/show-recoveryplan.component';
+import { ListPlayerComponent } from './Health/recoveyplans/list-player/list-player.component';
+import { ListRecoveryPlanComponent } from './Health/recoveyplans/list-recoveryplan/list-recoveryplan.component';
+
+
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -69,6 +83,13 @@ import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthreco
     AddHealthrecordComponent,
     EditHealthrecordComponent,
     ShowHealthrecordComponent,
+    AddRecoveryplanComponent,
+    EditRecoveryplanComponent,
+
+    ShowRecoveryplanComponent,
+    AddRecoveryplanComponent,
+    ListPlayerComponent,
+    ListRecoveryPlanComponent,
 
 
 
@@ -81,7 +102,16 @@ import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthreco
     HttpClientModule,
     ReactiveFormsModule,
     TacticModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
+
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatCardModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
