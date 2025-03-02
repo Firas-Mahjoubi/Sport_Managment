@@ -5,6 +5,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import {MatchesHomeComponent} from "./matches/matches-home/matches-home.component";
 import {GameweekSliderComponent} from "./matches/gameweek-slider/gameweek-slider.component";
+import { authGuard, roleGuard } from './auth.guard';
 import {MatchDetailsComponent} from "./matches/match-details/match-details.component";
 import {SidebarComponent} from "./matches/sidebar/sidebar.component";
 import { TrainingSessionComponent } from './components/training-session/training-session.component';
@@ -39,7 +40,7 @@ const routes: Routes = [
 
   { path: 'auth', component: AuthComponent },
   { path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
-  {path: 'dashboard', component:DashboardComponent},
+  {path: 'dashboard', component:DashboardComponent, canActivate: [roleGuard(['ADMIN'])]}, // Protect dashboard route
   {path: 'main', component:LandingPageComponent},
   { path: 'training-sessions', component: TrainingSessionComponent },//Training routes
   { path: 'training-sessions-exercice', component: TrainingSessionExerciceComponent },
