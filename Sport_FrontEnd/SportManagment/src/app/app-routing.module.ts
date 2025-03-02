@@ -21,25 +21,31 @@ import { EditHealthrecordComponent } from './Health/healthrecord/edit-healthreco
 
 import { ListInjuryArchiveComponent } from './Health/list-injury-archive/list-injury-archive.component';
 import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthrecord/show-healthrecord.component';
+import { AddRecoveryplanComponent } from './Health/recoveyplans/add-recoveryplan/add-recoveryplan.component';
+
+import { ListPlayerComponent } from './Health/recoveyplans/list-player/list-player.component';
+import { ListRecoveryPlanComponent } from './Health/recoveyplans/list-recoveryplan/list-recoveryplan.component';
+import { EditRecoveryplanComponent } from './Health/recoveyplans/edit-recoveryplan/edit-recoveryplan.component';
+import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoveryplan/show-recoveryplan.component';
 
 const routes: Routes = [
 
-  { path: 'auth', component: AuthComponent },
-  { path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
- {path: 'dashboard', component:DashboardComponent},
-  {path: 'main', component:LandingPageComponent},
-  { path: 'training-sessions', component: TrainingSessionComponent },//Training routes
-  { path: 'training-sessions-exercice', component: TrainingSessionExerciceComponent },
-  { path: 'training-sessions/new', component: TrainingSessionFormComponent }, // ✅ Add New
-  { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent }, // ✅ Edit
-  { path: 'exercises', component: ExerciseComponent },//exervise routes
- { path: 'add-exercise', component: ExerciseFormComponent },
-  { path: 'edit-exercise/:id', component: ExerciseFormComponent },
-  { path: 'aexercise', component: ExerciseListComponent },
-  { path: 'matches', component: MatchesHomeComponent },
-  { path: 'gameweeks', component: GameweekSliderComponent },
-  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
-  { path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
+  //{ path: 'auth', component: AuthComponent },
+  //{ path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
+ //{path: 'dashboard', component:DashboardComponent},
+  //{path: 'main', component:LandingPageComponent},
+  //{ path: 'training-sessions', component: TrainingSessionComponent },//Training routes
+  //{ path: 'training-sessions-exercice', component: TrainingSessionExerciceComponent },
+ // { path: 'training-sessions/new', component: TrainingSessionFormComponent }, // ✅ Add New
+  //{ path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent }, // ✅ Edit
+  //{ path: 'exercises', component: ExerciseComponent },//exervise routes
+  // { path: 'add-exercise', component: ExerciseFormComponent },
+ // { path: 'edit-exercise/:id', component: ExerciseFormComponent },
+  //{ path: 'aexercise', component: ExerciseListComponent },
+  //{ path: 'matches', component: MatchesHomeComponent },
+ // { path: 'gameweeks', component: GameweekSliderComponent },
+ // { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
+ // { path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
 
 
@@ -59,6 +65,21 @@ const routes: Routes = [
 { path: 'health/health-records/add', component: AddHealthrecordComponent }, //
 { path: 'health/health-records/edit/:id', component: EditHealthrecordComponent },
 { path: 'health/health-records/show/:id', component: ShowHealthrecordComponent },
+
+
+
+//skander turkiiiiii recoveryplan
+//{ path: 'add-recoveryplan/:playerId', component: AddRecoveryplanComponent },
+
+{ path: 'add-recoveryplan', component: AddRecoveryplanComponent },
+{ path: 'edit-recoveryplan/:injuryId/:planId', component: EditRecoveryplanComponent },
+{
+  path: 'show-recoveryplan/:injuryId/:planId',component: ShowRecoveryplanComponent},
+
+{ path: 'list-recoveryplan/:playerId', component: ListRecoveryPlanComponent },
+
+{ path: 'list-player', component: ListPlayerComponent },
+
 
 
 ];

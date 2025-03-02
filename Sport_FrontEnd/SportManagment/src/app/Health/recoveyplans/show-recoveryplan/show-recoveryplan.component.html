@@ -1,0 +1,17 @@
+<mat-card *ngIf="recoveryPlan">
+  <mat-card-title>Plan de Récupération #{{ recoveryPlan.id }}</mat-card-title>
+  <mat-card-content>
+    <p><strong>Description :</strong> {{ recoveryPlan.planDescription }}</p>
+    <p><strong>Date de début :</strong> {{ recoveryPlan.startDate }}</p>
+    <p><strong>Date estimée de fin :</strong> {{ recoveryPlan.estimatedEndDate }}</p>
+    <p><strong>Date réelle de fin :</strong> {{ recoveryPlan.actualEndDate || 'Non renseignée' }}</p>
+    <p><strong>Progression :</strong> {{ recoveryPlan.progress }}%</p>
+    <p><strong>Fréquence des séances :</strong> {{ recoveryPlan.sessionFrequency }} par semaine</p>
+    <p><strong>Durée de chaque séance :</strong> {{ recoveryPlan.sessionDuration }} minutes</p>
+    <p><strong>Type de plan :</strong> {{ recoveryPlan.planType }}</p>
+    <p><strong>Date de prochaine revue :</strong> {{ recoveryPlan.nextReviewDate }}</p>
+    <p><strong>Ajustements :</strong> {{ recoveryPlan.adjustments }}</p>
+    <p><strong>Statut :</strong> {{ recoveryPlan.planStatus }}</p>
+    <p><strong>Injury Concernée :</strong> {{ recoveryPlan.injury.description }}</p>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,13 @@
+.recoveryplan-card {
+  background-color: #1a1a1a;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
+  max-width: 600px;
+  margin: 40px auto;
+  font-family: 'Arial', sans-serif;
+}
+mat-list-item {
+  border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+}
