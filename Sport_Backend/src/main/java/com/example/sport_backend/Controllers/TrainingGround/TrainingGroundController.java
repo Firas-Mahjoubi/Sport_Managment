@@ -29,6 +29,11 @@ public class TrainingGroundController {
     public TrainingSession addSession(@RequestBody TrainingSession trainingSession) {
         return itrainingGroundService.addSession(trainingSession);
     }
+    @GetMapping("/getTrainingSession/{id}")
+            public TrainingSession getSessionById(@PathVariable Long id) {
+            return itrainingGroundService.getSessionById(id);
+            }
+
     @GetMapping("/getTrainingSession")
     public List<TrainingSession> getAllSessions() {
         return itrainingGroundService.getAllSessions();

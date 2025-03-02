@@ -1,0 +1,39 @@
+.training-session {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.session-header {
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.session-title {
+  font-weight: bold;
+}
+
+.card {
+  border-radius: 8px;
+}
+
+.exercise-card {
+  display: flex;
+  background: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.exercise-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.badge {
+  font-size: 14px;
+  padding: 5px 10px;
+}

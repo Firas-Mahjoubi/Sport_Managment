@@ -20,11 +20,11 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "first_name")  // 🔄 Corrige le mapping avec la base
+    @Column(name = "first_name")  // 🔄 Corrige le mapping avec la base (skander)
 
     String FirstName;
 
-    @Column(name = "last_name")   // 🔄 Corrige le mapping avec la base
+    @Column(name = "last_name")   // 🔄 Corrige le mapping avec la base (skander)
     String LastName;
     String position;
     Integer playerNumber;

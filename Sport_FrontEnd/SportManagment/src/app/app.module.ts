@@ -21,6 +21,10 @@ import { TrainingSessionFormComponent } from './components/training-session-form
 import { TrainingGroundNavbarComponent } from './components/training-ground-navbar/training-ground-navbar.component';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
+
+import { ExerciseLibraryComponent } from './components/exercise-library/exercise-library.component';
+import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
+
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
 import { InjuryEditComponent } from './Health/injury-edit/injury-edit.component';
 import { InjuryListComponent } from './Health/injury-list/injury-list.component';
@@ -35,6 +39,21 @@ import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.compo
 import { AdminMatchComponent } from './matches/admin-match/admin-match.component';
 import { AdminGoalComponent } from './matches/admin-goal/admin-goal.component';
 import { AdminCardComponent } from './matches/admin-card/admin-card.component';
+import { AddRecoveryplanComponent } from './Health/recoveyplans/add-recoveryplan/add-recoveryplan.component';
+import { EditRecoveryplanComponent } from './Health/recoveyplans/edit-recoveryplan/edit-recoveryplan.component';
+
+import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoveryplan/show-recoveryplan.component';
+import { ListPlayerComponent } from './Health/recoveyplans/list-player/list-player.component';
+import { ListRecoveryPlanComponent } from './Health/recoveyplans/list-recoveryplan/list-recoveryplan.component';
+
+
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+
 
 
 
@@ -56,6 +75,9 @@ import { AdminCardComponent } from './matches/admin-card/admin-card.component';
     TrainingGroundNavbarComponent,
     ExerciseFormComponent,
     ExerciseListComponent,
+    ExerciseLibraryComponent,
+    TrainingSessionViewComponent,
+
     InjuryAddComponent,
     InjuryEditComponent,
     InjuryListComponent,
@@ -70,6 +92,14 @@ import { AdminCardComponent } from './matches/admin-card/admin-card.component';
     AdminMatchComponent,
     AdminGoalComponent,
     AdminCardComponent,
+    AddRecoveryplanComponent,
+    EditRecoveryplanComponent,
+
+    ShowRecoveryplanComponent,
+    AddRecoveryplanComponent,
+    ListPlayerComponent,
+    ListRecoveryPlanComponent,
+
 
 
 
@@ -81,7 +111,16 @@ import { AdminCardComponent } from './matches/admin-card/admin-card.component';
     HttpClientModule,
     ReactiveFormsModule,
     TacticModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
+
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatCardModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

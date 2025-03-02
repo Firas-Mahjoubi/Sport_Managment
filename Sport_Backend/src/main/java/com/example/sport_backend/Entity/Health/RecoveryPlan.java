@@ -20,7 +20,7 @@ import java.time.LocalDate;
 public class RecoveryPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+   private Long id;
 
     String planDescription;
     LocalDate startDate;
@@ -44,9 +44,10 @@ public class RecoveryPlan {
     @Enumerated(EnumType.STRING)
     PlanStatus planStatus;
 
-    @OneToOne(cascade = CascadeType.ALL)
+   @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "injury_id", nullable = false, unique = true)
     private Injury injury;
+
 
 
 
