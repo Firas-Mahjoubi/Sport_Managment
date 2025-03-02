@@ -19,7 +19,8 @@ public class Goal {
     private Long id;
 
     private Integer scorerNumber;  // Player's number (scorer)
-
+    private Integer assisterNumber;
+    private  Boolean isHomeTeam;
     private Integer timing;  // Goal timing in match
 
     @ManyToOne
