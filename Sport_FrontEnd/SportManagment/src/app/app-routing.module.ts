@@ -7,7 +7,6 @@ import {MatchesHomeComponent} from "./matches/matches-home/matches-home.componen
 import {GameweekSliderComponent} from "./matches/gameweek-slider/gameweek-slider.component";
 import { authGuard, roleGuard } from './auth.guard';
 import {MatchDetailsComponent} from "./matches/match-details/match-details.component";
-import {SidebarComponent} from "./matches/sidebar/sidebar.component";
 import { TrainingSessionComponent } from './components/training-session/training-session.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
 import{TrainingSessionExerciceComponent} from './components/training-session-exercice/training-session-exercice.component';
@@ -28,6 +27,12 @@ import { EditHealthrecordComponent } from './Health/healthrecord/edit-healthreco
 
 import { ListInjuryArchiveComponent } from './Health/list-injury-archive/list-injury-archive.component';
 import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthrecord/show-healthrecord.component';
+import {AdminSidebarComponent} from "./admin/admin-sidebar/admin-sidebar.component";
+import {AdminHeaderComponent} from "./admin/admin-header/admin-header.component";
+import {AdminMatchComponent} from "./matches/admin-match/admin-match.component";
+import {AdminGoalComponent} from "./matches/admin-goal/admin-goal.component";
+import {AdminCardComponent} from "./matches/admin-card/admin-card.component";
+
 import { AddRecoveryplanComponent } from './Health/recoveyplans/add-recoveryplan/add-recoveryplan.component';
 
 import { ListPlayerComponent } from './Health/recoveyplans/list-player/list-player.component';
@@ -62,8 +67,19 @@ const routes: Routes = [
  { path: 'gameweeks', component: GameweekSliderComponent },
 
   { path: 'gameweeks', component: GameweekSliderComponent },
+  { path: 'adminMatch', component: AdminMatchComponent },
+
 
   { path: 'match/:matchId', component: MatchDetailsComponent },
+  { path: 'Dashboard', component: DashboardComponent },
+  {path :'DashboardSidebar',component:AdminSidebarComponent},
+  {path :'DashboardHeader',component:AdminHeaderComponent},
+  { path: 'admin-goals/:matchId', component: AdminGoalComponent },
+  { path: 'admin-cards/:matchId', component: AdminCardComponent },
+
+
+
+
   
   {path :'DashboardSidebar',component:SidebarComponent},
 

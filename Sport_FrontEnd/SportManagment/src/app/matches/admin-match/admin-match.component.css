@@ -1,0 +1,79 @@
+/* General Styling */
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Input Fields and Buttons */
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #1e7e34;
+}
+
+/* Match List */
+.match-list {
+  list-style: none;
+  padding: 0;
+}
+
+.match-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.match-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.team-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: contain;
+  border: 1px solid #ddd;
+}
+
+/* Alert Message */
+.alert-warning {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px;
+}

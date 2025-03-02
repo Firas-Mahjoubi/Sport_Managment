@@ -14,7 +14,6 @@ import { MatchesHomeComponent } from './matches/matches-home/matches-home.compon
 import { GameweekSliderComponent } from './matches/gameweek-slider/gameweek-slider.component';
 import { NavbarComponent } from './matches/navbar/navbar.component';
 import { MatchDetailsComponent } from './matches/match-details/match-details.component';
-import { SidebarComponent } from './matches/sidebar/sidebar.component';
 import { TrainingSessionComponent } from './components/training-session/training-session.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
 import { TrainingSessionExerciceComponent } from './components/training-session-exercice/training-session-exercice.component';
@@ -35,6 +34,11 @@ import { ListHealthrecordsComponent } from './Health/healthrecord/list-healthrec
 import { AddHealthrecordComponent } from './Health/healthrecord/add-healthrecord/add-healthrecord.component';
 import { EditHealthrecordComponent } from './Health/healthrecord/edit-healthrecord/edit-healthrecord.component';
 import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthrecord/show-healthrecord.component';
+import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
+import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.component';
+import { AdminMatchComponent } from './matches/admin-match/admin-match.component';
+import { AdminGoalComponent } from './matches/admin-goal/admin-goal.component';
+import { AdminCardComponent } from './matches/admin-card/admin-card.component';
 import { AddRecoveryplanComponent } from './Health/recoveyplans/add-recoveryplan/add-recoveryplan.component';
 import { EditRecoveryplanComponent } from './Health/recoveyplans/edit-recoveryplan/edit-recoveryplan.component';
 
@@ -63,7 +67,7 @@ import { MatCardModule } from '@angular/material/card';
     GameweekSliderComponent,
     NavbarComponent,
     MatchDetailsComponent,
-    SidebarComponent,
+    AdminSidebarComponent,
     TrainingSessionComponent,
     ExerciseComponent,
     TrainingSessionExerciceComponent,
@@ -83,6 +87,11 @@ import { MatCardModule } from '@angular/material/card';
     AddHealthrecordComponent,
     EditHealthrecordComponent,
     ShowHealthrecordComponent,
+    AdminHeaderComponent,
+    AdminSidebarComponent,
+    AdminMatchComponent,
+    AdminGoalComponent,
+    AdminCardComponent,
     AddRecoveryplanComponent,
     EditRecoveryplanComponent,
 
