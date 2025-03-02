@@ -1,5 +1,6 @@
 import { Component, OnInit  } from '@angular/core';
 import { TrainingSessionService } from '../../services/training-session.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-training-session-exercice',
   templateUrl: './training-session-exercice.component.html',
@@ -8,7 +9,7 @@ import { TrainingSessionService } from '../../services/training-session.service'
 export class TrainingSessionExerciceComponent implements OnInit{
   trainingSessions: any[] = [];  // Store sessions
 
-  constructor(private trainingSessionService: TrainingSessionService) {}
+  constructor(private trainingSessionService: TrainingSessionService ,private router:Router) {}
 
   ngOnInit(): void {
     this.loadTrainingSessions();
@@ -25,4 +26,14 @@ export class TrainingSessionExerciceComponent implements OnInit{
       }
     );
   }
+  logSessionId(id: number) {
+    console.log("Navigating to session with ID:", id);
+}
+navigateToSession(sessionId: number) {
+  if (sessionId) {
+      this.router.navigate(['/training-session', sessionId]);
+  } else {
+      console.error("Session ID is undefined!");
+  }
+}
 }
