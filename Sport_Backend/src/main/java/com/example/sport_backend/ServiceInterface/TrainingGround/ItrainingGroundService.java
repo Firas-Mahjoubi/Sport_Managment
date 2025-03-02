@@ -38,4 +38,6 @@ public interface ItrainingGroundService {
     public List<MediaExercice> getMediaByExercice(Long exerciceId);
 
     public void deleteMedia(Long id);
+
+
 }

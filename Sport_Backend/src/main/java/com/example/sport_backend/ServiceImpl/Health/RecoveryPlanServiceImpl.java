@@ -1,8 +1,12 @@
 package com.example.sport_backend.ServiceImpl.Health;
 
+import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Entity.Health.Injury;
 import com.example.sport_backend.Entity.Health.RecoveryPlan;
+
+import com.example.sport_backend.Repositories.ClubHouse.PlayerRepo;
 import com.example.sport_backend.Repositories.Health.InjuryRepositories;
+ // Assuming this repository is defined
 import com.example.sport_backend.Repositories.Health.RecoveryPlanRepositories;
 import com.example.sport_backend.ServiceInterface.Health.IRecoveryPlanService;
 import lombok.RequiredArgsConstructor;
@@ -10,22 +14,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class RecoveryPlanServiceImpl  implements IRecoveryPlanService {
-
+public class RecoveryPlanServiceImpl implements IRecoveryPlanService {
 
     @Autowired
     private RecoveryPlanRepositories recoveryPlanRepositories;
-    private final InjuryRepositories injuryRepositories;
 
+    @Autowired
+    private InjuryRepositories injuryRepositories;
+
+    @Autowired
+    private PlayerRepo playerRepositories;
 
     @Override
     public List<RecoveryPlan> getAllRecoveryPlans() {
-        return recoveryPlanRepositories.findAll();
+        List<RecoveryPlan> recoveryPlans = recoveryPlanRepositories.findAll();
+
+        if (recoveryPlans.isEmpty()) {
+            throw new RuntimeException("Aucun plan de récupération trouvé !");
+        }
+
+        return recoveryPlans;
     }
+
 
     @Override
     public RecoveryPlan getRecoveryPlanById(Long id) {
@@ -33,15 +48,33 @@ public class RecoveryPlanServiceImpl  implements IRecoveryPlanService {
                 .orElseThrow(() -> new RuntimeException("RecoveryPlan avec ID " + id + " non trouvé"));
     }
 
+
+
+
+    // Créer un Plan de Récupération en fonction de l'ID de la Blessure et de l'ID du Joueur
     @Override
-    public RecoveryPlan createRecoveryPlan(RecoveryPlan recoveryPlan) {
+    public RecoveryPlan createRecoveryPlan(Long injuryId, Long playerId, RecoveryPlan recoveryPlan) {
+        Injury injury = injuryRepositories.findById(injuryId)
+                .orElseThrow(() -> new RuntimeException("Blessure introuvable"));
+
+        Player player = playerRepositories.findById(playerId)
+                .orElseThrow(() -> new RuntimeException("Joueur introuvable"));
+
+        // Associer la blessure et le joueur au plan de récupération
+        recoveryPlan.setInjury(injury);
+        injury.setPlayer(player);  // On s'assure que la blessure est associée au joueur
+
+        // Sauvegarder le plan de récupération
         return recoveryPlanRepositories.save(recoveryPlan);
     }
 
-
     @Override
-    public RecoveryPlan updateRecoveryPlan(Long id, RecoveryPlan newRecoveryPlan) {
-        RecoveryPlan recoveryPlan = getRecoveryPlanById(id);
+    public RecoveryPlan updateRecoveryPlan(Long recoveryPlanId, RecoveryPlan newRecoveryPlan) {
+        // Trouver le plan de récupération existant par son ID
+        RecoveryPlan recoveryPlan = recoveryPlanRepositories.findById(recoveryPlanId)
+                .orElseThrow(() -> new RuntimeException("Plan de récupération avec ID " + recoveryPlanId + " non trouvé"));
+
+        // Mettre à jour les attributs du plan de récupération
         recoveryPlan.setPlanDescription(newRecoveryPlan.getPlanDescription());
         recoveryPlan.setStartDate(newRecoveryPlan.getStartDate());
         recoveryPlan.setEstimatedEndDate(newRecoveryPlan.getEstimatedEndDate());
@@ -53,38 +86,56 @@ public class RecoveryPlanServiceImpl  implements IRecoveryPlanService {
         recoveryPlan.setNextReviewDate(newRecoveryPlan.getNextReviewDate());
         recoveryPlan.setAdjustments(newRecoveryPlan.getAdjustments());
         recoveryPlan.setPlanStatus(newRecoveryPlan.getPlanStatus());
-        return recoveryPlanRepositories.save(recoveryPlan);
-    }
 
-    @Override
-    public void deleteRecoveryPlan(Long id) {
-        recoveryPlanRepositories.deleteById(id);
-    }
-
-
-//Affecter une Blessure (Injury) à un Dossier Médical (HealthRecord)
-    public RecoveryPlan assignRecoveryPlanToInjury(Long injuryId, RecoveryPlan recoveryPlan) {
-        Injury injury = injuryRepositories.findById(injuryId)
-                .orElseThrow(() -> new RuntimeException("Blessure introuvable"));
-
-        recoveryPlan.setInjury(injury);
-        injury.setRecoveryPlan(recoveryPlan); // Ajoute cette ligne !
-
+        // Sauvegarder et retourner le plan mis à jour
         return recoveryPlanRepositories.save(recoveryPlan);
     }
 
 
-    //Désaffecter un Plan de Récupération (RecoveryPlan) d'une Blessure
+    // Supprimer un Plan de Récupération pour un Joueur et une Blessure spécifiques
     @Transactional
-    public void unassignRecoveryPlanFromInjury(Long recoveryPlanId) {
+    @Override
+    public void deleteRecoveryPlan(Long injuryId, Long playerId, Long recoveryPlanId) {
         RecoveryPlan recoveryPlan = recoveryPlanRepositories.findById(recoveryPlanId)
                 .orElseThrow(() -> new RuntimeException("Plan de récupération introuvable"));
 
-        recoveryPlan.setInjury(null);
-        recoveryPlanRepositories.save(recoveryPlan);
+        Injury injury = injuryRepositories.findById(injuryId)
+                .orElseThrow(() -> new RuntimeException("Blessure introuvable"));
+
+        Player player = playerRepositories.findById(playerId)
+                .orElseThrow(() -> new RuntimeException("Joueur introuvable"));
+
+        // Vérifier que le plan correspond bien à la blessure et au joueur
+        if (!recoveryPlan.getInjury().equals(injury) || !recoveryPlan.getInjury().getPlayer().equals(player)) {
+            throw new RuntimeException("Le Plan de récupération ne correspond pas à cette blessure et joueur.");
+        }
+
+        recoveryPlanRepositories.delete(recoveryPlan);
     }
 
+    @Override
+    public List<RecoveryPlan> getRecoveryPlansByPlayerId(Long playerId) {
+        // Récupérer toutes les blessures du joueur
+        List<Injury> injuries = injuryRepositories.findByPlayerId(playerId);
 
+        if (injuries.isEmpty()) {
+            throw new RuntimeException("Aucune blessure trouvée pour le joueur avec ID " + playerId);
+        }
 
+        // Récupérer tous les RecoveryPlan associés aux blessures de ce joueur
+        List<RecoveryPlan> recoveryPlans = new ArrayList<>();
+
+        for (Injury injury : injuries) {
+            if (injury.getRecoveryPlan() != null) {
+                recoveryPlans.add(injury.getRecoveryPlan());
+            }
+        }
+
+        if (recoveryPlans.isEmpty()) {
+            throw new RuntimeException("Aucun plan de récupération trouvé pour ce joueur");
+        }
+
+        return recoveryPlans;
+    }
 
 }
