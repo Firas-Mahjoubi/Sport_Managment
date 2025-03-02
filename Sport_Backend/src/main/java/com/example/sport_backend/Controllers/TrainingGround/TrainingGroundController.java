@@ -43,6 +43,14 @@ public class TrainingGroundController {
         itrainingGroundService.deleteTrainingSession(id);
     }
 
+    @PostMapping("/{sessionId}/add-players")
+    public ResponseEntity<TrainingSession> addPlayersToSession(
+            @PathVariable Long sessionId, @RequestBody Set<Long> playerIds) {
+        TrainingSession session = itrainingGroundService.addPlayersToSession(sessionId, playerIds);
+        return ResponseEntity.ok(session);
+    }
+
+
     ///////////--------------------------Exercice----------------------------////////////////
     @PostMapping("AddExercice")
     public Exercice createExercice(@RequestBody Exercice exercice) {

@@ -7,16 +7,20 @@ import {MatchesHomeComponent} from "./matches/matches-home/matches-home.componen
 import {GameweekSliderComponent} from "./matches/gameweek-slider/gameweek-slider.component";
 import { authGuard, roleGuard } from './auth.guard';
 import {MatchDetailsComponent} from "./matches/match-details/match-details.component";
+
+//--------------------Training-groud -------------------------//
+import {SidebarComponent} from "./matches/sidebar/sidebar.component";
+import { TrainingSessionComponent } from './components/training-session-Assign-exercice/training-session.component';
+import{TrainingSessionExerciceComponent} from './components/training-session/training-session-exercice.component';
 import { TrainingSessionComponent } from './components/training-session/training-session.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
 import{TrainingSessionExerciceComponent} from './components/training-session-exercice/training-session-exercice.component';
 import {TrainingSessionFormComponent} from './components/training-session-form/training-session-form.component';
 import {ExerciseFormComponent} from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
-
 import { ExerciseLibraryComponent } from './components/exercise-library/exercise-library.component';
 import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
-
+//---------------------------------------------//
 import { InjuryListComponent } from './Health/injury-list/injury-list.component';
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
 import { InjuryEditComponent } from './Health/injury-edit/injury-edit.component';
@@ -27,6 +31,9 @@ import { EditHealthrecordComponent } from './Health/healthrecord/edit-healthreco
 
 import { ListInjuryArchiveComponent } from './Health/list-injury-archive/list-injury-archive.component';
 import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthrecord/show-healthrecord.component';
+
+import { HomeComponent } from './components/home/home.component';
+
 import {AdminSidebarComponent} from "./admin/admin-sidebar/admin-sidebar.component";
 import {AdminHeaderComponent} from "./admin/admin-header/admin-header.component";
 import {AdminMatchComponent} from "./matches/admin-match/admin-match.component";
@@ -41,27 +48,28 @@ import { EditRecoveryplanComponent } from './Health/recoveyplans/edit-recoverypl
 import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoveryplan/show-recoveryplan.component';
 
 
+
 const routes: Routes = [
 
+  { path: '', component: HomeComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
   {path: 'dashboard', component:DashboardComponent, canActivate: [roleGuard(['ADMIN'])]}, // Protect dashboard route
   {path: 'main', component:LandingPageComponent},
-  { path: 'training-sessions', component: TrainingSessionComponent },//Training routes
-  { path: 'training-sessions-exercice', component: TrainingSessionExerciceComponent },
-  { path: 'training-sessions/new', component: TrainingSessionFormComponent }, // ✅ Add New
-  { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent }, // ✅ Edit
+  //--------------------Training-groud -------------------------//
+  { path: 'training-sessions-exercice', component: TrainingSessionComponent },
+  { path: 'training-sessions', component: TrainingSessionExerciceComponent },
+  { path: 'training-sessions/new', component: TrainingSessionFormComponent }, 
+  { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent }, 
   { path: 'training-session/:id', component: TrainingSessionViewComponent },
-  { path: 'exercises', component: ExerciseComponent },//exervise routes
 
-   { path: 'add-exercise', component: ExerciseFormComponent },
- { path: 'edit-exercise/:id', component: ExerciseFormComponent },
 
   { path: 'add-exercise', component: ExerciseFormComponent },
   { path: 'edit-exercise/:id', component: ExerciseFormComponent },
-
-  { path: 'aexercise', component: ExerciseListComponent },
+  { path: 'exercise-list', component: ExerciseListComponent },
   { path: 'exercicse-lib', component: ExerciseLibraryComponent },
+  //---------------------------------------------//
+
   { path: 'matches', component: MatchesHomeComponent },
 
  { path: 'gameweeks', component: GameweekSliderComponent },
