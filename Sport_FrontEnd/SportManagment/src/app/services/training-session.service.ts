@@ -18,9 +18,15 @@ export class TrainingSessionService {
   getAllSessions(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/getTrainingSession`);
   }
+  
+
+    // // ✅ Fetch a session by ID
+    // getTrainingSessionById(id: number): Observable<any> {
+    //   return this.http.get<any>(`${this.apiUrl}/getTrainingSession/${id}`);
+    // }
 
    // ✅ Fetch session by ID
-   getSessionById(id: number): Observable<any> {
+   getTrainingSessionById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/getTrainingSession/${id}`);
   }
      // ✅ Create Training Session

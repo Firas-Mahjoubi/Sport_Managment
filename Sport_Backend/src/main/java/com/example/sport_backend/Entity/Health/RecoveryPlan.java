@@ -20,12 +20,16 @@ import java.time.LocalDate;
 public class RecoveryPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+   private Long id;
 
     String planDescription;
     LocalDate startDate;
     LocalDate estimatedEndDate;
+
     LocalDate actualEndDate;
+
+
+
 
     Float progress;
     Integer sessionFrequency;
@@ -40,18 +44,14 @@ public class RecoveryPlan {
     @Enumerated(EnumType.STRING)
     PlanStatus planStatus;
 
-    @OneToOne
-    @JoinColumn(name = "injury_id")
+   @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "injury_id", nullable = false, unique = true)
     private Injury injury;
 
-    @ManyToOne
-    @JoinColumn(name = "player_id", nullable = false)
-    private Player player; // Association avec Player
 
 
-    // Le playerId est juste utilisé pour la création et n'est pas persisté dans la DB
-    @Transient
-    private Long playerId;
+
+
 
 
 

@@ -6,11 +6,14 @@ import com.example.sport_backend.Entity.Enum.Status;
 import com.example.sport_backend.Entity.Enum.Type;
 import com.example.sport_backend.Entity.Enum.ZoneAffectee;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -45,11 +48,15 @@ public class Injury {
 
 
     @JsonIgnore
-    @OneToOne(mappedBy = "injury", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "injury", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private RecoveryPlan recoveryPlan;
 
-    @JsonIgnore
+
+
+
+
      @ManyToOne
+    @JsonIgnoreProperties("injuries")  // ✅ Évite les problèmes de sérialisation
     @JoinColumn(name = "player_id", nullable = false)
     private Player player;
 }
