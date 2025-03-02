@@ -1,0 +1,105 @@
+.recovery-plan-table-container {
+  padding: 24px;
+  background: linear-gradient(135deg, #f0f7ff, #e9eff5);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+.table-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #0056b3;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modern-table {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th.mat-header-cell {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 12px;
+}
+
+td.mat-cell {
+  padding: 14px;
+  font-size: 14px;
+  color: #333;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.player-avatar {
+  width: 36px;
+  height: 36px;
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  text-transform: uppercase;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+}
+
+.injury-badge {
+  padding: 4px 8px;
+  background-color: #ffcc00;
+  color: #333;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 14px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #28a745;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  transition: width 0.4s ease-in-out;
+}
+
+.delete-icon {
+  color: #dc3545;
+  transition: transform 0.3s ease;
+}
+
+.delete-icon:hover {
+  transform: scale(1.3);
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}

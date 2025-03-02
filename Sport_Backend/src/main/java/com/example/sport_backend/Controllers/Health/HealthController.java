@@ -2,9 +2,11 @@ package com.example.sport_backend.Controllers.Health;
 
 import com.example.sport_backend.Entity.Health.HealthRecord;
 import com.example.sport_backend.Entity.ClubHouse.Player;
+import com.example.sport_backend.Repositories.Health.HealthRepositories;
 import com.example.sport_backend.ServiceInterface.Health.IHealthService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +19,8 @@ public class HealthController {
 
     @Autowired
     private IHealthService healthService;
+
+    private final HealthRepositories healthRepositories;
 
     // Récupérer tous les enregistrements de santé
     @GetMapping("getAllHealthRecords")
@@ -42,12 +46,21 @@ public class HealthController {
         return healthService.updateHealthRecord(id, healthRecord);
     }
 
-    // Supprimer un enregistrement de santé par ID
+
     @DeleteMapping("deleteHealthRecord/{id}")
     public void deleteHealthRecord(@PathVariable Long id) {
         healthService.deleteHealthRecord(id);
     }
 
+
+
+    @GetMapping("/getPlayerByHealthRecord/{healthRecordId}")
+    public ResponseEntity<Player> getPlayerByHealthRecord(@PathVariable Long healthRecordId) {
+        HealthRecord healthRecord = healthRepositories.findById(healthRecordId)
+                .orElseThrow(() -> new RuntimeException("HealthRecord non trouvé"));
+
+        return ResponseEntity.ok(healthRecord.getPlayer());
+    }
 
 
 }

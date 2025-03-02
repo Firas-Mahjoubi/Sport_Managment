@@ -3,6 +3,7 @@ package com.example.sport_backend.ServiceImpl.Matches;
 import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Entity.ClubHouse.Team;
 import com.example.sport_backend.Entity.Matchs.Card;
+import com.example.sport_backend.Entity.Matchs.CardDTO;
 import com.example.sport_backend.Entity.Matchs.CardType;
 import com.example.sport_backend.Entity.Matchs.Match;
 import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
@@ -11,6 +12,9 @@ import com.example.sport_backend.Repositories.matches.MatchesRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -53,6 +57,27 @@ public class CardService {
 
         return cardRepo.save(card);
     }
+    @Transactional(readOnly = true)
+    public List<CardDTO> getCardsForMatch(Long matchId) {
+        // Fetch the match
+        Match match = matchRepo.findById(matchId)
+                .orElseThrow(() -> new RuntimeException("Match not found"));
+
+        // Retrieve all cards for the given match
+        return cardRepo.findByMatch(match)
+                .stream()
+                .map(card -> new CardDTO(
+                        card.getCardTime(),
+                        card.getCardType(),
+                        card.getCardTaker().getFirstName(),
+                        card.getCardTaker().getLastName(),
+                        card.getNumberOfPlayer(),
+                        card.getForHomeTeam() // Return boolean instead of team name
+                ))
+                .collect(Collectors.toList());
+    }
+
+
     @Transactional(readOnly = true)
     public Long countRedCardsForPlayer(String firstName, String lastName, String teamName) {
         return cardRepo.countCardsByPlayerAndTeam(firstName, lastName, teamName, CardType.RED);

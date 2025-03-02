@@ -19,7 +19,12 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    @Column(name = "first_name")  // 🔄 Corrige le mapping avec la base (skander)
+
     String FirstName;
+
+    @Column(name = "last_name")   // 🔄 Corrige le mapping avec la base (skander)
     String LastName;
     String position;
     Integer playerNumber;
@@ -28,12 +33,15 @@ public class Player {
     Team team;
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "player")
     private Set<Injury> injuries;
+
 
 
     @OneToOne
     @JoinColumn(name = "health_record_id", unique = true )
     private HealthRecord healthRecord;
+
+
 
 }

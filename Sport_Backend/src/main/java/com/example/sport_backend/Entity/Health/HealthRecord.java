@@ -43,8 +43,12 @@ public class HealthRecord {
     String commentaire;
 
 
-    @OneToOne(mappedBy = "healthRecord", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "player_id", unique = true) // Ajout de la clé étrangère
     @JsonIgnore
     private Player player;
+
+
+
 
 }

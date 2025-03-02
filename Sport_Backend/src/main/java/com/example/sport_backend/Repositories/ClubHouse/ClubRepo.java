@@ -5,4 +5,5 @@ import com.example.sport_backend.Entity.ClubHouse.League;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ClubRepo extends JpaRepository<Club,Long> {
+
 }

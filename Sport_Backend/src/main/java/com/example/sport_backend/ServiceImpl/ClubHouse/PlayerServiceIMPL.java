@@ -4,10 +4,15 @@ import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Repositories.ClubHouse.PlayerRepo;
 import com.example.sport_backend.ServiceInterface.ClubHouse.IPlayerService;
 import com.example.sport_backend.ServiceInterface.ClubHouse.ITeamService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-
+@Service
+@AllArgsConstructor
+@Slf4j
 public class PlayerServiceIMPL implements IPlayerService {
 
 
@@ -39,5 +44,12 @@ public class PlayerServiceIMPL implements IPlayerService {
     public Player updatePlayer(Long id, Player player) {
        player.setId(id);
         return playerRepo.save(player);
+    }
+
+
+    // ✅ Récupérer uniquement les joueurs qui n'ont pas encore de HealthRecord
+    @Override
+    public List<Player> getPlayersWithoutHealthRecord() {
+        return playerRepo.findPlayersWithoutHealthRecord();
     }
 }
