@@ -1,0 +1,69 @@
+<h3>Créer un Plan de Récupération</h3>
+
+<form [formGroup]="recoveryPlanForm" (ngSubmit)="submit()">
+
+  <div>
+    <label>Blessure concernée:</label>
+    <select formControlName="injuryId">
+      <option *ngFor="let injury of injuries" [value]="injury.id">
+        {{ injury.description }} ({{ injury.date }})
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label>Description:</label>
+    <input type="text" formControlName="planDescription">
+  </div>
+
+  <div>
+    <label>Début:</label>
+    <input type="date" formControlName="startDate">
+  </div>
+
+  <div>
+    <label>Fin estimée:</label>
+    <input type="date" formControlName="estimatedEndDate">
+  </div>
+
+  <div>
+    <label>Progression (%):</label>
+    <input type="number" formControlName="progress">
+  </div>
+
+  <div>
+    <label>Fréquence des séances (par semaine):</label>
+    <input type="number" formControlName="sessionFrequency">
+  </div>
+
+  <div>
+    <label>Durée d'une séance (minutes):</label>
+    <input type="number" formControlName="sessionDuration">
+  </div>
+
+  <div>
+    <label>Type de Plan:</label>
+    <select formControlName="planType">
+      <option *ngFor="let type of planTypes" [value]="type">{{ type }}</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Date de la prochaine révision:</label>
+    <input type="date" formControlName="nextReviewDate">
+  </div>
+
+  <div>
+    <label>Ajustements:</label>
+    <textarea formControlName="adjustments"></textarea>
+  </div>
+
+  <div>
+    <label>Statut:</label>
+    <select formControlName="planStatus">
+      <option *ngFor="let status of planStatuses" [value]="status">{{ status }}</option>
+    </select>
+  </div>
+
+  <button type="submit">Enregistrer</button>
+</form>
