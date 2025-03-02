@@ -80,8 +80,7 @@ const routes: Routes = [
 
 
 
-  
-  {path :'DashboardSidebar',component:SidebarComponent},
+
 
 
 
