@@ -13,6 +13,8 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("clubs")
+@CrossOrigin("*")
 public class ClubController {
 
     @GetMapping("/getAllClubs")

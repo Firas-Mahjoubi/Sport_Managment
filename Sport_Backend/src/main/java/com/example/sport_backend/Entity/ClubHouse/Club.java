@@ -20,7 +20,7 @@ public class Club {
     Long id;
     String name;
     String location;
-    String StadiumName;
+    String stadiumName;
     LocalDate foundationYear;
     String clubLogo;
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY)
