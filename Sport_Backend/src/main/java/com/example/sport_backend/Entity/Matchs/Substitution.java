@@ -1,6 +1,7 @@
 package com.example.sport_backend.Entity.Matchs;
 import com.example.sport_backend.Entity.Matchs.LineUp;
 import com.example.sport_backend.Entity.Matchs.Match;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -25,9 +26,11 @@ public class Substitution {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "line_up_id")  // Reference to the LineUp
+            @JsonIgnore
     LineUp lineUp;  // The associated lineup for the substitution
 
     @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name = "match_id")  // Reference to the match
+            @JsonIgnore
     Match match;  // The match associated with the substitution
 }

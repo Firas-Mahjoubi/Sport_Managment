@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatchesHomeComponent } from './matches/matches-home/matches-home.component';
 import { GameweekSliderComponent } from './matches/gameweek-slider/gameweek-slider.component';
 import { NavbarComponent } from './matches/navbar/navbar.component';
+import { MatchDetailsComponent } from './matches/match-details/match-details.component';
+import { SidebarComponent } from './matches/sidebar/sidebar.component';
 import { TrainingSessionComponent } from './components/training-session/training-session.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
 import { TrainingSessionExerciceComponent } from './components/training-session-exercice/training-session-exercice.component';
@@ -20,6 +22,10 @@ import { TrainingSessionFormComponent } from './components/training-session-form
 import { TrainingGroundNavbarComponent } from './components/training-ground-navbar/training-ground-navbar.component';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
+
+import { ExerciseLibraryComponent } from './components/exercise-library/exercise-library.component';
+import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
+
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
 import { InjuryEditComponent } from './Health/injury-edit/injury-edit.component';
 import { InjuryListComponent } from './Health/injury-list/injury-list.component';
@@ -46,6 +52,7 @@ import { MatCardModule } from '@angular/material/card';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +62,8 @@ import { MatCardModule } from '@angular/material/card';
     MatchesHomeComponent,
     GameweekSliderComponent,
     NavbarComponent,
+    MatchDetailsComponent,
+    SidebarComponent,
     TrainingSessionComponent,
     ExerciseComponent,
     TrainingSessionExerciceComponent,
@@ -62,6 +71,9 @@ import { MatCardModule } from '@angular/material/card';
     TrainingGroundNavbarComponent,
     ExerciseFormComponent,
     ExerciseListComponent,
+    ExerciseLibraryComponent,
+    TrainingSessionViewComponent,
+
     InjuryAddComponent,
     InjuryEditComponent,
     InjuryListComponent,
@@ -78,6 +90,8 @@ import { MatCardModule } from '@angular/material/card';
     AddRecoveryplanComponent,
     ListPlayerComponent,
     ListRecoveryPlanComponent,
+
+
 
 
   ],
