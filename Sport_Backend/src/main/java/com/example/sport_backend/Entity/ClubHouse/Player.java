@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 @Getter
@@ -23,6 +24,10 @@ public class Player {
     String LastName;
     String position;
     Integer playerNumber;
+    LocalDate birthDate; // 🟢 Date de naissance (nécessaire pour calculer l'âge)
+    String imageUrl; // 🟢 URL de l'image du joueur
+    String status;  // 🟢 Statut (Available, Injured, Rehab, Inactive, Selection, Away)
+
     String performanceStats;
     @ManyToOne
     Team team;
