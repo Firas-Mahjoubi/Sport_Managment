@@ -21,7 +21,7 @@ public class GoalController {
         return ResponseEntity.ok(goals);
     }
 
-    @DeleteMapping("/deleteGaol/{goalId}")
+    @DeleteMapping("/deleteGoal/{goalId}")
     public void deleteGoal(@PathVariable Long goalId) {
         goalService.deleteGoal(goalId);
     }

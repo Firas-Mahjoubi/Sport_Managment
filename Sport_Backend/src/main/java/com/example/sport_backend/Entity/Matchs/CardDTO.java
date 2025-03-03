@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CardDTO {
+    private Long cardId;
     private Integer cardTime;
     private CardType cardType;
     private String cardTakerFirstName;

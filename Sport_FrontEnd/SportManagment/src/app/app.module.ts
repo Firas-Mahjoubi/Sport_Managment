@@ -12,7 +12,6 @@ import { TacticModule } from './tactics/tactics.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatchesHomeComponent } from './matches/matches-home/matches-home.component';
 import { GameweekSliderComponent } from './matches/gameweek-slider/gameweek-slider.component';
-import { NavbarComponent } from './matches/navbar/navbar.component';
 import { MatchDetailsComponent } from './matches/match-details/match-details.component';
 
 //--------------------Training-groud -------------------------//
@@ -58,7 +57,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+
+import { MatchesmainComponent } from './matches/matchesmain/matchesmain.component';
+import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.component';
+
 import { CalendarComponent } from './AdvancedPlanning/calendar/calendar.component';
+
 
 
 
@@ -71,7 +75,6 @@ import { CalendarComponent } from './AdvancedPlanning/calendar/calendar.componen
     AuthComponent,
     MatchesHomeComponent,
     GameweekSliderComponent,
-    NavbarComponent,
     MatchDetailsComponent,
     AdminSidebarComponent,
     TrainingSessionComponent,
@@ -109,6 +112,8 @@ import { CalendarComponent } from './AdvancedPlanning/calendar/calendar.componen
     AddRecoveryplanComponent,
     ListPlayerComponent,
     ListRecoveryPlanComponent,
+    MatchesmainComponent,
+    MatchesNavbarComponent,
     CalendarComponent,
 
 

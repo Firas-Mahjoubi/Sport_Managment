@@ -44,6 +44,8 @@ import { ListPlayerComponent } from './Health/recoveyplans/list-player/list-play
 import { ListRecoveryPlanComponent } from './Health/recoveyplans/list-recoveryplan/list-recoveryplan.component';
 import { EditRecoveryplanComponent } from './Health/recoveyplans/edit-recoveryplan/edit-recoveryplan.component';
 import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoveryplan/show-recoveryplan.component';
+import {MatchesmainComponent} from "./matches/matchesmain/matchesmain.component";
+import {MatchesNavbarComponent} from "./matches/matches-navbar/matches-navbar.component";
 
 
 
@@ -70,8 +72,6 @@ const routes: Routes = [
 
   { path: 'matches', component: MatchesHomeComponent },
 
- { path: 'gameweeks', component: GameweekSliderComponent },
-
   { path: 'gameweeks', component: GameweekSliderComponent },
   { path: 'adminMatch', component: AdminMatchComponent },
 
@@ -82,8 +82,14 @@ const routes: Routes = [
   {path :'DashboardHeader',component:AdminHeaderComponent},
   { path: 'admin-goals/:matchId', component: AdminGoalComponent },
   { path: 'admin-cards/:matchId', component: AdminCardComponent },
+  {path: 'matchesmain', component:MatchesmainComponent},
+  {path: 'matchesNavbar', component:MatchesNavbarComponent},
 
-  {path :'DashboardSidebar',component:AdminSidebarComponent},
+
+
+
+
+
 
 
 
