@@ -96,7 +96,7 @@ const routes: Routes = [
 
 
 
-  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
+  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  
  { path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
 
