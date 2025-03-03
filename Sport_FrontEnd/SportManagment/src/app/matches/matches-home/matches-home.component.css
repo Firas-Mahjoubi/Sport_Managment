@@ -1,44 +1,17 @@
-
-  /* Matches Container */
 .matches-container {
   background-color: #f8f9fa;
   color: black;
   padding: 20px;
   border-radius: 10px;
-  margin-top: 20px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-.navbar{
-
-  margin-bottom: 80px;
 }
 
-/* Gameweek Slider */
-.gameweek-container {
-  background-color: #f8f9fa;
-  color: black;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 800px;
-  margin: 20px auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-/* League Title */
 .league-title {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
   color: #333;
-  text-align: center;
 }
 
-/* Match Card */
 .match-card {
   display: flex;
   align-items: center;
@@ -50,7 +23,6 @@
   border: 1px solid #ddd;
 }
 
-/* Match Info */
 .match-info {
   display: flex;
   align-items: center;
@@ -59,32 +31,27 @@
   max-width: 500px;
 }
 
-/* Team */
 .team {
   display: flex;
   align-items: center;
 }
 
-  /* Team Logo - Rectangle */
-  .team-logo {
-    width: 50px;  /* Adjust width as needed */
-    height: 50px; /* Adjust height as needed */
-    border-radius: 5px; /* Small rounded corners */
-    object-fit: contain;
-    background-color: white;
-    padding: 3px;
-    margin: 0 8px;
-    border: 1px solid #ccc;
-  }
+.team-logo {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: contain;
+  background-color: white;
+  padding: 3px;
+  margin: 0 8px;
+  border: 1px solid #ccc;
+}
 
-
-/* Team Name */
 .team-name {
   font-size: 16px;
   font-weight: bold;
 }
 
-/* Match Result */
 .match-result {
   font-size: 18px;
   font-weight: bold;
@@ -92,74 +59,3 @@
   text-align: center;
   width: 50px;
 }
-
-/* Category Selection Bar */
-.category-bar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  background-color: #111;
-  width: 100%;
-  position: relative;
-}
-
-.category-btn {
-  background-color: #222;
-  color: #aaa;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s;
-}
-
-.category-btn:hover {
-  background-color: #333;
-  color: white;
-}
-
-.category-btn.active {
-  background-color: white;
-  color: black;
-}
-  /* League Header */
-  .league-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-
-  /* League Logo - Rectangle */
-  .league-logo {
-    width: 70px;  /* Adjust width as needed */
-    height: 40px; /* Adjust height as needed */
-    border-radius: 5px; /* Small rounded corners instead of full circle */
-    margin-right: 10px;
-    object-fit: contain;
-    background-color: white;
-    padding: 3px;
-    border: 1px solid #ccc;
-  }
-
-
-  .league-info {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .league-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0;
-  }
-
-  .league-nation {
-    font-size: 14px;
-    color: #666;
-    margin: 0;
-  }
-
-

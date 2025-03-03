@@ -1,0 +1,38 @@
+<div class="container">
+  <h2 class="text-center">{{ isEditMode ? 'Modify' : 'Add' }} Team</h2>
+
+  <mat-card class="p-4">
+    <form (ngSubmit)="saveTeam()">
+      
+      <mat-form-field class="w-100">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" [(ngModel)]="team.name" name="name" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Stadium</mat-label>
+        <input matInput type="text" [(ngModel)]="team.stadium" name="stadium" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Logo URL</mat-label>
+        <input matInput type="text" [(ngModel)]="team.logoUrl" name="logoUrl">
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Category</mat-label>
+        <mat-select [(ngModel)]="team.category" name="category" required>
+          <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="text-center mt-3">
+        <button mat-raised-button color="primary" type="submit">
+          <mat-icon>{{ isEditMode ? 'edit' : 'add' }}</mat-icon>
+          {{ isEditMode ? 'Modify' : 'Add' }} Team
+        </button>
+      </div>
+
+    </form>
+  </mat-card>
+</div>

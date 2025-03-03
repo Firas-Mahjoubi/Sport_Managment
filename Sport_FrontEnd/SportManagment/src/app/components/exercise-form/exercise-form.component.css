@@ -1,6 +1,6 @@
 /* 🔥 Background Image */
 .exercise-form-container {
-  background: url('https://unsplash.com/fr/photos/un-homme-descendant-une-pente-enneigee-en-planche-a-neige-pIwof_el7ZI-') center/cover no-repeat;
+  background: url('https://source.unsplash.com/1600x900/?sports,training') center/cover no-repeat;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -10,7 +10,7 @@
 
 /* 📌 Form Card */
 .exercise-form-card {
-  background: rgba(74, 73, 73, 0.222);
+  background: rgba(255, 255, 255, 0.9);
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);

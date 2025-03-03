@@ -1,13 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.container {
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  mat-card {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  mat-form-field {
+    display: block;
+    width: 100%;
+  }
+  
+  table {
+    width: 100%;
+  }
+  

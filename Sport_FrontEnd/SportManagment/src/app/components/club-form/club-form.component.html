@@ -1,0 +1,36 @@
+ <app-dashboard></app-dashboard>
+ <div class="container mt-4">
+    <h2 class="text-center mb-4">Add Club</h2>
+
+    <form #clubForm="ngForm" (ngSubmit)="saveClub()" class="p-4 border rounded shadow bg-light">
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="club.name" name="name" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Location</label>
+        <input type="text" class="form-control" placeholder="Localisation" [(ngModel)]="club.location" name="location" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Stadium</label>
+        <input type="text" class="form-control" placeholder="Stadium" [(ngModel)]="club.stadiumName" name="stadiumName">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Year of Foundation</label>
+        <input type="date" class="form-control" [(ngModel)]="club.foundationYear" name="foundationYear">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">URL Logo</label>
+        <input type="text" class="form-control" placeholder="URL Logo" [(ngModel)]="club.clubLogo" name="clubLogo">
+      </div>
+
+      <!-- ✅ Bouton corrigé : submit et déclenchement de addClub() -->
+      <button type="submit" class="btn btn-primary w-100">
+        <i class="bi bi-plus-circle"></i> Add 
+      </button>
+    </form>
+</div>

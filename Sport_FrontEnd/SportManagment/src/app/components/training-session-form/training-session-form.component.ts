@@ -27,7 +27,6 @@ export class TrainingSessionFormComponent implements OnInit {
 
   exercises: any[] = []; // List of available exercises
   selectedExercises: number[] = []; // Selected exercise IDs
-  players: any;
 
   constructor(
     private trainingSessionService: TrainingSessionService,

@@ -1,0 +1,57 @@
+<div class="container">
+  <h2 class="text-center">Add Player</h2>
+
+  <mat-card class="p-4">
+    <form (ngSubmit)="addPlayer()">
+      <mat-form-field class="w-100">
+        <mat-label>firstName</mat-label>
+        <input matInput type="text" [(ngModel)]="player.firstName" name="firstName" required>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>lastName</mat-label>
+        <input matInput type="text" [(ngModel)]="player.lastName" name="lastName" required>
+      </mat-form-field>
+      
+      <mat-form-field class="w-100">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="dobPicker" [(ngModel)]="player.birthDate" name="dateOfBirth">
+        <mat-datepicker-toggle matIconSuffix [for]="dobPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dobPicker></mat-datepicker>
+      </mat-form-field>
+      
+
+      <mat-form-field class="w-100">
+        <mat-label>Position</mat-label>
+        <mat-select [(ngModel)]="player.position" name="position" required>
+          <mat-option value="attacker">Attacker</mat-option>
+          <mat-option value="medium">Medium</mat-option>
+          <mat-option value="Defender
+          ">Defender
+          </mat-option>
+          <mat-option value="Guardian
+          ">Guardian
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Number</mat-label>
+        <input matInput type="number" [(ngModel)]="player.playerNumber" name="playerNumber">
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Performance Stats</mat-label>
+        <input matInput type="text" [(ngModel)]="player.performanceStats" name="performanceStats">
+      </mat-form-field>
+
+      
+
+      <div class="text-center">
+        <button mat-raised-button color="primary" type="submit">
+          <mat-icon>add</mat-icon> Add Player
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

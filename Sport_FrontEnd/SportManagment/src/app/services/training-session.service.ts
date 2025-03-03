@@ -18,15 +18,9 @@ export class TrainingSessionService {
   getAllSessions(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/getTrainingSession`);
   }
-  
-
-    // // ✅ Fetch a session by ID
-    // getTrainingSessionById(id: number): Observable<any> {
-    //   return this.http.get<any>(`${this.apiUrl}/getTrainingSession/${id}`);
-    // }
 
    // ✅ Fetch session by ID
-   getTrainingSessionById(id: number): Observable<any> {
+   getSessionById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/getTrainingSession/${id}`);
   }
      // ✅ Create Training Session
@@ -46,10 +40,5 @@ export class TrainingSessionService {
   // ✅ Add exercises to a session
   addExercisesToSession(sessionId: number, exerciceIds: number[]): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/${sessionId}/add-exercises`, exerciceIds);
-  }
-
-  //Add Players to a session
-  addPlayersToSession(sessionId: number, playerIds: number[]): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/${sessionId}/add-players`, playerIds);
   }
 }

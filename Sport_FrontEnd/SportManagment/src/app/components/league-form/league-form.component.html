@@ -1,0 +1,19 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Add league</h2>
+
+  <form (ngSubmit)="addLeague()" class="p-4 border rounded shadow bg-light">
+    <div class="mb-3">
+      <label class="form-label">Nom</label>
+      <input type="text" class="form-control" [(ngModel)]="league.name" name="name" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Pays</label>
+      <select class="form-control" [(ngModel)]="league.country" name="country" required>
+        <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Add</button>
+  </form>
+</div>
