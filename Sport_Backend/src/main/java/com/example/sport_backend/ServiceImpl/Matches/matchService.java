@@ -1,25 +1,29 @@
 package com.example.sport_backend.ServiceImpl.Matches;
 
-
 import com.example.sport_backend.Entity.ClubHouse.League;
 import com.example.sport_backend.Entity.ClubHouse.Team;
 import com.example.sport_backend.Entity.Enum.Categories;
 import com.example.sport_backend.Entity.Matchs.Match;
+import com.example.sport_backend.Entity.Matchs.MatchDetailsResponseDto;
+import com.example.sport_backend.Entity.Matchs.MatchResponseDto;
+import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
 import com.example.sport_backend.Repositories.matches.MatchesRepo;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class matchService  {
+public class matchService {
     private final MatchesRepo matchesRepo;
+    private final TeamRepositories teamRepo;
+
 
     public List<Match> generateSeasonMatches(League league, LocalDate startDate) {
         List<Match> matches = new ArrayList<>();
@@ -30,7 +34,7 @@ public class matchService  {
                 .flatMap(club -> club.getTeams().stream())
                 .collect(Collectors.toList());
 
-        // Categorizing teams
+        // Categorizing teams (if necessary)
         List<Team> seniorTeams = teams.stream()
                 .filter(team -> team.getCategories() == Categories.SENIOR)
                 .collect(Collectors.toList());
@@ -39,67 +43,149 @@ public class matchService  {
                 .filter(team -> team.getCategories() == Categories.JUNIOR)
                 .collect(Collectors.toList());
 
+        // Generate matches for senior teams and then junior teams
         int gameWeek = 1;
         gameWeek = generateMatchesForCategory(seniorTeams, startDate, gameWeek, matches);
         gameWeek = generateMatchesForCategory(juniorTeams, startDate, gameWeek, matches);
 
-        // Sort matches by gameWeek before saving
-        matches.sort(Comparator.comparingInt(Match::getGameWeek));
+        // Shuffle matches for a random schedule (optional)
+        Collections.shuffle(matches);
 
         // Save generated matches
         matchesRepo.saveAll(matches);
 
         return matches;
     }
+    public Map<String, List<MatchResponseDto>> getMatchesByGameWeek(int gameWeek) {
+        String currentSeason = determineSeason(LocalDate.now()); // Determine current season dynamically
+
+        // Fetch matches for the given game week and current season
+        List<Match> matches = matchesRepo.findByGameWeekAndSeason(gameWeek, currentSeason);
+        System.out.println("Fetched Matches: " + matches.size());  // ✅ Debugging
+
+        return matches.stream()
+                .filter(match -> match.getHomeTeam() != null && match.getAwayTeam() != null) // Ensure valid teams
+                .collect(Collectors.groupingBy(match -> {
+                    // Find home team and get league name
+                    Optional<Team> homeTeamOpt = teamRepo.findByName(match.getHomeTeam());
+
+                    homeTeamOpt.ifPresent(team ->
+                            System.out.println("Found Team: " + team.getId()) // ✅ Debug team fetching
+                    );
+
+                    return homeTeamOpt
+                            .map(team -> (team.getClub() != null && team.getClub().getLeague() != null)
+                                    ? team.getClub().getLeague().getName() // ✅ Return League Name
+                                    : "Unknown League" // Handle missing league
+                            )
+                            .orElse("Unknown League");
+                }, Collectors.mapping(match -> {
+                    // Fetch logos
+                    String homeTeamLogo = teamRepo.findByName(match.getHomeTeam())
+                            .map(Team::getLogoUrl)
+                            .orElse("default-home-logo.png");
+
+                    String awayTeamLogo = teamRepo.findByName(match.getAwayTeam())
+                            .map(Team::getLogoUrl)
+                            .orElse("default-away-logo.png");
+
+                    // Convert Match entity to MatchResponseDto
+                    return new MatchResponseDto(
+                            match.getId(),
+                            match.getHomeTeam(),
+                            match.getAwayTeam(),
+                            homeTeamLogo,
+                            awayTeamLogo,
+                            match.getStadium(),
+                            match.getResult(),
+                            match.getGameWeek(),
+                            match.getSeason(),
+                            LocalDateTime.of(match.getDate(), match.getStartTime().toLocalTime()) // Ensure LocalDateTime
+                    );
+                }, Collectors.toList())));
+    }
+
+    public MatchDetailsResponseDto getMatchById(Long matchId) {
+        Optional<Match> matchOpt = matchesRepo.findById(matchId);
+
+        if (matchOpt.isEmpty()) {
+            throw new RuntimeException("Match not found with ID: " + matchId);
+        }
+
+        Match match = matchOpt.get();
+
+        // Fetch home and away teams
+        Team homeTeam = teamRepo.findByName(match.getHomeTeam()).orElse(null);
+        Team awayTeam = teamRepo.findByName(match.getAwayTeam()).orElse(null);
+
+        // Fetch team logos
+        String homeTeamLogo = (homeTeam != null) ? homeTeam.getLogoUrl() : "default-home-logo.png";
+        String awayTeamLogo = (awayTeam != null) ? awayTeam.getLogoUrl() : "default-away-logo.png";
+
+        // Fetch the league details (assuming a team belongs to one club, which belongs to one league)
+        League league = (homeTeam != null && homeTeam.getClub() != null) ? homeTeam.getClub().getLeague() : null;
+
+        String leagueName = (league != null) ? league.getName() : "Unknown League";
+        String leagueLogo = (league != null) ? league.getLogourl() : "default-league-logo.png";
+        String leagueNation = (league != null) ? league.getNation() : "Unknown Nation";
+
+        return new MatchDetailsResponseDto(
+                match.getId(),
+                match.getHomeTeam(),
+                match.getAwayTeam(),
+                homeTeamLogo,
+                awayTeamLogo,
+                match.getStadium(),
+                match.getResult(),
+                match.getGameWeek(),
+                match.getSeason(),
+                LocalDateTime.of(match.getDate(), match.getStartTime().toLocalTime()),
+                leagueName,
+                leagueLogo,
+                leagueNation
+        );
+    }
+
+
 
     private static int generateMatchesForCategory(List<Team> teams, LocalDate startDate, int gameWeek, List<Match> matches) {
         int totalTeams = teams.size();
-        if (totalTeams < 2) return gameWeek; // Not enough teams to create matches
+        if (totalTeams < 2 || totalTeams % 2 != 0) return gameWeek; // Ensure even number of teams
 
-        // Create a list of team indices for round-robin scheduling
-        List<Integer> teamIndices = new ArrayList<>();
-        for (int i = 0; i < totalTeams; i++) {
-            teamIndices.add(i);
-        }
+        List<Team> tempTeams = new ArrayList<>(teams);
+        Team fixedTeam = tempTeams.remove(0); // Keep one team fixed for balancing
 
-        // Iterate through each game week for the first half of the season
-        for (int week = 0; week < totalTeams - 1; week++) {
-            // Schedule matches for the current game week
+        int totalRounds = totalTeams - 1; // Each team plays against all others once
+        for (int round = 0; round < totalRounds; round++) {
             for (int i = 0; i < totalTeams / 2; i++) {
-                Team homeTeam = teams.get(teamIndices.get(i));
-                Team awayTeam = teams.get(teamIndices.get(totalTeams - 1 - i));
+                Team home = (i == 0) ? fixedTeam : tempTeams.get(i - 1);
+                Team away = tempTeams.get(totalTeams - 2 - i);
 
-                // Home match for home team
-                matches.add(createMatch(homeTeam, awayTeam, startDate.plusWeeks(gameWeek - 1), gameWeek));
+                matches.add(createMatch(home, away, startDate.plusWeeks(gameWeek - 1), gameWeek));
             }
 
-            // Rotate teams for the next game week (round-robin)
-            teamIndices.add(1, teamIndices.remove(teamIndices.size() - 1));
-
-            // Increment game week
+            // Rotate teams (excluding the fixed team)
+            Collections.rotate(tempTeams, 1);
             gameWeek++;
         }
 
-        // Generate reverse fixtures for the second half of the season
-        for (int week = 0; week < totalTeams - 1; week++) {
-            // Schedule matches for the current game week
+        // Generate reverse fixtures (home-away switch)
+        for (int round = 0; round < totalRounds; round++) {
             for (int i = 0; i < totalTeams / 2; i++) {
-                Team awayTeam = teams.get(teamIndices.get(i)); // Swap home and away
-                Team homeTeam = teams.get(teamIndices.get(totalTeams - 1 - i)); // Swap home and away
+                Team away = (i == 0) ? fixedTeam : tempTeams.get(i - 1);
+                Team home = tempTeams.get(totalTeams - 2 - i);
 
-                // Away match for home team (reverse fixture)
-                matches.add(createMatch(homeTeam, awayTeam, startDate.plusWeeks(gameWeek - 1), gameWeek));
+                matches.add(createMatch(home, away, startDate.plusWeeks(gameWeek - 1), gameWeek));
             }
 
-            // Rotate teams for the next game week (round-robin)
-            teamIndices.add(1, teamIndices.remove(teamIndices.size() - 1));
-
-            // Increment game week
+            // Rotate teams again for reverse fixtures
+            Collections.rotate(tempTeams, 1);
             gameWeek++;
         }
 
         return gameWeek;
     }
+
 
     private static Match createMatch(Team home, Team away, LocalDate date, int gameWeek) {
         Match match = new Match();
@@ -125,4 +211,5 @@ public class matchService  {
             return year + "/" + (year + 1);
         }
     }
+
 }

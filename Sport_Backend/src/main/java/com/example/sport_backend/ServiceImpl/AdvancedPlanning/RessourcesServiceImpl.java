@@ -40,14 +40,23 @@ public class RessourcesServiceImpl implements RessourcesInterface {
     @Override
     public void removeRessources(long idRessources) {ressourcesRepository.deleteById(idRessources);}
 
+
     @Override
+
     public Ressources affecterRessourceAEvent(Long ressourceId, Long eventId) {
         Ressources ressource = ressourcesRepository.findById(ressourceId)
                 .orElseThrow(() -> new RuntimeException("Ressource non trouvée avec ID : " + ressourceId));
 
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new RuntimeException("Event non trouvé avec ID : " + eventId));
+
         ressource.setEvent(event);
         return ressourcesRepository.save(ressource);
     }
+
+
+
+
+
+
 }

@@ -1,0 +1,41 @@
+.exercise-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.exercise-card:hover {
+  transform: scale(1.03);
+}
+
+.card-img-wrapper {
+  height: 180px;
+  overflow: hidden;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.exercise-tags {
+  margin-top: 10px;
+}
+
+.badge-tag {
+  background-color: #007bff;
+  color: white;
+  margin-right: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.btn-danger {
+  transition: background-color 0.2s;
+}
+
+.btn-danger:hover {
+  background-color: red;
+}

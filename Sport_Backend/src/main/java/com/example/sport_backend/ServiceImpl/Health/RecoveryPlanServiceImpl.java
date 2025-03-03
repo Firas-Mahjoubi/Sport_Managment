@@ -1,29 +1,38 @@
 package com.example.sport_backend.ServiceImpl.Health;
 
+import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Entity.Health.Injury;
 import com.example.sport_backend.Entity.Health.RecoveryPlan;
+import com.example.sport_backend.Repositories.ClubHouse.PlayerRepo;
 import com.example.sport_backend.Repositories.Health.InjuryRepositories;
 import com.example.sport_backend.Repositories.Health.RecoveryPlanRepositories;
 import com.example.sport_backend.ServiceInterface.Health.IRecoveryPlanService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class RecoveryPlanServiceImpl  implements IRecoveryPlanService {
+@Transactional
+public class RecoveryPlanServiceImpl implements IRecoveryPlanService {
 
-
-    @Autowired
-    private RecoveryPlanRepositories recoveryPlanRepositories;
+    private final RecoveryPlanRepositories recoveryPlanRepositories;
     private final InjuryRepositories injuryRepositories;
-
+    private final PlayerRepo playerRepositories;
 
     @Override
     public List<RecoveryPlan> getAllRecoveryPlans() {
-        return recoveryPlanRepositories.findAll();
+        List<RecoveryPlan> recoveryPlans = recoveryPlanRepositories.findAll();
+
+        if (recoveryPlans.isEmpty()) {
+            throw new RuntimeException("Aucun plan de récupération trouvé !");
+        }
+
+        return recoveryPlans;
     }
 
     @Override
@@ -33,13 +42,28 @@ public class RecoveryPlanServiceImpl  implements IRecoveryPlanService {
     }
 
     @Override
-    public RecoveryPlan createRecoveryPlan(RecoveryPlan recoveryPlan) {
+    public RecoveryPlan createRecoveryPlan(Long injuryId, RecoveryPlan recoveryPlan) {
+        Injury injury = injuryRepositories.findById(injuryId)
+                .orElseThrow(() -> new EntityNotFoundException("Injury not found with id: " + injuryId));
+
+        if (injury.getRecoveryPlan() != null) {
+            throw new IllegalStateException("Cette blessure a déjà un plan de récupération.");
+        }
+
+        recoveryPlan.setInjury(injury);
+        recoveryPlan.setId(null);
         return recoveryPlanRepositories.save(recoveryPlan);
     }
 
+
+
+
     @Override
-    public RecoveryPlan updateRecoveryPlan(Long id, RecoveryPlan newRecoveryPlan) {
-        RecoveryPlan recoveryPlan = getRecoveryPlanById(id);
+    public RecoveryPlan updateRecoveryPlan(Long recoveryPlanId, RecoveryPlan newRecoveryPlan) {
+        RecoveryPlan recoveryPlan = recoveryPlanRepositories.findById(recoveryPlanId)
+                .orElseThrow(() -> new RuntimeException("Plan de récupération avec ID " + recoveryPlanId + " non trouvé"));
+
+        // Mettre à jour les attributs
         recoveryPlan.setPlanDescription(newRecoveryPlan.getPlanDescription());
         recoveryPlan.setStartDate(newRecoveryPlan.getStartDate());
         recoveryPlan.setEstimatedEndDate(newRecoveryPlan.getEstimatedEndDate());
@@ -51,35 +75,64 @@ public class RecoveryPlanServiceImpl  implements IRecoveryPlanService {
         recoveryPlan.setNextReviewDate(newRecoveryPlan.getNextReviewDate());
         recoveryPlan.setAdjustments(newRecoveryPlan.getAdjustments());
         recoveryPlan.setPlanStatus(newRecoveryPlan.getPlanStatus());
+
         return recoveryPlanRepositories.save(recoveryPlan);
     }
 
+    @Transactional
     @Override
-    public void deleteRecoveryPlan(Long id) {
-        recoveryPlanRepositories.deleteById(id);
-    }
-
-
-//Affecter une Blessure (Injury) à un Dossier Médical (HealthRecord)
-    public RecoveryPlan assignRecoveryPlanToInjury(Long injuryId, RecoveryPlan recoveryPlan) {
-        Injury injury = injuryRepositories.findById(injuryId)
-                .orElseThrow(() -> new RuntimeException("Blessure introuvable"));
-
-        recoveryPlan.setInjury(injury);
-        injury.setRecoveryPlan(recoveryPlan); // Ajoute cette ligne !
-
-        return recoveryPlanRepositories.save(recoveryPlan);
-    }
-
-
-    //Désaffecter un Plan de Récupération (RecoveryPlan) d'une Blessure
-    public void unassignRecoveryPlanFromInjury(Long recoveryPlanId) {
+    public void deleteRecoveryPlan(Long injuryId, Long recoveryPlanId) {
         RecoveryPlan recoveryPlan = recoveryPlanRepositories.findById(recoveryPlanId)
                 .orElseThrow(() -> new RuntimeException("Plan de récupération introuvable"));
 
-        recoveryPlan.setInjury(null);
-        recoveryPlanRepositories.save(recoveryPlan);
+        Injury injury = injuryRepositories.findById(injuryId)
+                .orElseThrow(() -> new RuntimeException("Blessure introuvable"));
+
+        if (!recoveryPlan.getInjury().equals(injury)) {
+            throw new RuntimeException("Le Plan de récupération ne correspond pas à cette blessure.");
+        }
+
+        recoveryPlanRepositories.delete(recoveryPlan);
     }
+
+
+    @Override
+    public List<RecoveryPlan> getRecoveryPlansByPlayerId(Long playerId) {
+        List<Injury> injuries = injuryRepositories.findByPlayerId(playerId);
+
+        if (injuries.isEmpty()) {
+            throw new RuntimeException("Aucune blessure trouvée pour le joueur avec ID " + playerId);
+        }
+
+        List<RecoveryPlan> recoveryPlans = new ArrayList<>();
+
+        for (Injury injury : injuries) {
+            if (injury.getRecoveryPlan() != null) {
+                recoveryPlans.add(injury.getRecoveryPlan());
+            }
+        }
+
+        if (recoveryPlans.isEmpty()) {
+            throw new RuntimeException("Aucun plan de récupération trouvé pour ce joueur");
+        }
+
+        return recoveryPlans;
+    }
+
+    @Override
+    public List<Injury> getInjuriesByPlayerId(Long playerId) {
+        Player player = playerRepositories.findById(playerId)
+                .orElseThrow(() -> new RuntimeException("Joueur introuvable"));
+
+        List<Injury> injuries = injuryRepositories.findByPlayerId(playerId);
+
+        if (injuries.isEmpty()) {
+            throw new RuntimeException("Aucune blessure trouvée pour ce joueur !");
+        }
+
+        return injuries;
+    }
+
 
 
 

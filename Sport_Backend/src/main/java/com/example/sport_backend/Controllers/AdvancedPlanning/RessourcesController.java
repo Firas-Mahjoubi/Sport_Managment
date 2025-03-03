@@ -41,9 +41,11 @@ public class RessourcesController {
     public void removeRessource(@PathVariable long idRessource) {ressourcesService.removeRessources(idRessource);
     }
 
+
     @PutMapping("/affecter/{ressourceId}/{eventId}")
     public Ressources affecterRessource(@PathVariable Long ressourceId, @PathVariable Long eventId) {
         return ressourcesService.affecterRessourceAEvent(ressourceId, eventId);
     }
+
 
 }

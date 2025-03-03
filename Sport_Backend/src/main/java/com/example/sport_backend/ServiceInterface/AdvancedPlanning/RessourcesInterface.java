@@ -1,6 +1,5 @@
 package com.example.sport_backend.ServiceInterface.AdvancedPlanning;
 
-import com.example.sport_backend.Entity.AdvancedPlanning.Event;
 import com.example.sport_backend.Entity.AdvancedPlanning.Ressources;
 
 import java.util.List;

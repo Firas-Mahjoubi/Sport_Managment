@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -35,5 +36,14 @@ public class EventsServiceImpl implements EventsInterface {
     }
 
     @Override
-    public void removeEvent(long idEvent) {}
+    public boolean removeEvent(long idEvent) {
+        Optional<Event> eventOptional = eventRepository.findById(idEvent);
+        if (eventOptional.isPresent()) {
+            eventRepository.delete(eventOptional.get());
+            return true; // Événement supprimé avec succès
+        }
+        return false; // Si l'événement n'est pas trouvé
+    }
+
+
 }

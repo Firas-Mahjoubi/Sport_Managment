@@ -1,0 +1,63 @@
+<div class="container">
+    <h2 class="text-center mt-4">⚽ Select Exercises for Training Session</h2>
+  
+    <!-- ✅ Select a training session -->
+    <div class="form-group mt-3">
+      <label class="fw-bold">Select a Training Session</label>
+      <select class="form-control" [(ngModel)]="selectedSessionId">
+        <option *ngFor="let session of trainingSessions" [value]="session.id">
+          📅 {{ session.name }} - {{ session.date }}
+        </option>
+      </select>
+    </div>
+  
+    <!-- ✅ Exercise Cards -->
+    <div class="row mt-4">
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let exercise of exercises">
+        <div 
+          class="card exercise-card"
+          [ngClass]="{'selected': selectedExercises.includes(exercise.id)}"
+          (click)="toggleExerciseSelection(exercise.id)"
+        >
+          <!-- ✅ Exercise Image or Default Image -->
+          <img 
+          [src]="exercise.imageUrl ? exercise.imageUrl : 'https://img.freepik.com/photos-premium/spheres-football-3d-raffinees-balles-football-blanches-noires-surface-grise-elegante_1031658-231.jpg?semt=ais_hybrid'" 
+          class="card-img-top exercise-img" 
+          alt="{{ exercise.name }}"
+        >
+  
+          <div class="card-body">
+            <h5 class="card-title fw-bold">{{ exercise.name }}</h5>
+            <p class="card-text text-muted">{{ exercise.description }}</p>
+  
+            <!-- ✅ Display Levels -->
+            <div class="d-flex justify-content-between">
+              <span class="badge bg-success">💪 Fitness: {{ exercise.fitnessLevel }}</span>
+              <span class="badge bg-info">⚽ Technique: {{ exercise.techniqueLevel }}</span>
+              <span class="badge bg-warning">🎯 Tactics: {{ exercise.tacticLevel }}</span>
+            </div>
+  
+            <!-- ✅ Display Tags -->
+            <div class="mt-2">
+              <span *ngFor="let tag of exercise.tags" class="badge bg-primary me-1">
+                #{{ tag.name }}
+              </span>
+            </div>
+  
+            <!-- ✅ Duration & Group Size -->
+            <div class="mt-3 text-center">
+              ⏳ <strong>{{ exercise.durationMinutes }}</strong> min | 👥 Group: <strong>{{ exercise.groupSize }}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- ✅ Submit button -->
+    <div class="text-center mt-4">
+      <button class="btn btn-lg btn-primary" (click)="addExercisesToSession()">
+        ✅ Add Selected Exercises to Session
+      </button>
+    </div>
+  </div>
+  

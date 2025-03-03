@@ -6,11 +6,14 @@ import com.example.sport_backend.Entity.Enum.Status;
 import com.example.sport_backend.Entity.Enum.Type;
 import com.example.sport_backend.Entity.Enum.ZoneAffectee;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,6 +22,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+
 public class Injury {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,10 +48,15 @@ public class Injury {
 
 
     @JsonIgnore
-    @OneToOne(mappedBy = "injury", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "injury", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private RecoveryPlan recoveryPlan;
 
+
+
+
+
      @ManyToOne
-    @JoinColumn(name = "player_id", nullable = true)
+    @JsonIgnoreProperties("injuries")  // ✅ Évite les problèmes de sérialisation
+    @JoinColumn(name = "player_id", nullable = false)
     private Player player;
 }

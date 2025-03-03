@@ -1,0 +1,29 @@
+<p>injury-show works!</p>
+<div class="container mt-4">
+  <h2 class="text-center">🩹 Détails de la Blessure</h2>
+
+  <!-- 🕒 Affichage du chargement -->
+  <div *ngIf="loading" class="text-center">
+    <p>⏳ Chargement...</p>
+  </div>
+
+  <!-- ❌ Erreur si la blessure n'existe pas -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- ✅ Affichage des détails -->
+  <div *ngIf="injury" class="card">
+    <div class="card-body">
+      <h5 class="card-title">Type: {{ injury.type }}</h5>
+      <p class="card-text"><strong>Joueur :</strong> {{ injury.player.firstName }} {{ injury.player.lastName }}</p>
+      <p class="card-text"><strong>Gravité :</strong> {{ injury.severity }}</p>
+      <p class="card-text"><strong>Status :</strong> {{ injury.status }}</p>
+      <p class="card-text"><strong>Description :</strong> {{ injury.description }}</p>
+      <p class="card-text"><strong>Date de la blessure :</strong> {{ injury.date | date:'dd/MM/yyyy' }}</p>
+
+      <!-- 🔙 Bouton Retour -->
+      <a routerLink="/health/injury" class="btn btn-primary">🔙 Retour à la liste</a>
+    </div>
+  </div>
+</div>

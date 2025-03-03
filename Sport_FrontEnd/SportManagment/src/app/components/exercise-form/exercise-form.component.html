@@ -1,0 +1,82 @@
+<div class="exercise-form-container">
+  <div class="exercise-form-card">
+    <h2 class="text-center text-uppercase">
+      {{ isEditing ? '✏️ Edit Exercise' : '➕ New Exercise' }}
+    </h2>
+
+    <div class="form-group">
+      <label>🏋️ Exercise Name *</label>
+      <input type="text" class="form-control" [(ngModel)]="exercise.name" required>
+    </div>
+
+    <div class="form-group mt-3">
+      <label>👀 Visibility</label>
+      <select class="form-control" [(ngModel)]="exercise.visibility">
+        <option value="PUBLIC">Public</option>
+        <option value="PRIVATE">Private</option>
+      </select>
+    </div>
+
+    <div class="form-group mt-3">
+      <label>📝 Description</label>
+      <textarea class="form-control" rows="4" [(ngModel)]="exercise.description"></textarea>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-4">
+        <label>💪 Fitness</label>
+        <input type="range" min="0" max="10" [(ngModel)]="exercise.fitnessLevel" class="form-range">
+      </div>
+      <div class="col-md-4">
+        <label>⚽ Technique</label>
+        <input type="range" min="0" max="10" [(ngModel)]="exercise.techniqueLevel" class="form-range">
+      </div>
+      <div class="col-md-4">
+        <label>🧠 Tactics</label>
+        <input type="range" min="0" max="10" [(ngModel)]="exercise.tacticLevel" class="form-range">
+      </div>
+    </div>
+
+    <div class="form-group mt-3">
+      <label>🎯 Main Focus</label>
+      <input type="text" class="form-control" [(ngModel)]="exercise.mainFocus">
+    </div>
+
+    <div class="form-group mt-3">
+      <label>👶 Age Group</label>
+      <select class="form-control" [(ngModel)]="exercise.ageGroup">
+        <option value="U10">U10</option>
+        <option value="U12">U12</option>
+        <option value="U14">U14</option>
+        <option value="U16">U16</option>
+      </select>
+    </div>
+
+    <div class="form-group mt-3">
+      <label>👥 Group Size</label>
+      <input type="number" class="form-control" [(ngModel)]="exercise.groupSize">
+    </div>
+
+    <div class="form-group mt-3">
+      <label>⏳ Duration (minutes)</label>
+      <input type="number" class="form-control" [(ngModel)]="exercise.durationMinutes">
+    </div>
+
+    <div class="form-group mt-3">
+      <label>🖼️ Image URL</label>
+      <input type="text" class="form-control" [(ngModel)]="exercise.imageUrl">
+    </div>
+
+    <div class="form-group mt-3">
+      <label>🏷️ Tags</label>
+      <div *ngFor="let tag of tags" class="form-check">
+        <input class="form-check-input" type="checkbox" [value]="tag.id" [(ngModel)]="selectedTags">
+        <label class="form-check-label">{{ tag.name }}</label>
+      </div>
+    </div>
+
+    <button class="btn btn-primary mt-4 btn-save w-100" (click)="saveExercise()">
+      {{ isEditing ? '✅ Update Exercise' : '💾 Save Exercise' }}
+    </button>
+  </div>
+</div>

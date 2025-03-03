@@ -1,8 +1,12 @@
 package com.example.sport_backend.ServiceImpl.Matches;
 
 import com.example.sport_backend.Entity.ClubHouse.Team;
+import com.example.sport_backend.Entity.ClubHouse.Player;
+
 import com.example.sport_backend.Entity.Matchs.LineUp;
 import com.example.sport_backend.Entity.Matchs.Match;
+import com.example.sport_backend.Entity.Matchs.PlayerInfoDTO;
+import com.example.sport_backend.Repositories.ClubHouse.PlayerRepo;
 import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
 import com.example.sport_backend.Repositories.matches.LineUpRepo;
 import com.example.sport_backend.Repositories.matches.MatchesRepo;
@@ -11,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -20,6 +25,41 @@ public class LineupService {
     private final LineUpRepo lineUpRepo;
     private final MatchesRepo matchRepo;
     private final TeamRepositories teamRepo;
+    private final PlayerRepo playerRepo;
+    public Map<Long, PlayerInfoDTO> getPlayerNamesForLineup(Long matchId, boolean isHomeTeam) {
+        // Get the lineup
+        LineUp lineUp = getLineupForMatchAndTeam(matchId, isHomeTeam);
+
+        // Get team name from the match
+        String teamName = isHomeTeam ? lineUp.getMatch().getHomeTeam() : lineUp.getMatch().getAwayTeam();
+
+        Team team = teamRepo.findByName(teamName)
+                .orElseThrow(() -> new RuntimeException("Team not found with name: " + teamName));
+
+        // Fetch starting players with position
+        Map<Long, PlayerInfoDTO> playersMap = playerRepo.findByTeamAndPlayerNumberIn(team, lineUp.getTeamplayerNumbers())
+                .stream()
+                .collect(Collectors.toMap(
+                        player -> player.getPlayerNumber().longValue(),  // Convert Integer to Long
+                        player -> new PlayerInfoDTO(player.getFirstName(), player.getLastName(), player.getPosition(), isHomeTeam) // Include firstName
+                ));
+
+        // Fetch substitute players with position
+        Map<Long, PlayerInfoDTO> subsMap = playerRepo.findByTeamAndPlayerNumberIn(team, lineUp.getTeamplayerSubsNumbers())
+                .stream()
+                .collect(Collectors.toMap(
+                        player -> player.getPlayerNumber().longValue(),  // Convert Integer to Long
+                        player -> new PlayerInfoDTO(player.getFirstName(), player.getLastName(), player.getPosition(), isHomeTeam) // Include firstName
+                ));
+
+        // Merge both maps
+        playersMap.putAll(subsMap);
+
+        return playersMap;
+    }
+
+
+
 
     @Transactional
     public LineUp createTeamLineUp(Long matchId, boolean isHomeTeam, LineUp lineUpRequest) {
@@ -27,7 +67,7 @@ public class LineupService {
         Match match = matchRepo.findById(matchId)
                 .orElseThrow(() -> new RuntimeException("Match not found"));
 
-        // Get the team name based on the isHomeTeam flag
+        // Get the team name based on isHomeTeam flag
         String teamName = isHomeTeam ? match.getHomeTeam() : match.getAwayTeam();
 
         if (teamName == null) {
@@ -38,34 +78,33 @@ public class LineupService {
         Team team = teamRepo.findByName(teamName)
                 .orElseThrow(() -> new RuntimeException("Team not found with name: " + teamName));
 
-        // Extract player numbers for the starting 11 players and substitutes
-        List<Long> playerNumbers = team.getPlayers().stream()
-                .limit(11)  // Main 11 players
-                .map(player -> (long) player.getPlayerNumber())  // Convert Integer to Long
-                .collect(Collectors.toList());
+        // Use the request payload's data
+        List<Long> playerNumbers = lineUpRequest.getTeamplayerNumbers();
+        List<Long> subsNumbers = lineUpRequest.getTeamplayerSubsNumbers();
 
-        // Extract substitute numbers (up to 7 substitutes)
-        List<Long> subsNumbers = team.getPlayers().stream()
-                .skip(11)  // The next 7 players are substitutes
-                .limit(7)
-                .map(player -> (long) player.getPlayerNumber())  // Convert Integer to Long
-                .collect(Collectors.toList());
-
-        // Create the LineUp object using the request data
+        // Create the LineUp object
         LineUp lineUp = new LineUp();
-        lineUp.setMatch(match);  // Set the match for the lineup
-        lineUp.setFormation(lineUpRequest.getFormation());  // Set the formation from the request
+        lineUp.setMatch(match);
+        lineUp.setFormation(lineUpRequest.getFormation());
+        lineUp.setIsHomeTeam(isHomeTeam);
 
-        // If it's the home team, set the player numbers and substitute numbers for the home team
-        if (isHomeTeam) {
-            lineUp.setTeamplayerNumbers(playerNumbers);  // Set main 11 players
-            lineUp.setTeamplayerSubsNumbers(subsNumbers);  // Set substitute players
-        } else {
-            lineUp.setTeamplayerNumbers(playerNumbers);  // Set main 11 players for away team
-            lineUp.setTeamplayerSubsNumbers(subsNumbers);  // Set substitute players for away team
-        }
+        // Set players from request payload
+        lineUp.setTeamplayerNumbers(playerNumbers);
+        lineUp.setTeamplayerSubsNumbers(subsNumbers);
 
-        // Save and return the LineUp object
         return lineUpRepo.save(lineUp);
+    }
+
+    public LineUp getLineupForMatchAndTeam(Long matchId, boolean isHomeTeam) {
+        Match match = matchRepo.findById(matchId)
+                .orElseThrow(() -> new RuntimeException("Match not found"));
+
+        if (isHomeTeam) {
+            return lineUpRepo.findByMatchAndIsHomeTeam(match, true)
+                    .orElseThrow(() -> new RuntimeException("Home team lineup not found for match"));
+        } else {
+            return lineUpRepo.findByMatchAndIsHomeTeam(match, false)
+                    .orElseThrow(() -> new RuntimeException("Away team lineup not found for match"));
+        }
     }
 }
