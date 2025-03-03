@@ -9,12 +9,10 @@ import { authGuard, roleGuard } from './auth.guard';
 import {MatchDetailsComponent} from "./matches/match-details/match-details.component";
 
 //--------------------Training-groud -------------------------//
-import {SidebarComponent} from "./matches/sidebar/sidebar.component";
+
 import { TrainingSessionComponent } from './components/training-session-Assign-exercice/training-session.component';
 import{TrainingSessionExerciceComponent} from './components/training-session/training-session-exercice.component';
-import { TrainingSessionComponent } from './components/training-session/training-session.component';
-import { ExerciseComponent } from './components/exercise/exercise.component';
-import{TrainingSessionExerciceComponent} from './components/training-session-exercice/training-session-exercice.component';
+
 import {TrainingSessionFormComponent} from './components/training-session-form/training-session-form.component';
 import {ExerciseFormComponent} from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
@@ -85,11 +83,7 @@ const routes: Routes = [
   { path: 'admin-goals/:matchId', component: AdminGoalComponent },
   { path: 'admin-cards/:matchId', component: AdminCardComponent },
 
-
-
-
-  
-  {path :'DashboardSidebar',component:SidebarComponent},
+  {path :'DashboardSidebar',component:AdminSidebarComponent},
 
 
 

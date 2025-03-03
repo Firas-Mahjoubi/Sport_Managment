@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class TrainingSessionExerciceComponent implements OnInit{
   trainingSessions: any[] = [];  // Store sessions
+  defaultImage: string = 'https://img.freepik.com/photos-premium/spheres-football-3d-raffinees-balles-football-blanches-noires-surface-grise-elegante_1031658-231.jpg?semt=ais_hybrid';
 
   constructor(private trainingSessionService: TrainingSessionService ,private router:Router) {}
 
