@@ -1,7 +1,7 @@
 # Football Club Management
 
 ## 📌 Project Overview
-This project is a football club management application designed to organize training sessions, track players, and improve exercise management. The goal is to provide an efficient tool for coaches and clubs to optimize planning and performance tracking.
+Football Club Management is a tool designed for football clubs and coaches to manage training sessions, exercises, and player performance efficiently. Built with Spring Boot and Angular, it provides an intuitive interface for organizing workouts and tracking fitness.
 
 ## 🚀 Key Features
 - **Exercise Management**: Create, edit, and classify exercises (public or private).
