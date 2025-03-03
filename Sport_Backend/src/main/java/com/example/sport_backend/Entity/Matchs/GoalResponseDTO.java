@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class GoalResponseDTO {
+    private Long id;
     private String scorerFirstName;
     private String scorerLastName;
     private String assisterFirstName;
