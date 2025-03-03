@@ -25,7 +25,7 @@ import java.util.List;
 public class InjuryServiceIMPL implements IInjuryService {
 
     @Autowired
-    private InjuryRepositories injuryRepositories;
+    private final InjuryRepositories injuryRepositories;
     private final PlayerRepo playerRepositories;
     private final RecoveryPlanRepositories recoveryPlanRepositories;
 
@@ -51,9 +51,22 @@ public class InjuryServiceIMPL implements IInjuryService {
         Player player = playerRepositories.findById(playerId)
                 .orElseThrow(() -> new RuntimeException("Joueur introuvable"));
 
-        injury.setPlayer(player);  // Associer le joueur à la blessure
+        // Vérifier que l'injury contient les informations essentielles
+        if (injury.getType() == null || injury.getSeverity() == null || injury.getDate() == null) {
+            throw new IllegalArgumentException("Type, sévérité et date sont obligatoires !");
+        }
+
+        // Associer le joueur à la blessure
+        injury.setPlayer(player);
+
+        // Vérifier si un RecoveryPlan est présent et l'associer correctement
+        if (injury.getRecoveryPlan() != null) {
+            injury.getRecoveryPlan().setInjury(injury);
+        }
+
         return injuryRepositories.save(injury);
     }
+
 
 
     @Override
@@ -96,35 +109,46 @@ public class InjuryServiceIMPL implements IInjuryService {
     @Override
     @Transactional
     public void archiveAndRemoveInjury(Long injuryId) {
-        // Récupération de la blessure
         Injury injury = injuryRepositories.findById(injuryId)
                 .orElseThrow(() -> new EntityNotFoundException("Blessure introuvable"));
 
-        // Vérifier si la blessure est guérie
+        System.out.println("Tentative de suppression de la blessure ID : " + injuryId);
+        System.out.println("Statut actuel : " + injury.getStatus());
+
+        // Vérification stricte : seule une blessure GUERIE peut être supprimée
         if (injury.getStatus() != Status.GUERIE) {
-            throw new RuntimeException("La blessure n'est pas encore guérie !");
+            System.out.println("ÉCHEC : La blessure n'est pas guérie !");
+            throw new RuntimeException("Impossible de supprimer ! La blessure n'est pas encore guérie.");
         }
 
-        // Créer l'historique de la blessure
+        // Archiver la blessure
         InjuryHistory history = new InjuryHistory(injury);
         injuryHistoryRepositories.save(history);
+        System.out.println("Blessure archivée avec succès.");
 
-        // Vérifier si le joueur est toujours associé à la blessure
+        // Supprimer l'association avec le joueur
         if (injury.getPlayer() != null) {
-            // Supprimer l'association entre la blessure et le joueur
             injury.setPlayer(null);
-            injuryRepositories.save(injury);  // Sauvegarder les modifications
+            injuryRepositories.save(injury);
         }
 
-        // Supprimer la blessure après archivage
+        // Supprimer la blessure
         injuryRepositories.delete(injury);
+        System.out.println("Blessure supprimée avec succès !");
     }
+
 
 
 
     @Override
     public List<InjuryHistory> getInjuryHistoryByPlayer(Long playerId) {
         return injuryHistoryRepositories.findByPlayerId(playerId);
+    }
+
+
+    @Override
+    public List<InjuryHistory> getAllArchivedInjuries() {
+        return injuryHistoryRepositories.findAllArchivedInjuries();
     }
 
 

@@ -1,0 +1,27 @@
+.folder-container {
+    text-align: center;
+    padding: 20px;
+    color: white;
+  }
+  
+  .empty-folder img {
+    width: 100px;
+    margin-bottom: 10px;
+  }
+  
+  .upload-options {
+    margin-top: 20px;
+  }
+  
+  .upload-options button {
+    display: block;
+    width: 250px;
+    padding: 10px;
+    margin: 10px auto;
+    background: #00ff88;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  

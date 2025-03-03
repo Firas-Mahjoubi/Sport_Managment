@@ -29,6 +29,11 @@ public class TrainingGroundController {
     public TrainingSession addSession(@RequestBody TrainingSession trainingSession) {
         return itrainingGroundService.addSession(trainingSession);
     }
+    @GetMapping("/getTrainingSession/{id}")
+            public TrainingSession getSessionById(@PathVariable Long id) {
+            return itrainingGroundService.getSessionById(id);
+            }
+
     @GetMapping("/getTrainingSession")
     public List<TrainingSession> getAllSessions() {
         return itrainingGroundService.getAllSessions();
@@ -37,6 +42,14 @@ public class TrainingGroundController {
     public void deleteTrainingSession(@PathVariable Long id) {
         itrainingGroundService.deleteTrainingSession(id);
     }
+
+    @PostMapping("/{sessionId}/add-players")
+    public ResponseEntity<TrainingSession> addPlayersToSession(
+            @PathVariable Long sessionId, @RequestBody Set<Long> playerIds) {
+        TrainingSession session = itrainingGroundService.addPlayersToSession(sessionId, playerIds);
+        return ResponseEntity.ok(session);
+    }
+
 
     ///////////--------------------------Exercice----------------------------////////////////
     @PostMapping("AddExercice")

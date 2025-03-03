@@ -2,6 +2,7 @@ package com.example.sport_backend.Controllers.Matches;
 
 import com.example.sport_backend.Entity.ClubHouse.League;
 import com.example.sport_backend.Entity.Matchs.Match;
+import com.example.sport_backend.Entity.Matchs.MatchDetailsResponseDto;
 import com.example.sport_backend.Entity.Matchs.MatchResponseDto;
 import com.example.sport_backend.Repositories.ClubHouse.LeagueRepo;
 import com.example.sport_backend.ServiceImpl.Matches.matchService;
@@ -31,6 +32,11 @@ public class MatchController {
     public ResponseEntity<Map<String, List<MatchResponseDto>>> getMatchesByGameWeek(@RequestParam int gameWeek) {
         Map<String, List<MatchResponseDto>> matchesByLeague = matchService.getMatchesByGameWeek(gameWeek);
         return ResponseEntity.ok(matchesByLeague);
+    }
+    @GetMapping("/get-match-details/{matchId}")
+    public ResponseEntity<MatchDetailsResponseDto> getMatchById(@PathVariable Long matchId) {
+        MatchDetailsResponseDto matchDto = matchService.getMatchById(matchId);
+        return ResponseEntity.ok(matchDto);
     }
 
 

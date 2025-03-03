@@ -79,13 +79,23 @@ public class HealthServiceIMPL  implements IHealthService {
         return healthRepositories.save(healthRecord);
     }
 
-
-
     @Override
     public void deleteHealthRecord(Long id) {
+        HealthRecord healthRecord = healthRepositories.findById(id)
+                .orElseThrow(() -> new RuntimeException("HealthRecord introuvable avec l'ID : " + id));
 
+        // Vérifier si un joueur est lié à ce HealthRecord
+        if (healthRecord.getPlayer() != null) {
+            Player player = healthRecord.getPlayer();
+            player.setHealthRecord(null); // Supprime la relation du côté du joueur
+            playerRepositories.save(player); // Sauvegarde le joueur mis à jour
+        }
+
+        // Supprimer le HealthRecord
         healthRepositories.deleteById(id);
-
     }
+
+
+
 
 }

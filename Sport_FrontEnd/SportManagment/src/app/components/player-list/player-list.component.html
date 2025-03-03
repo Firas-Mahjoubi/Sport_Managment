@@ -1,0 +1,47 @@
+<div class="container">
+  <h2 class="text-center">Players</h2>
+
+  <div class="d-flex flex-wrap justify-content-center gap-3">
+    <mat-card *ngFor="let player of players" class="player-card">
+      <mat-card-header>
+        <div mat-card-avatar class="player-avatar">
+          <img *ngIf="player.imageUrl; else defaultImage" 
+               [src]="player.imageUrl" 
+               alt="Photo de {{ player.firstName }}" 
+               class="img-fluid">
+          <ng-template #defaultImage>
+            <img src="assets/default-player.png" 
+                 alt="Photo par défaut" 
+                 class="img-fluid">
+          </ng-template>
+        </div>
+        <mat-card-title>{{ player.firstName }} {{ player.lastName }}</mat-card-title>
+        <mat-card-subtitle>{{ player.position }} • #{{ player.playerNumber }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p><strong>Naissance :</strong> {{ player.birthDate ? player.birthDate : 'Non spécifiée' }}</p>
+        <p>
+          <strong>Status :</strong>
+          <span [ngClass]="{
+            'text-success': player.status === 'Available',
+            'text-danger': player.status === 'Injured',
+            
+          }">
+            {{ player.status  }}
+          </span>
+        </p>
+      </mat-card-content>
+
+      <mat-card-actions class="d-flex justify-content-between">
+        <button mat-button color="primary" (click)="editPlayer(player)">
+          <mat-icon>edit</mat-icon> To modify
+        </button>
+        
+        <button mat-button color="warn" (click)="deletePlayer(player.id)">
+          <mat-icon>delete</mat-icon> Delete
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

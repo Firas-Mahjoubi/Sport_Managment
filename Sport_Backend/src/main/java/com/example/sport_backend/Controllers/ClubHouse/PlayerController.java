@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("players")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class PlayerController {
     @Autowired
     private IPlayerService iPlayerService;
@@ -41,4 +41,13 @@ public class PlayerController {
     public Player updatePlayer(@PathVariable Long id, @RequestBody Player player) {
         return iPlayerService.updatePlayer(id, player);
     }
+
+
+    // ✅ Nouveau endpoint pour récupérer les joueurs sans HealthRecord
+    @GetMapping("/players/without-healthrecord")
+    public List<Player> getPlayersWithoutHealthRecord() {
+        return iPlayerService.getPlayersWithoutHealthRecord();
+    }
+
+
 }
