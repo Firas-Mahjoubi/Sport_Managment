@@ -32,6 +32,7 @@
         }
     </style>
 </head>
+<app-header></app-header>
 <body>
     <div class="container mt-4">
         <div class="form-container">
@@ -118,6 +119,8 @@
                     <label>After Session Notes</label>
                     <textarea class="form-control" rows="3" [(ngModel)]="trainingSession.afterSessionNotes" name="afterSessionNotes"></textarea>
                 </div>
+                
+                
 
                 <!-- ✅ Submit Button -->
                 <button type="submit" class="btn btn-primary mt-3">💾 Save Session</button>
@@ -126,3 +129,4 @@
     </div>
 </body>
 </html>
+<app-footer></app-footer>

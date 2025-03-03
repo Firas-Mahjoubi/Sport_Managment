@@ -1,13 +1,13 @@
 .training-session {
   max-width: 900px;
   margin: auto;
-  background: white;
+  background: rgba(255, 255, 255, 0);
   border-radius: 12px;
   padding: 20px;
 }
 
 .session-header {
-  background: #f8f9fa;
+  background: #f8f9fa00;
   border-radius: 8px;
 }
 
@@ -17,11 +17,12 @@
 
 .card {
   border-radius: 8px;
+  background: #f9f9f900;
 }
 
 .exercise-card {
   display: flex;
-  background: #f9f9f9;
+  background: #f9f9f900;
   border-radius: 8px;
   margin-bottom: 10px;
 }
@@ -36,4 +37,5 @@
 .badge {
   font-size: 14px;
   padding: 5px 10px;
+  background: #f9f9f900;
 }

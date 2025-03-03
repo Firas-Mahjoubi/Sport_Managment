@@ -47,4 +47,9 @@ export class TrainingSessionService {
   addExercisesToSession(sessionId: number, exerciceIds: number[]): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/${sessionId}/add-exercises`, exerciceIds);
   }
+
+  //Add Players to a session
+  addPlayersToSession(sessionId: number, playerIds: number[]): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/${sessionId}/add-players`, playerIds);
+  }
 }
