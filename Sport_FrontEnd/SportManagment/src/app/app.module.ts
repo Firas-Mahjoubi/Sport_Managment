@@ -65,7 +65,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatchesmainComponent } from './matches/matchesmain/matchesmain.component';
-import { CalendarComponent } from './AdvancedPlanning/calendar/calendar.component';
 
 import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.component';
 
