@@ -41,7 +41,7 @@ export class MatchesHomeComponent implements OnInit {
   }
 
   fetchLeagues(): void {
-    this.http.get<League[]>(`${this.apiUrl}/getallleague`).subscribe(
+    this.http.get<League[]>(`${this.apiUrl}/leagues/getallleague`).subscribe(
       (data) => {
         this.leagues = data;
       },
