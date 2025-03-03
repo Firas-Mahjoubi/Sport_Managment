@@ -59,8 +59,8 @@ const routes: Routes = [
   //--------------------Training-groud -------------------------//
   { path: 'training-sessions-exercice', component: TrainingSessionComponent },
   { path: 'training-sessions', component: TrainingSessionExerciceComponent },
-  { path: 'training-sessions/new', component: TrainingSessionFormComponent }, 
-  { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent }, 
+  { path: 'training-sessions/new', component: TrainingSessionFormComponent },
+  { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent },
   { path: 'training-session/:id', component: TrainingSessionViewComponent },
 
 
@@ -91,12 +91,14 @@ const routes: Routes = [
 
 
 
+  {path :'DashboardSidebar',component:AdminSidebarComponent},
 
 
 
 
 
-  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  
+
+  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },
  { path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
 
