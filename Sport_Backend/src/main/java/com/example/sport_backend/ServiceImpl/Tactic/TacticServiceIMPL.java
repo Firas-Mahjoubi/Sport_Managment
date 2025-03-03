@@ -1,6 +1,7 @@
 package com.example.sport_backend.ServiceImpl.Tactic;
 
 import com.example.sport_backend.Entity.ClubHouse.Team;
+import com.example.sport_backend.Entity.Enum.TrainingFocus;
 import com.example.sport_backend.Entity.Tactic.Tactic;
 import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
 import com.example.sport_backend.Repositories.Tactic.TacticRepositories;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -51,7 +53,9 @@ public class TacticServiceIMPL implements ITacticService {
 
     @Override
     public List<Tactic> getAllTactics() {
-        return tacticRepositories.findAll();
+        return tacticRepositories.findAll().stream()
+                .peek(tactic -> tactic.setTrainingFocus(TrainingFocus.fromString(tactic.getTrainingFocus().name())))
+                .collect(Collectors.toList());
     }
 
     @Override

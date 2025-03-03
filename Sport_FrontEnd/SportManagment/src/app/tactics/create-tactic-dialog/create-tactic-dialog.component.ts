@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { TacticService } from 'src/app/services/tactic.service';
 
 @Component({
   selector: 'app-create-tactic-dialog',
@@ -10,11 +11,12 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class CreateTacticDialogComponent {
   tacticForm: FormGroup;
   formations = ['4-4-2', '4-3-3', '3-5-2', '5-3-2']; // Example formations
-  trainingFocusOptions = ['DEFENSE', 'ATTACK', 'POSSESSION', 'PRESSING']; // Example options
+  trainingFocusOptions = ['ATTACK', 'DEFENSE', 'GOALKEEPER', 'TRANSITION','FORMATION']; // Example options
 
   constructor(
-    public dialogRef: MatDialogRef<CreateTacticDialogComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private tacticService: TacticService,
+    private dialogRef: MatDialogRef<CreateTacticDialogComponent>
   ) {
     this.tacticForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
@@ -26,9 +28,27 @@ export class CreateTacticDialogComponent {
 
   createFolder(): void {
     if (this.tacticForm.valid) {
-      this.dialogRef.close(this.tacticForm.value);
+      const newTactic = {
+        name: this.tacticForm.value.name,
+        description: this.tacticForm.value.description,
+        formation: this.tacticForm.value.formation,
+        trainingFocus: this.tacticForm.value.trainingFocus
+      };
+  
+      const teamId = 1; // Replace with dynamic team ID if needed
+  
+      this.tacticService.createTactic(newTactic, teamId).subscribe({
+        next: (createdTactic) => {
+          console.log('Tactic created successfully:', createdTactic);
+          this.dialogRef.close(createdTactic);
+        },
+        error: (error) => {
+          console.error('Error creating tactic:', error);
+        }
+      });
     }
   }
+  
 
   closeDialog(): void {
     this.dialogRef.close(null);

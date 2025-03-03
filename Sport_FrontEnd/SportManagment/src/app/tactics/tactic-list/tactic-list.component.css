@@ -1,109 +1,100 @@
-
+/* General Styling */
 body {
-    background: #303030;
-    color: rgb(17, 14, 14);
-    font-family: Arial, sans-serif;
-  }
-  
-  .container {
-    padding: 20px;
-  }
-  
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .search-bar {
-    margin-bottom: 20px;
+  background-color: #f9f9f9;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
 }
-  
-.search-bar input {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background: #222;
-    color: white;
-    font-size: 16px;
-  }
-  .search-bar input::placeholder {
-    color: gray;
-  }
-  .folder-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .folder {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    background: #222;
-    border-radius: 10px;
-    width: 300px;
-    cursor: pointer;
-    transition: 0.3s;
-    position: relative;
-  }
-  
-  .folder:hover {
-    background: #333;
-  }
-  
-  .folder-content {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-  }
-  
-  .folder img {
-    width: 50px;
-    margin-right: 15px;
-  }
-  
-  .folder-details h3 {
-    margin: 0;
-    font-size: 18px;
-  }
-  
-  .folder-details p {
-    margin: 3px 0;
-    color: gray;
-  }
-  
-  .menu-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: white;
-    font-size: 24px;
-  }
-  
-  .delete-button {
-    color: red;
-  }
-  
-  .add-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-  }
-  
-  .add-button button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: #00ff88;
-    color: black;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  h3 {
-    color: #8fbea9;
-  }
-  
+
+/* Container */
+.container {
+  width: 80%;
+  margin: auto;
+  padding-top: 20px;
+}
+
+/* Page Title */
+.page-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+/* Search Bar */
+.search-field {
+  width: 100%;
+  max-width: 400px;
+  display: block;
+  margin: auto;
+}
+
+/* Folder List */
+.folder-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Individual Folder */
+.folder {
+  width: 250px;
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.folder:hover {
+  transform: scale(1.05);
+}
+
+/* Folder Icon */
+.folder-icon {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+/* Folder Details */
+.folder-details {
+  flex-grow: 1;
+}
+
+.folder-details h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #222;
+}
+
+.folder-details p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Three Dots Menu */
+.menu-button {
+  color: #666;
+}
+
+/* Floating Add Button */
+.add-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.add-button button {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.add-button button:hover {
+  transform: scale(1.1);
+}

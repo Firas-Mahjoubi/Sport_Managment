@@ -42,6 +42,7 @@ export class TacticService {
   createTactic(tactic: Tactic, teamId: number): Observable<Tactic> {
     return this.http.post<Tactic>(`${this.apiUrl}/createTactic/${teamId}`, tactic);
   }
+  
 
   /**
    * Update an existing tactic

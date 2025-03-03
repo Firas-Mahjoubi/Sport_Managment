@@ -1,45 +1,54 @@
 <body>
-    <div class="container">
-        <h2>Mes Tactic</h2>
-      
-        <div class="search-bar">
-          <input 
-            type="text" 
-            placeholder="🔍 Search" 
-            [(ngModel)]="searchQuery" 
-            (keyup)="filterTactics()">
-        </div>
-      
-        <div class="folder-list">
-          <div *ngFor="let tactic of filteredTactics; trackBy: trackById" class="folder">
-            <div class="folder-content" (click)="tactic.id !== undefined && openTacticFolder(tactic.id)">
-              <img src="assets/images/folder.png" alt="Folder Icon">
-              <div class="folder-details">
-                <h3>{{ tactic.name }}</h3>
-                <p>{{tactic.formation}}</p>
-                <p>0 Animations</p>
-                <p>0 Images</p>
-              </div>
-            </div>
-      
-            <!-- Three dots menu -->
-            <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
-              ⋮
-            </button>
-      
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="renameTactic(tactic)">✏️ Renommer</button>
-              <button mat-menu-item (click)="copyTactic(tactic)">📄 Copier</button>
-              <button mat-menu-item (click)="moveTactic(tactic)">📂 Déplacer</button>
-              <button mat-menu-item (click)="tactic.id !== undefined && deleteTactic(tactic.id)" class="delete-button">🗑️ Supprimer</button>
-            </mat-menu>
+  <div class="container">
+    <h2 class="page-title">📂 My Tactics</h2>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>🔍 Search</mat-label>
+        <input 
+          matInput
+          type="text" 
+          [(ngModel)]="searchQuery" 
+          (keyup)="filterTactics()"
+          placeholder="Search a tactic..."
+        />
+      </mat-form-field>
+    </div>
+
+    <!-- Folder List -->
+    <div class="folder-list">
+      <div *ngFor="let tactic of filteredTactics; trackBy: trackById" class="folder">
+        <div class="folder-content" (click)="tactic.id !== undefined && openTacticFolder(tactic.id)">
+          <img src="assets/images/folder.png" alt="Folder Icon" class="folder-icon">
+          <div class="folder-details">
+            <h3>{{ tactic.name }}</h3>
+            <p><strong>Formation:</strong> {{ tactic.formation }}</p>
+            <p><strong>Training Focus:</strong> {{ tactic.trainingFocus }}</p>
           </div>
         </div>
-      
-        <div class="add-button">
-          <button (click)="openCreateDialog()">➕</button>
-        </div>
+
+        <!-- Three Dots Menu -->
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="renameTactic(tactic)">
+            <mat-icon>edit</mat-icon> Rename
+          </button>
+          <button mat-menu-item (click)="tactic.id !== undefined && deleteTactic(tactic.id)" class="delete-button">
+            <mat-icon>delete</mat-icon> Delete
+          </button>
+        </mat-menu>
       </div>
-      
+    </div>
+
+    <!-- Floating Add Button -->
+    <div class="add-button">
+      <button mat-fab color="primary" (click)="openCreateDialog()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
 </body>
-  
