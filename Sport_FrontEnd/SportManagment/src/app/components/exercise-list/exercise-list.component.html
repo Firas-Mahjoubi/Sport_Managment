@@ -1,29 +1,52 @@
-<div class="container mt-5">
-  <h2 class="text-center text-uppercase mb-4">🏋️‍♂️ Training Exercises</h2>
 
+<app-header></app-header>
+<div class="container mt-5 site-section">
+  <div class="col-12 title-section">
+    <h2 class="heading">Training Exercises</h2>
+  </div>
   <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let exercise of exercises">
-      <div class="card exercise-card">
-        
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let exercise of exercises">
+      <div class="custom-media d-block shadow-lg p-3 rounded">
+
         <!-- Image Section -->
-        <div class="card-img-wrapper">
-          <img 
-            [src]="exercise.imageUrl ? exercise.imageUrl : defaultImage" 
-            class="card-img-top" 
-            alt="Exercise Image">
+        <div class="img mb-4">
+          <a href="#">
+            <img [src]="exercise.imageUrl ? exercise.imageUrl : defaultImage" alt="Exercise Image"
+              class="img-fluid rounded">
+          </a>
         </div>
 
-        <div class="card-body">
-          <h5 class="card-title text-primary fw-bold">{{ exercise.name }}</h5>
-          <p class="card-text text-muted">{{ exercise.description }}</p>
+        <!-- Text Content -->
+        <div class="text">
+         
+          <h5 class="mb-4 fw-bold text-danger">{{ exercise.name }}</h5>
+          <p class="text-muted">{{ exercise.description }}</p>
 
           <div class="exercise-details">
-            <p><i class="fas fa-bullseye text-danger"></i> <strong>Main Focus:</strong> {{ exercise.mainFocus }}</p>
-            <p><i class="fas fa-dumbbell text-warning"></i> <strong>Fitness Level:</strong> {{ exercise.fitnessLevel }}</p>
-            <p><i class="fas fa-brain text-success"></i> <strong>Technique Level:</strong> {{ exercise.techniqueLevel }}</p>
-            <p><i class="fas fa-chess-board text-info"></i> <strong>Tactical Level:</strong> {{ exercise.tacticLevel }}</p>
-            <p><i class="fas fa-users text-secondary"></i> <strong>Group Size:</strong> {{ exercise.groupSize }}</p>
-            <p><i class="fas fa-clock text-dark"></i> <strong>Duration:</strong> {{ exercise.durationMinutes }} min</p>
+            <p class="d-flex align-items-center">
+              <i class="fas fa-dumbbell text-warning me-2"></i>
+              <strong class="text-white me-1">Fitness Level:</strong> {{ exercise.fitnessLevel }}
+            </p>
+
+            <p class="d-flex align-items-center">
+              <i class="fas fa-brain text-success me-2"></i>
+              <strong class="text-white me-1">Technique Level:</strong> {{ exercise.techniqueLevel }}
+            </p>
+
+            <p class="d-flex align-items-center">
+              <i class="fas fa-chess-board text-info me-2"></i>
+              <strong class="text-white me-1">Tactical Level:</strong> {{ exercise.tacticLevel }}
+            </p>
+
+            <p class="d-flex align-items-center">
+              <i class="fas fa-users text-secondary me-2"></i>
+              <strong class="text-white me-1">Group Size:</strong> {{ exercise.groupSize }}
+            </p>
+
+            <p class="d-flex align-items-center">
+              <i class="fas fa-clock text-dark me-2"></i>
+              <strong class="text-white me-1">Duration:</strong> {{ exercise.durationMinutes }} min
+            </p>
           </div>
 
           <!-- Tags -->
@@ -34,10 +57,26 @@
           </div>
 
           <!-- Buttons -->
-          <button class="btn btn-outline-primary w-100 mt-3">🔍 View Details</button>
-          <button class="btn btn-danger mt-2 w-100" (click)="deleteExercise(exercise.id)">🗑 Delete</button>
+          <p class="text-center mt-3">
+            <a href="#" class="btn btn-primary text-white">🔍 View Details</a>
+            <button class="btn btn-danger ms-2" (click)="deleteExercise(exercise.id)">🗑 Delete</button>
+
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-7 text-center">
+        <div class="custom-pagination">
+          <a href="#">1</a>
+          <span>2</span>
+          <a href="#">3</a>
+          <a href="#">4</a>
+          <a href="#">5</a>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<app-footer></app-footer>

@@ -3,6 +3,9 @@
   margin: 0 auto;
   font-family: Arial, sans-serif;
 }
+.navbar{
+  margin-bottom: 80px;
+}
 
 .league-header {
   display: flex;

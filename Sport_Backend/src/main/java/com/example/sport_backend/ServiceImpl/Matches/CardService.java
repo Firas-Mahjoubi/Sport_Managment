@@ -67,6 +67,7 @@ public class CardService {
         return cardRepo.findByMatch(match)
                 .stream()
                 .map(card -> new CardDTO(
+                        card.getId(),
                         card.getCardTime(),
                         card.getCardType(),
                         card.getCardTaker().getFirstName(),

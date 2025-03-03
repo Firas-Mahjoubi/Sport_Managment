@@ -8,6 +8,7 @@ import com.example.sport_backend.Entity.Matchs.MatchDetailsResponseDto;
 import com.example.sport_backend.Entity.Matchs.MatchResponseDto;
 import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
 import com.example.sport_backend.Repositories.matches.MatchesRepo;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class matchService {
     private final MatchesRepo matchesRepo;
     private final TeamRepositories teamRepo;
 
-
+    @Transactional
     public List<Match> generateSeasonMatches(League league, LocalDate startDate) {
         List<Match> matches = new ArrayList<>();
 

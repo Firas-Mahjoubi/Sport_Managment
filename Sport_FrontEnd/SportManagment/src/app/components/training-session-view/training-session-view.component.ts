@@ -8,7 +8,8 @@ import { TrainingSessionService } from '../../services/training-session.service'
   styleUrls: ['./training-session-view.component.css']
 })
 export class TrainingSessionViewComponent implements OnInit {
-  trainingSession: any = null;
+  
+  trainingSession: any = { exercices: [] }; // ✅ Ensure exercices is an array
   defaultImage = 'https://via.placeholder.com/150';
   cumulativeTimes: number[] = []; // Store cumulative times
 
@@ -27,10 +28,16 @@ export class TrainingSessionViewComponent implements OnInit {
   loadTrainingSession(id: number): void {
     this.trainingSessionService.getTrainingSessionById(id).subscribe(
       (data) => {
-        this.trainingSession = data;
+        console.log("Received Training Session:", data); // ✅ Debugging Log
+        this.trainingSession = {
+          ...data,
+          exercices: data.exercices || data.exercises || [] // ✅ Ensure `exercices` is an array
+        };
         this.calculateCumulativeTimes();
       },
-      (error) => { console.error('Error loading session:', error); }
+      (error) => {
+        console.error('Error loading session:', error);
+      }
     );
   }
 
@@ -49,13 +56,14 @@ export class TrainingSessionViewComponent implements OnInit {
   getCumulativeTime(index: number): number {
     return this.cumulativeTimes[index] || 0;
   }
-    // Color for intensity badge
-    getIntensityColor(intensity: string): string {
-      switch (intensity.toLowerCase()) {
-        case 'low': return 'success';
-        case 'medium': return 'warning';
-        case 'high': return 'danger';
-        default: return 'secondary';
-      }
+
+  // Color for intensity badge
+  getIntensityColor(intensity: string): string {
+    switch (intensity?.toLowerCase()) {
+      case 'low': return 'success';
+      case 'medium': return 'warning';
+      case 'high': return 'danger';
+      default: return 'secondary';
     }
+  }
 }
