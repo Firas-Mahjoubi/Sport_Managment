@@ -57,12 +57,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-import { MatchesmainComponent } from './matches/matchesmain/matchesmain.component';
 import { CalendarComponent } from './AdvancedPlanning/calendar/calendar.component';
+import { EventFormComponent } from './AdvancedPlanning/calendar/event-form/event-form.component';
+import { SessionFormComponent } from './AdvancedPlanning/session-form/session-form.component';
+import { EventDetailsComponent } from './AdvancedPlanning/event-details/event-details.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatchesmainComponent } from './matches/matchesmain/matchesmain.component';
 
 import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.component';
 
-
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -112,10 +120,13 @@ import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.
     AddRecoveryplanComponent,
     ListPlayerComponent,
     ListRecoveryPlanComponent,
+    CalendarComponent,
+    EventFormComponent,
+    SessionFormComponent,
+    EventDetailsComponent,
+
     MatchesmainComponent,
     MatchesNavbarComponent,
-    CalendarComponent,
-
 
 
 
@@ -131,12 +142,19 @@ import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.
     BrowserAnimationsModule,
 
 
+
     MatTableModule,
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,
     MatSelectModule,
     MatCardModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    FontAwesomeModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatFormFieldModule
 
   ],
   providers: [],
