@@ -1,0 +1,57 @@
+.training-session-container {
+  padding: 30px;
+  background-color: #58585800;
+  border-radius: 10px;
+}
+
+.exercise-card {
+  background-color: #58585800;
+  border-radius: 12px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.exercise-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.exercise-img {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+}
+
+.selection-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.exercise-card:hover .selection-overlay {
+  opacity: 1;
+}
+
+.selection-overlay i {
+  font-size: 40px;
+}
+
+.selected {
+  border: 2px solid #007bff !important;
+  box-shadow: 0px 5px 15px rgba(0, 123, 255, 0.4) !important;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #0056b3, #003f7f);
+}

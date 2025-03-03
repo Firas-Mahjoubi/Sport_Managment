@@ -12,20 +12,18 @@ import { TacticModule } from './tactics/tactics.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatchesHomeComponent } from './matches/matches-home/matches-home.component';
 import { GameweekSliderComponent } from './matches/gameweek-slider/gameweek-slider.component';
-import { NavbarComponent } from './matches/navbar/navbar.component';
 import { MatchDetailsComponent } from './matches/match-details/match-details.component';
-import { SidebarComponent } from './matches/sidebar/sidebar.component';
-import { TrainingSessionComponent } from './components/training-session/training-session.component';
-import { ExerciseComponent } from './components/exercise/exercise.component';
-import { TrainingSessionExerciceComponent } from './components/training-session-exercice/training-session-exercice.component';
+
+//--------------------Training-groud -------------------------//
+import { TrainingSessionComponent } from './components/training-session-Assign-exercice/training-session.component';
+import { TrainingSessionExerciceComponent } from './components/training-session/training-session-exercice.component';
 import { TrainingSessionFormComponent } from './components/training-session-form/training-session-form.component';
 import { TrainingGroundNavbarComponent } from './components/training-ground-navbar/training-ground-navbar.component';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
-
 import { ExerciseLibraryComponent } from './components/exercise-library/exercise-library.component';
 import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
-
+//---------------------------------------------//
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
 import { InjuryEditComponent } from './Health/injury-edit/injury-edit.component';
 import { InjuryListComponent } from './Health/injury-list/injury-list.component';
@@ -35,6 +33,16 @@ import { ListHealthrecordsComponent } from './Health/healthrecord/list-healthrec
 import { AddHealthrecordComponent } from './Health/healthrecord/add-healthrecord/add-healthrecord.component';
 import { EditHealthrecordComponent } from './Health/healthrecord/edit-healthrecord/edit-healthrecord.component';
 import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthrecord/show-healthrecord.component';
+
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HomeComponent } from './components/home/home.component';
+
+import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
+import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.component';
+import { AdminMatchComponent } from './matches/admin-match/admin-match.component';
+import { AdminGoalComponent } from './matches/admin-goal/admin-goal.component';
+import { AdminCardComponent } from './matches/admin-card/admin-card.component';
 import { AddRecoveryplanComponent } from './Health/recoveyplans/add-recoveryplan/add-recoveryplan.component';
 import { EditRecoveryplanComponent } from './Health/recoveyplans/edit-recoveryplan/edit-recoveryplan.component';
 
@@ -49,6 +57,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { CalendarComponent } from './AdvancedPlanning/calendar/calendar.component';
+import { EventFormComponent } from './AdvancedPlanning/calendar/event-form/event-form.component';
+import { SessionFormComponent } from './AdvancedPlanning/session-form/session-form.component';
+import { EventDetailsComponent } from './AdvancedPlanning/event-details/event-details.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatchesmainComponent } from './matches/matchesmain/matchesmain.component';
+
+import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.component';
+
+
 
 
 
@@ -61,11 +81,9 @@ import { MatCardModule } from '@angular/material/card';
     AuthComponent,
     MatchesHomeComponent,
     GameweekSliderComponent,
-    NavbarComponent,
     MatchDetailsComponent,
-    SidebarComponent,
+    AdminSidebarComponent,
     TrainingSessionComponent,
-    ExerciseComponent,
     TrainingSessionExerciceComponent,
     TrainingSessionFormComponent,
     TrainingGroundNavbarComponent,
@@ -83,6 +101,16 @@ import { MatCardModule } from '@angular/material/card';
     AddHealthrecordComponent,
     EditHealthrecordComponent,
     ShowHealthrecordComponent,
+
+    HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+
+    AdminHeaderComponent,
+    AdminSidebarComponent,
+    AdminMatchComponent,
+    AdminGoalComponent,
+    AdminCardComponent,
     AddRecoveryplanComponent,
     EditRecoveryplanComponent,
 
@@ -90,6 +118,13 @@ import { MatCardModule } from '@angular/material/card';
     AddRecoveryplanComponent,
     ListPlayerComponent,
     ListRecoveryPlanComponent,
+    CalendarComponent,
+    EventFormComponent,
+    SessionFormComponent,
+    EventDetailsComponent,
+
+    MatchesmainComponent,
+    MatchesNavbarComponent,
 
 
 
@@ -105,12 +140,16 @@ import { MatCardModule } from '@angular/material/card';
     BrowserAnimationsModule,
 
 
+
     MatTableModule,
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,
     MatSelectModule,
     MatCardModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    FontAwesomeModule
 
   ],
   providers: [],
