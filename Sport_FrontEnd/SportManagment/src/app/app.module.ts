@@ -64,6 +64,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { CalendarComponent } from './AdvancedPlanning/calendar/calendar.component';
 
 
 
@@ -114,6 +115,7 @@ import { MatCardModule } from '@angular/material/card';
     AddRecoveryplanComponent,
     ListPlayerComponent,
     ListRecoveryPlanComponent,
+    CalendarComponent,
 
 
 
