@@ -1,1 +1,13 @@
-<p>event-details works!</p>
+<div class="event-details">
+  <h2>{{ event.nameEvent }}</h2>
+  <p><strong>Date:</strong> {{ event.date | date }}</p>
+  <p><strong>Description:</strong> {{ event.description }}</p>
+  <p><strong>Address:</strong> {{ event.address }}</p>
+  <p><strong>Type:</strong> {{ event.typeEvent }}</p>
+
+  <div class="actions">
+    <button mat-button color="warn" (click)="deleteEvent()">Delete</button>
+    <button mat-button color="primary" (click)="editEvent()">Edit</button>
+    <button mat-button (click)="close()">Close</button>
+  </div>
+</div>

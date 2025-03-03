@@ -6,7 +6,6 @@ import { EventService } from '../../services/event.service'; // Service pour les
 import { EventDetailsComponent } from '../event-details/event-details.component'; // Import du composant EventDetails
 import { SessionService } from '../../services/session.service'; // Service pour les sessions
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -185,17 +184,17 @@ selectDay(day: number | null): void {
 
   // Ouvrir le formulaire pour ajouter une session
   openSessionForm(): void {
-    const dialogRef = this.dialog.open(SessionFormComponent, {
-      width: '500px',
-      data: {} // Vous pouvez passer des données au formulaire si nécessaire
-    });
+  const dialogRef = this.dialog.open(SessionFormComponent, {
+    width: '500px',
+    data: {} // Vous pouvez passer des données au formulaire si nécessaire
+  });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.saveSession(result); // Envoyer les données au backend
-      }
-    });
-  }
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.saveSession(result); // Envoyer les données au backend
+    }
+  });
+}
 
   // Envoyer les données de la session au backend
   saveSession(sessionData: any): void {
@@ -208,6 +207,9 @@ selectDay(day: number | null): void {
       }
     });
   }
+
+
+
 
   // Filtrer les événements pour un jour donné
   getEventsForDay(day: number | null): any[] {

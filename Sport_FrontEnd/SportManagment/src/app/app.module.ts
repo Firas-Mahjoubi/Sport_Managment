@@ -68,7 +68,9 @@ import { MatchesmainComponent } from './matches/matchesmain/matchesmain.componen
 
 import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.component';
 
-
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -149,7 +151,10 @@ import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.
     MatCardModule,
     MatDialogModule,
     MatDatepickerModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatFormFieldModule
 
   ],
   providers: [],
