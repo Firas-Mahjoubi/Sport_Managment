@@ -47,12 +47,16 @@ import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoverypl
 import {MatchesmainComponent} from "./matches/matchesmain/matchesmain.component";
 import {MatchesNavbarComponent} from "./matches/matches-navbar/matches-navbar.component";
 
-
+import {CalendarComponent} from "./AdvancedPlanning/calendar/calendar.component";
+import {EventFormComponent} from "./AdvancedPlanning/calendar/event-form/event-form.component";
+import {SessionFormComponent} from "./AdvancedPlanning/session-form/session-form.component";
+import {EventDetailsComponent} from "./AdvancedPlanning/event-details/event-details.component";
 
 const routes: Routes = [
 
   { path: '', component: HomeComponent },
   { path: 'auth', component: AuthComponent },
+  {path:'calendar',component:CalendarComponent},
   { path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
   {path: 'dashboard', component:DashboardComponent, canActivate: [roleGuard(['ADMIN'])]}, // Protect dashboard route
   {path: 'main', component:LandingPageComponent},
