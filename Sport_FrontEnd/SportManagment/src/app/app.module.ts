@@ -13,17 +13,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatchesHomeComponent } from './matches/matches-home/matches-home.component';
 import { GameweekSliderComponent } from './matches/gameweek-slider/gameweek-slider.component';
 import { MatchDetailsComponent } from './matches/match-details/match-details.component';
-import { TrainingSessionComponent } from './components/training-session/training-session.component';
-import { ExerciseComponent } from './components/exercise/exercise.component';
-import { TrainingSessionExerciceComponent } from './components/training-session-exercice/training-session-exercice.component';
+
+//--------------------Training-groud -------------------------//
+import { TrainingSessionComponent } from './components/training-session-Assign-exercice/training-session.component';
+import { TrainingSessionExerciceComponent } from './components/training-session/training-session-exercice.component';
 import { TrainingSessionFormComponent } from './components/training-session-form/training-session-form.component';
 import { TrainingGroundNavbarComponent } from './components/training-ground-navbar/training-ground-navbar.component';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
-
 import { ExerciseLibraryComponent } from './components/exercise-library/exercise-library.component';
 import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
-
+//---------------------------------------------//
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
 import { InjuryEditComponent } from './Health/injury-edit/injury-edit.component';
 import { InjuryListComponent } from './Health/injury-list/injury-list.component';
@@ -33,6 +33,11 @@ import { ListHealthrecordsComponent } from './Health/healthrecord/list-healthrec
 import { AddHealthrecordComponent } from './Health/healthrecord/add-healthrecord/add-healthrecord.component';
 import { EditHealthrecordComponent } from './Health/healthrecord/edit-healthrecord/edit-healthrecord.component';
 import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthrecord/show-healthrecord.component';
+
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HomeComponent } from './components/home/home.component';
+
 import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
 import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.component';
 import { AdminMatchComponent } from './matches/admin-match/admin-match.component';
@@ -54,6 +59,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatchesmainComponent } from './matches/matchesmain/matchesmain.component';
 import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.component';
+import { CalendarComponent } from './AdvancedPlanning/calendar/calendar.component';
 
 
 
@@ -69,7 +75,6 @@ import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.
     MatchDetailsComponent,
     AdminSidebarComponent,
     TrainingSessionComponent,
-    ExerciseComponent,
     TrainingSessionExerciceComponent,
     TrainingSessionFormComponent,
     TrainingGroundNavbarComponent,
@@ -87,6 +92,11 @@ import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.
     AddHealthrecordComponent,
     EditHealthrecordComponent,
     ShowHealthrecordComponent,
+
+    HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+
     AdminHeaderComponent,
     AdminSidebarComponent,
     AdminMatchComponent,
@@ -101,6 +111,8 @@ import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.
     ListRecoveryPlanComponent,
     MatchesmainComponent,
     MatchesNavbarComponent,
+    CalendarComponent,
+
 
 
 

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExerciseService } from '../../services/exercise.service';
 import { TagService } from '../../services/tag.service';
-
 @Component({
   selector: 'app-exercise-form',
   templateUrl: './exercise-form.component.html',
@@ -13,7 +12,7 @@ export class ExerciseFormComponent implements OnInit {
   tags: any[] = [];
   selectedTags: number[] = [];
   isEditing: boolean = false;
-
+ 
   exercise: any = {
     name: '',
     visibility: 'PUBLIC',
@@ -87,13 +86,14 @@ export class ExerciseFormComponent implements OnInit {
     if (this.isEditing) {
       this.exerciseService.updateExercise(this.exerciseId!, this.exercise).subscribe(() => {
         alert('Exercise Updated Successfully');
-        this.router.navigate(['/aexercise']);
+        this.router.navigate(['/exercise-list']);
       });
     } else {
       this.exerciseService.createExercise(this.exercise).subscribe(() => {
         alert('Exercise Created Successfully');
-        this.router.navigate(['/aexercise']);
+        this.router.navigate(['/exercise-list']);
       });
     }
   }
+
 }

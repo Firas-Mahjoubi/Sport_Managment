@@ -1,9 +1,11 @@
 package com.example.sport_backend.ServiceImpl.TrainingGround;
 
+import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Entity.TrainigGround.Exercice;
 import com.example.sport_backend.Entity.TrainigGround.MediaExercice;
 import com.example.sport_backend.Entity.TrainigGround.Tag;
 import com.example.sport_backend.Entity.TrainigGround.TrainingSession;
+import com.example.sport_backend.Repositories.ClubHouse.PlayerRepo;
 import com.example.sport_backend.Repositories.TrainingGround.ExerciceRepositories;
 import com.example.sport_backend.Repositories.TrainingGround.MediaRepositories;
 import com.example.sport_backend.Repositories.TrainingGround.TagRepositories;
@@ -28,8 +30,11 @@ public class TrainingGroundServiceIMPL implements ItrainingGroundService {
     private TrainingSessionRepositories trainingSessionRepositories;
     private TagRepositories tagRepositories;
     private MediaRepositories mediaRepositories;
+    private PlayerRepo playerRepositories;
 
     ///////////--------------------------TrainingSession----------------------------////////////////
+
+
 
     @Override
     public TrainingSession addSession(TrainingSession trainingSession) {
@@ -50,6 +55,18 @@ public class TrainingGroundServiceIMPL implements ItrainingGroundService {
     public void deleteTrainingSession(Long id) {
         trainingSessionRepositories.deleteById(id);
     }
+
+    @Override
+    public TrainingSession addPlayersToSession(Long sessionId, Set<Long> playerIds) {
+        TrainingSession session = trainingSessionRepositories.findById(sessionId)
+                .orElseThrow(() -> new RuntimeException("Session non trouvée"));
+
+        Set<Player> players = new HashSet<>(playerRepositories.findAllById(playerIds));
+        session.getPlayers().addAll(players);
+
+        return trainingSessionRepositories.save(session);
+    }
+
 
 
 

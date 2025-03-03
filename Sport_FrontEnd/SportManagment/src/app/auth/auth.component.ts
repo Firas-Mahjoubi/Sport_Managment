@@ -69,6 +69,7 @@ export class AuthComponent {
         if (response.role) {
           localStorage.setItem("userRole", response.role); // Save role in localStorage
           this.redirectToRole(response.role);
+          localStorage.setItem("userId", response.id);
         }
       },
       error: (err) => {
