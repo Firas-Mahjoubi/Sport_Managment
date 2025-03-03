@@ -15,15 +15,9 @@ import { GameweekSliderComponent } from './matches/gameweek-slider/gameweek-slid
 import { NavbarComponent } from './matches/navbar/navbar.component';
 import { MatchDetailsComponent } from './matches/match-details/match-details.component';
 
-import { SidebarComponent } from './matches/sidebar/sidebar.component';
 //--------------------Training-groud -------------------------//
 import { TrainingSessionComponent } from './components/training-session-Assign-exercice/training-session.component';
 import { TrainingSessionExerciceComponent } from './components/training-session/training-session-exercice.component';
-
-import { TrainingSessionComponent } from './components/training-session/training-session.component';
-import { ExerciseComponent } from './components/exercise/exercise.component';
-import { TrainingSessionExerciceComponent } from './components/training-session-exercice/training-session-exercice.component';
-
 import { TrainingSessionFormComponent } from './components/training-session-form/training-session-form.component';
 import { TrainingGroundNavbarComponent } from './components/training-ground-navbar/training-ground-navbar.component';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';

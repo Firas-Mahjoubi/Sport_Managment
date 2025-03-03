@@ -1,3 +1,7 @@
+
+<app-header></app-header>
+<br><br><br><br><br>
+
 <div class="container mt-4 training-session">
   <!-- Header -->
   <div class="session-header d-flex justify-content-between align-items-center p-3 shadow-sm">
@@ -30,32 +34,37 @@
     <div class="col-md-6">
       <div class="card shadow-sm p-3">
         <h5>📝 Notes</h5>
-        <h6>Before Session</h6>
-        <p>{{ trainingSession.beforeSessionNotes }}</p>
-        <h6>After Session</h6>
-        <p>{{ trainingSession.afterSessionNotes }}</p>
+        <h6 class=" text-white">Before Session</h6>
+        <span class=" text-muted">{{ trainingSession.beforeSessionNotes }}</span>
+        <h6 class=" text-white">After Session</h6>
+        <span class=" text-muted">{{ trainingSession.afterSessionNotes }}</span>
       </div>
     </div>
   </div>
 
-  <!-- Session Plan (Exercises) -->
-  <div class="mt-4">
-    <h4>📋 Session Plan</h4>
-    <div *ngIf="trainingSession.exercices.length > 0; else noExercises">
-      <div *ngFor="let exercise of trainingSession.exercices" class="session-exercise">
-        <div class="exercise-card d-flex p-3 shadow-sm">
-          <img [src]="exercise.imageUrl ? exercise.imageUrl : defaultImage" class="exercise-img" />
-          <div class="ms-3">
-            <h5 class="text-primary">{{ exercise.name }}</h5>
-            <p class="text-muted">{{ exercise.description }}</p>
-            <span class="badge bg-info">⏳ {{ exercise.durationMinutes }} min</span>
-          </div>
+ <!-- Session Plan (Exercises) -->
+<div class="mt-4">
+  <h4>📋 Session Plan</h4>
+
+  <div *ngIf="trainingSession?.exercices?.length > 0; else noExercises">
+    <div *ngFor="let exercise of trainingSession.exercices; let i = index" class="session-exercise">
+      <div class="exercise-card d-flex p-3 shadow-sm bg-dark text-light rounded">
+        <img [src]="exercise.imageUrl ? exercise.imageUrl : defaultImage" class="exercise-img" />
+        <div class="ms-3">
+          <h5 class="text-warning">{{ exercise.name }}</h5>
+          <p class="text-muted">{{ exercise.description }}</p>
+          <span class="badge bg-info">⏳ {{ exercise.durationMinutes }} min</span>
+          <span class="badge bg-secondary ms-2">⏳ Cumulative: {{ getCumulativeTime(i) }} min</span>
         </div>
       </div>
     </div>
-    <ng-template #noExercises>
-      <p class="text-muted">No exercises added to this session.</p>
-    </ng-template>
-    
   </div>
+
+  <ng-template #noExercises>
+    <p class="text-muted">No exercises added to this session.</p>
+  </ng-template>
 </div>
+
+
+</div>
+<app-footer></app-footer>

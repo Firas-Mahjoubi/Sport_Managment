@@ -1,3 +1,8 @@
+<app-header></app-header>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <div class="container drill-library-container">
@@ -5,21 +10,27 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div class="col-12 title-section">
       <h2 class="heading">Training Exercises</h2>
+      
     </div>
+   
     <button class="btn btn-success" routerLink="/add-exercise">+ Create Drill</button>
+ 
   </div>
 
   <!-- Search & Filter Controls -->
   <div class="row g-3">
+    
     <div class="col-md-8">
       <input type="text" class="form-control" placeholder="🔍 Search drills..." [(ngModel)]="searchQuery">
     </div>
     <div class="col-md-4">
+      
       <select class="form-control" [(ngModel)]="sortBy">
         <option value="mostRecent">Public</option>
         <option value="popular">Private</option>
       </select>
     </div>
+    
   </div>
   
   <!-- Drill Grid Layout -->
@@ -45,3 +56,4 @@
     </div>
   </div>
 </div>
+<app-footer></app-footer>
