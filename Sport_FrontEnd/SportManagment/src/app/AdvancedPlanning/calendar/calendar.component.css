@@ -1,0 +1,297 @@
+/* Styles de base pour le calendrier */
+.calendar {
+  font-family: 'Arial', sans-serif;
+  max-width: 800px;
+  margin: 20px auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* En-tête du calendrier */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: linear-gradient(135deg, #3f51b5, #2196f3);
+  color: white;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: 1.6em;
+  font-weight: 700;
+}
+
+.calendar-header button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.calendar-header button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* Sélecteur de vue */
+.view-selector {
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.view-selector button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  color: #3f51b5;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.view-selector button.active {
+  background: #3f51b5;
+  color: white;
+}
+
+.view-selector button:hover {
+  background: rgba(63, 81, 181, 0.1);
+  transform: scale(1.05);
+}
+
+/* Vue Jour */
+.day-view {
+  padding: 20px;
+  text-align: center;
+}
+
+.day-view .day-header {
+  margin-bottom: 20px;
+}
+
+.day-view h3 {
+  font-size: 1.9em;
+  color: #3f51b5;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Vue Mois */
+.month-view {
+  padding: 20px;
+}
+
+.day-names {
+  display: flex;
+  justify-content: space-around;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #3f51b5;
+}
+
+.day-name {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+}
+
+.week {
+  display: flex;
+  justify-content: space-around;
+}
+
+.day {
+  flex: 1;
+  text-align: center;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.day:hover {
+  background: #f0f0f0;
+  transform: scale(1.05) translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.day.empty {
+  background-color: transparent;
+  border: none;
+  cursor: default;
+}
+
+.day.selected {
+  background: #3f51b5;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Vue Année */
+.year-view {
+  padding: 20px;
+}
+
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.month {
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #f9f9f9;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.month:hover {
+  background: #e0e0e0;
+  transform: scale(1.05) translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Mode sombre */
+.calendar.dark-mode {
+  background-color: #1e1e1e;
+  border-color: #333;
+  color: #ffffff;
+}
+
+.calendar.dark-mode .calendar-header {
+  background: linear-gradient(135deg, #333, #555);
+  border-bottom-color: #444;
+}
+
+.calendar.dark-mode .view-selector {
+  background-color: #333;
+  border-bottom-color: #444;
+}
+
+.calendar.dark-mode .view-selector button {
+  color: #ffffff;
+}
+
+.calendar.dark-mode .view-selector button.active {
+  background: #555;
+  color: #ffffff;
+}
+
+.calendar.dark-mode .view-selector button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.calendar.dark-mode .day {
+  border-color: #444;
+  background-color: #333;
+  color: #ffffff;
+}
+
+.calendar.dark-mode .day:hover {
+  background-color: #444;
+  transform: scale(1.05);
+}
+
+.calendar.dark-mode .day.selected {
+  background: #555;
+  color: #ffffff;
+}
+
+.calendar.dark-mode .month {
+  border-color: #444;
+  background-color: #333;
+  color: #ffffff;
+}
+
+.calendar.dark-mode .month:hover {
+  background-color: #444;
+  transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.day-view, .month-view, .year-view {
+  animation: fadeIn 0.5s ease;
+}
+
+/* Evénements */
+.event {
+  background-color: #3f51b5;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 4px;
+  margin: 2px 0;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.event:hover {
+  background-color: #303f9f;
+  transform: scale(1.1);
+}
+/* Conteneur des boutons */
+.add-event-container {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Espacement uniforme */
+}
+
+/* Style de base pour les boutons */
+.add-event-container button {
+  background-color: #007bff; /* Bleu simple */
+  color: white;
+  padding: 10px 20px; /* Espacement modéré */
+  font-size: 14px;
+  font-weight: normal;
+  border: 1px solid #007bff; /* Bordure assortie */
+  border-radius: 5px; /* Coins légèrement arrondis */
+  cursor: pointer;
+  transition: background-color 0.2s ease; /* Transition simple */
+}
+
+/* Effet de survol */
+.add-event-container button:hover {
+  background-color: #0056b3; /* Bleu foncé au survol */
+  border-color: #0056b3; /* Bordure assortie */
+}
+
+/* Icônes */
+.add-event-container button mat-icon {
+  margin-right: 8px; /* Un peu d'espace entre l'icône et le texte */
+  font-size: 18px; /* Icônes simples */
+}

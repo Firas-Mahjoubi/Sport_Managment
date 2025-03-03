@@ -1,6 +1,5 @@
 package com.example.sport_backend.ServiceInterface.AdvancedPlanning;
 
-import com.example.sport_backend.Entity.AdvancedPlanning.Event;
 import com.example.sport_backend.Entity.AdvancedPlanning.Ressources;
 
 import java.util.List;
@@ -12,5 +11,6 @@ public interface RessourcesInterface {
     Ressources getRessources (Long idRessources);
     void removeRessources (long idRessources);
     Ressources affecterRessourceAEvent(Long ressourceId, Long eventId);
+
 
 }

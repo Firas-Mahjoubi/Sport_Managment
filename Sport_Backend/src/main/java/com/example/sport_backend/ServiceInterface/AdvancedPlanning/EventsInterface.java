@@ -9,6 +9,6 @@ public interface EventsInterface {
     List<Event> getAllEvents();
     Event updateEvent (Event event);
     Event getEvent (Long idEvent);
-    void removeEvent (long idEvent);
+    boolean removeEvent (long idEvent);
 
 }
