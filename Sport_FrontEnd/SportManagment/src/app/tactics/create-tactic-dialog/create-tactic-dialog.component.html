@@ -1,14 +1,53 @@
 <mat-dialog-content class="dialog-container">
-    <h2>Créer un nouveau dossier</h2>
-  
-    <form [formGroup]="tacticForm">
-      <label>Nom du dossier <span style="color: red;">*</span></label>
-      <input matInput formControlName="name" placeholder="Nom du dossier">
-    </form>
-  
-    <div class="button-group">
-      <button mat-button (click)="closeDialog()">✖</button>
-      <button mat-button (click)="createFolder()" [disabled]="!tacticForm.valid">Créer</button>
-    </div>
-  </mat-dialog-content>
-  
+  <h2 class="title">Créer un nouveau Tactic</h2>
+
+  <form [formGroup]="tacticForm">
+    <!-- Name Input -->
+    <mat-form-field appearance="fill">
+      <mat-label>Nom du Tactic</mat-label>
+      <input matInput formControlName="name" placeholder="Ex: Attaque rapide">
+      <mat-error *ngIf="tacticForm.controls['name'].invalid && tacticForm.controls['name'].touched">
+        Le nom est obligatoire et doit contenir au moins 3 caractères.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Description Input -->
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" placeholder="Décrivez votre tactique"></textarea>
+      <mat-error *ngIf="tacticForm.controls['description'].invalid && tacticForm.controls['description'].touched">
+        La description est obligatoire et doit contenir au moins 10 caractères.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Formation Dropdown -->
+    <mat-form-field appearance="fill">
+      <mat-label>Formation</mat-label>
+      <mat-select formControlName="formation">
+        <mat-option *ngFor="let f of formations" [value]="f">{{ f }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="tacticForm.controls['formation'].invalid && tacticForm.controls['formation'].touched">
+        Sélectionnez une formation.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Training Focus Dropdown -->
+    <mat-form-field appearance="fill">
+      <mat-label>Training Focus</mat-label>
+      <mat-select formControlName="trainingFocus">
+        <mat-option *ngFor="let focus of trainingFocusOptions" [value]="focus">{{ focus }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="tacticForm.controls['trainingFocus'].invalid && tacticForm.controls['trainingFocus'].touched">
+        Sélectionnez un objectif d'entraînement.
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+  <!-- Buttons -->
+  <div class="button-group">
+    <button mat-button color="warn" (click)="closeDialog()">✖ Annuler</button>
+    <button mat-raised-button color="primary" (click)="createFolder()" [disabled]="!tacticForm.valid">
+      ✔ Créer
+    </button>
+  </div>
+</mat-dialog-content>

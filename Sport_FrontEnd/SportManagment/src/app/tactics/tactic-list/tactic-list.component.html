@@ -1,6 +1,6 @@
 <body>
     <div class="container">
-        <h2>Mes dossiers</h2>
+        <h2>Mes Tactic</h2>
       
         <div class="search-bar">
           <input 
@@ -16,7 +16,7 @@
               <img src="assets/images/folder.png" alt="Folder Icon">
               <div class="folder-details">
                 <h3>{{ tactic.name }}</h3>
-                <p>0 Dossiers</p>
+                <p>{{tactic.formation}}</p>
                 <p>0 Animations</p>
                 <p>0 Images</p>
               </div>
@@ -40,7 +40,6 @@
           <button (click)="openCreateDialog()">➕</button>
         </div>
       </div>
-      
       
 </body>
   
