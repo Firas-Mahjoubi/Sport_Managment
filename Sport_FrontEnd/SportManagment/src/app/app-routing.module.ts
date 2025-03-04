@@ -45,6 +45,9 @@ import { EditRecoveryplanComponent } from './Health/recoveyplans/edit-recoverypl
 import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoveryplan/show-recoveryplan.component';
 import {MatchesmainComponent} from "./matches/matchesmain/matchesmain.component";
 import {MatchesNavbarComponent} from "./matches/matches-navbar/matches-navbar.component";
+import { TacticListComponent } from './tactics/tactic-list/tactic-list.component';
+import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
+import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 
 
 
@@ -96,11 +99,12 @@ const routes: Routes = [
 
 
 
-  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },
- { path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
 
-
+  { path: 'tactics', component: TacticListComponent }, 
+  { path: 'tactics/create', component: TacticFormComponent, canActivate: [roleGuard(['COACH'])]  },
+  { path: 'tactics/:id', component: TacticFolderComponent, canActivate: [roleGuard(['COACH'])]  },
+  { path: 'tactics/edit/:id', component: TacticFormComponent , canActivate: [roleGuard(['COACH'])] }, 
 
 
 //skander turkiiiiii injury
@@ -131,6 +135,7 @@ const routes: Routes = [
 { path: 'list-recoveryplan/:playerId', component: ListRecoveryPlanComponent },
 
 { path: 'list-player', component: ListPlayerComponent },
+{ path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
 
 

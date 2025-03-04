@@ -8,7 +8,6 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { TacticModule } from './tactics/tactics.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatchesHomeComponent } from './matches/matches-home/matches-home.component';
 import { GameweekSliderComponent } from './matches/gameweek-slider/gameweek-slider.component';
@@ -72,6 +71,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { TacticListComponent } from './tactics/tactic-list/tactic-list.component';
+import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
+import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
+import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +118,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AdminCardComponent,
     AddRecoveryplanComponent,
     EditRecoveryplanComponent,
-
+ TacticListComponent,
+    TacticFormComponent,
+    TacticFolderComponent,
+    CreateTacticDialogComponent,
     ShowRecoveryplanComponent,
     ListPlayerComponent,
     ListRecoveryPlanComponent,
@@ -131,7 +139,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    TacticModule,
     BrowserAnimationsModule,
     RouterModule,
     CommonModule,
@@ -147,7 +154,19 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+     CommonModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatInputModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatIconModule,
+        MatFormFieldModule, // ✅ Required for mat-form-field
+        MatSelectModule, // ✅ Required for mat-select
+        MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
