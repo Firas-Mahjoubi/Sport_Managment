@@ -9,20 +9,16 @@
   <div class="container">
     <h2 class="page-title">📂 My Tactics</h2>
 
-    <!-- Search Bar -->
-    <div class="search-bar">
-      <mat-form-field appearance="outline" class="search-field">
-        <mat-label>🔍 Search Tactics</mat-label>
-        <input 
-          matInput
-          type="text" 
-          [(ngModel)]="searchQuery" 
-          (keyup)="filterTactics()"
-          placeholder="Search a tactic..."
-        />
-      </mat-form-field>
+    <div class="search-bar mb-4">
+      <input 
+        type="text" 
+        class="form-control search-input" 
+        [(ngModel)]="searchQuery" 
+        (keyup)="filterTactics()"
+        placeholder="🔍 Search Tactics..."
+      />
     </div>
-
+    
     <!-- Folder List -->
     <div class="folder-list">
       <div *ngFor="let tactic of filteredTactics; trackBy: trackById" class="folder card">
@@ -39,16 +35,16 @@
         <div class="dropdown">
           <button class="menu-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <p>...</p> 
-         </button>
+          </button>
           <ul class="dropdown-menu">
             <li>
-              <button class="dropdown-item edit-btn" (click)="renameTactic(tactic)">
-                <mat-icon>edit</mat-icon> Rename
+              <button class="dropdown-item text-primary" (click)="renameTactic(tactic)">
+                <i class="bi bi-pencil"></i> Edit
               </button>
             </li>
             <li>
-              <button class="dropdown-item delete-btn" (click)="tactic.id !== undefined && deleteTactic(tactic.id)">
-                <mat-icon>delete</mat-icon> Delete
+              <button class="dropdown-item text-danger" (click)="tactic.id !== undefined && deleteTactic(tactic.id)">
+                <i class="bi bi-trash"></i> Delete
               </button>
             </li>
           </ul>
