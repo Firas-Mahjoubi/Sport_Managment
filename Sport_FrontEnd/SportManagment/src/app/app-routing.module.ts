@@ -46,6 +46,8 @@ import { EditRecoveryplanComponent } from './Health/recoveyplans/edit-recoverypl
 import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoveryplan/show-recoveryplan.component';
 import {MatchesmainComponent} from "./matches/matchesmain/matchesmain.component";
 import {MatchesNavbarComponent} from "./matches/matches-navbar/matches-navbar.component";
+import {MatchesFooterComponent} from "./matches/matches-footer/matches-footer.component";
+import {AdminSubstitutionComponent} from "./matches/admin-substitution/admin-substitution.component";
 
 
 
@@ -84,6 +86,10 @@ const routes: Routes = [
   { path: 'admin-cards/:matchId', component: AdminCardComponent },
   {path: 'matchesmain', component:MatchesmainComponent},
   {path: 'matchesNavbar', component:MatchesNavbarComponent},
+  {path: 'matchesFooter', component:MatchesFooterComponent},
+  { path: 'admin-substitutions/:matchId', component: AdminSubstitutionComponent }, // 🆕 Route with matchId
+
+
 
 
 

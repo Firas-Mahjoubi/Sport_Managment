@@ -10,6 +10,8 @@ interface GoalResponseDTO {
   timing: number;
   Result: string;
   isHomeGoal: boolean;
+  homeGoal?: boolean;   // Add this to match API response
+
 }
 
 interface CardDTO {
@@ -28,6 +30,8 @@ interface SubstitutionInfoDTO {
   playerOutFirstName: string;
   playerOutLastName: string;
   isHomeTeam: boolean;
+  homeTeam?: boolean;   // Add this to match API response
+
 }
 interface MatchDetailsDTO {
   leagueName: string;
@@ -44,14 +48,23 @@ interface MatchDetailsDTO {
   selector: 'app-match-details',
   templateUrl: './match-details.component.html',
   styleUrls: ['./match-details.component.css']
-})
-export class MatchDetailsComponent implements OnInit {
+})export class MatchDetailsComponent implements OnInit {
   matchId!: number;
   matchDetails: MatchDetailsDTO | null = null;
 
   goals: GoalResponseDTO[] = [];
   cards: CardDTO[] = [];
   substitutions: SubstitutionInfoDTO[] = [];
+
+  // Filtered data
+  homeGoals: GoalResponseDTO[] = [];
+  awayGoals: GoalResponseDTO[] = [];
+
+  homeCards: CardDTO[] = [];
+  awayCards: CardDTO[] = [];
+
+  homeSubstitutions: SubstitutionInfoDTO[] = [];
+  awaySubstitutions: SubstitutionInfoDTO[] = [];
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
@@ -82,22 +95,62 @@ export class MatchDetailsComponent implements OnInit {
         },
         error: err => console.error("Error fetching match details:", err)
       });
+
     this.http.get<GoalResponseDTO[]>(`http://localhost:8088/goalsformatch/${this.matchId}`)
       .subscribe({
-        next: data => this.goals = data,
+        next: data => {
+          console.log("Raw Goals Data:", data);
+
+          this.goals = data.map(goal => ({
+            ...goal,
+            isHomeGoal: goal.homeGoal === true // FIXED: Using correct property name
+          }));
+
+          this.homeGoals = this.goals.filter(goal => goal.isHomeGoal);
+          this.awayGoals = this.goals.filter(goal => !goal.isHomeGoal);
+
+          console.log("Home Goals:", this.homeGoals);
+          console.log("Away Goals:", this.awayGoals);
+        },
         error: err => console.error("Error fetching goals:", err)
       });
 
+
+// Fetch cards
     this.http.get<CardDTO[]>(`http://localhost:8088/getcardsformatch/${this.matchId}`)
       .subscribe({
-        next: data => this.cards = data,
+        next: data => {
+          console.log("Cards fetched:", data);
+          this.cards = data.map(card => ({
+            ...card,
+            forHomeTeam: card.forHomeTeam === true // Ensure boolean
+          }));
+          this.homeCards = this.cards.filter(card => card.forHomeTeam);
+          this.awayCards = this.cards.filter(card => !card.forHomeTeam);
+        },
         error: err => console.error("Error fetching cards:", err)
       });
 
     this.http.get<SubstitutionInfoDTO[]>(`http://localhost:8088/api/matches/substitutions/getSubstitution/${this.matchId}`)
       .subscribe({
-        next: data => this.substitutions = data,
+        next: data => {
+          console.log("Raw Substitutions Data:", data); // Log raw API response
+
+          this.substitutions = data.map(sub => ({
+            ...sub,
+            isHomeTeam: sub.homeTeam === true // Use 'homeTeam' instead of 'isHomeTeam'
+          }));
+
+          console.log("Processed Substitutions:", this.substitutions); // Log processed substitutions
+
+          this.homeSubstitutions = this.substitutions.filter(sub => sub.homeTeam);
+          this.awaySubstitutions = this.substitutions.filter(sub => !sub.homeTeam);
+
+          console.log("Home Substitutions:", this.homeSubstitutions);
+          console.log("Away Substitutions:", this.awaySubstitutions);
+        },
         error: err => console.error("Error fetching substitutions:", err)
       });
+
   }
 }

@@ -61,6 +61,8 @@ import { MatchesmainComponent } from './matches/matchesmain/matchesmain.componen
 import { CalendarComponent } from './AdvancedPlanning/calendar/calendar.component';
 
 import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.component';
+import { MatchesFooterComponent } from './matches/matches-footer/matches-footer.component';
+import { AdminSubstitutionComponent } from './matches/admin-substitution/admin-substitution.component';
 
 
 
@@ -115,6 +117,8 @@ import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.
     MatchesmainComponent,
     MatchesNavbarComponent,
     CalendarComponent,
+    MatchesFooterComponent,
+    AdminSubstitutionComponent,
 
 
 
