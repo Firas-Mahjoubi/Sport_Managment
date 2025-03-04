@@ -1,46 +1,62 @@
+<app-header></app-header>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+
 <body>
-    <div class="container">
-        <h2>Mes dossiers</h2>
-      
-        <div class="search-bar">
-          <input 
-            type="text" 
-            placeholder="🔍 Search" 
-            [(ngModel)]="searchQuery" 
-            (keyup)="filterTactics()">
-        </div>
-      
-        <div class="folder-list">
-          <div *ngFor="let tactic of filteredTactics; trackBy: trackById" class="folder">
-            <div class="folder-content" (click)="tactic.id !== undefined && openTacticFolder(tactic.id)">
-              <img src="assets/images/folder.png" alt="Folder Icon">
-              <div class="folder-details">
-                <h3>{{ tactic.name }}</h3>
-                <p>0 Dossiers</p>
-                <p>0 Animations</p>
-                <p>0 Images</p>
-              </div>
-            </div>
-      
-            <!-- Three dots menu -->
-            <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
-              ⋮
-            </button>
-      
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="renameTactic(tactic)">✏️ Renommer</button>
-              <button mat-menu-item (click)="copyTactic(tactic)">📄 Copier</button>
-              <button mat-menu-item (click)="moveTactic(tactic)">📂 Déplacer</button>
-              <button mat-menu-item (click)="tactic.id !== undefined && deleteTactic(tactic.id)" class="delete-button">🗑️ Supprimer</button>
-            </mat-menu>
+  <div class="container">
+    <h2 class="page-title">📂 My Tactics</h2>
+
+    <div class="search-bar mb-4">
+      <input 
+        type="text" 
+        class="form-control search-input" 
+        [(ngModel)]="searchQuery" 
+        (keyup)="filterTactics()"
+        placeholder="🔍 Search Tactics..."
+      />
+    </div>
+    
+    <!-- Folder List -->
+    <div class="folder-list">
+      <div *ngFor="let tactic of filteredTactics; trackBy: trackById" class="folder card">
+        <div class="card-body folder-content" (click)="tactic.id !== undefined && openTacticFolder(tactic.id)">
+          <img src="assets/images/folder.png" alt="Folder Icon" class="folder-icon">
+          <div class="folder-details">
+            <h3>{{ tactic.name }}</h3>
+            <p><strong>Formation:</strong> {{ tactic.formation }}</p>
+            <p><strong>Training Focus:</strong> {{ tactic.trainingFocus }}</p>
           </div>
         </div>
-      
-        <div class="add-button">
-          <button (click)="openCreateDialog()">➕</button>
+
+        <!-- Three Dots Menu -->
+        <div class="dropdown">
+          <button class="menu-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <p>...</p> 
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <button class="dropdown-item text-primary" (click)="renameTactic(tactic)">
+                <i class="bi bi-pencil"></i> Edit
+              </button>
+            </li>
+            <li>
+              <button class="dropdown-item text-danger" (click)="tactic.id !== undefined && deleteTactic(tactic.id)">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
-      
-      
+    </div>
+
+    <!-- Floating Add Button -->
+    <div class="add-button">
+      <button mat-fab color="primary" (click)="openCreateDialog()">
+        <mat-icon>+</mat-icon>
+      </button>
+    </div>
+  </div>
 </body>
-  

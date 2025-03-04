@@ -1,0 +1,108 @@
+/* ✅ Small Popup Notification */
+.modal-small {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background-color: #48DB71;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+  }
+  
+  /* ✅ Success Icon */
+  .modal-icon {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+  }
+  
+
+  /* ✅ Ensure the table container fits well */
+.container-fluid {
+    max-width: 95%;
+    margin: auto;
+  }
+  
+  /* ✅ Improve table readability */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    padding: 12px;
+    text-align: center;
+  }
+  
+  /* ✅ Fix button spacing */
+  .btn {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 12px;
+  }
+
+  /* ✅ Overlay Form Styling */
+.form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  /* ✅ Floating Form */
+  .form-card {
+    background: #fff;
+    padding: 20px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  /* ✅ Header with Close Button */
+  .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .btn-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  /* ✅ Button Styling */
+  .btn {
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 5px;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+  }
+  
+  

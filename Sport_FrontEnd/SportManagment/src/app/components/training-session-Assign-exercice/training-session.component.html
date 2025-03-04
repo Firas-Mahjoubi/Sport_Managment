@@ -1,16 +1,11 @@
 <app-header></app-header>
+<br>
+<br>
+<br>
+<br>
 <div class="container training-session-container">
   <div class="col-12 title-section">
-  <h2 class="heading">Select Exercises for Training Session</h2>
-  </div>
-  <!-- ✅ Select a Training Session -->
-  <div class="form-group mt-4">
-    <label class="fw-bold">Select a Training Session</label>
-    <select class="form-control" [(ngModel)]="selectedSessionId">
-      <option *ngFor="let session of trainingSessions" [value]="session.id">
-        {{ session.name }} - {{ session.date }}
-      </option>
-    </select>
+    <h2 class="heading">Assign Exercises to Training Session</h2>
   </div>
 
   <!-- ✅ Exercise Cards Grid -->
@@ -37,20 +32,20 @@
           <h5 class="card-title fw-bold text-dark">{{ exercise.name }}</h5>
           <p class="card-text text-muted">{{ exercise.description }}</p>
 
-            <p class="d-flex align-items-center">
-              <i class="fas fa-dumbbell text-warning me-2"></i>
-              <strong class="text-white me-1">Fitness Level:</strong><span class="text-white">{{ exercise.fitnessLevel }}</span>
-            </p>
+          <p class="d-flex align-items-center">
+            <i class="fas fa-dumbbell text-warning me-2"></i>
+            <strong class="text-white me-1">Fitness Level:</strong><span class="text-white">{{ exercise.fitnessLevel }}</span>
+          </p>
 
-            <p class="d-flex align-items-center">
-              <i class="fas fa-brain text-success me-2"></i>
-              <strong class="text-white me-1">Technique Level:</strong> <span class="text-white">{{ exercise.techniqueLevel }}</span>
-            </p>
+          <p class="d-flex align-items-center">
+            <i class="fas fa-brain text-success me-2"></i>
+            <strong class="text-white me-1">Technique Level:</strong> <span class="text-white">{{ exercise.techniqueLevel }}</span>
+          </p>
 
-            <p class="d-flex align-items-center">
-              <i class="fas fa-chess-board text-info me-2"></i>
-              <strong class="text-white me-1">Tactical Level:</strong><span class="text-white">{{ exercise.tacticLevel }}</span> 
-            </p>
+          <p class="d-flex align-items-center">
+            <i class="fas fa-chess-board text-info me-2"></i>
+            <strong class="text-white me-1">Tactical Level:</strong><span class="text-white">{{ exercise.tacticLevel }}</span> 
+          </p>
 
           <!-- ✅ Tags Display -->
           <div class="mt-2">
@@ -71,8 +66,9 @@
   <!-- ✅ Submit Button -->
   <div class="text-center mt-4">
     <button class="btn btn-lg btn-primary" (click)="addExercisesToSession()">
-      ✅ Add Selected Exercises to Session
+      ✅ Confirm Assignment
     </button>
   </div>
 </div>
+
 <app-footer></app-footer>

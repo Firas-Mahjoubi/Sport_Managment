@@ -372,7 +372,7 @@ h6 {
 .logo span {
   font-size: 26px;
   font-weight: 700;
-  color: #012970;
+  color: hsl(12, 100%, 38%);
   font-family: "Nunito", sans-serif;
 }
 
@@ -452,6 +452,16 @@ h6 {
 
 .header .search-form button i {
   color: #012970;
+}
+/* ✅ Ensure sidebar does not push content too much */
+body {
+  overflow-x: hidden;
+}
+
+/* ✅ Adjust main content */
+.main-content {
+  margin-left: 250px; /* Adjust if needed */
+  padding: 20px;
 }
 
 /*--------------------------------------------------------------
