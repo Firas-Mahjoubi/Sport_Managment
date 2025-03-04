@@ -18,6 +18,9 @@ export class TrainingSessionService {
   getAllSessions(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/getTrainingSession`);
   }
+  deleteSession(sessionId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/deleteTrainingSession/${sessionId}`);
+  }
   
 
     // // ✅ Fetch a session by ID
@@ -43,8 +46,17 @@ export class TrainingSessionService {
     return this.http.get<any[]>(`${this.apiUrl}/getExercices`);
   }
 
-  // ✅ Add exercises to a session
-  addExercisesToSession(sessionId: number, exerciceIds: number[]): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/${sessionId}/add-exercises`, exerciceIds);
+  addExercisesToSession(sessionId: number, exerciseIds: number[]): Observable<any> {
+    return this.http.post<any>(
+      `${this.apiUrl}/${sessionId}/add-exercises`,  // ✅ Correct URL format
+      exerciseIds  // ✅ Send exercise IDs as body
+    );
+  }
+  
+  
+
+  //Add Players to a session
+  addPlayersToSession(sessionId: number, playerIds: number[]): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/${sessionId}/add-players`, playerIds);
   }
 }

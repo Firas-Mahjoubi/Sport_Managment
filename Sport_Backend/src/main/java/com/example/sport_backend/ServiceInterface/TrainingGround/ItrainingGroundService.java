@@ -15,6 +15,8 @@ public interface ItrainingGroundService {
     List<TrainingSession> getAllSessions();
     TrainingSession getSessionById(Long id);
     void deleteTrainingSession(Long id);
+    TrainingSession addPlayersToSession(Long sessionId, Set<Long> playerIds);
+
 
     ///////////--------------------------Exercice----------------------------////////////////
     public Exercice createExercice(Exercice exercice);

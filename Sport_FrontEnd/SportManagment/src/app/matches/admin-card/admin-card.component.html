@@ -1,0 +1,104 @@
+<div class="container">
+  <h2 class="text-center my-4">Manage Cards</h2>
+
+  <!-- Success & Error Messages -->
+  <div *ngIf="successMessage" class="alert alert-success text-center">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger text-center">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Add Card Form -->
+  <div class="card p-4">
+    <div class="form-group">
+      <label class="form-label">Player Number:</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="playerNumber"
+        placeholder="Enter player number"
+        min="1"
+        max="99"
+        required
+        [class.is-invalid]="playerNumber !== null && (playerNumber < 1 || playerNumber > 99)"
+      />
+      <div *ngIf="playerNumber !== null && (playerNumber < 1 || playerNumber > 99)" class="text-danger">
+        Player number must be between 1 and 99.
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Card Type:</label>
+      <select class="form-control" [(ngModel)]="cardType" required>
+        <option value="YELLOW">Yellow Card</option>
+        <option value="RED">Red Card</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Team:</label>
+      <select class="form-control" [(ngModel)]="isHomeTeam" required>
+        <option [value]="true">Home Team</option>
+        <option [value]="false">Away Team</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Card Time (Min):</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="cardTime"
+        placeholder="Minute of card"
+        min="1"
+        max="130"
+        required
+        [class.is-invalid]="cardTime !== null && (cardTime < 1 || cardTime > 130)"
+      />
+      <div *ngIf="cardTime !== null && (cardTime < 1 || cardTime > 130)" class="text-danger">
+        Card time must be between 1 and 130 minutes.
+      </div>
+    </div>
+
+    <button
+      class="btn btn-success w-100"
+      (click)="addCard()"
+      [disabled]="loading || !isFormValid()"
+    >
+      {{ loading ? 'Adding...' : 'Add Card' }}
+    </button>
+  </div>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="loading" class="text-center my-3">
+    <div class="spinner-border text-primary" role="status"></div>
+  </div>
+
+  <!-- Card List -->
+  <div *ngIf="cards.length > 0" class="mt-4 dashboard-table-wrapper">
+    <h3 class="text-center">Cards for Match</h3>
+    <table class="card-table">
+      <thead>
+      <tr>
+        <th>Card Type</th>
+        <th>Player Number</th>
+        <th>Team</th>
+        <th>Time</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let card of cards">
+        <td><strong>{{ card.cardType }}</strong></td>
+        <td>{{ card.numberOfPlayer }}</td>
+        <td>{{ card.forHomeTeam ? 'Home' : 'Away' }}</td>
+        <td><span class="badge bg-secondary">Min {{ card.cardTime }}</span></td>
+        <td><button class="btn btn-action" (click)="deleteCard(card.cardId)">Delete</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- No Cards Found Message -->
+  <div *ngIf="cards.length === 0 && !loading" class="alert alert-warning text-center mt-4">
+    No cards found for this match.
+  </div>
+</div>

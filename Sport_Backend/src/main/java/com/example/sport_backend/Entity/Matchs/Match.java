@@ -39,9 +39,15 @@ public class Match {
     @Column(nullable = false)
     Integer gameWeek;  // New field for storing the game week
 
-    @ManyToMany(cascade = CascadeType.ALL)
-            @JsonIgnore
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinTable(
+            name = "game_match_teams",
+            joinColumns = @JoinColumn(name = "matches_id"),
+            inverseJoinColumns = @JoinColumn(name = "teams_id")
+    )
+    @JsonIgnore
     List<Team> teams;
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "match")
     List<Goal> goals;
@@ -52,9 +58,8 @@ public class Match {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "match")
     List<Substitution> substitutions;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "match")
-    LineUp lineUp;
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "match")
+    List<LineUp> lineUps;
     private static final Pattern RESULT_PATTERN = Pattern.compile("^\\d+-\\d+$");
 
     public void setResult(String result) {

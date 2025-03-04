@@ -1,6 +1,7 @@
 package com.example.sport_backend.Controllers;
 
 import com.example.sport_backend.Entity.ClubHouse.User;
+import com.example.sport_backend.Entity.Enum.Role;
 import com.example.sport_backend.Repositories.ClubHouse.UserRepositories;
 import com.example.sport_backend.ServiceImpl.ClubHouse.EmailService;
 import jakarta.validation.Valid;
@@ -47,6 +48,7 @@ public class AuthController {
         }
 
         User user = userOptional.get();
+
         if (!user.isVerified()) {
             return ResponseEntity.badRequest().body(Map.of("message", "Error: Please verify your email before logging in!"));
         }
@@ -56,11 +58,17 @@ public class AuthController {
         );
 
         if (authentication.isAuthenticated()) {
-            return ResponseEntity.ok(Map.of("message", "Login successful!"));
+            return ResponseEntity.ok(Map.of(
+                    "message", "Login successful!",
+                    "role", user.getRole().name(), // ✅ Convert Enum Role to String
+                    "email", user.getEmail()
+            ));
         } else {
-            return ResponseEntity.badRequest().body(Map.of("message", "Login failed! Incorrect credentials."));
+            return ResponseEntity.badRequest().body(Map.of("message", "Login failed!"));
         }
     }
+
+
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@RequestBody Map<String, String> request) {
         String email = request.get("email");
@@ -127,7 +135,9 @@ public class AuthController {
         if (existingUser.isPresent()) {
             return ResponseEntity.badRequest().body(Map.of("message", "Error: Email already exists!"));
         }
-
+        if (user.getRole() == null) {
+            user.setRole(Role.COACH);
+        }
         // Encrypt password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 

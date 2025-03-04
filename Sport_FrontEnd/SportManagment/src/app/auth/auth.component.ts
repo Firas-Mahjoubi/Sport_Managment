@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -19,7 +19,7 @@ export class AuthComponent {
   forgotPasswordForm: FormGroup;
   resetForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,private router: Router) { 
     this.authForm = this.fb.group({
       name: [''],
       email: ['', [Validators.required, Validators.email]],
@@ -66,6 +66,11 @@ export class AuthComponent {
       next: (response: any) => {
         this.message = response.message;
         this.messageColor = 'green';
+        if (response.role) {
+          localStorage.setItem("userRole", response.role); // Save role in localStorage
+          this.redirectToRole(response.role);
+          localStorage.setItem("userId", response.id);
+        }
       },
       error: (err) => {
         this.message = err.error?.message || "An error occurred.";
@@ -73,7 +78,24 @@ export class AuthComponent {
       }
     });
   }
-
+  redirectToRole(role: string) {
+    switch (role) {
+      case 'ADMIN':
+        this.router.navigate(['dashboard']);
+        break;
+      case 'PLAYER':
+        this.router.navigate(['/player-dashboard']);
+        break;
+      case 'COACH':
+        this.router.navigate(['exercise-list']);
+        break;
+      case 'MEDICIN':
+        this.router.navigate(['/medic-dashboard']);
+        break;
+      default:
+        this.router.navigate(['/home']); // Default route
+    }
+  }
   onForgotPassword() {
     const email = this.forgotPasswordForm.controls['email'].value;
     if (!email) {
@@ -124,6 +146,10 @@ export class AuthComponent {
       }
     });
   }
-
-
+  logout() {
+    localStorage.removeItem("userRole");
+    this.router.navigate(['/']);
+  }
+  
+  
 }

@@ -1,5 +1,6 @@
 package com.example.sport_backend.Entity.TrainigGround;
 
+import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Entity.ClubHouse.Team;
 import com.example.sport_backend.Entity.ClubHouse.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -43,11 +44,18 @@ public class TrainingSession {
     Integer questionablePlayers;
     Integer absentPlayers;
 
-    // ✅ Notes Section
+    // ✅ Notes Section 
     String beforeSessionNotes;
     String afterSessionNotes;
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "training_session_players",
+            joinColumns = @JoinColumn(name = "session_id"),
+            inverseJoinColumns = @JoinColumn(name = "player_id")
+    )
+    private Set<Player> players = new HashSet<>();
 
-    // ✅ Session Plan (List of Exercises)
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "training_session_exercises",

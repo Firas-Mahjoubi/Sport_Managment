@@ -1,0 +1,74 @@
+<app-header></app-header>
+<br>
+<br>
+<br>
+<br>
+<div class="container training-session-container">
+  <div class="col-12 title-section">
+    <h2 class="heading">Assign Exercises to Training Session</h2>
+  </div>
+
+  <!-- ✅ Exercise Cards Grid -->
+  <div class="row mt-4">
+    <div class="col-lg-4 col-md-6 mb-4" *ngFor="let exercise of exercises">
+      <div 
+        class="card shadow-sm exercise-card"
+        [ngClass]="{'selected': selectedExercises.includes(exercise.id)}"
+        (click)="toggleExerciseSelection(exercise.id)"
+      >
+        <!-- ✅ Exercise Image -->
+        <div class="position-relative">
+          <img 
+            [src]="exercise.imageUrl ? exercise.imageUrl : 'https://img.freepik.com/photos-premium/spheres-football-3d-raffinees-balles-football-blanches-noires-surface-grise-elegante_1031658-231.jpg?semt=ais_hybrid'" 
+            class="card-img-top exercise-img" 
+            alt="{{ exercise.name }}"
+          >
+          <div class="selection-overlay d-flex align-items-center justify-content-center">
+            <i class="fas fa-check-circle text-success"></i>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title fw-bold text-dark">{{ exercise.name }}</h5>
+          <p class="card-text text-muted">{{ exercise.description }}</p>
+
+          <p class="d-flex align-items-center">
+            <i class="fas fa-dumbbell text-warning me-2"></i>
+            <strong class="text-white me-1">Fitness Level:</strong><span class="text-white">{{ exercise.fitnessLevel }}</span>
+          </p>
+
+          <p class="d-flex align-items-center">
+            <i class="fas fa-brain text-success me-2"></i>
+            <strong class="text-white me-1">Technique Level:</strong> <span class="text-white">{{ exercise.techniqueLevel }}</span>
+          </p>
+
+          <p class="d-flex align-items-center">
+            <i class="fas fa-chess-board text-info me-2"></i>
+            <strong class="text-white me-1">Tactical Level:</strong><span class="text-white">{{ exercise.tacticLevel }}</span> 
+          </p>
+
+          <!-- ✅ Tags Display -->
+          <div class="mt-2">
+            <span *ngFor="let tag of exercise.tags" class="badge bg-primary me-1">
+              #{{ tag.name }}
+            </span>
+          </div>
+
+          <!-- ✅ Duration & Group Size -->
+          <div class="mt-3 text-center fw-bold text-secondary">
+            ⏳ {{ exercise.durationMinutes }} min | 👥 Group: {{ exercise.groupSize }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Submit Button -->
+  <div class="text-center mt-4">
+    <button class="btn btn-lg btn-primary" (click)="addExercisesToSession()">
+      ✅ Confirm Assignment
+    </button>
+  </div>
+</div>
+
+<app-footer></app-footer>

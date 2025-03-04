@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExerciseService } from '../../services/exercise.service';
-
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 @Component({
   selector: 'app-exercise-list',
   templateUrl: './exercise-list.component.html',
@@ -9,9 +9,23 @@ import { ExerciseService } from '../../services/exercise.service';
 export class ExerciseListComponent implements OnInit {
   exercises: any[] = [];
   defaultImage: string = 'https://via.placeholder.com/150'; // ✅ Default Image
+  searchQuery: string = '';
+  selectedFilter: string = '';
+  constructor(private exerciseService: ExerciseService,private sanitizer: DomSanitizer) {
+    
+  }
+  getStars(level: number): SafeHtml {
+    const maxStars = 5; // Maximum of 5 stars
+    const fullStar = '<i class="fas fa-star text-warning"></i>';
+    const emptyStar = '<i class="far fa-star text-warning"></i>';
 
-  constructor(private exerciseService: ExerciseService) {}
-
+    let stars = '';
+    for (let i = 1; i <= maxStars; i++) {
+      stars += i <= Math.round(level / 20) ? fullStar : emptyStar;
+    }
+    
+    return this.sanitizer.bypassSecurityTrustHtml(stars);
+  }
   ngOnInit(): void {
     this.loadExercises();
   }
@@ -38,4 +52,17 @@ export class ExerciseListComponent implements OnInit {
       );
     }
   }
+   // ✅ Filtered Exercises
+   filteredExercises(): any[] {
+    return this.exercises.filter(exercise => {
+      // 🔎 Filter by search query
+      const matchesSearch = exercise.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+
+      // 📂 Filter by visibility (Public/Private)
+      const matchesFilter = this.selectedFilter ? exercise.visibility === this.selectedFilter : true;
+
+      return matchesSearch && matchesFilter;
+    });
+  }
+  
 }

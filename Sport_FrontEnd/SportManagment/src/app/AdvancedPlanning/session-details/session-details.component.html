@@ -1,0 +1,11 @@
+<div class="session-details">
+  <h2>{{ session.name }}</h2>
+  <p><strong>Date:</strong> {{ session.date | date }}</p>
+  <p><strong>Start Time:</strong> {{ session.startTime }}</p>
+  <p><strong>End Time:</strong> {{ session.endTime }}</p>
+  <div class="actions">
+    <button mat-button (click)="editSession()">Edit</button>
+    <button mat-button (click)="deleteSession()">Delete</button>
+    <button mat-button (click)="close()">Close</button>
+  </div>
+</div>

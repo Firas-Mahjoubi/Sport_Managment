@@ -10,6 +10,7 @@ import com.example.sport_backend.Repositories.ClubHouse.PlayerRepo;
 import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
 import com.example.sport_backend.Repositories.matches.LineUpRepo;
 import com.example.sport_backend.Repositories.matches.MatchesRepo;
+import com.example.sport_backend.Repositories.matches.SubstitutionRepo;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class LineupService {
     private final MatchesRepo matchRepo;
     private final TeamRepositories teamRepo;
     private final PlayerRepo playerRepo;
+    private final SubstitutionRepo substitutionRepo;
     public Map<Long, PlayerInfoDTO> getPlayerNamesForLineup(Long matchId, boolean isHomeTeam) {
         // Get the lineup
         LineUp lineUp = getLineupForMatchAndTeam(matchId, isHomeTeam);
@@ -107,4 +109,22 @@ public class LineupService {
                     .orElseThrow(() -> new RuntimeException("Away team lineup not found for match"));
         }
     }
+    @Transactional
+    public void deleteLineUp(Long lineupId) {
+        // First, delete substitutions related to the lineup
+        substitutionRepo.deleteByLineUpId(lineupId);
+
+        // Fetch and delete the lineup
+        LineUp lineUp = lineUpRepo.findById(lineupId)
+                .orElseThrow(() -> new RuntimeException("Lineup not found with ID: " + lineupId));
+
+        // Clear the associated collections
+        lineUp.getTeamplayerNumbers().clear();
+        lineUp.getTeamplayerSubsNumbers().clear();
+        lineUpRepo.save(lineUp);
+
+        // Delete the lineup
+        lineUpRepo.delete(lineUp);
+    }
+
 }

@@ -1,0 +1,87 @@
+<app-header></app-header>
+<br><br><br><br><br><br><br>
+<div class="container training-session-container">
+  <div class="col-12 title-section d-flex justify-content-between align-items-center">
+    <h2 class="heading">Training Sessions</h2>
+    
+    <!-- ✅ Right-aligned button -->
+    <div>
+      <button class="btn btn-success" routerLink="/training-session-add">+ Create New Session</button>
+    </div>
+  </div>
+
+  <!-- No Sessions Available -->
+  <div *ngIf="trainingSessions.length === 0" class="text-center">
+    <p class="text-muted">No training sessions available.</p>
+  </div>
+
+  <div class="row g-4"> <!-- ✅ Added spacing between cards -->
+    <div class="col-12 col-md-6" *ngFor="let session of trainingSessions"> <!-- ✅ Force 2 cards per row -->
+      <div class="card session-card bg-dark text-light shadow-lg border-0 d-flex flex-column">
+        <div class="card-body d-flex flex-column justify-content-between">
+          <h5 class="mb-3 fw-bold text-danger">
+            {{ session.name }}
+            <span class="badge bg-secondary ms-2">{{ session.intensity }}</span>
+          </h5>
+
+          <p class="card-text">
+            <i class="fas fa-map-marker-alt text-light"></i> {{ session.location }}
+          </p>
+          <p>
+            <i class="fas fa-calendar-alt text-danger"></i> <strong>Date:</strong> {{ session.date }}
+          </p>
+
+          <!-- 🏆 Selected Exercises -->
+          <h6 class="mt-3"><i class="fas fa-dumbbell text-success"></i> Selected Exercises</h6>
+
+          <div *ngIf="session.exercices.length > 0; else noExercises">
+            <div class="d-flex flex-wrap">
+              <div *ngFor="let exercise of session.exercices" class="p-2">
+                <div class="exercise-card d-flex align-items-center">
+                  <img [src]="exercise.imageUrl ? exercise.imageUrl : defaultImage"
+                    class="rounded-circle border border-light" width="50" height="50" alt="Exercise Image" />
+                  <span class="ms-2 text-light">{{ exercise.name }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ng-template #noExercises>
+            <p class="text-muted"><i class="fas fa-exclamation-triangle"></i> No exercises added.</p>
+          </ng-template>
+
+          <!-- 🎯 Buttons Section -->
+          <div class="button-group d-flex justify-content-between mt-auto">
+            <button class="btn btn-warning text-dark flex-fill me-2" [routerLink]="['/training-sessions-exercice', session.id]">
+              ➕ Assign Exercises
+            </button>
+            <button class="btn btn-primary text-white w-100 me-2" (click)="navigateToSession(session.id)">
+              📋 View Details
+            </button>
+
+            <button class="btn btn-danger text-white flex-fill me-2" (click)="deleteSession(session.id)">
+              ❌ Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br><br>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-7 text-center">
+      <div class="custom-pagination">
+        <a href="#">1</a>
+        <span>2</span>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br><br>
+<app-footer></app-footer>

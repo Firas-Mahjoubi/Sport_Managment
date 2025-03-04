@@ -1,0 +1,181 @@
+/* General Styles */
+.container {
+  max-width: 1200px; /* Wider for dashboard consistency */
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif; /* Professional font stack */
+}
+
+body {
+  background-color: #f8f9fa; /* Light gray background */
+  color: #333;
+}
+
+/* Typography */
+h2, h3 {
+  color: #2c3e50; /* Darker blue-gray */
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+/* Card Styling */
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #fff;
+}
+
+/* Form Group Styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #d1d9e6; /* Updated for dashboard style */
+  padding: 12px;
+  font-size: 14px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease;
+  color: #000 !important;
+}
+
+.form-control:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+  outline: none;
+}
+
+/* Button Styling */
+.btn {
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px; /* Slightly smaller for dashboard */
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-success {
+  background-color: #2ecc71; /* Updated green for consistency */
+  border: none;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  display: block;
+}
+
+.btn-success:hover {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+}
+
+.btn-action {
+  background-color: transparent; /* No background */
+  border: 1px solid #d1d9e6; /* Light border */
+  color: #7f8c8d; /* Muted gray */
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.btn-action:hover {
+  background-color: #ecf0f1; /* Light gray hover */
+  color: #2c3e50; /* Darker text on hover */
+  border-color: #b3c0ce;
+}
+
+/* Goals Table Styling */
+.dashboard-table-wrapper {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* For sticky header */
+}
+
+.goal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.goal-table th,
+.goal-table td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid #e4e9f0;
+}
+
+.goal-table th {
+  background: linear-gradient(to bottom, #f5f7fa, #e9ecef); /* Subtle gradient */
+  color: #2c3e50;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.goal-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.goal-table tbody tr:nth-child(odd) {
+  background-color: #f9fafc;
+}
+
+.goal-table tbody tr:hover {
+  background-color: #eef2f7; /* Pronounced hover effect */
+}
+
+.goal-table td {
+  vertical-align: middle;
+  color: #34495e;
+}
+
+.goal-table td strong {
+  color: #3498db; /* Blue for scorer emphasis */
+}
+
+/* Action Buttons in Table */
+.goal-table td button {
+  width: 100%;
+  margin: 0;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .goal-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .goal-table th,
+  .goal-table td {
+    white-space: nowrap;
+    min-width: 100px; /* Prevent collapse */
+  }
+}

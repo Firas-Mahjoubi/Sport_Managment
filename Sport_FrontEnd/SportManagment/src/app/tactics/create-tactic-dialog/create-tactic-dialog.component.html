@@ -1,14 +1,59 @@
 <mat-dialog-content class="dialog-container">
-    <h2>Créer un nouveau dossier</h2>
-  
-    <form [formGroup]="tacticForm">
-      <label>Nom du dossier <span style="color: red;">*</span></label>
-      <input matInput formControlName="name" placeholder="Nom du dossier">
-    </form>
-  
-    <div class="button-group">
-      <button mat-button (click)="closeDialog()">✖</button>
-      <button mat-button (click)="createFolder()" [disabled]="!tacticForm.valid">Créer</button>
-    </div>
-  </mat-dialog-content>
-  
+  <h2 class="dialog-title">Create a New Tactic</h2>
+
+  <form [formGroup]="tacticForm" class="form-container">
+    
+    <!-- Tactic Name -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Tactic Name</mat-label>
+      <input matInput formControlName="name" placeholder="Ex: Quick Attack">
+      <mat-error *ngIf="tacticForm.controls['name'].hasError('required')">
+        Name is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Description -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="2" placeholder="Describe your tactic"></textarea>
+      <mat-error *ngIf="tacticForm.controls['description'].hasError('required')">
+        Description is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Formation Selection -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Formation</mat-label>
+      <mat-select formControlName="formation">
+        <mat-option *ngFor="let formation of formations" [value]="formation">
+          {{ formation }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="tacticForm.controls['formation'].hasError('required')">
+        Please select a formation.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Training Focus Selection -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Training Focus</mat-label>
+      <mat-select formControlName="trainingFocus">
+        <mat-option *ngFor="let focus of trainingFocuses" [value]="focus">
+          {{ focus }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="tacticForm.controls['trainingFocus'].hasError('required')">
+        Please select a training focus.
+      </mat-error>
+    </mat-form-field>
+
+  </form>
+
+  <!-- Action Buttons -->
+  <mat-dialog-actions class="button-group">
+    <button mat-button (click)="closeDialog()" class="cancel-button">✖ Cancel</button>
+    <button mat-flat-button color="primary" (click)="createTactic()" [disabled]="tacticForm.invalid">
+      ✔ Create
+    </button>
+  </mat-dialog-actions>
+</mat-dialog-content>

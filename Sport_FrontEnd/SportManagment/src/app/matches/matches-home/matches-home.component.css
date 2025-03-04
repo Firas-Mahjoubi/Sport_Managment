@@ -12,6 +12,13 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+.navbar{
+
+  margin-bottom: 80px;
+}
+.footer{
+  margin-top: 80px;
+}
 
 /* Gameweek Slider */
 .gameweek-container {
