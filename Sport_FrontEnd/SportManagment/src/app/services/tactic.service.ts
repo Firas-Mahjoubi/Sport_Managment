@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Tactic {
@@ -40,8 +40,11 @@ export class TacticService {
    * @param teamId - The team ID associated with the tactic
    */
   createTactic(tactic: Tactic, teamId: number): Observable<Tactic> {
-    return this.http.post<Tactic>(`${this.apiUrl}/createTactic/${teamId}`, tactic);
+    return this.http.post<Tactic>(`${this.apiUrl}/createTactic/${teamId}`, tactic, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
+  
 
   /**
    * Update an existing tactic

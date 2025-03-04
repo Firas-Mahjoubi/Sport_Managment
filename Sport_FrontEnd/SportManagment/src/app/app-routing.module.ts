@@ -30,7 +30,6 @@ import { EditHealthrecordComponent } from './Health/healthrecord/edit-healthreco
 import { ListInjuryArchiveComponent } from './Health/list-injury-archive/list-injury-archive.component';
 import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthrecord/show-healthrecord.component';
 
-import { HomeComponent } from './components/home/home.component';
 
 import {AdminSidebarComponent} from "./admin/admin-sidebar/admin-sidebar.component";
 import {AdminHeaderComponent} from "./admin/admin-header/admin-header.component";
@@ -51,7 +50,6 @@ import {MatchesNavbarComponent} from "./matches/matches-navbar/matches-navbar.co
 
 const routes: Routes = [
 
-  { path: '', component: HomeComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
   {path: 'dashboard', component:DashboardComponent, canActivate: [roleGuard(['ADMIN'])]}, // Protect dashboard route

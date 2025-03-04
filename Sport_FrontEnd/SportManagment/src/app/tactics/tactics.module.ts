@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { __decorate } from "tslib";
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TacticsRoutingModule } from './tactics-routing.module';
@@ -10,6 +11,10 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -21,12 +26,19 @@ import { MatMenuModule } from '@angular/material/menu';
   imports: [
     CommonModule,
     TacticsRoutingModule,
+    CommonModule,
+    TacticsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
     MatInputModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    MatIconModule,
+    MatFormFieldModule, // ✅ Required for mat-form-field
+    MatSelectModule, // ✅ Required for mat-select
+    MatToolbarModule,
+    
   ]
 
 })

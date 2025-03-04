@@ -50,7 +50,6 @@ import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoverypl
 import { ListPlayerComponent } from './Health/recoveyplans/list-player/list-player.component';
 import { ListRecoveryPlanComponent } from './Health/recoveyplans/list-recoveryplan/list-recoveryplan.component';
 
-
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -63,7 +62,6 @@ import { SessionFormComponent } from './AdvancedPlanning/session-form/session-fo
 import { EventDetailsComponent } from './AdvancedPlanning/event-details/event-details.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatchesmainComponent } from './matches/matchesmain/matchesmain.component';
 
 import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.component';
@@ -71,9 +69,9 @@ import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
-
-
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -117,7 +115,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     EditRecoveryplanComponent,
 
     ShowRecoveryplanComponent,
-    AddRecoveryplanComponent,
     ListPlayerComponent,
     ListRecoveryPlanComponent,
     CalendarComponent,
@@ -127,10 +124,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
     MatchesmainComponent,
     MatchesNavbarComponent,
-
-
-
-
   ],
   imports: [
     BrowserModule,
@@ -140,8 +133,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     TacticModule,
     BrowserAnimationsModule,
-
-
+    RouterModule,
+    CommonModule,
+    FontAwesomeModule,
 
     MatTableModule,
     MatIconModule,
@@ -151,11 +145,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCardModule,
     MatDialogModule,
     MatDatepickerModule,
-    FontAwesomeModule,
     MatNativeDateModule,
     MatInputModule,
     MatFormFieldModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]
