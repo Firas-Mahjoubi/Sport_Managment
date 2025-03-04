@@ -8,6 +8,9 @@ import com.example.sport_backend.Entity.Enum.ZoneAffectee;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -28,22 +31,34 @@ public class Injury {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @PastOrPresent(message = "La date de blessure ne peut pas être dans le futur.")
+    @NotNull(message = "La date est obligatoire.")
     LocalDate date;
 
+
+    @NotNull(message = "Le type de blessure est obligatoire.")
     @Enumerated(EnumType.STRING)
     Type type;
 
+
+    @NotNull(message = "La gravité est obligatoire.")
     @Enumerated(EnumType.STRING)
     Severity severity;
 
+    @Size(max = 500, message = "La description ne peut pas dépasser 500 caractères.")
     String description;
 
+
+    @NotNull(message = "Le statut est obligatoire.")
     @Enumerated(EnumType.STRING)
     Status status;
 
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "La zone affectée est obligatoire.")
     ZoneAffectee zoneAffectee;
 
+
+    @Size(max = 255, message = "La cause ne peut pas dépasser 255 caractères.")
     String cause;
 
 

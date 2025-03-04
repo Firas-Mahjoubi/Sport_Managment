@@ -44,9 +44,7 @@ export class InjuryListComponent implements OnInit {
     });
   }
 
-  /**
-   * Charge la liste des joueurs depuis le backend
-   */
+  
   loadPlayers(): void {
     this.playerService.getPlayers().subscribe((data: Player[]) => {
       this.players = data;
@@ -54,9 +52,7 @@ export class InjuryListComponent implements OnInit {
     });
   }
 
-  /**
-   * Filtre les blessures en fonction de la recherche et du joueur sélectionné
-   */
+
   filterInjuries(): void {
     this.filteredInjuries = this.injuries.filter(injury => {
       const matchesSearch = injury.type.toLowerCase().includes(this.searchText.toLowerCase()) ||

@@ -1,10 +1,10 @@
 
-<!-- ➕ Bouton Ajouter un Health Record -->
+
 <a [routerLink]="['/health/injury/add']" class="btn-add-health">
-  ➕ Ajouter Health Record
+  ➕ Ajouter Blessures
 </a>
 
-<!-- 🌌 Arrière-plan avec une image en HTML -->
+
 <div style="
   position: fixed;
   top: 0;
@@ -41,7 +41,7 @@
         </option>
 
       </select>
-      
+
     </div>
   </div>
 
@@ -82,14 +82,14 @@
             [disabled]="injury.status !== 'GUERIE'">
             🗑️ Supprimer
           </button>
-        </td> <!-- 🔹 Fermeture du <td> manquant -->
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
 
 
-<!-- 🔙 Bouton Retour au Tableau de Santé -->
+
 <a [routerLink]="['/health-dashboard']" class="btn-back-health">
   ⬅️ Retour au Tableau de Santé
 </a>
