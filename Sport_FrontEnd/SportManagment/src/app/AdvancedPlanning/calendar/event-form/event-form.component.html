@@ -9,11 +9,20 @@
       <mat-form-field appearance="outline">
         <mat-label>Event Name</mat-label>
         <input matInput formControlName="nameEvent" required>
+        <mat-error *ngIf="eventForm.get('nameEvent')?.hasError('required')">
+          Event name is required.
+        </mat-error>
+        <mat-error *ngIf="eventForm.get('nameEvent')?.hasError('minlength')">
+          Event name must be at least 3 characters long.
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Description</mat-label>
         <textarea matInput formControlName="description"></textarea>
+        <mat-error *ngIf="eventForm.get('description')?.hasError('maxlength')">
+          Description should not exceed 250 characters.
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -24,11 +33,20 @@
         <input matInput [matDatepicker]="picker" formControlName="date" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="eventForm.get('date')?.hasError('required')">
+          Date is required.
+        </mat-error>
+        <mat-error *ngIf="eventForm.get('date')?.hasError('dateInvalid')">
+          Date must be today or in the future.
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Time</mat-label>
         <input matInput type="time" formControlName="time" required>
+        <mat-error *ngIf="eventForm.get('time')?.hasError('required')">
+          Time is required.
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -37,6 +55,12 @@
       <mat-form-field appearance="outline">
         <mat-label>Location</mat-label>
         <input matInput formControlName="address" required>
+        <mat-error *ngIf="eventForm.get('address')?.hasError('required')">
+          Location is required.
+        </mat-error>
+        <mat-error *ngIf="eventForm.get('address')?.hasError('minlength')">
+          Location should be at least 5 characters long.
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -49,13 +73,16 @@
             {{ type }}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="eventForm.get('typeEvent')?.hasError('required')">
+          Event type is required.
+        </mat-error>
       </mat-form-field>
     </div>
 
     <!-- Action Buttons -->
     <div class="form-actions">
       <button mat-button type="button" (click)="onCancel()" class="btn-cancel">Cancel</button>
-      <button mat-flat-button color="primary" type="submit" class="btn-save">Save Event</button>
+      <button mat-flat-button color="primary" type="submit" class="btn-save" [disabled]="eventForm.invalid">Save Event</button>
     </div>
 
   </form>

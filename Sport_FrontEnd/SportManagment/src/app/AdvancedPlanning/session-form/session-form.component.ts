@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -13,18 +13,18 @@ export class SessionFormComponent {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<SessionFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { session: any } // Recevoir les données de la session
+    @Inject(MAT_DIALOG_DATA) public data: { session: any }
   ) {
     // Initialisation du formulaire avec les anciennes valeurs
     this.sessionForm = this.fb.group({
       id: [data.session?.id || null], // ID de la session (pour la mise à jour)
-      name: [data.session?.name || '', Validators.required], // Pré-remplir le nom
+      name: [data.session?.name || '', [Validators.required, Validators.minLength(3)]], // Validation du nom de la session
       date: [
-        data.session?.date ? new Date(data.session.date).toISOString().split('T')[0] : '', // Utilisation de la date au format ISO
-        Validators.required
-      ], // Pré-remplir la date
-      startTime: [data.session?.startTime || '', Validators.required], // Pré-remplir l'heure de début
-      endTime: [data.session?.endTime || '', Validators.required] // Pré-remplir l'heure de fin
+        data.session?.date ? new Date(data.session.date).toISOString().split('T')[0] : '',
+        [Validators.required, this.dateValidator] // Validation de la date
+      ],
+      startTime: [data.session?.startTime || '', Validators.required], // Validation de l'heure de début
+      endTime: [data.session?.endTime || '', [Validators.required, this.timeValidator]] // Validation de l'heure de fin
     });
 
     // Si la session existe (mode édition), ajuster la date en UTC
@@ -33,6 +33,39 @@ export class SessionFormComponent {
       const utcDate = new Date(Date.UTC(localDate.getFullYear(), localDate.getMonth(), localDate.getDate()));
       this.sessionForm.patchValue({ date: utcDate.toISOString().split('T')[0] });
     }
+  }
+
+  // Validation de la date (doit être aujourd'hui ou après)
+  dateValidator(control: AbstractControl): ValidationErrors | null {
+    const selectedDate = new Date(control.value);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Mettre la date d'aujourd'hui à 00:00:00 pour ignorer l'heure
+
+    return selectedDate >= today ? null : { dateInvalid: true };
+  }
+
+  // Validation pour vérifier que l'heure de début est avant l'heure de fin
+  timeValidator(control: AbstractControl): ValidationErrors | null {
+    const form = control?.parent;
+    if (form) {
+      const startTime = form.get('startTime')?.value;
+      const endTime = control.value;
+
+      if (startTime && endTime) {
+        const [startHours, startMinutes] = startTime.split(':').map(Number);
+        const [endHours, endMinutes] = endTime.split(':').map(Number);
+
+        const start = new Date();
+        start.setHours(startHours, startMinutes);
+
+        const end = new Date();
+        end.setHours(endHours, endMinutes);
+
+        return start < end ? null : { timeInvalid: true }; // Vérifie que startTime est avant endTime
+      }
+    }
+
+    return null;
   }
 
   /**

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -22,17 +22,27 @@ export class EventFormComponent {
     let existingDate = data?.event?.date ? new Date(data.event.date) : null;
 
     this.eventForm = this.fb.group({
-      nameEvent: [data?.event?.nameEvent || '', Validators.required],
-      description: [data?.event?.description || ''],
-      date: [existingDate || '', Validators.required], // Conserver le format `Date` pour le calendrier
-      time: [existingDate ? this.formatTime(existingDate) : '12:00', Validators.required], // Format HH:mm
-      address: [data?.event?.address || '', Validators.required],
+      nameEvent: [data?.event?.nameEvent || '', [Validators.required, Validators.minLength(3)]],
+      description: [data?.event?.description || '', Validators.maxLength(250)],
+      date: [existingDate || '', [Validators.required, this.dateValidator]],  // Ajout de la validation personnalisée
+      time: [existingDate ? this.formatTime(existingDate) : '12:00', Validators.required],
+      address: [data?.event?.address || '', [Validators.required, Validators.minLength(5)]],
       typeEvent: [data?.event?.typeEvent || '', Validators.required]
     });
   }
 
+  // Validation personnalisée pour la date (date supérieure ou égale à aujourd'hui)
+  dateValidator(control: AbstractControl): ValidationErrors | null {
+    const selectedDate = new Date(control.value);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Mettre la date d'aujourd'hui à 00:00:00 pour ignorer l'heure
+
+    // Si la date sélectionnée est avant aujourd'hui, retournez une erreur
+    return selectedDate >= today ? null : { dateInvalid: true };
+  }
+
   private formatTime(date: Date): string {
-    return date.toTimeString().substring(0, 5); // HH:mm
+    return date.toTimeString().substring(0, 5); // Format HH:mm
   }
 
   onSubmit(): void {
