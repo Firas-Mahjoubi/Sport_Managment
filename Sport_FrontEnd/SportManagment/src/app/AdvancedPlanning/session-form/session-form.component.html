@@ -1,10 +1,17 @@
 <mat-dialog-content>
   <form [formGroup]="sessionForm" (ngSubmit)="onSubmit()" class="event-form">
+    <h2 class="form-title">Create Your Session🚀</h2>
 
     <!-- Session Name -->
     <mat-form-field appearance="outline">
       <mat-label>Session Name</mat-label>
       <input matInput formControlName="name" required>
+      <mat-error *ngIf="sessionForm.get('name')?.hasError('required')">
+        Session name is required.
+      </mat-error>
+      <mat-error *ngIf="sessionForm.get('name')?.hasError('minlength')">
+        Session name must be at least 3 characters long.
+      </mat-error>
     </mat-form-field>
 
     <!-- Date -->
@@ -13,25 +20,39 @@
       <input matInput [matDatepicker]="picker" formControlName="date" required>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="sessionForm.get('date')?.hasError('required')">
+        Date is required.
+      </mat-error>
+      <mat-error *ngIf="sessionForm.get('date')?.hasError('dateInvalid')">
+        Date must be today or in the future.
+      </mat-error>
     </mat-form-field>
 
     <!-- Start Time -->
     <mat-form-field appearance="outline">
       <mat-label>Start Time</mat-label>
       <input matInput type="time" formControlName="startTime" required>
+      <mat-error *ngIf="sessionForm.get('startTime')?.hasError('required')">
+        Start time is required.
+      </mat-error>
     </mat-form-field>
 
     <!-- End Time -->
     <mat-form-field appearance="outline">
       <mat-label>End Time</mat-label>
       <input matInput type="time" formControlName="endTime" required>
+      <mat-error *ngIf="sessionForm.get('endTime')?.hasError('required')">
+        End time is required.
+      </mat-error>
+      <mat-error *ngIf="sessionForm.get('endTime')?.hasError('timeInvalid')">
+        End time must be after start time.
+      </mat-error>
     </mat-form-field>
 
     <!-- Action Buttons -->
     <div class="form-actions">
       <button mat-button type="button" (click)="onCancel()" class="btn-cancel">Cancel</button>
-      <button mat-flat-button color="primary" type="submit" class="btn-save">Save Session</button>
+      <button mat-flat-button color="primary" type="submit" class="btn-save" [disabled]="sessionForm.invalid">Save Session</button>
     </div>
-
   </form>
 </mat-dialog-content>

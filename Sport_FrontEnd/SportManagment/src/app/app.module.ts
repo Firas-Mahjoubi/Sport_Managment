@@ -68,6 +68,12 @@ import { AdminSubstitutionComponent } from './matches/admin-substitution/admin-s
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+
+
+
+
+
+
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -77,6 +83,8 @@ import { TacticListComponent } from './tactics/tactic-list/tactic-list.component
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
+import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
+
 
 @NgModule({
   declarations: [
@@ -132,6 +140,9 @@ import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/crea
 
     MatchesmainComponent,
     MatchesNavbarComponent,
+
+    SessionDetailsComponent
+
   ],
   imports: [
     BrowserModule,
@@ -166,7 +177,7 @@ import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/crea
         MatIconModule,
         MatFormFieldModule, // ✅ Required for mat-form-field
         MatSelectModule, // ✅ Required for mat-select
-        MatToolbarModule,
+        MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
