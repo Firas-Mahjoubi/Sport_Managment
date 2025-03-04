@@ -1,39 +1,38 @@
 .dialog-container {
-    text-align: center;
-    padding: 20px;
-    background: #222;
-    color: white;
-    border-radius: 10px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #555;
-    background: #333;
-    color: white;
-  }
-  
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button[mat-button]:disabled {
-    background: gray;
-  }
-  
-  button[mat-button] {
-    background: #00ff88;
-    color: black;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.dialog-title {
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.cancel-button {
+  color: red;
+}
+
+mat-dialog-content {
+  max-height: 70vh;
+  overflow-y: auto;
+}

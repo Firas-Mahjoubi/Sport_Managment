@@ -1,6 +1,7 @@
 package com.example.sport_backend.Entity.Tactic;
 
 import com.example.sport_backend.Entity.ClubHouse.Team;
+import com.example.sport_backend.Entity.Enum.TrainingFocus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -23,7 +24,8 @@ public class Tactic {
     String name;
     String description;
     String formation;
-    String trainingFocus;
+    @Enumerated(EnumType.STRING)
+    TrainingFocus trainingFocus;
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = true)
     @JsonIgnore

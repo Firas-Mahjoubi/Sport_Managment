@@ -9,19 +9,28 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateTacticDialogComponent {
   tacticForm: FormGroup;
+  
+  // Available formations
+  formations: string[] = ['4-4-2', '4-3-3', '3-5-2', '5-3-2'];
+  
+  // Available training focuses
+  trainingFocuses: string[] = ['ATTACK', 'DEFENSE', 'POSSESSION', 'PRESSING'];
 
   constructor(
     public dialogRef: MatDialogRef<CreateTacticDialogComponent>,
     private fb: FormBuilder
   ) {
     this.tacticForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      formation: ['', Validators.required],
+      trainingFocus: ['', Validators.required]
     });
   }
 
-  createFolder(): void {
+  createTactic(): void {
     if (this.tacticForm.valid) {
-      this.dialogRef.close(this.tacticForm.value.name);
+      this.dialogRef.close(this.tacticForm.value);
     }
   }
 
