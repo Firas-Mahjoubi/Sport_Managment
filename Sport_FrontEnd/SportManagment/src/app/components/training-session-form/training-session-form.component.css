@@ -11,4 +11,12 @@
   .exercise-card.selected {
     border: 3px solid #007bff; /* Highlight selected exercises */
   }
+  .btn-primary {
+    width: 100%;
+    font-size: 18px;
+  }
   
+/* 🎨 Exercise Form Styling */
+.form-group label {
+  font-weight: bold;
+}

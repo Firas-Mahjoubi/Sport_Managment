@@ -12,12 +12,11 @@ import {MatchDetailsComponent} from "./matches/match-details/match-details.compo
 
 import { TrainingSessionComponent } from './components/training-session-Assign-exercice/training-session.component';
 import{TrainingSessionExerciceComponent} from './components/training-session/training-session-exercice.component';
+import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
 
-import {TrainingSessionFormComponent} from './components/training-session-form/training-session-form.component';
+
 import {ExerciseFormComponent} from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
-import { ExerciseLibraryComponent } from './components/exercise-library/exercise-library.component';
-import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
 //---------------------------------------------//
 import { InjuryListComponent } from './Health/injury-list/injury-list.component';
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
@@ -30,7 +29,6 @@ import { EditHealthrecordComponent } from './Health/healthrecord/edit-healthreco
 import { ListInjuryArchiveComponent } from './Health/list-injury-archive/list-injury-archive.component';
 import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthrecord/show-healthrecord.component';
 
-import { HomeComponent } from './components/home/home.component';
 
 import {AdminSidebarComponent} from "./admin/admin-sidebar/admin-sidebar.component";
 import {AdminHeaderComponent} from "./admin/admin-header/admin-header.component";
@@ -44,32 +42,46 @@ import { ListPlayerComponent } from './Health/recoveyplans/list-player/list-play
 import { ListRecoveryPlanComponent } from './Health/recoveyplans/list-recoveryplan/list-recoveryplan.component';
 import { EditRecoveryplanComponent } from './Health/recoveyplans/edit-recoveryplan/edit-recoveryplan.component';
 import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoveryplan/show-recoveryplan.component';
+
+import{BackofficeListExerciceComponent} from './components/backoffice-list-exercice/backoffice-list-exercice.component';
+import { TrainingSessionFormComponent } from './components/training-session-form/training-session-form.component';
+
 import {MatchesmainComponent} from "./matches/matchesmain/matchesmain.component";
 import {MatchesNavbarComponent} from "./matches/matches-navbar/matches-navbar.component";
 import {MatchesFooterComponent} from "./matches/matches-footer/matches-footer.component";
 import {AdminSubstitutionComponent} from "./matches/admin-substitution/admin-substitution.component";
+import { TacticListComponent } from './tactics/tactic-list/tactic-list.component';
+import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
+import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
+import { HomeComponent } from './components/home/home.component';
+
 
 
 
 const routes: Routes = [
 
-  { path: '', component: HomeComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
   {path: 'dashboard', component:DashboardComponent, canActivate: [roleGuard(['ADMIN'])]}, // Protect dashboard route
   {path: 'main', component:LandingPageComponent},
   //--------------------Training-groud -------------------------//
-  { path: 'training-sessions-exercice', component: TrainingSessionComponent },
-  { path: 'training-sessions', component: TrainingSessionExerciceComponent },
-  { path: 'training-sessions/new', component: TrainingSessionFormComponent },
-  { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent },
-  { path: 'training-session/:id', component: TrainingSessionViewComponent },
+  { path: 'training-sessions-exercice/:id', component: TrainingSessionComponent , canActivate: [roleGuard(['COACH'])]},
+  { path: 'training-sessions', component: TrainingSessionExerciceComponent , canActivate: [roleGuard(['COACH'])]},
+
+  { path: 'training-session-add', component: TrainingSessionFormComponent , canActivate: [roleGuard(['COACH'])]}, 
+
+  { path: 'training-sessions/new', component: TrainingSessionFormComponent , canActivate: [roleGuard(['COACH'])]},
+  { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent, canActivate: [roleGuard(['COACH'])] },
+
+  { path: 'training-session/:id', component: TrainingSessionViewComponent, canActivate: [roleGuard(['COACH'])] },
 
 
-  { path: 'add-exercise', component: ExerciseFormComponent },
-  { path: 'edit-exercise/:id', component: ExerciseFormComponent },
-  { path: 'exercise-list', component: ExerciseListComponent },
-  { path: 'exercicse-lib', component: ExerciseLibraryComponent },
+  { path: 'add-exercise', component: ExerciseFormComponent , canActivate: [roleGuard(['COACH'])]},
+  { path: 'edit-exercise/:id', component: ExerciseFormComponent, canActivate: [roleGuard(['COACH'])] },
+  { path: 'exercise-list', component: ExerciseListComponent , canActivate: [roleGuard(['COACH'])]},
+    //---------------------Backoffice-training-Ground ------------------------//
+
+    { path: 'add-exercise-back', component: BackofficeListExerciceComponent },
   //---------------------------------------------//
 
   { path: 'matches', component: MatchesHomeComponent },
@@ -104,11 +116,12 @@ const routes: Routes = [
 
 
 
-  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },
- { path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
 
-
+  { path: 'tactics', component: TacticListComponent }, 
+  { path: 'tactics/create', component: TacticFormComponent, canActivate: [roleGuard(['COACH'])]  },
+  { path: 'tactics/:id', component: TacticFolderComponent, canActivate: [roleGuard(['COACH'])]  },
+  { path: 'tactics/edit/:id', component: TacticFormComponent , canActivate: [roleGuard(['COACH'])] }, 
 
 
 //skander turkiiiiii injury
@@ -129,7 +142,7 @@ const routes: Routes = [
 
 
 //skander turkiiiiii recoveryplan
-
+{path: 'home', component: HomeComponent},
 
 { path: 'add-recoveryplan', component: AddRecoveryplanComponent },
 { path: 'edit-recoveryplan/:injuryId/:planId', component: EditRecoveryplanComponent },
@@ -139,7 +152,7 @@ const routes: Routes = [
 { path: 'list-recoveryplan/:playerId', component: ListRecoveryPlanComponent },
 
 { path: 'list-player', component: ListPlayerComponent },
-
+{path: '**', redirectTo: 'home'}, 
 
 
 ];

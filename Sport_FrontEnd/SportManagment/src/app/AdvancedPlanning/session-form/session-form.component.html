@@ -1,0 +1,37 @@
+<mat-dialog-content>
+  <form [formGroup]="sessionForm" (ngSubmit)="onSubmit()" class="event-form">
+
+    <!-- Session Name -->
+    <mat-form-field appearance="outline">
+      <mat-label>Session Name</mat-label>
+      <input matInput formControlName="name" required>
+    </mat-form-field>
+
+    <!-- Date -->
+    <mat-form-field appearance="outline">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Start Time -->
+    <mat-form-field appearance="outline">
+      <mat-label>Start Time</mat-label>
+      <input matInput type="time" formControlName="startTime" required>
+    </mat-form-field>
+
+    <!-- End Time -->
+    <mat-form-field appearance="outline">
+      <mat-label>End Time</mat-label>
+      <input matInput type="time" formControlName="endTime" required>
+    </mat-form-field>
+
+    <!-- Action Buttons -->
+    <div class="form-actions">
+      <button mat-button type="button" (click)="onCancel()" class="btn-cancel">Cancel</button>
+      <button mat-flat-button color="primary" type="submit" class="btn-save">Save Session</button>
+    </div>
+
+  </form>
+</mat-dialog-content>

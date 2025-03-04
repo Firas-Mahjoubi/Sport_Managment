@@ -1,6 +1,7 @@
 package com.example.sport_backend.Controllers;
 
 import com.example.sport_backend.Entity.ClubHouse.User;
+import com.example.sport_backend.Entity.Enum.Role;
 import com.example.sport_backend.Repositories.ClubHouse.UserRepositories;
 import com.example.sport_backend.ServiceImpl.ClubHouse.EmailService;
 import jakarta.validation.Valid;
@@ -134,7 +135,9 @@ public class AuthController {
         if (existingUser.isPresent()) {
             return ResponseEntity.badRequest().body(Map.of("message", "Error: Email already exists!"));
         }
-
+        if (user.getRole() == null) {
+            user.setRole(Role.COACH);
+        }
         // Encrypt password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TrainingSessionService } from '../../services/training-session.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-training-session',
@@ -7,59 +8,79 @@ import { TrainingSessionService } from '../../services/training-session.service'
   styleUrls: ['./training-session.component.css']
 })
 export class TrainingSessionComponent implements OnInit {
-  trainingSessions: any[] = [];
+  sessionId: number | null = null;
+  trainingSession: any;
   exercises: any[] = [];
-  selectedSessionId: number | null = null;
   selectedExercises: number[] = [];
 
-  constructor(private trainingSessionService: TrainingSessionService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private trainingSessionService: TrainingSessionService
+  ) {}
 
   ngOnInit(): void {
-    this.loadTrainingSessions();
-    this.loadExercises();
+    // ✅ Ensure sessionId is always a number (Fallback to 0 if null)
+    this.sessionId = Number(this.route.snapshot.paramMap.get('id')) || 0;
+  
+    if (this.sessionId > 0) { // Prevent calling API with an invalid ID
+      this.loadTrainingSession();
+      this.loadExercises();
+    } else {
+      console.error("❌ Invalid session ID:", this.sessionId);
+    }
+  }
+  
+
+  // ✅ Load training session details
+  loadTrainingSession(): void {
+    this.trainingSessionService.getTrainingSessionById(this.sessionId!).subscribe(session => {
+      this.trainingSession = session;
+    });
   }
 
-  // ✅ Load all training sessions
-  loadTrainingSessions(): void {
-    this.trainingSessionService.getTrainingSessions().subscribe(
-      (data) => { this.trainingSessions = data; },
-      (error) => { console.error('Error loading sessions:', error); }
-    );
-  }
-
-  // ✅ Load all exercises
+  // ✅ Load available exercises
   loadExercises(): void {
-    this.trainingSessionService.getAllExercises().subscribe(
-      (data) => { this.exercises = data; },
-      (error) => { console.error('Error loading exercises:', error); }
-    );
+    this.trainingSessionService.getAllExercises().subscribe(exercises => {
+      this.exercises = exercises;
+    });
   }
 
-  // ✅ Handle exercise selection
+  // ✅ Toggle Exercise Selection
   toggleExerciseSelection(exerciseId: number): void {
-    if (this.selectedExercises.includes(exerciseId)) {
-      this.selectedExercises = this.selectedExercises.filter(id => id !== exerciseId);
+    const index = this.selectedExercises.indexOf(exerciseId);
+    if (index > -1) {
+      this.selectedExercises.splice(index, 1);
     } else {
       this.selectedExercises.push(exerciseId);
     }
   }
 
-  // ✅ Add selected exercises to the chosen training session
+  // ✅ Assign Selected Exercises to Session
   addExercisesToSession(): void {
-    if (!this.selectedSessionId) {
-      alert('Please select a training session.');
+    if (!this.sessionId) {
+      alert("❌ Session ID is missing!");
       return;
     }
 
-    this.trainingSessionService.addExercisesToSession(this.selectedSessionId, this.selectedExercises).subscribe(
-      (response) => {
-        alert('Exercises added successfully!');
-        this.selectedExercises = []; // Reset selection
+    if (this.selectedExercises.length === 0) {
+      alert("❌ Please select at least one exercise.");
+      return;
+    }
+
+    console.log("📤 Sending Request:", {
+      sessionId: this.sessionId,
+      exercises: this.selectedExercises
+    });
+
+    this.trainingSessionService.addExercisesToSession(this.sessionId, this.selectedExercises).subscribe({
+      next: () => {
+        alert("✅ Exercises assigned successfully!");
       },
-      (error) => {
-        console.error('Error adding exercises:', error);
-        alert('Failed to add exercises.');
+      error: (error) => {
+        console.error("❌ Error:", error);
+        alert("❌ Failed to assign exercises.");
       }
-    );
+    });
   }
 }
+

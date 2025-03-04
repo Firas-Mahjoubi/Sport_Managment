@@ -44,9 +44,10 @@ public class TrainingSession {
     Integer questionablePlayers;
     Integer absentPlayers;
 
-    // ✅ Notes Section
+    // ✅ Notes Section 
     String beforeSessionNotes;
     String afterSessionNotes;
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "training_session_players",
@@ -54,8 +55,7 @@ public class TrainingSession {
             inverseJoinColumns = @JoinColumn(name = "player_id")
     )
     private Set<Player> players = new HashSet<>();
-    // ✅ Session Plan (List of Exercises)
-    @JsonIgnore
+
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "training_session_exercises",
