@@ -11,7 +11,6 @@ import { TacticModule } from './tactics/tactics.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatchesHomeComponent } from './matches/matches-home/matches-home.component';
 import { GameweekSliderComponent } from './matches/gameweek-slider/gameweek-slider.component';
-import { NavbarComponent } from './matches/navbar/navbar.component';
 import { MatchDetailsComponent } from './matches/match-details/match-details.component';
 
 //--------------------Training-groud -------------------------//
@@ -57,6 +56,13 @@ import { MatCardModule } from '@angular/material/card';
 import { BackofficeAddExerciceComponent } from './components/backoffice-add-exercice/backoffice-add-exercice.component';
 import { BackofficeListExerciceComponent } from './components/backoffice-list-exercice/backoffice-list-exercice.component';
 import { TrainingSessionFormComponent } from './components/training-session-form/training-session-form.component';
+import { MatchesmainComponent } from './matches/matchesmain/matchesmain.component';
+import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.component';
+
+import { CalendarComponent } from './AdvancedPlanning/calendar/calendar.component';
+
+
+
 
 
 
@@ -68,7 +74,6 @@ import { TrainingSessionFormComponent } from './components/training-session-form
     AuthComponent,
     MatchesHomeComponent,
     GameweekSliderComponent,
-    NavbarComponent,
     MatchDetailsComponent,
     AdminSidebarComponent,
     TrainingSessionComponent,
@@ -104,9 +109,19 @@ import { TrainingSessionFormComponent } from './components/training-session-form
     AddRecoveryplanComponent,
     ListPlayerComponent,
     ListRecoveryPlanComponent,
+
     BackofficeAddExerciceComponent,
     BackofficeListExerciceComponent,
    
+
+    MatchesmainComponent,
+    MatchesNavbarComponent,
+    CalendarComponent,
+
+
+
+
+
 
   ],
   imports: [

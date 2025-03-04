@@ -76,6 +76,7 @@ public class GoalService  {
         goal.setAssisterNumber(assisterNumber);
         goal.setTiming(timing);
         goal.setMatch(match);
+        goal.setIsHomeTeam(isHomeGoal);
         goalRepo.save(goal);
 
         // Update match result
@@ -119,7 +120,14 @@ public class GoalService  {
 
         return goals.stream()
                 .map(goal -> {
-                    String teamName = goal.getIsHomeTeam() ? match.getHomeTeam() : match.getAwayTeam();
+                    // Handle potential null values for isHomeTeam
+                    Boolean isHomeTeam = goal.getIsHomeTeam();
+                    if (isHomeTeam == null) {
+                        System.out.println("Warning: isHomeTeam is null for goal ID " + goal.getId());
+                        isHomeTeam = true; // Default to home team if null
+                    }
+
+                    String teamName = isHomeTeam ? match.getHomeTeam() : match.getAwayTeam();
 
                     // Find the team by name
                     Team team = teamRepo.findByName(teamName)
@@ -130,13 +138,14 @@ public class GoalService  {
                             playerRepo.findByTeamAndPlayerNumber(team, goal.getAssisterNumber()).orElse(null) : null;
 
                     return new GoalResponseDTO(
-                            goal.getScorer().getFirstName(),   // String
-                            goal.getScorer().getLastName(),    // String
-                            (assister != null) ? assister.getFirstName() : null,  // String
-                            (assister != null) ? assister.getLastName() : null,   // String
-                            goal.getTiming(),  // ✅ Matches DTO order (Integer)
-                            match.getResult(), // ✅ Matches DTO order (String)
-                            goal.getIsHomeTeam()  // ✅ Boolean (no "Home"/"Away" String)
+                            goal.getId(),
+                            goal.getScorer().getFirstName(),
+                            goal.getScorer().getLastName(),
+                            (assister != null) ? assister.getFirstName() : null,
+                            (assister != null) ? assister.getLastName() : null,
+                            goal.getTiming(),
+                            match.getResult(),
+                            isHomeTeam  // Now safely returns true/false
                     );
                 })
                 .collect(Collectors.toList());
