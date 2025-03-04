@@ -273,9 +273,7 @@
   margin: 20px;
   display: flex;
   justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap; /* Ajout crucial */
-  padding: 10px; /* Ajout de marge intérieure */
+  gap: 15px; /* Espacement uniforme */
 }
 
 /* Style de base pour les boutons */
@@ -301,4 +299,18 @@
 .add-event-container button mat-icon {
   margin-right: 8px; /* Un peu d'espace entre l'icône et le texte */
   font-size: 18px; /* Icônes simples */
+}
+/* Style pour les sessions */
+.session {
+  background-color: #4caf50; /* Couleur verte pour les sessions */
+  color: white;
+  padding: 2px 5px;
+  border-radius: 4px;
+  margin: 2px 0;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.session:hover {
+  background-color: #388e3c; /* Couleur verte plus foncée au survol */
 }

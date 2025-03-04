@@ -1,6 +1,7 @@
 <app-admin-header></app-admin-header>
 <app-admin-sidebar></app-admin-sidebar>
 
+
 <div class="calendar" [class.dark-mode]="isDarkMode">
   <!-- Bouton "Add Event" -->
   <div class="add-event-container">
@@ -68,6 +69,9 @@
         <div *ngFor="let event of getEventsForDay(day)" class="event">
           {{ event.nameEvent }}
         </div>
+        <div *ngFor="let session of getSessionsForDay(day)" class="session">
+          {{ session.name }}
+        </div>
       </div>
     </div>
   </div>
@@ -81,4 +85,5 @@
     </div>
   </div>
 </div>
+
 

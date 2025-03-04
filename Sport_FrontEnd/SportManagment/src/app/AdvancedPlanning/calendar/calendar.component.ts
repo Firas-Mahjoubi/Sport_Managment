@@ -5,7 +5,9 @@ import { SessionFormComponent } from '../session-form/session-form.component'; /
 import { EventService } from '../../services/event.service'; // Service pour les événements
 import { EventDetailsComponent } from '../event-details/event-details.component'; // Import du composant EventDetails
 import { SessionService } from '../../services/session.service'; // Service pour les sessions
+import { SessionDetailsComponent } from '../session-details/session-details.component'; // Import du composant SessionDetails
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -105,27 +107,42 @@ export class CalendarComponent {
 
   // Sélectionner un jour
   // In CalendarComponent
-selectDay(day: number | null): void {
-  if (day !== null) {
-    this.selectedDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day);
-    this.viewMode = 'day'; // Switch to day view
+  selectDay(day: number | null): void {
+    if (day !== null) {
+      this.selectedDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day);
+      this.viewMode = 'day'; // Basculer vers la vue jour
 
-    // Open event details if an event is clicked
-    const eventsForDay = this.getEventsForDay(day);
-    if (eventsForDay.length > 0) {
-      const dialogRef = this.dialog.open(EventDetailsComponent, {
-        width: '500px',
-        data: { event: eventsForDay[0] } // Pass the first event of the day
-      });
+      // Ouvrir les détails de l'événement si un événement est cliqué
+      const eventsForDay = this.getEventsForDay(day);
+      if (eventsForDay.length > 0) {
+        const dialogRef = this.dialog.open(EventDetailsComponent, {
+          width: '500px',
+          data: { event: eventsForDay[0] } // Passer le premier événement de la journée
+        });
 
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.loadEvents(); // Reload events if an event was deleted
-        }
-      });
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.loadEvents(); // Recharger les événements si un événement a été supprimé
+          }
+        });
+      }
+
+      // Ouvrir les détails de la session si une session est cliquée
+      const sessionsForDay = this.getSessionsForDay(day);
+      if (sessionsForDay.length > 0) {
+        const dialogRef = this.dialog.open(SessionDetailsComponent, {
+          width: '500px',
+          data: { session: sessionsForDay[0] } // Passer la première session de la journée
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.loadSessions(); // Recharger les sessions si une session a été supprimée ou modifiée
+          }
+        });
+      }
     }
   }
-}
 
   // Sélectionner un mois
   selectMonth(monthIndex: number): void {
@@ -184,17 +201,17 @@ selectDay(day: number | null): void {
 
   // Ouvrir le formulaire pour ajouter une session
   openSessionForm(): void {
-  const dialogRef = this.dialog.open(SessionFormComponent, {
-    width: '500px',
-    data: {} // Vous pouvez passer des données au formulaire si nécessaire
-  });
+    const dialogRef = this.dialog.open(SessionFormComponent, {
+      width: '500px',
+      data: {} // Vous pouvez passer des données au formulaire si nécessaire
+    });
 
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      this.saveSession(result); // Envoyer les données au backend
-    }
-  });
-}
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.saveSession(result); // Envoyer les données au backend
+      }
+    });
+  }
 
   // Envoyer les données de la session au backend
   saveSession(sessionData: any): void {
@@ -233,4 +250,39 @@ selectDay(day: number | null): void {
     }
     return result;
   }
+  // Tableau pour stocker les sessions
+sessions: any[] = [];
+
+// Charger les sessions au démarrage
+ngOnInit(): void {
+  this.generateCalendar();
+  this.loadEvents();
+  this.loadSessions(); // Charger les sessions
+}
+
+// Méthode pour charger les sessions
+loadSessions(): void {
+  this.sessionService.getAllSessions().subscribe({
+    next: (response) => {
+      this.sessions = response; // Stocker les sessions
+    },
+    error: (error) => {
+      console.error('Error loading sessions:', error);
+    }
+  });
+}
+
+// Méthode pour filtrer les sessions pour un jour donné
+getSessionsForDay(day: number | null): any[] {
+  if (day === null) return [];
+  const date = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day);
+  return this.sessions.filter(session => {
+    const sessionDate = new Date(session.date);
+    return (
+      sessionDate.getFullYear() === date.getFullYear() &&
+      sessionDate.getMonth() === date.getMonth() &&
+      sessionDate.getDate() === date.getDate()
+    );
+  });
+}
 }

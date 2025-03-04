@@ -13,14 +13,15 @@ export class SessionFormComponent {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<SessionFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: { session: any } // Recevoir les données de la session
   ) {
-    // Initialisation du formulaire
+    // Initialisation du formulaire avec les anciennes valeurs
     this.sessionForm = this.fb.group({
-      name: ['', Validators.required], // Nom de la session (obligatoire)
-      date: ['', Validators.required], // Date de la session (obligatoire)
-      startTime: ['', Validators.required], // Heure de début (obligatoire)
-      endTime: ['', Validators.required] // Heure de fin (obligatoire)
+      id: [data.session?.id || null], // ID de la session (pour la mise à jour)
+      name: [data.session?.name || '', Validators.required], // Pré-remplir le nom
+      date: [data.session?.date || '', Validators.required], // Pré-remplir la date
+      startTime: [data.session?.startTime || '', Validators.required], // Pré-remplir l'heure de début
+      endTime: [data.session?.endTime || '', Validators.required] // Pré-remplir l'heure de fin
     });
   }
 

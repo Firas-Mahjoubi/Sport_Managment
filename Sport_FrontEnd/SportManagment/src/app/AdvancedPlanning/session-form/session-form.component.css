@@ -77,3 +77,16 @@ mat-form-field:hover {
     transform: translateY(0);
   }
 }
+/* Title */
+.form-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  -webkit-background-clip: text; /* Préfixe Webkit */
+  -moz-background-clip: text;    /* Préfixe Firefox */
+  background-clip: text;         /* Propriété standard */
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 16px;
+}
