@@ -1,6 +1,5 @@
 /* General Styling */
 body {
-  background-color: #f8f9fa;
   font-family: 'Roboto', sans-serif;
   color: #333;
 }
@@ -17,17 +16,20 @@ body {
   text-align: center;
   font-size: 28px;
   font-weight: bold;
-  color: #222;
+  color: #f5f5f5;
   margin-bottom: 20px;
 }
 
 /* Search Bar */
-.search-field {
+.search-bar input {
+  color: black !important; /* Ensures the text is visible */
+  background-color: white !important; /* Keeps background white */
+  border: 1px solid #ccc; /* Adds a light border */
+  padding: 10px;
+  font-size: 16px;
   width: 100%;
-  max-width: 500px;
-  display: block;
-  margin: auto;
 }
+
 
 /* Folder List */
 .folder-list {
@@ -91,18 +93,18 @@ body {
 
 /* Dropdown Menu */
 .dropdown-menu {
-  min-width: 150px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  min-width: 120px;
+  text-align: left;
 }
 
-/* Edit and Delete Buttons */
 .dropdown-item {
   display: flex;
   align-items: center;
-  padding: 10px;
+  gap: 5px;
+  padding: 5px 10px;
   font-size: 14px;
 }
+
 
 .dropdown-item mat-icon {
   margin-right: 8px;
