@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class RessourcesServiceImpl implements RessourcesInterface {
+
     EventRepository eventRepository;
     RessourcesRepository ressourcesRepository;
     @Override
@@ -39,6 +40,9 @@ public class RessourcesServiceImpl implements RessourcesInterface {
     @Override
     public void removeRessources(long idRessources) {ressourcesRepository.deleteById(idRessources);}
 
+
+    @Override
+
     public Ressources affecterRessourceAEvent(Long ressourceId, Long eventId) {
         Ressources ressource = ressourcesRepository.findById(ressourceId)
                 .orElseThrow(() -> new RuntimeException("Ressource non trouvée avec ID : " + ressourceId));
@@ -46,11 +50,13 @@ public class RessourcesServiceImpl implements RessourcesInterface {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new RuntimeException("Event non trouvé avec ID : " + eventId));
 
-
         ressource.setEvent(event);
-
-
         return ressourcesRepository.save(ressource);
     }
+
+
+
+
+
 
 }

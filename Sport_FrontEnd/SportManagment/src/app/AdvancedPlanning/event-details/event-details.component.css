@@ -1,0 +1,41 @@
+.event-details {
+  padding: 20px;
+  max-width: 400px;
+  margin: auto;
+}
+
+.event-details h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.event-details p {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+button {
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+button[color="warn"] {
+  background-color: #d32f2f;
+  color: white;
+}
+
+button[color="primary"] {
+  background-color: #1976d2;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.9;
+}
