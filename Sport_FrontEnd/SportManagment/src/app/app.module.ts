@@ -143,6 +143,11 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
 
     SessionDetailsComponent
 
+
+
+
+
+
   ],
   imports: [
     BrowserModule,

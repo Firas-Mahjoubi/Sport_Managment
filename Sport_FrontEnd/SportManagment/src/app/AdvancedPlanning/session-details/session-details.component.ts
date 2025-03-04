@@ -15,18 +15,18 @@ export class SessionDetailsComponent {
     @Inject(MAT_DIALOG_DATA) public data: { session: any },
     private dialogRef: MatDialogRef<SessionDetailsComponent>,
     private sessionService: SessionService,
-    private dialog: MatDialog // Injecter MatDialog
+    private dialog: MatDialog 
   ) {
-    this.session = data.session; // Récupérer la session passée en paramètre
+    this.session = data.session;
   }
 
-  // Supprimer la session
+
   deleteSession(): void {
     if (this.session.id) {
       this.sessionService.deleteSession(this.session.id).subscribe({
         next: () => {
           console.log('Session deleted successfully');
-          this.dialogRef.close(true); // Fermer la boîte de dialogue et indiquer que la session a été supprimée
+          this.dialogRef.close(true);
         },
         error: (error) => {
           console.error('Error deleting session:', error);
@@ -35,19 +35,19 @@ export class SessionDetailsComponent {
     }
   }
 
-  // Ouvrir le formulaire pour éditer la session
+
   editSession(): void {
     const dialogRef = this.dialog.open(SessionFormComponent, {
       width: '500px',
-      data: { session: this.session } // Passer la session à éditer
+      data: { session: this.session }
     });
 
-    dialogRef.afterClosed().subscribe((result: any) => { // Ajouter le type 'any' ou un type spécifique
+    dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
         this.sessionService.updateSession(result).subscribe({
           next: () => {
             console.log('Session updated successfully');
-            this.dialogRef.close(true); // Fermer la boîte de dialogue et indiquer que la session a été modifiée
+            this.dialogRef.close(true);
           },
           error: (error) => {
             console.error('Error updating session:', error);
@@ -57,7 +57,7 @@ export class SessionDetailsComponent {
     });
   }
 
-  // Fermer la boîte de dialogue
+
   close(): void {
     this.dialogRef.close();
   }

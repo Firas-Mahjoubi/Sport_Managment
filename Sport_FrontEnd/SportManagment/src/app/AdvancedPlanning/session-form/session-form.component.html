@@ -2,7 +2,7 @@
   <form [formGroup]="sessionForm" (ngSubmit)="onSubmit()" class="event-form">
     <h2 class="form-title">Create Your Session🚀</h2>
 
-    <!-- Session Name -->
+    
     <mat-form-field appearance="outline">
       <mat-label>Session Name</mat-label>
       <input matInput formControlName="name" required>
@@ -14,7 +14,7 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Date -->
+
     <mat-form-field appearance="outline">
       <mat-label>Date</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="date" required>
@@ -28,7 +28,7 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Start Time -->
+
     <mat-form-field appearance="outline">
       <mat-label>Start Time</mat-label>
       <input matInput type="time" formControlName="startTime" required>
@@ -37,7 +37,7 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- End Time -->
+
     <mat-form-field appearance="outline">
       <mat-label>End Time</mat-label>
       <input matInput type="time" formControlName="endTime" required>
@@ -49,7 +49,7 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Action Buttons -->
+
     <div class="form-actions">
       <button mat-button type="button" (click)="onCancel()" class="btn-cancel">Cancel</button>
       <button mat-flat-button color="primary" type="submit" class="btn-save" [disabled]="sessionForm.invalid">Save Session</button>
