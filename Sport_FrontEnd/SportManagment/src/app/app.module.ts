@@ -71,6 +71,7 @@ import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
 
 
 
@@ -127,6 +128,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
     MatchesmainComponent,
     MatchesNavbarComponent,
+    SessionDetailsComponent,
 
 
 

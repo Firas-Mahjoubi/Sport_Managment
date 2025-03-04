@@ -273,7 +273,9 @@
   margin: 20px;
   display: flex;
   justify-content: center;
-  gap: 15px; /* Espacement uniforme */
+  gap: 15px;
+  flex-wrap: wrap; /* Ajout crucial */
+  padding: 10px; /* Ajout de marge intérieure */
 }
 
 /* Style de base pour les boutons */
