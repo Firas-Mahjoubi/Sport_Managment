@@ -28,26 +28,26 @@ import { ListRecoveryPlanComponent } from './Health/recoveyplans/list-recoverypl
 import { EditRecoveryplanComponent } from './Health/recoveyplans/edit-recoveryplan/edit-recoveryplan.component';
 import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoveryplan/show-recoveryplan.component';
 
+import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+
 const routes: Routes = [
 
-  { path: 'auth', component: AuthComponent },
-  { path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
- {path: 'dashboard', component:DashboardComponent},
+ // { path: 'auth', component: AuthComponent },
+  //{ path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
+// {path: 'dashboard', component:DashboardComponent},
   {path: 'main', component:LandingPageComponent},
-  { path: 'training-sessions', component: TrainingSessionComponent },//Training routes
-  { path: 'training-sessions-exercice', component: TrainingSessionExerciceComponent },
-  { path: 'training-sessions/new', component: TrainingSessionFormComponent }, // ✅ Add New
-  { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent }, // ✅ Edit
-  { path: 'exercises', component: ExerciseComponent },//exervise routes
-   { path: 'add-exercise', component: ExerciseFormComponent },
- { path: 'edit-exercise/:id', component: ExerciseFormComponent },
-  { path: 'aexercise', component: ExerciseListComponent },
-  { path: 'matches', component: MatchesHomeComponent },
- { path: 'gameweeks', component: GameweekSliderComponent },
-  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
- { path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
-
-
+ // { path: 'training-sessions', component: TrainingSessionComponent },//Training routes
+ // { path: 'training-sessions-exercice', component: TrainingSessionExerciceComponent },
+ // { path: 'training-sessions/new', component: TrainingSessionFormComponent }, // ✅ Add New
+  //{ path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent }, // ✅ Edit
+  //{ path: 'exercises', component: ExerciseComponent },//exervise routes
+ //  { path: 'add-exercise', component: ExerciseFormComponent },
+// { path: 'edit-exercise/:id', component: ExerciseFormComponent },
+  //{ path: 'aexercise', component: ExerciseListComponent },
+ // { path: 'matches', component: MatchesHomeComponent },
+ //{ path: 'gameweeks', component: GameweekSliderComponent },
+ // { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
+ //{ path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
 
 
@@ -80,6 +80,8 @@ const routes: Routes = [
 
 { path: 'list-player', component: ListPlayerComponent },
 
+
+{ path: 'health-dashboard', component: HealthDashboardComponent },
 
 
 ];

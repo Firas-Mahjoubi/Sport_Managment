@@ -1,3 +1,16 @@
+<!-- 🌌 Arrière-plan avec une image -->
+<div style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('assets/injury1.jpg') no-repeat center center/cover;
+  filter: brightness(0.4);
+  z-index: -1;">
+</div>
+
+<!-- 📦 Formulaire d'édition -->
 <div class="container mt-4">
   <h2 class="text-center">Modifier une Blessure</h2>
   <form [formGroup]="injuryForm" (ngSubmit)="onSubmit()">

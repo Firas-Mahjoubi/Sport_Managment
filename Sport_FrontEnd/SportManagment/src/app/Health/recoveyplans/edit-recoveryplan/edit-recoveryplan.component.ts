@@ -14,6 +14,10 @@ export class EditRecoveryplanComponent implements OnInit {
   editForm!: FormGroup;
   planId!: number;
   injuryId!: number;
+  progressValue: number = 0;
+  dateError: boolean = false;
+  planStatuses: string[] = ['En cours', 'Terminé', 'Annulé']; // Exemples de statuts
+  planTypes: string[] = ['Rééducation', 'Renforcement', 'Reprise']; // Exemples de types
 
   constructor(
     private fb: FormBuilder,
@@ -23,7 +27,6 @@ export class EditRecoveryplanComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.injuryId = Number(this.route.snapshot.paramMap.get('injuryId'));
     this.planId = Number(this.route.snapshot.paramMap.get('planId'));
 
     this.initForm();
@@ -32,25 +35,54 @@ export class EditRecoveryplanComponent implements OnInit {
 
   initForm(): void {
     this.editForm = this.fb.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      duration: [0, [Validators.required, Validators.min(1)]],
-      status: ['', Validators.required],
+      injuryId: [{ value: '', disabled: true }, Validators.required], // Désactivé car non modifiable
+      planDescription: ['', Validators.required],
       startDate: ['', Validators.required],
-      endDate: ['', Validators.required],
-      progress: [0, [Validators.required, Validators.min(0), Validators.max(100)]]
+      estimatedEndDate: ['', Validators.required],
+      progress: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
+      sessionFrequency: [1, Validators.required],
+      sessionDuration: [1, Validators.required],
+
+      nextReviewDate: ['', Validators.required],
+      adjustments: [''],
+
     });
   }
 
   loadRecoveryPlan(): void {
     this.recoveryPlanService.getRecoveryPlanById(this.planId).subscribe({
-      next: (plan) => this.editForm.patchValue(plan),
+      next: (plan) => {
+        this.editForm.patchValue({
+          injuryId: plan.injury.id,
+          planDescription: plan.planDescription,
+          startDate: plan.startDate,
+          estimatedEndDate: plan.estimatedEndDate,
+          progress: plan.progress,
+          sessionFrequency: plan.sessionFrequency,
+          sessionDuration: plan.sessionDuration,
+          planType: plan.planType,
+          nextReviewDate: plan.nextReviewDate,
+          adjustments: plan.adjustments,
+          planStatus: plan.planStatus
+        });
+        this.progressValue = plan.progress; // Mettre à jour la barre de progression
+      },
       error: (err) => console.error('Erreur lors de la récupération du plan', err)
     });
   }
 
+  validateDates(): void {
+    const startDate = this.editForm.get('startDate')?.value;
+    const endDate = this.editForm.get('estimatedEndDate')?.value;
+    this.dateError = endDate < startDate;
+  }
+
+  updateProgress(event: any): void {
+    this.progressValue = event.target.value;
+  }
+
   onSubmit(): void {
-    if (this.editForm.invalid) {
+    if (this.editForm.invalid || this.dateError) {
       alert('Veuillez remplir correctement tous les champs');
       return;
     }
@@ -58,13 +90,13 @@ export class EditRecoveryplanComponent implements OnInit {
     const updatedPlan: RecoveryPlan = {
       ...this.editForm.value,
       id: this.planId,
-      injury: { id: this.injuryId } // On garde le lien avec la blessure
+      injury: { id: this.editForm.get('injuryId')?.value } // Garder le lien avec la blessure
     };
 
     this.recoveryPlanService.updateRecoveryPlan(this.planId, updatedPlan).subscribe({
       next: () => {
         alert('Plan mis à jour avec succès');
-        this.router.navigate(['/list-recoveryplans']);
+        this.router.navigate(['/list-recoveryplan/:playerId']);
       },
       error: (err) => console.error('Erreur lors de la mise à jour', err)
     });

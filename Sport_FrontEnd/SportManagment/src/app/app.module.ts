@@ -44,6 +44,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 
+import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -79,6 +84,8 @@ import { MatCardModule } from '@angular/material/card';
     ListPlayerComponent,
     ListRecoveryPlanComponent,
 
+    HealthDashboardComponent,
+
 
   ],
   imports: [
@@ -97,6 +104,8 @@ import { MatCardModule } from '@angular/material/card';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatCardModule,
+    MatProgressBarModule,
+    MatDividerModule,
 
   ],
   providers: [],

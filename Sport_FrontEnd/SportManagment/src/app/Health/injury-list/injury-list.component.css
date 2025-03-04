@@ -1,0 +1,204 @@
+/* 🌌 Arrière-plan sombre et flou */
+body {
+
+  background-attachment: fixed;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+/* 📦 Conteneur principal */
+.injury-container {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px) brightness(0.8);
+  background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
+  box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5);
+  border: 1px solid rgba(255, 77, 77, 0.5);
+}
+
+/* 🏥 Titre */
+.title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ff4d4d;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 10px rgba(255, 77, 77, 0.7);
+}
+
+/* 📋 Style du tableau avec effet "glassmorphism" */
+.injury-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.3);
+}
+
+.injury-table th, .injury-table td {
+  padding: 14px;
+  text-align: left;
+  font-size: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.injury-table th {
+  background: rgba(255, 77, 77, 0.9);
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.injury-table tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.injury-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transition: 0.3s ease-in-out;
+}
+
+/* 🔘 Boutons modernes avec effet */
+.btn {
+  font-weight: bold;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 13px;
+  border: none;
+}
+
+.btn-sm {
+  padding: 8px 14px;
+  font-size: 12px;
+}
+
+/* 🔍 Bouton Voir */
+.btn-view {
+  background: linear-gradient(135deg, #0066cc, #004999);
+  color: white;
+}
+
+.btn-view:hover {
+  background: linear-gradient(135deg, #004999, #003377);
+}
+
+/* ✏️ Bouton Modifier */
+.btn-edit {
+  background: linear-gradient(135deg, #ffcc00, #e6b800);
+  color: white;
+}
+
+.btn-edit:hover {
+  background: linear-gradient(135deg, #e6b800, #cc9900);
+}
+
+/* 🗑️ Bouton Supprimer */
+.btn-delete {
+  background: linear-gradient(135deg, #ff4d4d, #e60000);
+  color: white;
+}
+
+.btn-delete:hover {
+  background: linear-gradient(135deg, #e60000, #cc0000);
+}
+
+/* 🔲 Boutons désactivés */
+button[disabled], .btn[disabled] {
+  background-color: #444;
+  border-color: #666;
+  color: #999;
+  cursor: not-allowed;
+}
+
+
+/* 📦 Champs de recherche et sélection stylés */
+.search-input, .player-select {
+  background-color: rgba(255, 255, 255, 0.9); /* Fond clair pour contraste */
+  color: black; /* Texte noir */
+  border: 1px solid rgba(255, 77, 77, 0.7);
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.search-input::placeholder, .player-select option {
+  color: black; /* Texte noir */
+  font-weight: normal;
+}
+
+.search-input:focus, .player-select:focus {
+  border-color: #ff4d4d;
+  outline: none;
+}
+
+
+
+/* 🔙 Bouton Retour au Tableau de Santé */
+.btn-back-health {
+  position: fixed;
+  top: 20%;
+  left: 20px;
+  width: 250px;
+  height: 500px;
+  background-color: #ff4d4d;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+  z-index: 1000;
+}
+
+.btn-back-health:hover {
+  background-color: #dc3545;
+  transform: scale(1.05);
+}
+
+
+
+
+
+/* ➕ Bouton Ajouter une Blessure */
+.btn-add-health {
+  position: fixed;
+  top: 20%;
+  right: 20px;
+  width: 250px;
+  height: 500px;
+  background-color: #dc3545; /* Rouge pour Injury */
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+  z-index: 1000;
+}
+
+.btn-add-health:hover {
+  background-color: #dc3545;
+  transform: scale(1.05);
+}
+
