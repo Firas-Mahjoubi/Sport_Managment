@@ -1,6 +1,8 @@
 <div class="navbar">
 <app-matches-navbar></app-matches-navbar>
 </div>
+
+
 <div class="match-details-container">
   <!-- League Info -->
   <div class="league-header">
@@ -28,30 +30,74 @@
 
   <!-- Goals Section -->
   <div class="section">
-    <h3>Goals</h3>
-    <div *ngFor="let goal of goals" class="goal-card" [ngClass]="{'home-goal': goal.isHomeGoal, 'away-goal': !goal.isHomeGoal}">
-      <p><strong>{{ goal.scorerFirstName }} {{ goal.scorerLastName }}</strong> ⚽ ({{ goal.timing }}')</p>
-      <p *ngIf="goal.assisterFirstName">Assist: {{ goal.assisterFirstName }} {{ goal.assisterLastName }}</p>
-      <p class="goal-result">{{ goal.Result }}</p>
+    <div class="goals-container">
+      <!-- Home Goals -->
+      <div class="home-section">
+          <div *ngFor="let goal of homeGoals" class="goal-card home-goal">
+          <p><strong>{{ goal.scorerFirstName }} {{ goal.scorerLastName }}</strong> ⚽ ({{ goal.timing }}')</p>
+          <p *ngIf="goal.assisterFirstName">Assist: {{ goal.assisterFirstName }} {{ goal.assisterLastName }}</p>
+          <p class="goal-result">{{ goal.Result }}</p>
+        </div>
+      </div>
+
+      <!-- Away Goals -->
+      <div class="away-section">
+        <div *ngFor="let goal of awayGoals" class="goal-card away-goal">
+          <p><strong>{{ goal.scorerFirstName }} {{ goal.scorerLastName }}</strong> ⚽ ({{ goal.timing }}')</p>
+          <p *ngIf="goal.assisterFirstName">Assist: {{ goal.assisterFirstName }} {{ goal.assisterLastName }}</p>
+          <p class="goal-result">{{ goal.Result }}</p>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Cards Section -->
   <div class="section">
-    <h3>Cards</h3>
-    <div *ngFor="let card of cards" class="card-item" [ngClass]="{'home-card': card.forHomeTeam, 'away-card': !card.forHomeTeam}">
-      <p><span [ngClass]="{'yellow-card': card.cardType === 'YELLOW', 'red-card': card.cardType === 'RED'}"></span>
-        <strong>{{ card.cardTakerFirstName }} {{ card.cardTakerLastName }}</strong> ({{ card.cardTime }}')</p>
+    <div class="cards-container">
+      <!-- Home Cards -->
+      <div class="home-section">
+        <div *ngFor="let card of homeCards" class="card-item home-card">
+          <p>
+            <span *ngIf="card.cardType === 'YELLOW'">🟨</span>
+            <span *ngIf="card.cardType === 'RED'">🟥</span>
+            <strong>{{ card.cardTakerFirstName }} {{ card.cardTakerLastName }}</strong> ({{ card.cardTime }}')
+          </p>
+        </div>
+      </div>
+
+      <!-- Away Cards -->
+      <div class="away-section">
+        <div *ngFor="let card of awayCards" class="card-item away-card">
+          <p>
+            <span *ngIf="card.cardType === 'YELLOW'">🟨</span>
+            <span *ngIf="card.cardType === 'RED'">🟥</span>
+            <strong>{{ card.cardTakerFirstName }} {{ card.cardTakerLastName }}</strong> ({{ card.cardTime }}')
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Substitutions Section -->
   <div class="section">
-    <h3>Substitutions</h3>
-    <div *ngFor="let sub of substitutions" class="sub-item" [ngClass]="{'home-sub': sub.isHomeTeam, 'away-sub': !sub.isHomeTeam}">
-      <p><strong>🔄 {{ sub.playerInFirstName }} {{ sub.playerInLastName }}</strong> IN</p>
-      <p><strong>⬅️ {{ sub.playerOutFirstName }} {{ sub.playerOutLastName }}</strong> OUT</p>
-      <p>Minute: {{ sub.minuteOfPlay }}'</p>
+    <div class="subs-container">
+      <!-- Home Substitutions -->
+      <div class="home-section">
+        <div *ngFor="let sub of homeSubstitutions" class="sub-item home-sub">
+          <p><strong>🔄 {{ sub.playerInFirstName }} {{ sub.playerInLastName }}</strong> IN</p>
+          <p><strong>⬅️ {{ sub.playerOutFirstName }} {{ sub.playerOutLastName }}</strong> OUT</p>
+          <p>Minute: {{ sub.minuteOfPlay }}'</p>
+        </div>
+      </div>
+
+      <!-- Away Substitutions -->
+      <div class="away-section">
+        <div *ngFor="let sub of awaySubstitutions" class="sub-item away-sub">
+          <p><strong>🔄 {{ sub.playerInFirstName }} {{ sub.playerInLastName }}</strong> IN</p>
+          <p><strong>⬅️ {{ sub.playerOutFirstName }} {{ sub.playerOutLastName }}</strong> OUT</p>
+          <p>Minute: {{ sub.minuteOfPlay }}'</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

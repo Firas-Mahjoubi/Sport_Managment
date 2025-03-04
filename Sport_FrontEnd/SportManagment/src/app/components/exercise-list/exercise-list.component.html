@@ -1,11 +1,34 @@
-
 <app-header></app-header>
-<div class="container mt-5 site-section">
-  <div class="col-12 title-section">
+<br><br><br><br><br><br><br>
+
+<div class="container training-session-container">
+  <div class="col-12 title-section d-flex justify-content-between align-items-center">
     <h2 class="heading">Training Exercises</h2>
+    
+    <!-- ✅ Right-aligned button -->
+    <div>
+      <button class="btn btn-success" routerLink="/add-exercise">+ Create Exercise</button>
+    </div>
   </div>
+
+  <!-- 🔎 Search and Filter Row -->
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <input type="text" class="form-control" placeholder="🔎 Search for an exercise..." [(ngModel)]="searchQuery">
+    </div>
+    <div class="col-md-6">
+      <select class="form-control" [(ngModel)]="selectedFilter">
+        <option value=""> Show All</option>
+        <option value="PUBLIC">🌎 Public</option>
+        <option value="PRIVATE">🔒 Private</option>
+      </select>
+    </div>
+  </div>
+
+  <br><br>
+
   <div class="row">
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let exercise of exercises">
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let exercise of filteredExercises()">
       <div class="custom-media d-block shadow-lg p-3 rounded">
 
         <!-- Image Section -->
@@ -18,7 +41,6 @@
 
         <!-- Text Content -->
         <div class="text">
-         
           <h5 class="mb-4 fw-bold text-danger">{{ exercise.name }}</h5>
           <p class="text-muted">{{ exercise.description }}</p>
 
@@ -60,23 +82,25 @@
           <p class="text-center mt-3">
             <a href="#" class="btn btn-primary text-white">🔍 View Details</a>
             <button class="btn btn-danger ms-2" (click)="deleteExercise(exercise.id)">🗑 Delete</button>
-
           </p>
         </div>
       </div>
     </div>
-    <div class="row justify-content-center">
-      <div class="col-lg-7 text-center">
-        <div class="custom-pagination">
-          <a href="#">1</a>
-          <span>2</span>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-        </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-7 text-center">
+      <br>
+      <div class="custom-pagination">
+        <a href="#">1</a>
+        <span>2</span>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
       </div>
     </div>
   </div>
 </div>
 
+<br><br>
 <app-footer></app-footer>

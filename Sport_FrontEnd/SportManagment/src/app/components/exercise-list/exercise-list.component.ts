@@ -9,7 +9,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class ExerciseListComponent implements OnInit {
   exercises: any[] = [];
   defaultImage: string = 'https://via.placeholder.com/150'; // ✅ Default Image
-
+  searchQuery: string = '';
+  selectedFilter: string = '';
   constructor(private exerciseService: ExerciseService,private sanitizer: DomSanitizer) {
     
   }
@@ -50,6 +51,18 @@ export class ExerciseListComponent implements OnInit {
         }
       );
     }
+  }
+   // ✅ Filtered Exercises
+   filteredExercises(): any[] {
+    return this.exercises.filter(exercise => {
+      // 🔎 Filter by search query
+      const matchesSearch = exercise.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+
+      // 📂 Filter by visibility (Public/Private)
+      const matchesFilter = this.selectedFilter ? exercise.visibility === this.selectedFilter : true;
+
+      return matchesSearch && matchesFilter;
+    });
   }
   
 }

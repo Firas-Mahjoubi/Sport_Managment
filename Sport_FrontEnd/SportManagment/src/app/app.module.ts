@@ -8,7 +8,6 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { TacticModule } from './tactics/tactics.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatchesHomeComponent } from './matches/matches-home/matches-home.component';
 import { GameweekSliderComponent } from './matches/gameweek-slider/gameweek-slider.component';
@@ -18,10 +17,8 @@ import { MatchDetailsComponent } from './matches/match-details/match-details.com
 import { TrainingSessionComponent } from './components/training-session-Assign-exercice/training-session.component';
 import { TrainingSessionExerciceComponent } from './components/training-session/training-session-exercice.component';
 import { TrainingSessionFormComponent } from './components/training-session-form/training-session-form.component';
-import { TrainingGroundNavbarComponent } from './components/training-ground-navbar/training-ground-navbar.component';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
-import { ExerciseLibraryComponent } from './components/exercise-library/exercise-library.component';
 import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
 //---------------------------------------------//
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
@@ -50,7 +47,6 @@ import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoverypl
 import { ListPlayerComponent } from './Health/recoveyplans/list-player/list-player.component';
 import { ListRecoveryPlanComponent } from './Health/recoveyplans/list-recoveryplan/list-recoveryplan.component';
 
-
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -63,17 +59,31 @@ import { SessionFormComponent } from './AdvancedPlanning/session-form/session-fo
 import { EventDetailsComponent } from './AdvancedPlanning/event-details/event-details.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatchesmainComponent } from './matches/matchesmain/matchesmain.component';
 
 import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.component';
+import { MatchesFooterComponent } from './matches/matches-footer/matches-footer.component';
+import { AdminSubstitutionComponent } from './matches/admin-substitution/admin-substitution.component';
 
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+
+
+
+
+
+
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { TacticListComponent } from './tactics/tactic-list/tactic-list.component';
+import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
+import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
+import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
 import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
-
-
 
 
 @NgModule({
@@ -89,10 +99,8 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
     TrainingSessionComponent,
     TrainingSessionExerciceComponent,
     TrainingSessionFormComponent,
-    TrainingGroundNavbarComponent,
     ExerciseFormComponent,
     ExerciseListComponent,
-    ExerciseLibraryComponent,
     TrainingSessionViewComponent,
 
     InjuryAddComponent,
@@ -116,19 +124,26 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
     AdminCardComponent,
     AddRecoveryplanComponent,
     EditRecoveryplanComponent,
-
+ TacticListComponent,
+    TacticFormComponent,
+    TacticFolderComponent,
+    CreateTacticDialogComponent,
     ShowRecoveryplanComponent,
-    AddRecoveryplanComponent,
     ListPlayerComponent,
     ListRecoveryPlanComponent,
     CalendarComponent,
+    MatchesFooterComponent,
+    AdminSubstitutionComponent,
     EventFormComponent,
     SessionFormComponent,
     EventDetailsComponent,
 
     MatchesmainComponent,
     MatchesNavbarComponent,
+
     SessionDetailsComponent
+
+
 
 
 
@@ -140,10 +155,10 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    TacticModule,
     BrowserAnimationsModule,
-
-
+    RouterModule,
+    CommonModule,
+    FontAwesomeModule,
 
     MatTableModule,
     MatIconModule,
@@ -153,11 +168,21 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
     MatCardModule,
     MatDialogModule,
     MatDatepickerModule,
-    FontAwesomeModule,
     MatNativeDateModule,
     MatInputModule,
-    MatFormFieldModule
-
+    MatFormFieldModule,
+     CommonModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatInputModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatIconModule,
+        MatFormFieldModule, // ✅ Required for mat-form-field
+        MatSelectModule, // ✅ Required for mat-select
+        MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
