@@ -61,6 +61,12 @@ import {EventFormComponent} from "./AdvancedPlanning/calendar/event-form/event-f
 import {SessionFormComponent} from "./AdvancedPlanning/session-form/session-form.component";
 import {EventDetailsComponent} from "./AdvancedPlanning/event-details/event-details.component";
 
+import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+
+
+
+
+
 const routes: Routes = [
 
   { path: 'auth', component: AuthComponent },
@@ -95,6 +101,20 @@ const routes: Routes = [
 
 
   { path: 'match/:matchId', component: MatchDetailsComponent },
+
+
+  {path :'DashboardSidebar',component:SidebarComponent},
+
+
+
+
+
+
+  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
+
+
+
+
   { path: 'Dashboard', component: DashboardComponent },
   {path :'DashboardSidebar',component:AdminSidebarComponent},
   {path :'DashboardHeader',component:AdminHeaderComponent},
@@ -114,6 +134,7 @@ const routes: Routes = [
 
 
   {path :'DashboardSidebar',component:AdminSidebarComponent},
+
 
 
 
@@ -158,6 +179,11 @@ const routes: Routes = [
 { path: 'list-player', component: ListPlayerComponent },
 {path: '**', redirectTo: 'home'}, 
 
+{ path: 'health-dashboard', component: HealthDashboardComponent },
+
+
+
+{ path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
 ];
 @NgModule({

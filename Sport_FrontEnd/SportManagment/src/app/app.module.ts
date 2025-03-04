@@ -72,6 +72,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
+import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+import { MatDividerModule } from '@angular/material/divider';
 
 
 import { RouterModule } from '@angular/router';
@@ -145,6 +150,8 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
 
 
 
+    HealthDashboardComponent,
+
 
 
 
@@ -166,6 +173,11 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
     MatProgressSpinnerModule,
     MatSelectModule,
     MatCardModule,
+
+    MatProgressBarModule,
+    MatDividerModule,
+
+
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -183,6 +195,7 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
         MatFormFieldModule, // ✅ Required for mat-form-field
         MatSelectModule, // ✅ Required for mat-select
         MatToolbarModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

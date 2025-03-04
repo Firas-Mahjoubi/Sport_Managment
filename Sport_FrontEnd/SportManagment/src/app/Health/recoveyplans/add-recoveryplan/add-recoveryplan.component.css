@@ -1,34 +1,240 @@
-.container {
-  padding: 20px;
+/* 🌟 Conteneur principal pour Recovery Plan */
+.recovery-plan-add-container {
+  background-color: rgba(17, 17, 17, 0.9); /* Fond légèrement transparent */
+  color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  max-width: 800px; /* Plus large */
+  margin: 40px auto;
+  border: 1px solid #00ff00; /* Bordure verte */
+  font-family: 'Poppins', sans-serif;
 }
 
-.players-list ul {
-  list-style: none;
-  padding: 0;
+/* 🔵 Titre pour Recovery Plan */
+.form-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #00ff00; /* Vert */
+  text-transform: uppercase;
 }
 
-.players-list li {
-  cursor: pointer;
-  padding: 8px;
-  border: 1px solid #ddd;
+/* 📏 Organisation en colonnes */
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+/* 🏥 Groupes de champs */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* 🏷️ Labels */
+label {
+  font-weight: bold;
+  color: #fff;
   margin-bottom: 5px;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 14px;
 }
 
-.players-list li.selected {
-  background-color: #007bff;
-  color: white;
+/* 🎯 Champs */
+.form-control {
+  width: 100%;
+  padding: 12px;
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #007bff;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
-form {
-  display: grid;
-  gap: 10px;
-  margin-top: 15px;
+textarea.form-control {
+  resize: none;
+  min-height: 80px;
 }
 
-button {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 8px 12px;
+.form-control:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(34, 255, 0, 0.8);
+  border-color: #00ff00;
+}
+
+/* 🔽 Sélections */
+select.form-control {
   cursor: pointer;
+}
+
+/* 🔘 Boutons */
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.submit-btn {
+  background-color: #00ff00;
+  color: #fff;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  width: 48%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cancel-btn {
+  display: inline-block;
+  width: 48%;
+  text-align: center;
+  background-color: #444;
+  color: #fff;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.submit-btn:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled),
+.cancel-btn:hover {
+  background-color: #cc0000;
+  transform: scale(1.03);
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .recovery-plan-add-container {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .submit-btn, .cancel-btn {
+    width: 100%;
+  }
+}
+
+/* ───────────────────────────────────────────── */
+/* Personnalisation du slider de progression */
+/* ───────────────────────────────────────────── */
+input[type="range"].form-control {
+ 
+  width: 100%;
+  height: 8px;
+  background: #333;
+  border-radius: 5px;
+  outline: none;
+  margin: 10px 0;
+}
+
+/* Piste du slider (Chrome, Safari) */
+input[type="range"].form-control::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  background: #444;
+  border-radius: 5px;
+}
+
+/* Curseur du slider (Chrome, Safari) */
+input[type="range"].form-control::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  background: #28a745;  /* Vert personnalisé */
+  border: 2px solid #fff;
+  border-radius: 50%;
+  margin-top: -8px; /* Centre le curseur verticalement */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+input[type="range"].form-control::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+input[type="range"].form-control:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.8);
+}
+
+/* Pour Firefox */
+input[type="range"].form-control::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  background: #444;
+  border-radius: 5px;
+}
+
+input[type="range"].form-control::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: #28a745;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+input[type="range"].form-control::-moz-range-thumb:hover {
+  transform: scale(1.1);
+}
+
+/* Pour Internet Explorer */
+input[type="range"].form-control::-ms-track {
+  width: 100%;
+  height: 8px;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type="range"].form-control::-ms-fill-lower {
+  background: #444;
+  border-radius: 5px;
+}
+
+input[type="range"].form-control::-ms-fill-upper {
+  background: #444;
+  border-radius: 5px;
+}
+
+input[type="range"].form-control::-ms-thumb {
+  width: 24px;
+  height: 24px;
+  background: #28a745;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+input[type="range"].form-control::-ms-thumb:hover {
+  transform: scale(1.1);
 }
