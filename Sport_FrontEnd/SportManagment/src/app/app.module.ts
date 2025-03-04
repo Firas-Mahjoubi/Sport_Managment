@@ -128,7 +128,7 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
 
     MatchesmainComponent,
     MatchesNavbarComponent,
-    SessionDetailsComponent,
+    SessionDetailsComponent
 
 
 
