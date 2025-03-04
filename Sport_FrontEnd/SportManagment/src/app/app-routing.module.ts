@@ -51,6 +51,7 @@ import {MatchesNavbarComponent} from "./matches/matches-navbar/matches-navbar.co
 import { TacticListComponent } from './tactics/tactic-list/tactic-list.component';
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 
@@ -62,20 +63,20 @@ const routes: Routes = [
   {path: 'dashboard', component:DashboardComponent, canActivate: [roleGuard(['ADMIN'])]}, // Protect dashboard route
   {path: 'main', component:LandingPageComponent},
   //--------------------Training-groud -------------------------//
-  { path: 'training-sessions-exercice/:id', component: TrainingSessionComponent },
-  { path: 'training-sessions', component: TrainingSessionExerciceComponent },
+  { path: 'training-sessions-exercice/:id', component: TrainingSessionComponent , canActivate: [roleGuard(['COACH'])]},
+  { path: 'training-sessions', component: TrainingSessionExerciceComponent , canActivate: [roleGuard(['COACH'])]},
 
-  { path: 'training-session-add', component: TrainingSessionFormComponent }, 
+  { path: 'training-session-add', component: TrainingSessionFormComponent , canActivate: [roleGuard(['COACH'])]}, 
 
-  { path: 'training-sessions/new', component: TrainingSessionFormComponent },
-  { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent },
+  { path: 'training-sessions/new', component: TrainingSessionFormComponent , canActivate: [roleGuard(['COACH'])]},
+  { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent, canActivate: [roleGuard(['COACH'])] },
 
-  { path: 'training-session/:id', component: TrainingSessionViewComponent },
+  { path: 'training-session/:id', component: TrainingSessionViewComponent, canActivate: [roleGuard(['COACH'])] },
 
 
-  { path: 'add-exercise', component: ExerciseFormComponent },
-  { path: 'edit-exercise/:id', component: ExerciseFormComponent },
-  { path: 'exercise-list', component: ExerciseListComponent },
+  { path: 'add-exercise', component: ExerciseFormComponent , canActivate: [roleGuard(['COACH'])]},
+  { path: 'edit-exercise/:id', component: ExerciseFormComponent, canActivate: [roleGuard(['COACH'])] },
+  { path: 'exercise-list', component: ExerciseListComponent , canActivate: [roleGuard(['COACH'])]},
     //---------------------Backoffice-training-Ground ------------------------//
 
     { path: 'add-exercise-back', component: BackofficeListExerciceComponent },
@@ -135,7 +136,7 @@ const routes: Routes = [
 
 
 //skander turkiiiiii recoveryplan
-
+{path: 'home', component: HomeComponent},
 
 { path: 'add-recoveryplan', component: AddRecoveryplanComponent },
 { path: 'edit-recoveryplan/:injuryId/:planId', component: EditRecoveryplanComponent },
@@ -145,8 +146,7 @@ const routes: Routes = [
 { path: 'list-recoveryplan/:playerId', component: ListRecoveryPlanComponent },
 
 { path: 'list-player', component: ListPlayerComponent },
-{ path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
-
+{path: '**', redirectTo: 'home'}, 
 
 
 ];
