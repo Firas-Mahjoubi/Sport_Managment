@@ -1,6 +1,7 @@
 package com.example.sport_backend.Repositories.ClubHouse;
 
 import com.example.sport_backend.Entity.ClubHouse.Player;
+import com.example.sport_backend.Entity.ClubHouse.Team;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,6 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PlayerRepo extends JpaRepository<Player,Long> {
+    List<Player> findByTeamAndPlayerNumberIn(Team team, List<Long> numbers);
+    Optional<Player> findByTeamAndPlayerNumber(Team team, Integer playerNumber);
+
+
     @Query("SELECT p FROM Player p " +
             "JOIN p.team t " +
             "JOIN t.matches m " +
