@@ -1,3 +1,12 @@
+.calendar-container {
+  max-width: 1200px; /* Vous pouvez ajuster la largeur maximale ici */
+  margin: 0 auto; /* Centrer le calendrier horizontalement */
+  padding: 20px;
+  background-color: #fff; /* Fond blanc ou ajuster à votre design */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .calendar {
   font-family: 'Arial', sans-serif;
   max-width: 800px;
@@ -11,7 +20,7 @@
 
   /* Centering styles */
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

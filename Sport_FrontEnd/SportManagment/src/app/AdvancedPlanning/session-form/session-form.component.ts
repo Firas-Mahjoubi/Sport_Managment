@@ -19,10 +19,20 @@ export class SessionFormComponent {
     this.sessionForm = this.fb.group({
       id: [data.session?.id || null], // ID de la session (pour la mise à jour)
       name: [data.session?.name || '', Validators.required], // Pré-remplir le nom
-      date: [data.session?.date || '', Validators.required], // Pré-remplir la date
+      date: [
+        data.session?.date ? new Date(data.session.date).toISOString().split('T')[0] : '', // Utilisation de la date au format ISO
+        Validators.required
+      ], // Pré-remplir la date
       startTime: [data.session?.startTime || '', Validators.required], // Pré-remplir l'heure de début
       endTime: [data.session?.endTime || '', Validators.required] // Pré-remplir l'heure de fin
     });
+
+    // Si la session existe (mode édition), ajuster la date en UTC
+    if (data.session?.date) {
+      const localDate = new Date(data.session.date);
+      const utcDate = new Date(Date.UTC(localDate.getFullYear(), localDate.getMonth(), localDate.getDate()));
+      this.sessionForm.patchValue({ date: utcDate.toISOString().split('T')[0] });
+    }
   }
 
   /**
@@ -31,7 +41,17 @@ export class SessionFormComponent {
    */
   onSubmit(): void {
     if (this.sessionForm.valid) {
-      this.dialogRef.close(this.sessionForm.value);
+      let formData = this.sessionForm.value;
+
+      // Convertir la date locale en UTC
+      const localDate = new Date(formData.date);
+      const utcDate = new Date(Date.UTC(localDate.getFullYear(), localDate.getMonth(), localDate.getDate()));
+
+      // Remplacer la date par la version UTC
+      formData.date = utcDate;
+
+      // Fermer le formulaire et envoyer les données
+      this.dialogRef.close(formData);
     }
   }
 
