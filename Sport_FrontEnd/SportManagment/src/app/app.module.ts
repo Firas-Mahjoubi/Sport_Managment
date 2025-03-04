@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -18,11 +17,8 @@ import { MatchDetailsComponent } from './matches/match-details/match-details.com
 //--------------------Training-groud -------------------------//
 import { TrainingSessionComponent } from './components/training-session-Assign-exercice/training-session.component';
 import { TrainingSessionExerciceComponent } from './components/training-session/training-session-exercice.component';
-import { TrainingSessionFormComponent } from './components/training-session-form/training-session-form.component';
-import { TrainingGroundNavbarComponent } from './components/training-ground-navbar/training-ground-navbar.component';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
-import { ExerciseLibraryComponent } from './components/exercise-library/exercise-library.component';
 import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
 //---------------------------------------------//
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
@@ -58,7 +54,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-
+import { BackofficeAddExerciceComponent } from './components/backoffice-add-exercice/backoffice-add-exercice.component';
+import { BackofficeListExerciceComponent } from './components/backoffice-list-exercice/backoffice-list-exercice.component';
+import { TrainingSessionFormComponent } from './components/training-session-form/training-session-form.component';
 
 
 
@@ -75,12 +73,10 @@ import { MatCardModule } from '@angular/material/card';
     AdminSidebarComponent,
     TrainingSessionComponent,
     TrainingSessionExerciceComponent,
-    TrainingSessionFormComponent,
-    TrainingGroundNavbarComponent,
     ExerciseFormComponent,
     ExerciseListComponent,
-    ExerciseLibraryComponent,
     TrainingSessionViewComponent,
+    TrainingSessionFormComponent,
 
     InjuryAddComponent,
     InjuryEditComponent,
@@ -108,10 +104,9 @@ import { MatCardModule } from '@angular/material/card';
     AddRecoveryplanComponent,
     ListPlayerComponent,
     ListRecoveryPlanComponent,
-
-
-
-
+    BackofficeAddExerciceComponent,
+    BackofficeListExerciceComponent,
+   
 
   ],
   imports: [
@@ -122,15 +117,13 @@ import { MatCardModule } from '@angular/material/card';
     ReactiveFormsModule,
     TacticModule,
     BrowserAnimationsModule,
-
-
+    FormsModule,
     MatTableModule,
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,
     MatSelectModule,
     MatCardModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]

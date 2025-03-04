@@ -12,12 +12,11 @@ import {MatchDetailsComponent} from "./matches/match-details/match-details.compo
 
 import { TrainingSessionComponent } from './components/training-session-Assign-exercice/training-session.component';
 import{TrainingSessionExerciceComponent} from './components/training-session/training-session-exercice.component';
+import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
 
-import {TrainingSessionFormComponent} from './components/training-session-form/training-session-form.component';
+
 import {ExerciseFormComponent} from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
-import { ExerciseLibraryComponent } from './components/exercise-library/exercise-library.component';
-import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
 //---------------------------------------------//
 import { InjuryListComponent } from './Health/injury-list/injury-list.component';
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
@@ -44,7 +43,8 @@ import { ListPlayerComponent } from './Health/recoveyplans/list-player/list-play
 import { ListRecoveryPlanComponent } from './Health/recoveyplans/list-recoveryplan/list-recoveryplan.component';
 import { EditRecoveryplanComponent } from './Health/recoveyplans/edit-recoveryplan/edit-recoveryplan.component';
 import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoveryplan/show-recoveryplan.component';
-
+import{BackofficeListExerciceComponent} from './components/backoffice-list-exercice/backoffice-list-exercice.component';
+import { TrainingSessionFormComponent } from './components/training-session-form/training-session-form.component';
 
 
 const routes: Routes = [
@@ -55,17 +55,18 @@ const routes: Routes = [
   {path: 'dashboard', component:DashboardComponent, canActivate: [roleGuard(['ADMIN'])]}, // Protect dashboard route
   {path: 'main', component:LandingPageComponent},
   //--------------------Training-groud -------------------------//
-  { path: 'training-sessions-exercice', component: TrainingSessionComponent },
+  { path: 'training-sessions-exercice/:id', component: TrainingSessionComponent },
   { path: 'training-sessions', component: TrainingSessionExerciceComponent },
-  { path: 'training-sessions/new', component: TrainingSessionFormComponent }, 
-  { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent }, 
+  { path: 'training-session-add', component: TrainingSessionFormComponent }, 
   { path: 'training-session/:id', component: TrainingSessionViewComponent },
 
 
   { path: 'add-exercise', component: ExerciseFormComponent },
   { path: 'edit-exercise/:id', component: ExerciseFormComponent },
   { path: 'exercise-list', component: ExerciseListComponent },
-  { path: 'exercicse-lib', component: ExerciseLibraryComponent },
+    //---------------------Backoffice-training-Ground ------------------------//
+
+    { path: 'add-exercise-back', component: BackofficeListExerciceComponent },
   //---------------------------------------------//
 
   { path: 'matches', component: MatchesHomeComponent },
