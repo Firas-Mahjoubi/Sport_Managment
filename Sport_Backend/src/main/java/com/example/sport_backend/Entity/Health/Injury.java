@@ -31,25 +31,24 @@ public class Injury {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @PastOrPresent(message = "La date de blessure ne peut pas être dans le futur.")
-    @NotNull(message = "La date est obligatoire.")
+
     LocalDate date;
 
 
-    @NotNull(message = "Le type de blessure est obligatoire.")
+
     @Enumerated(EnumType.STRING)
     Type type;
 
 
-    @NotNull(message = "La gravité est obligatoire.")
+
     @Enumerated(EnumType.STRING)
     Severity severity;
 
-    @Size(max = 500, message = "La description ne peut pas dépasser 500 caractères.")
+
     String description;
 
 
-    @NotNull(message = "Le statut est obligatoire.")
+
     @Enumerated(EnumType.STRING)
     Status status;
 

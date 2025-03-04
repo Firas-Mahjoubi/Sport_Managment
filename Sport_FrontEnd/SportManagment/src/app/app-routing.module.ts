@@ -32,13 +32,14 @@ import { HealthDashboardComponent } from './Health/health-dashboard/health-dashb
 
 const routes: Routes = [
 
+
  // { path: 'auth', component: AuthComponent },
 //{ path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
 // {path: 'dashboard', component:DashboardComponent},
-{path: 'main', component:LandingPageComponent},
+ {path: 'main', component:LandingPageComponent},
  // { path: 'training-sessions', component: TrainingSessionComponent },//Training routes
  // { path: 'training-sessions-exercice', component: TrainingSessionExerciceComponent },
- // { path: 'training-sessions/new', component: TrainingSessionFormComponent }, 
+ // { path: 'training-sessions/new', component: TrainingSessionFormComponent },
 //{ path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent },
 //{ path: 'exercises', component: ExerciseComponent },//exervise routes
  //  { path: 'add-exercise', component: ExerciseFormComponent },
