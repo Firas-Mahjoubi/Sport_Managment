@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -15,6 +16,7 @@ import { MatchDetailsComponent } from './matches/match-details/match-details.com
 //--------------------Training-groud -------------------------//
 import { TrainingSessionComponent } from './components/training-session-Assign-exercice/training-session.component';
 import { TrainingSessionExerciceComponent } from './components/training-session/training-session-exercice.component';
+import { TrainingSessionFormComponent } from './components/training-session-form/training-session-form.component';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
@@ -51,14 +53,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-
-import { BackofficeAddExerciceComponent } from './components/backoffice-add-exercice/backoffice-add-exercice.component';
-import { BackofficeListExerciceComponent } from './components/backoffice-list-exercice/backoffice-list-exercice.component';
-import { TrainingSessionFormComponent } from './components/training-session-form/training-session-form.component';
-import { MatchesmainComponent } from './matches/matchesmain/matchesmain.component';
-import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.component';
-
-
 import { CalendarComponent } from './AdvancedPlanning/calendar/calendar.component';
 import { EventFormComponent } from './AdvancedPlanning/calendar/event-form/event-form.component';
 import { SessionFormComponent } from './AdvancedPlanning/session-form/session-form.component';
@@ -82,7 +76,6 @@ import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,10 +88,10 @@ import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/crea
     AdminSidebarComponent,
     TrainingSessionComponent,
     TrainingSessionExerciceComponent,
+    TrainingSessionFormComponent,
     ExerciseFormComponent,
     ExerciseListComponent,
     TrainingSessionViewComponent,
-    TrainingSessionFormComponent,
 
     InjuryAddComponent,
     InjuryEditComponent,
@@ -128,30 +121,13 @@ import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/crea
     ShowRecoveryplanComponent,
     ListPlayerComponent,
     ListRecoveryPlanComponent,
-
-
-    BackofficeAddExerciceComponent,
-    BackofficeListExerciceComponent,
-   
-
-    MatchesmainComponent,
-    MatchesNavbarComponent,
-
     CalendarComponent,
     EventFormComponent,
     SessionFormComponent,
     EventDetailsComponent,
 
-
-
-
-
-
-
-
     MatchesmainComponent,
     MatchesNavbarComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -160,12 +136,9 @@ import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/crea
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-
-    FormsModule,
     RouterModule,
     CommonModule,
     FontAwesomeModule,
-
 
     MatTableModule,
     MatIconModule,
@@ -173,8 +146,6 @@ import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/crea
     MatProgressSpinnerModule,
     MatSelectModule,
     MatCardModule,
-
-
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -192,7 +163,6 @@ import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/crea
         MatFormFieldModule, // ✅ Required for mat-form-field
         MatSelectModule, // ✅ Required for mat-select
         MatToolbarModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]
