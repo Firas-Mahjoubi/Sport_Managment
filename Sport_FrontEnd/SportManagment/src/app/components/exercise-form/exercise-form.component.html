@@ -1,163 +1,111 @@
 <app-header></app-header>
-
 <br><br><br><br><br>
 
-<div class="exercise-form-container">
-  <div class="exercise-form-card">
-    <h2 class="text-center text-uppercase">
-      {{ isEditing ? '✏️ Edit Exercise' : '➕ New Exercise' }}
-    </h2>
-    <form #exerciseForm="ngForm" (ngSubmit)="saveExercise()" novalidate>
-      
-      <!-- Exercise Name -->
-      <div class="form-group">
-        <label>🏋️ Exercise Name *</label>
-        <input 
-          type="text" 
-          class="form-control" 
-          [ngClass]="{'is-invalid': name.invalid && name.touched, 'is-valid': name.valid && name.touched}" 
-          [(ngModel)]="exercise.name" 
-          name="name" 
-          required 
-          minlength="3" 
-          #name="ngModel">
-        <div class="invalid-feedback" *ngIf="name.invalid && name.touched">
-          <small *ngIf="name.errors?.['required']">⚠️ This field is required.</small>
-          <small *ngIf="name.errors?.['minlength']">⚠️ Must be at least 3 characters long.</small>
-        </div>
-      </div>
+<div class="container mt-4">
+    <div class="form-container">
+        <h2 class="text-center mb-4">🏋️ {{ isEditing ? '✏️ Edit Exercise' : '➕ New Exercise' }}</h2>
 
-      <!-- Visibility -->
-      <div class="form-group mt-3">
-        <label>👀 Visibility</label>
-        <select 
-          class="form-control" 
-          [ngClass]="{'is-invalid': visibility.invalid && visibility.touched, 'is-valid': visibility.valid && visibility.touched}" 
-          [(ngModel)]="exercise.visibility" 
-          name="visibility" 
-          required 
-          #visibility="ngModel">
-          <option value="PUBLIC">Public</option>
-          <option value="PRIVATE">Private</option>
-        </select>
-        <div class="invalid-feedback" *ngIf="visibility.invalid && visibility.touched">
-          <small>⚠️ Visibility selection is required.</small>
-        </div>
-      </div>
+        <form #exerciseForm="ngForm" (ngSubmit)="saveExercise()" novalidate>
+            
+            <!-- 🏋️ Exercise Name -->
+            <div class="form-group">
+                <label>Exercise Name *</label>
+                <input type="text" class="form-control" [(ngModel)]="exercise.name" name="name" required minlength="3" #name="ngModel">
+                <div class="invalid-feedback" *ngIf="name.invalid && name.touched">
+                    <small *ngIf="name.errors?.['required']">⚠️ This field is required.</small>
+                    <small *ngIf="name.errors?.['minlength']">⚠️ Must be at least 3 characters long.</small>
+                </div>
+            </div>
 
-      <!-- Description -->
-      <div class="form-group mt-3">
-        <label>📝 Description</label>
-        <textarea 
-          class="form-control" 
-          [ngClass]="{'is-invalid': description.invalid && description.touched, 'is-valid': description.valid && description.touched}" 
-          rows="4" 
-          [(ngModel)]="exercise.description" 
-          name="description" 
-          required 
-          minlength="10" 
-          #description="ngModel"></textarea>
-        <div class="invalid-feedback" *ngIf="description.invalid && description.touched">
-          <small *ngIf="description.errors?.['required']">⚠️ Description is required.</small>
-          <small *ngIf="description.errors?.['minlength']">⚠️ Must be at least 10 characters long.</small>
-        </div>
-      </div>
+            <!-- 👀 Visibility -->
+            <div class="form-group mt-3">
+                <label>Visibility</label>
+                <select class="form-control" [(ngModel)]="exercise.visibility" name="visibility" required #visibility="ngModel">
+                    <option value="PUBLIC">Public</option>
+                    <option value="PRIVATE">Private</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="visibility.invalid && visibility.touched">
+                    <small>⚠️ Visibility selection is required.</small>
+                </div>
+            </div>
 
-      <div class="row mt-3">
-        <div class="col-md-4">
-          <label>💪 Fitness</label>
-          <input type="range" min="0" max="10" [(ngModel)]="exercise.fitnessLevel" class="form-range" name="fitnessLevel">
-        </div>
-        <div class="col-md-4">
-          <label>⚽ Technique</label>
-          <input type="range" min="0" max="10" [(ngModel)]="exercise.techniqueLevel" class="form-range" name="techniqueLevel">
-        </div>
-        <div class="col-md-4">
-          <label>🧠 Tactics</label>
-          <input type="range" min="0" max="10" [(ngModel)]="exercise.tacticLevel" class="form-range" name="tacticLevel">
-        </div>
-      </div>
+            <!-- 📝 Description -->
+            <div class="form-group mt-3">
+                <label>Description</label>
+                <textarea class="form-control" rows="4" [(ngModel)]="exercise.description" name="description" required minlength="10" #description="ngModel"></textarea>
+                <div class="invalid-feedback" *ngIf="description.invalid && description.touched">
+                    <small *ngIf="description.errors?.['required']">⚠️ Description is required.</small>
+                    <small *ngIf="description.errors?.['minlength']">⚠️ Must be at least 10 characters long.</small>
+                </div>
+            </div>
 
-      <!-- Main Focus -->
-      <div class="form-group mt-3">
-        <label>🎯 Main Focus</label>
-        <input 
-          type="text" 
-          class="form-control" 
-          [ngClass]="{'is-invalid': mainFocus.invalid && mainFocus.touched, 'is-valid': mainFocus.valid && mainFocus.touched}" 
-          [(ngModel)]="exercise.mainFocus" 
-          name="mainFocus" 
-          required 
-          #mainFocus="ngModel">
-        <div class="invalid-feedback" *ngIf="mainFocus.invalid && mainFocus.touched">
-          <small>⚠️ This field is required.</small>
-        </div>
-      </div>
+            <!-- 📊 Levels -->
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <label>💪 Fitness Level</label>
+                    <input type="range" min="0" max="10" [(ngModel)]="exercise.fitnessLevel" class="form-range" name="fitnessLevel">
+                </div>
+                <div class="col-md-4">
+                    <label>⚽ Technique Level</label>
+                    <input type="range" min="0" max="10" [(ngModel)]="exercise.techniqueLevel" class="form-range" name="techniqueLevel">
+                </div>
+                <div class="col-md-4">
+                    <label>🧠 Tactical Level</label>
+                    <input type="range" min="0" max="10" [(ngModel)]="exercise.tacticLevel" class="form-range" name="tacticLevel">
+                </div>
+            </div>
 
-      <!-- Age Group -->
-      <div class="form-group mt-3">
-        <label>👶 Age Group</label>
-        <select 
-          class="form-control" 
-          [ngClass]="{'is-invalid': ageGroup.invalid && ageGroup.touched, 'is-valid': ageGroup.valid && ageGroup.touched}" 
-          [(ngModel)]="exercise.ageGroup" 
-          name="ageGroup" 
-          required 
-          #ageGroup="ngModel">
-          <option value="">Select Age Group</option>
-          <option value="U10">U10</option>
-          <option value="U12">U12</option>
-          <option value="U14">U14</option>
-          <option value="U16">U16</option>
-        </select>
-        <div class="invalid-feedback" *ngIf="ageGroup.invalid && ageGroup.touched">
-          <small>⚠️ Age group selection is required.</small>
-        </div>
-      </div>
+            <!-- 🎯 Main Focus -->
+            <div class="form-group mt-3">
+                <label>Main Focus</label>
+                <input type="text" class="form-control" [(ngModel)]="exercise.mainFocus" name="mainFocus" required #mainFocus="ngModel">
+                <div class="invalid-feedback" *ngIf="mainFocus.invalid && mainFocus.touched">
+                    <small>⚠️ This field is required.</small>
+                </div>
+            </div>
 
-      <!-- Group Size -->
-      <div class="form-group mt-3">
-        <label>👥 Group Size</label>
-        <input 
-          type="number" 
-          class="form-control" 
-          [ngClass]="{'is-invalid': groupSize.invalid && groupSize.touched, 'is-valid': groupSize.valid && groupSize.touched}" 
-          [(ngModel)]="exercise.groupSize" 
-          name="groupSize" 
-          required 
-          min="1" 
-          max="50" 
-          #groupSize="ngModel">
-        <div class="invalid-feedback" *ngIf="groupSize.invalid && groupSize.touched">
-          <small *ngIf="groupSize.errors?.['required']">⚠️ Group size is required.</small>
-          <small *ngIf="groupSize.errors?.['min']">⚠️ Minimum value is 1.</small>
-          <small *ngIf="groupSize.errors?.['max']">⚠️ Maximum value is 50.</small>
-        </div>
-      </div>
+            <!-- 👶 Age Group -->
+            <div class="form-group mt-3">
+                <label>Age Group</label>
+                <select class="form-control" [(ngModel)]="exercise.ageGroup" name="ageGroup" required #ageGroup="ngModel">
+                    <option value="">Select Age Group</option>
+                    <option value="U10">U10</option>
+                    <option value="U12">U12</option>
+                    <option value="U14">U14</option>
+                    <option value="U16">U16</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="ageGroup.invalid && ageGroup.touched">
+                    <small>⚠️ Age group selection is required.</small>
+                </div>
+            </div>
 
-      <!-- Image URL -->
-      <div class="form-group mt-3">
-        <label>🖼️ Image URL</label>
-        <input 
-          type="text" 
-          class="form-control" 
-          [ngClass]="{'is-invalid': imageUrl.invalid && imageUrl.touched, 'is-valid': imageUrl.valid && imageUrl.touched}" 
-          [(ngModel)]="exercise.imageUrl" 
-          name="imageUrl" 
-          pattern="https?://.+" 
-          #imageUrl="ngModel">
-        <div class="invalid-feedback" *ngIf="imageUrl.invalid && imageUrl.touched">
-          <small *ngIf="imageUrl.errors?.['pattern']">⚠️ Please enter a valid URL (http/https).</small>
-        </div>
-      </div>
+            <!-- 👥 Group Size -->
+            <div class="form-group mt-3">
+                <label>Group Size</label>
+                <input type="number" class="form-control" [(ngModel)]="exercise.groupSize" name="groupSize" required min="1" max="50" #groupSize="ngModel">
+                <div class="invalid-feedback" *ngIf="groupSize.invalid && groupSize.touched">
+                    <small *ngIf="groupSize.errors?.['required']">⚠️ Group size is required.</small>
+                    <small *ngIf="groupSize.errors?.['min']">⚠️ Minimum value is 1.</small>
+                    <small *ngIf="groupSize.errors?.['max']">⚠️ Maximum value is 50.</small>
+                </div>
+            </div>
 
-      <!-- Submit Button -->
-      <button class="btn btn-primary mt-4 btn-save w-100" type="submit" [disabled]="exerciseForm.invalid">
-        {{ isEditing ? '✅ Update Exercise' : '💾 Save Exercise' }}
-      </button>
-    
-    </form>
-  </div>
+            <!-- 🖼️ Image URL -->
+            <div class="form-group mt-3">
+                <label>Image URL</label>
+                <input type="text" class="form-control" [(ngModel)]="exercise.imageUrl" name="imageUrl" pattern="https?://.+" #imageUrl="ngModel">
+                <div class="invalid-feedback" *ngIf="imageUrl.invalid && imageUrl.touched">
+                    <small *ngIf="imageUrl.errors?.['pattern']">⚠️ Please enter a valid URL (http/https).</small>
+                </div>
+            </div>
+
+            <!-- ✅ Submit Button -->
+            <button class="btn btn-primary mt-3 w-100" type="submit" [disabled]="exerciseForm.invalid">
+                {{ isEditing ? '✅ Update Exercise' : '💾 Save Exercise' }}
+            </button>
+
+        </form>
+    </div>
 </div>
 
 <app-footer></app-footer>
