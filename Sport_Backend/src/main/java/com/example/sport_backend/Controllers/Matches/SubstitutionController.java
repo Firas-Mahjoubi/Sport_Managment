@@ -39,4 +39,9 @@ public class SubstitutionController {
     public List<SubstitutionInfoDTO> getSubstitutions(@PathVariable Long matchId) {
         return substitutionService.getSubstitutionsForMatch(matchId);
     }
+    @DeleteMapping("deleteSubstitution/{substitutionId}")
+    public ResponseEntity<String> deleteSubstitution(@PathVariable Long substitutionId) {
+        substitutionService.deleteSubstitution(substitutionId);
+        return ResponseEntity.ok("Substitution deleted successfully");
+    }
 }

@@ -1,4 +1,3 @@
-// AdminMatchComponent (admin-match.component.ts)
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -11,7 +10,7 @@ import { Router } from '@angular/router';
 export class AdminMatchComponent implements OnInit {
   leagueName: string = '';
   gameWeek: number = 1;
-  matches: any[] = [];
+  matchesByLeague: { [key: string]: any[] } = {}; // Store matches by league
   loading: boolean = false;
   errorMessage: string = '';
   successMessage: string = '';
@@ -49,7 +48,7 @@ export class AdminMatchComponent implements OnInit {
   getMatchesAfterGeneration(): void {
     this.http.get(`${this.baseUrl}/get-matches-by-league?leagueName=${this.leagueName}`).subscribe({
       next: (response: any) => {
-        this.matches = response?.matches ?? [];
+        this.matchesByLeague = { [this.leagueName]: response?.matches ?? [] };
         this.loading = false;
       },
       error: (err) => {
@@ -66,7 +65,12 @@ export class AdminMatchComponent implements OnInit {
 
     this.http.get(`${this.baseUrl}/get-matches-by-game-week?gameWeek=${this.gameWeek}`).subscribe({
       next: (response: any) => {
-        this.matches = response?.Liga ?? [];
+        if (response) {
+          // Keep the matches organized by league instead of flattening
+          this.matchesByLeague = response;
+        } else {
+          this.matchesByLeague = {};
+        }
         this.loading = false;
       },
       error: (err) => {
@@ -80,8 +84,15 @@ export class AdminMatchComponent implements OnInit {
   navigateToAdminGoal(matchId: number): void {
     this.router.navigate(['/admin-goals', matchId]);
   }
+
   navigateToAdminCard(matchId: number): void {
     this.router.navigate(['/admin-cards', matchId]);
   }
 
+  navigateToAdminSubstitution(matchId: number): void {
+    this.router.navigate(['/admin-substitutions', matchId]);
+  }
+
+  // Helper to get Object keys for *ngFor
+  Object = Object;
 }

@@ -62,6 +62,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatchesmainComponent } from './matches/matchesmain/matchesmain.component';
 
 import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.component';
+import { MatchesFooterComponent } from './matches/matches-footer/matches-footer.component';
+import { AdminSubstitutionComponent } from './matches/admin-substitution/admin-substitution.component';
 
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
@@ -122,6 +124,8 @@ import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/crea
     ListPlayerComponent,
     ListRecoveryPlanComponent,
     CalendarComponent,
+    MatchesFooterComponent,
+    AdminSubstitutionComponent,
     EventFormComponent,
     SessionFormComponent,
     EventDetailsComponent,
