@@ -1,0 +1,129 @@
+.form-container {
+  background-color: rgba(17, 17, 17, 0.9);
+  color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  max-width: 800px;
+  margin: 40px auto;
+  border: 1px solid #28a745;
+  font-family: 'Poppins', sans-serif;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #28a745;
+  text-transform: uppercase;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-group {
+  flex: 1;
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 5px;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #28a745;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(34, 255, 0, 0.8);
+  border-color: #28a745;
+}
+
+/* 📅 Date picker */
+input[type="date"] {
+  cursor: pointer;
+}
+
+/* 📊 Barre de progression */
+input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+  background: #28a745;
+}
+
+/* ✅ Boutons */
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.submit-btn {
+  background-color: #28a745;
+  color: #fff;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  width: 48%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  text-transform: uppercase;
+}
+
+.cancel-btn {
+  display: inline-block;
+  width: 48%;
+  text-align: center;
+  background-color: #444;
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.2s;
+  text-transform: uppercase;
+}
+
+.submit-btn:hover:not(:disabled),
+.cancel-btn:hover {
+  background-color: #28a745;
+  transform: scale(1.03);
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .submit-btn, .cancel-btn {
+    width: 100%;
+  }
+}

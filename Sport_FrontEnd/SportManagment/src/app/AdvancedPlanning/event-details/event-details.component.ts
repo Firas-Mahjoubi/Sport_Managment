@@ -18,31 +18,31 @@ export class EventDetailsComponent {
     private eventService: EventService,
     private dialog: MatDialog
   ) {
-    this.event = data.event;  // Récupérer l'événement à partir des données passées
-    console.log('Event data received:', this.event);  // Vérification dans la console
+    this.event = data.event;  
+    console.log('Event data received:', this.event);
   }
 
-  // Supprimer l'événement
+
   deleteEvent(): void {
-    if (!this.event || !this.event.id) {  // Remplacer 'idEvent' par 'id' ici
-      console.error('Event or Event ID is missing!', this.event);  // Vérification si event et id existent
+    if (!this.event || !this.event.id) {
+      console.error('Event or Event ID is missing!', this.event);
       return;
     }
 
-    console.log(`Deleting event with ID: ${this.event.id}`);  // Remplacer 'idEvent' par 'id'
+    console.log(`Deleting event with ID: ${this.event.id}`);
 
-    this.eventService.removeEvent(this.event.id).subscribe({  // Remplacer 'idEvent' par 'id' ici aussi
+    this.eventService.removeEvent(this.event.id).subscribe({
       next: () => {
         console.log('Event deleted successfully');
-        this.dialogRef.close(true);  // Ferme la boîte de dialogue après la suppression
+        this.dialogRef.close(true);
       },
       error: (error) => {
-        console.error('Error deleting event:', error);  // Gestion des erreurs
+        console.error('Error deleting event:', error);
       }
     });
   }
 
-  // Modifier l'événement
+
   editEvent(): void {
     const dialogRef = this.dialog.open(EventFormComponent, {
       width: '400px',
@@ -51,7 +51,7 @@ export class EventDetailsComponent {
 
     dialogRef.afterClosed().subscribe(updatedEvent => {
       if (updatedEvent) {
-        const updatedEventData = { ...this.event, ...updatedEvent };  // Fusionner les anciennes et nouvelles données
+        const updatedEventData = { ...this.event, ...updatedEvent };
 
         this.eventService.updateEvent(updatedEventData).subscribe({
           next: () => {
@@ -66,8 +66,7 @@ export class EventDetailsComponent {
     });
   }
 
-  // Fermer la boîte de dialogue
-  close(): void {
+    close(): void {
     this.dialogRef.close();
   }
 }

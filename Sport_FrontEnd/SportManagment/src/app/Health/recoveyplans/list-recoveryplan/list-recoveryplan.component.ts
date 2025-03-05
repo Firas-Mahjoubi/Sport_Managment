@@ -59,7 +59,10 @@ export class ListRecoveryPlanComponent implements OnInit {
       if (confirmation && plan.id && plan.injury.id) {
         this.recoveryPlanService.deleteRecoveryPlan(plan.injury.id, plan.id).subscribe({
           next: () => {
-            this.loadRecoveryPlans();
+            console.log('Plan supprimé avec succès !');
+
+            // 🔥 Supprimer localement pour éviter le refresh
+            this.recoveryPlans = this.recoveryPlans.filter(p => p.id !== plan.id);
           },
           error: (err) => {
             console.error('Erreur lors de la suppression:', err);
@@ -68,4 +71,5 @@ export class ListRecoveryPlanComponent implements OnInit {
       }
     }
   }
+
 }

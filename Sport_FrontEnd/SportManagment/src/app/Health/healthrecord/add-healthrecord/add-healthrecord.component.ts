@@ -71,7 +71,8 @@ export class AddHealthrecordComponent implements OnInit {
     this.healthRecordService.createHealthRecord(playerId, healthRecordData)
       .subscribe(() => {
         console.log("Health Record ajouté !");
-        this.router.navigate(['/healthrecords']);
+          // ✅ Redirection après le succès
+      this.router.navigate(['/health/health-records']);
       });
   }
 }
