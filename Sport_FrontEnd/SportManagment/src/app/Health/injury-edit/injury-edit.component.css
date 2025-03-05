@@ -1,0 +1,89 @@
+body {
+  background-color: #000; /* Noir profond */
+  color: #fff; /* Texte blanc */
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* 📦 Conteneur du formulaire */
+.container {
+  background-color: #111; /* Fond légèrement plus clair que le body */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4); /* Ombre rouge légère */
+  max-width: 600px;
+  margin: 50px auto;
+  border: 1px solid #ff0000; /* Bordure rouge sport */
+}
+
+/* 🏥 Titre */
+h2 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ff0000; /* Rouge vif */
+  text-transform: uppercase;
+}
+
+/* 🎯 Champs du formulaire */
+.mb-3 label {
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+/* 🎨 Champs de saisie et sélection */
+.form-control, .form-select {
+  width: 100%;
+  padding: 10px;
+  background-color: #222; /* Fond foncé */
+  color: #fff;
+  border: 1px solid #ff0000; /* Bordure rouge */
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-control:focus, .form-select:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+  border-color: #ff0000;
+}
+
+/* ✅ Boutons */
+.btn-primary {
+  background-color: #ff0000; /* Rouge intense */
+  color: #fff;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #cc0000; /* Rouge plus foncé */
+}
+
+/* ❌ Bouton Annuler */
+.btn-secondary {
+  background-color: #444; /* Gris foncé */
+  color: #fff;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.btn-secondary:hover {
+  background-color: #666; /* Gris plus clair */
+}

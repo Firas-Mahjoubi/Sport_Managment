@@ -87,7 +87,7 @@ export class AuthComponent {
         this.router.navigate(['matchesmain']);
         break;
       case 'COACH':
-        this.router.navigate(['main']);
+        this.router.navigate(['exercise-list']);
         break;
       case 'MEDICIN':
         this.router.navigate(['/medic-dashboard']);

@@ -1,1 +1,86 @@
-<p>calendar works!</p>
+<app-admin-header></app-admin-header>
+<app-admin-sidebar></app-admin-sidebar>
+
+<div class="calendar-container">
+<div class="calendar" [class.dark-mode]="isDarkMode">
+
+  <div class="add-event-container">
+    <button mat-raised-button (click)="openEventForm()">
+      Add Event
+    </button>
+    <button mat-raised-button (click)="openSessionForm()" style="margin-left: 10px;">
+      Add Session
+    </button>
+
+  </div>
+
+
+  <div class="calendar-header">
+    <button mat-icon-button (click)="viewMode === 'day' ? prevMonth() : viewMode === 'month' ? prevMonth() : prevYear()">
+      <fa-icon [icon]="faChevronLeft"></fa-icon>
+    </button>
+    <h2>
+      <span *ngIf="viewMode === 'day'">{{ selectedDate ? selectedDate.toDateString() : 'Select a day' }}</span>
+      <span *ngIf="viewMode === 'month'">{{ getMonthName() }} {{ getYear() }}</span>
+      <span *ngIf="viewMode === 'year'">{{ getYear() }}</span>
+    </h2>
+    <button mat-icon-button (click)="viewMode === 'day' ? nextMonth() : viewMode === 'month' ? nextMonth() : nextYear()">
+      <fa-icon [icon]="faChevronRight"></fa-icon>
+    </button>
+
+    <button mat-icon-button (click)="toggleDarkMode()">
+      {{ isDarkMode ? '🌜' : '🌞' }}
+    </button>
+  </div>
+
+
+  <div class="view-selector">
+    <button mat-button (click)="viewMode = 'day'" [class.active]="viewMode === 'day'">Day</button>
+    <button mat-button (click)="viewMode = 'month'" [class.active]="viewMode === 'month'">Month</button>
+    <button mat-button (click)="viewMode = 'year'" [class.active]="viewMode === 'year'">Year</button>
+  </div>
+
+
+  <div *ngIf="viewMode === 'day'" class="day-view">
+    <div class="day-header">
+      <h3>{{ selectedDate ? selectedDate.toDateString() : 'Select a day' }}</h3>
+    </div>
+
+    <div *ngFor="let event of getEventsForDay(selectedDate ? selectedDate.getDate() : null)" class="event">
+      {{ event.name }}
+    </div>
+  </div>
+
+  <div *ngIf="viewMode === 'month'" class="month-view">
+    <div class="day-names">
+      <div *ngFor="let day of dayNames" class="day-name">{{ day }}</div>
+    </div>
+    <div *ngFor="let week of weeks" class="week">
+      <div
+        *ngFor="let day of week"
+        class="day"
+        [class.empty]="day === null"
+        [class.selected]="selectedDate && day === selectedDate.getDate()"
+        (click)="selectDay(day)"
+      >
+        {{ day }}
+        <div *ngFor="let event of getEventsForDay(day)" class="event">
+          {{ event.nameEvent }}
+        </div>
+        <div *ngFor="let session of getSessionsForDay(day)" class="session">
+          {{ session.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="viewMode === 'year'" class="year-view">
+    <div class="year-grid">
+      <div *ngFor="let month of monthNames; let i = index" class="month" (click)="selectMonth(i)">
+        {{ month }}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+

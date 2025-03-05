@@ -1,72 +1,92 @@
-<p>injury-add works!</p>
-<div class="container mt-4">
-  <h2 class="text-center">Ajouter une Blessure</h2>
+<!-- 🌌 Arrière-plan avec une image -->
+<div style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('assets/injury1.jpg') no-repeat center center/cover;
+  filter: brightness(0.4);
+  z-index: -1;">
+</div>
 
-  <form [formGroup]="injuryForm" (ngSubmit)="submitForm()" class="mt-4">
-    <!-- Sélection du joueur -->
-    <div class="mb-3">
-      <label for="player" class="form-label">Joueur :</label>
-      <select id="player" class="form-select" formControlName="player">
-        <option *ngFor="let player of players" [value]="player.id + ''">
+<!-- 📦 Formulaire d'ajout -->
+<div class="injury-add-container">
+  <h2 class="form-title">➕ Ajouter une Blessure</h2>
 
-          {{ player.firstName }} {{ player.lastName }} (#{{ player.playerNumber }})
-        </option>
-      </select>
+  <form [formGroup]="injuryForm" (ngSubmit)="submitForm()" class="injury-form">
+    <div class="form-row">
+      <!-- Joueur -->
+      <div class="form-group">
+        <label for="player">👤 Joueur :</label>
+        <select id="player" formControlName="player" class="form-control">
+          <option *ngFor="let player of players" [value]="player.id + ''">
+            {{ player.firstName }} {{ player.lastName }} (#{{ player.playerNumber }})
+          </option>
+        </select>
+      </div>
+
+      <!-- Date -->
+      <div class="form-group">
+        <label for="date">📅 Date de la blessure :</label>
+        <input type="date" id="date" formControlName="date" class="form-control">
+      </div>
     </div>
 
-    <!-- Date -->
-    <div class="mb-3">
-      <label for="date" class="form-label">Date de la blessure :</label>
-      <input type="date" id="date" class="form-control" formControlName="date" required>
+    <div class="form-row">
+      <!-- Type de blessure -->
+      <div class="form-group">
+        <label for="type">⚠️ Type :</label>
+        <select id="type" formControlName="type" class="form-control">
+          <option *ngFor="let t of types" [value]="t">{{ t }}</option>
+        </select>
+      </div>
+
+      <!-- Gravité -->
+      <div class="form-group">
+        <label for="severity">🔥 Gravité :</label>
+        <select id="severity" formControlName="severity" class="form-control">
+          <option *ngFor="let s of severities" [value]="s">{{ s }}</option>
+        </select>
+      </div>
     </div>
 
-    <!-- Type de blessure -->
-    <div class="mb-3">
-      <label for="type" class="form-label">Type :</label>
-      <select id="type" class="form-select" formControlName="type">
-        <option *ngFor="let t of types" [value]="t">{{ t }}</option>
-      </select>
+    <div class="form-row">
+      <!-- Zone affectée -->
+      <div class="form-group">
+        <label for="zoneAffectee">📍 Zone affectée :</label>
+        <select id="zoneAffectee" formControlName="zoneAffectee" class="form-control">
+          <option *ngFor="let z of zones" [value]="z">{{ z }}</option>
+        </select>
+      </div>
+
+      <!-- Statut -->
+      <div class="form-group">
+        <label for="status">🚦 Statut :</label>
+        <select id="status" formControlName="status" class="form-control">
+          <option *ngFor="let st of statuses" [value]="st">{{ st }}</option>
+        </select>
+      </div>
     </div>
 
-    <!-- Gravité -->
-    <div class="mb-3">
-      <label for="severity" class="form-label">Gravité :</label>
-      <select id="severity" class="form-select" formControlName="severity">
-        <option *ngFor="let s of severities" [value]="s">{{ s }}</option>
-      </select>
-    </div>
-
-    <!-- Zone affectée -->
-    <div class="mb-3">
-      <label for="zoneAffectee" class="form-label">Zone affectée :</label>
-      <select id="zoneAffectee" class="form-select" formControlName="zoneAffectee">
-        <option *ngFor="let z of zones" [value]="z">{{ z }}</option>
-      </select>
-    </div>
-
-    <!-- Description -->
-    <div class="mb-3">
-      <label for="description" class="form-label">Description :</label>
-      <textarea id="description" class="form-control" formControlName="description" rows="3"></textarea>
+    <!-- Description (pleine largeur) -->
+    <div class="form-group">
+      <label for="description">📝 Description :</label>
+      <textarea id="description" formControlName="description" rows="3" class="form-control"></textarea>
     </div>
 
     <!-- Cause -->
-    <div class="mb-3">
-      <label for="cause" class="form-label">Cause :</label>
-      <input type="text" id="cause" class="form-control" formControlName="cause">
+    <div class="form-group">
+      <label for="cause">💥 Cause :</label>
+      <input type="text" id="cause" formControlName="cause" class="form-control">
     </div>
 
-    <!-- Statut -->
-    <div class="mb-3">
-      <label for="status" class="form-label">Statut :</label>
-      <select id="status" class="form-select" formControlName="status">
-        <option *ngFor="let st of statuses" [value]="st">{{ st }}</option>
-      </select>
+    <!-- Boutons -->
+    <div class="form-buttons">
+      <button type="submit" [disabled]="injuryForm.invalid" class="submit-btn">
+        ✅ Ajouter la Blessure
+      </button>
+      <a [routerLink]="['/health/injury']" class="cancel-btn">❌ Annuler</a>
     </div>
-
-    <!-- Bouton Ajouter -->
-    <button type="submit" class="btn btn-primary w-100" [disabled]="injuryForm.invalid">
-      Ajouter Blessure
-    </button>
   </form>
-</div>
+</div> /* 🌟 Conteneur principal */

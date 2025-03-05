@@ -11,12 +11,12 @@ export class PlayerService {
 
   constructor(private http: HttpClient) {}
 
-  // ✅ Récupère tous les joueurs
+
   getPlayers(): Observable<Player[]> {
     return this.http.get<Player[]>(`${this.baseUrl}/getallplayers`);
   }
 
-  // ✅ Récupère les joueurs sans HealthRecord
+ 
   getPlayersWithoutHealthRecord(): Observable<Player[]> {
     return this.http.get<Player[]>(`${this.baseUrl}/players/without-healthrecord`);
   }
