@@ -21,7 +21,9 @@ export class AdminCardComponent implements OnInit {
   isHomeTeam: boolean = true;
   cardTime: number | null = null;
 
-  private baseUrl = 'http://localhost:8088';
+  selectedFile: File | null = null; // Store the selected CSV file
+
+  private baseUrl = 'http://localhost:8088/api'; // Updated to match the backend API structure
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
@@ -114,5 +116,47 @@ export class AdminCardComponent implements OnInit {
       this.cardTime <= 130 &&
       !!this.cardType &&
       this.isHomeTeam !== null;
+  }
+
+  // New methods for CSV upload
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    if (file && file.type === 'text/csv') {
+      this.selectedFile = file;
+      this.errorMessage = ''; // Clear any previous error
+    } else {
+      this.errorMessage = 'Please select a valid CSV file.';
+      this.selectedFile = null;
+    }
+  }
+
+  uploadCsv(): void {
+    if (!this.selectedFile) {
+      this.errorMessage = 'Please select a CSV file to upload.';
+      return;
+    }
+
+    this.loading = true;
+    this.errorMessage = '';
+    this.successMessage = '';
+
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+
+    this.http.post(`${this.baseUrl}/uploadCards/${this.matchId}`, formData)
+      .subscribe({
+        next: (response: any) => {
+          this.successMessage = response || 'Cards uploaded successfully!';
+          this.getCards(); // Refresh the card list
+          this.loading = false;
+          this.selectedFile = null; // Clear the file input
+          setTimeout(() => this.successMessage = '', 3000); // Clear success message after 3s
+        },
+        error: (err) => {
+          console.error('Error uploading CSV:', err);
+          this.errorMessage = err.error || 'Failed to upload CSV. Please try again.';
+          this.loading = false;
+        }
+      });
   }
 }

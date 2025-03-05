@@ -67,6 +67,27 @@
     </button>
   </div>
 
+  <!-- CSV Upload Section -->
+  <div class="card p-4 mt-4">
+    <h3 class="text-center">Upload Cards via CSV</h3>
+    <div class="form-group">
+      <label class="form-label">Select CSV File:</label>
+      <input
+        type="file"
+        class="form-control"
+        (change)="onFileChange($event)"
+        accept=".csv"
+      />
+    </div>
+    <button
+      class="btn btn-primary w-100"
+      (click)="uploadCsv()"
+      [disabled]="loading || !selectedFile"
+    >
+      {{ loading ? 'Uploading...' : 'Upload CSV' }}
+    </button>
+  </div>
+
   <!-- Loading Indicator -->
   <div *ngIf="loading" class="text-center my-3">
     <div class="spinner-border text-primary" role="status"></div>

@@ -75,7 +75,7 @@ const routes: Routes = [
   { path: 'matches', component: MatchesHomeComponent },
 
   { path: 'gameweeks', component: GameweekSliderComponent },
-  { path: 'adminMatch', component: AdminMatchComponent },
+  { path: 'admindash', component: AdminMatchComponent },
 
 
   { path: 'match/:matchId', component: MatchDetailsComponent },

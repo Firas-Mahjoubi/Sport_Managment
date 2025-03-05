@@ -19,7 +19,7 @@ export class AuthComponent {
   forgotPasswordForm: FormGroup;
   resetForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,private router: Router) { 
+  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,private router: Router) {
     this.authForm = this.fb.group({
       name: [''],
       email: ['', [Validators.required, Validators.email]],
@@ -81,10 +81,10 @@ export class AuthComponent {
   redirectToRole(role: string) {
     switch (role) {
       case 'ADMIN':
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['admindash']);
         break;
       case 'PLAYER':
-        this.router.navigate(['/player-dashboard']);
+        this.router.navigate(['matchesmain']);
         break;
       case 'COACH':
         this.router.navigate(['main']);
@@ -150,6 +150,6 @@ export class AuthComponent {
     localStorage.removeItem("userRole");
     this.router.navigate(['/']);
   }
-  
-  
+
+
 }
