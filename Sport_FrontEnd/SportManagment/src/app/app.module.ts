@@ -75,6 +75,7 @@ import { TacticListComponent } from './tactics/tactic-list/tactic-list.component
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
+import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
 
 @NgModule({
   declarations: [
@@ -128,6 +129,7 @@ import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/crea
 
     MatchesmainComponent,
     MatchesNavbarComponent,
+    TacticBoardComponent,
   ],
   imports: [
     BrowserModule,
