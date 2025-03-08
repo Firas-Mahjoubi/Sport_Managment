@@ -142,8 +142,7 @@ const routes: Routes = [
 
 
 
-
-  { path: 'tactics', component: TacticListComponent }, 
+  { path: 'tactics', component: TacticListComponent, canActivate: [roleGuard(['COACH'])] }, 
   { path: 'tactics/create', component: TacticFormComponent, canActivate: [roleGuard(['COACH'])]  },
   { path: 'tactics/:id', component: TacticFolderComponent, canActivate: [roleGuard(['COACH'])]  },
   { path: 'tactics/edit/:id', component: TacticFormComponent , canActivate: [roleGuard(['COACH'])] }, 

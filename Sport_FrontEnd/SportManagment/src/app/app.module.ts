@@ -88,6 +88,7 @@ import { TacticListComponent } from './tactics/tactic-list/tactic-list.component
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
+import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
 import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
 
 
@@ -145,16 +146,9 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
 
     MatchesmainComponent,
     MatchesNavbarComponent,
-
+    TacticBoardComponent,
     SessionDetailsComponent
-
-
-
     HealthDashboardComponent,
-
-
-
-
   ],
   imports: [
     BrowserModule,
