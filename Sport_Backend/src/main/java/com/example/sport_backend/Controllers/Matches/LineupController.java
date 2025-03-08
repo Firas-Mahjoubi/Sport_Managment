@@ -31,6 +31,12 @@ public class LineupController {
         // Return the created LineUp
         return ResponseEntity.ok(createdLineUp);
     }
+    @DeleteMapping("/delete/{lineupId}")
+    public ResponseEntity<String> deleteLineUp(@PathVariable Long lineupId) {
+        lineUpService.deleteLineUp(lineupId);
+        return ResponseEntity.ok("Lineup deleted successfully.");
+    }
+
     @GetMapping("/getlineupPlayers/{matchId}")
     public Map<Long, PlayerInfoDTO> getPlayerDetailsForLineup(
             @PathVariable Long matchId,

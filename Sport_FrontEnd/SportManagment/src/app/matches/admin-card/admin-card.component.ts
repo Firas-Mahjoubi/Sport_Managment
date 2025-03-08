@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -20,7 +19,7 @@ export class AdminCardComponent implements OnInit {
   cardType: string = 'YELLOW'; // Default card type
   playerNumber: number | null = null;
   isHomeTeam: boolean = true;
-  cardTime: number | null = null; // New field for card time
+  cardTime: number | null = null;
 
   private baseUrl = 'http://localhost:8088';
 
@@ -38,7 +37,7 @@ export class AdminCardComponent implements OnInit {
     this.http.get(`${this.baseUrl}/getcardsformatch/${this.matchId}`).subscribe({
       next: (response: any) => {
         this.cards = response ?? [];
-        console.log('Fetched cards:', this.cards); // ✅ Log fetched cards
+        console.log('Fetched cards:', this.cards);
         this.loading = false;
       },
       error: (err) => {
@@ -49,10 +48,9 @@ export class AdminCardComponent implements OnInit {
     });
   }
 
-
   addCard(): void {
-    if (!this.playerNumber || this.cardTime === null || this.cardTime < 0) {
-      this.errorMessage = 'Player number and card time are required!';
+    if (!this.isFormValid()) {
+      this.errorMessage = 'Please fill in all required fields correctly (Player: 1-99, Time: 1-130)';
       return;
     }
 
@@ -66,7 +64,6 @@ export class AdminCardComponent implements OnInit {
       cardTime: this.cardTime
     };
 
-    // Send `isHomeTeam` as a query parameter
     this.http.post(`${this.baseUrl}/addCard/${this.matchId}?isHomeTeam=${this.isHomeTeam}`, cardData)
       .subscribe({
         next: () => {
@@ -75,6 +72,9 @@ export class AdminCardComponent implements OnInit {
           this.loading = false;
           this.playerNumber = null;
           this.cardTime = null;
+          this.cardType = 'YELLOW'; // Reset to default
+          this.isHomeTeam = true;   // Reset to default
+          setTimeout(() => this.successMessage = '', 3000); // Clear success message after 3s
         },
         error: (err) => {
           console.error('Error adding card:', err);
@@ -83,7 +83,6 @@ export class AdminCardComponent implements OnInit {
         }
       });
   }
-
 
   deleteCard(cardId: number | undefined): void {
     if (!cardId) {
@@ -101,9 +100,19 @@ export class AdminCardComponent implements OnInit {
       )
       .subscribe(() => {
         this.successMessage = 'Card deleted successfully!';
-        this.getCards(); // Refresh the list after deletion
+        this.getCards();
+        setTimeout(() => this.successMessage = '', 3000); // Clear success message after 3s
       });
   }
 
-
+  isFormValid(): boolean {
+    return this.playerNumber !== null &&
+      this.playerNumber >= 1 &&
+      this.playerNumber <= 99 &&
+      this.cardTime !== null &&
+      this.cardTime >= 1 &&
+      this.cardTime <= 130 &&
+      !!this.cardType &&
+      this.isHomeTeam !== null;
+  }
 }

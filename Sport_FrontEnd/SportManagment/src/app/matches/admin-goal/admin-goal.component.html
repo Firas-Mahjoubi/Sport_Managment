@@ -1,30 +1,117 @@
+<div class="container mt-4">
+  <h2 class="text-center">Manage Goals for Match #{{ matchId }}</h2>
 
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success text-center">
+    {{ successMessage }}
+  </div>
 
-<!-- Goal Form -->
-<form [formGroup]="goalForm">
-  <input type="number" formControlName="scorerNumber" placeholder="Scorer Number" required>
-  <input type="number" formControlName="assisterNumber" placeholder="Assister Number">
-  <input type="number" formControlName="timing" placeholder="Timing" required>
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger text-center">
+    {{ errorMessage }}
+  </div>
 
-  <!-- Home or Away Team Selection -->
-  <label>
-    <input type="radio" formControlName="isHomeGoal" [value]="true"> Home Goal
-  </label>
-  <label>
-    <input type="radio" formControlName="isHomeGoal" [value]="false"> Away Goal
-  </label>
+  <!-- Goal Form -->
+  <form [formGroup]="goalForm" (ngSubmit)="addGoal()" class="mb-4 card">
+    <div class="form-group">
+      <label for="scorerNumber" class="form-label">Scorer Number</label>
+      <input
+        type="number"
+        id="scorerNumber"
+        formControlName="scorerNumber"
+        class="form-control"
+        required
+        min="1"
+        max="99"
+        [class.is-invalid]="goalForm.get('scorerNumber')?.invalid && goalForm.get('scorerNumber')?.touched"
+      >
+      <div *ngIf="goalForm.get('scorerNumber')?.invalid && goalForm.get('scorerNumber')?.touched" class="invalid-feedback">
+        Player number must be between 1 and 99.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="assisterNumber" class="form-label">Assister Number</label>
+      <input
+        type="number"
+        id="assisterNumber"
+        formControlName="assisterNumber"
+        class="form-control"
+        min="1"
+        max="99"
+        [class.is-invalid]="goalForm.get('assisterNumber')?.invalid && goalForm.get('assisterNumber')?.touched"
+      >
+      <div *ngIf="goalForm.get('assisterNumber')?.invalid && goalForm.get('assisterNumber')?.touched" class="invalid-feedback">
+        Player number must be between 1 and 99.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="timing" class="form-label">Timing (Minute)</label>
+      <input
+        type="number"
+        id="timing"
+        formControlName="timing"
+        class="form-control"
+        required
+        min="1"
+        max="130"
+        [class.is-invalid]="goalForm.get('timing')?.invalid && goalForm.get('timing')?.touched"
+      >
+      <div *ngIf="goalForm.get('timing')?.invalid && goalForm.get('timing')?.touched" class="invalid-feedback">
+        Timing must be between 1 and 130 minutes.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="isHomeGoal" class="form-label">Home Team?</label>
+      <select
+        id="isHomeGoal"
+        formControlName="isHomeGoal"
+        class="form-control"
+        required
+      >
+        <option [value]="true">YES</option>
+        <option [value]="false">NO</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success w-100" [disabled]="goalForm.invalid">
+      Add Goal
+    </button>
+  </form>
 
-  <button type="button" (click)="addGoal()">Add Goal</button>
-</form>
+  <!-- Goals Table -->
+  <div *ngIf="goals.length > 0; else noGoals" class="dashboard-table-wrapper">
+    <table class="goal-table">
+      <thead>
+      <tr>
+        <th>Scorer</th>
+        <th>Assister</th>
+        <th>Timing</th>
+        <th>Home Team</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let goal of goals">
+        <td>
+          <strong>{{ goal.scorerFirstName }} {{ goal.scorerLastName || '' }}</strong>
+        </td>
+        <td>
+          <span *ngIf="goal.assisterFirstName">
+            {{ goal.assisterFirstName }} {{ goal.assisterLastName || '' }}
+          </span>
+          <span *ngIf="!goal.assisterFirstName">-</span>
+        </td>
+        <td>{{ goal.timing }}'</td>
+        <td>{{ goal.homeGoal ? 'True' : 'False' }}</td>
+        <td>
+          <button class="btn btn-action" (click)="deleteGoal(goal.id)">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
-<!-- Goals List -->
-<ul>
-  <li *ngFor="let goal of goals">
-    <strong>{{ goal.scorerFirstName }} {{ goal.scorerLastName || '' }}</strong>
-    <span *ngIf="goal.assisterFirstName"> assisted by {{ goal.assisterFirstName }} {{ goal.assisterLastName || '' }}</span>
-    at {{ goal.timing }}' ({{ goal.homeGoal ? 'Home' : 'Away' }})
-    - <strong>Result:</strong> {{ goal.result }}
-
-    <button (click)="deleteGoal(goal.id)">Delete</button>
-  </li>
-</ul>
+  <!-- No Goals Message -->
+  <ng-template #noGoals>
+    <p class="text-center text-muted">No goals recorded for this match.</p>
+  </ng-template>
+</div>

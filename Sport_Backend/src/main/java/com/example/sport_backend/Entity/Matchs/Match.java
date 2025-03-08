@@ -58,9 +58,8 @@ public class Match {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "match")
     List<Substitution> substitutions;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "match")
-    LineUp lineUp;
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "match")
+    List<LineUp> lineUps;
     private static final Pattern RESULT_PATTERN = Pattern.compile("^\\d+-\\d+$");
 
     public void setResult(String result) {

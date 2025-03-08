@@ -62,10 +62,23 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatchesmainComponent } from './matches/matchesmain/matchesmain.component';
 
 import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.component';
+import { MatchesFooterComponent } from './matches/matches-footer/matches-footer.component';
+import { AdminSubstitutionComponent } from './matches/admin-substitution/admin-substitution.component';
 
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+
+
+
+
+import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+import { MatDividerModule } from '@angular/material/divider';
+
+
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -76,6 +89,8 @@ import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
 import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
+import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
+
 
 @NgModule({
   declarations: [
@@ -123,6 +138,8 @@ import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.compon
     ListPlayerComponent,
     ListRecoveryPlanComponent,
     CalendarComponent,
+    MatchesFooterComponent,
+    AdminSubstitutionComponent,
     EventFormComponent,
     SessionFormComponent,
     EventDetailsComponent,
@@ -130,6 +147,8 @@ import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.compon
     MatchesmainComponent,
     MatchesNavbarComponent,
     TacticBoardComponent,
+    SessionDetailsComponent
+    HealthDashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -148,6 +167,11 @@ import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.compon
     MatProgressSpinnerModule,
     MatSelectModule,
     MatCardModule,
+
+    MatProgressBarModule,
+    MatDividerModule,
+
+
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -164,7 +188,8 @@ import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.compon
         MatIconModule,
         MatFormFieldModule, // ✅ Required for mat-form-field
         MatSelectModule, // ✅ Required for mat-select
-        MatToolbarModule,
+        MatToolbarModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,14 +1,28 @@
-/* Styles de base pour le calendrier */
+.calendar-container {
+  max-width: 1200px; /* Vous pouvez ajuster la largeur maximale ici */
+  margin: 0 auto; /* Centrer le calendrier horizontalement */
+  padding: 20px;
+  background-color: #fff; /* Fond blanc ou ajuster à votre design */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .calendar {
   font-family: 'Arial', sans-serif;
   max-width: 800px;
-  margin: 20px auto;
+  width: 90%; /* Added for better responsiveness */
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   overflow: hidden;
   background-color: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, color 0.3s ease;
+
+  /* Centering styles */
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* En-tête du calendrier */
@@ -294,4 +308,18 @@
 .add-event-container button mat-icon {
   margin-right: 8px; /* Un peu d'espace entre l'icône et le texte */
   font-size: 18px; /* Icônes simples */
+}
+/* Style pour les sessions */
+.session {
+  background-color: #4caf50; /* Couleur verte pour les sessions */
+  color: white;
+  padding: 2px 5px;
+  border-radius: 4px;
+  margin: 2px 0;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.session:hover {
+  background-color: #388e3c; /* Couleur verte plus foncée au survol */
 }
