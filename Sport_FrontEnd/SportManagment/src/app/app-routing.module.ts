@@ -29,7 +29,6 @@ import { EditHealthrecordComponent } from './Health/healthrecord/edit-healthreco
 import { ListInjuryArchiveComponent } from './Health/list-injury-archive/list-injury-archive.component';
 import { ShowHealthrecordComponent } from './Health/healthrecord/show-healthrecord/show-healthrecord.component';
 
-import { HomeComponent } from './components/home/home.component';
 
 import {AdminSidebarComponent} from "./admin/admin-sidebar/admin-sidebar.component";
 import {AdminHeaderComponent} from "./admin/admin-header/admin-header.component";
@@ -49,13 +48,15 @@ import { TrainingSessionFormComponent } from './components/training-session-form
 
 import {MatchesmainComponent} from "./matches/matchesmain/matchesmain.component";
 import {MatchesNavbarComponent} from "./matches/matches-navbar/matches-navbar.component";
+import { TacticListComponent } from './tactics/tactic-list/tactic-list.component';
+import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
+import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 
 
 
 
 const routes: Routes = [
 
-  { path: '', component: HomeComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
   {path: 'dashboard', component:DashboardComponent, canActivate: [roleGuard(['ADMIN'])]}, // Protect dashboard route
@@ -63,7 +64,12 @@ const routes: Routes = [
   //--------------------Training-groud -------------------------//
   { path: 'training-sessions-exercice/:id', component: TrainingSessionComponent },
   { path: 'training-sessions', component: TrainingSessionExerciceComponent },
+
   { path: 'training-session-add', component: TrainingSessionFormComponent }, 
+
+  { path: 'training-sessions/new', component: TrainingSessionFormComponent },
+  { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent },
+
   { path: 'training-session/:id', component: TrainingSessionViewComponent },
 
 
@@ -96,16 +102,19 @@ const routes: Routes = [
 
 
 
+  {path :'DashboardSidebar',component:AdminSidebarComponent},
 
 
 
 
 
-  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  
- { path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
 
 
+  { path: 'tactics', component: TacticListComponent }, 
+  { path: 'tactics/create', component: TacticFormComponent, canActivate: [roleGuard(['COACH'])]  },
+  { path: 'tactics/:id', component: TacticFolderComponent, canActivate: [roleGuard(['COACH'])]  },
+  { path: 'tactics/edit/:id', component: TacticFormComponent , canActivate: [roleGuard(['COACH'])] }, 
 
 
 //skander turkiiiiii injury
@@ -136,6 +145,7 @@ const routes: Routes = [
 { path: 'list-recoveryplan/:playerId', component: ListRecoveryPlanComponent },
 
 { path: 'list-player', component: ListPlayerComponent },
+{ path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
 
 
