@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListRecoveryplanComponent } from './list-recoveryplan.component';
+import { ListRecoveryPlanComponent } from './list-recoveryplan.component';
 
-describe('ListRecoveryplanComponent', () => {
-  let component: ListRecoveryplanComponent;
-  let fixture: ComponentFixture<ListRecoveryplanComponent>;
+describe('ListRecoveryPlanComponent', () => {
+  let component: ListRecoveryPlanComponent;
+  let fixture: ComponentFixture<ListRecoveryPlanComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ListRecoveryplanComponent]
+      declarations: [ListRecoveryPlanComponent]
     });
-    fixture = TestBed.createComponent(ListRecoveryplanComponent);
+    fixture = TestBed.createComponent(ListRecoveryPlanComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,51 +1,100 @@
-<p>edit-recoveryplan works!</p>
-<div class="container mt-4">
-  <h3>Modifier le plan de récupération</h3>
+<!-- 🌌 Arrière-plan -->
+<div style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('assets/player.jpg') no-repeat center center/cover;
+  filter: brightness(0.4);
+  z-index: -1;">
+</div>
 
-  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+<!-- 📦 Conteneur du formulaire -->
+<div class="form-container">
+  <h4 class="form-title">✏️ Modifier le Plan de Récupération</h4>
 
-    <div class="mb-3">
-      <label for="name" class="form-label">Nom du plan</label>
-      <input type="text" class="form-control" id="name" formControlName="name">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="recovery-plan-form">
+
+    <!-- 🔹 Blessure concernée -->
+    <div class="form-group">
+      <label>Blessure concernée:</label>
+      <input type="text" [value]="editForm.get('injuryId')?.value" disabled class="form-control">
     </div>
 
-    <div class="mb-3">
-      <label for="description" class="form-label">Description</label>
-      <textarea class="form-control" id="description" formControlName="description"></textarea>
+    <!-- 🔹 Description -->
+    <div class="form-group">
+      <label>Description:</label>
+      <input type="text" formControlName="planDescription" required class="form-control">
     </div>
 
-    <div class="mb-3">
-      <label for="duration" class="form-label">Durée (en jours)</label>
-      <input type="number" class="form-control" id="duration" formControlName="duration">
+    <div class="form-row">
+      <!-- 🔹 Date de début -->
+      <div class="form-group">
+        <label>Début:</label>
+        <input type="date" formControlName="startDate" (change)="validateDates()" required class="form-control">
+      </div>
+
+      <!-- 🔹 Date de fin estimée -->
+      <div class="form-group">
+        <label>Fin estimée:</label>
+        <input type="date" formControlName="estimatedEndDate" (change)="validateDates()" required class="form-control">
+        <small *ngIf="dateError" class="text-danger">
+          ⚠ La date de fin ne peut pas être avant la date de début.
+        </small>
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label for="status" class="form-label">Statut</label>
-      <select class="form-select" id="status" formControlName="status">
-        <option value="PLANNED">Prévu</option>
-        <option value="IN_PROGRESS">En cours</option>
-        <option value="COMPLETED">Terminé</option>
-        <option value="CANCELLED">Annulé</option>
-      </select>
+    <!-- 🔹 Progression -->
+    <div class="form-group">
+      <label>Progression (%):</label>
+      <input type="range" formControlName="progress" min="0" max="100" step="1" (input)="updateProgress($event)" class="form-control">
+      <span>{{ progressValue }}%</span>
     </div>
 
-    <div class="mb-3">
-      <label for="startDate" class="form-label">Date de début</label>
-      <input type="date" class="form-control" id="startDate" formControlName="startDate">
+    <div class="form-row">
+      <!-- 🔹 Fréquence des séances -->
+      <div class="form-group">
+        <label>Fréquence des séances:</label>
+        <input type="number" formControlName="sessionFrequency" min="1" required class="form-control">
+      </div>
+
+      <!-- 🔹 Durée d'une séance -->
+      <div class="form-group">
+        <label>Durée d'une séance (min):</label>
+        <input type="number" formControlName="sessionDuration" min="1" required class="form-control">
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label for="endDate" class="form-label">Date de fin</label>
-      <input type="date" class="form-control" id="endDate" formControlName="endDate">
+    <div class="form-row">
+      <!-- 🔹 Type de Plan -->
+
+
+      <!-- 🔹 Prochaine révision -->
+      <div class="form-group">
+        <label>Prochaine révision:</label>
+        <input type="date" formControlName="nextReviewDate" required class="form-control">
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label for="progress" class="form-label">Progression (%)</label>
-      <input type="number" class="form-control" id="progress" formControlName="progress">
+    <!-- 🔹 Ajustements -->
+    <div class="form-group">
+      <label>Ajustements:</label>
+      <textarea formControlName="adjustments" rows="3" class="form-control"></textarea>
     </div>
 
-    <button type="submit" class="btn btn-primary me-2">Enregistrer</button>
-    <button type="button" class="btn btn-secondary" (click)="cancel()">Annuler</button>
+    <!-- 🔹 Statut -->
+    
+
+    <!-- 🔘 Boutons -->
+    <div class="form-buttons">
+      <button type="submit" [disabled]="editForm.invalid || dateError" class="submit-btn">
+        ✅ Mettre à jour
+      </button>
+      <a routerLink="/list-recoveryplan/:playerId" class="cancel-btn">
+        ❌ Annuler
+      </a>
+    </div>
 
   </form>
 </div>

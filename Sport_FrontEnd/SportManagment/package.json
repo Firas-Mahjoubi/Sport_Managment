@@ -20,8 +20,12 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
-    "@fortawesome/angular-fontawesome": "^0.13.0",
+
+    "@fortawesome/fontawesome-free": "^6.7.2",
+
+    "@fortawesome/angular-fontawesome": "^1.0.0",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
+
     "@kurkle/color": "^0.3.4",
     "@ng-bootstrap/ng-bootstrap": "^15.0.0",
     "@popperjs/core": "^2.11.8",

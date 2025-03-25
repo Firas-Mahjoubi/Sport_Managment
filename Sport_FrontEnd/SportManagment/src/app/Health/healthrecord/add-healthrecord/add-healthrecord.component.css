@@ -1,0 +1,143 @@
+/* 🌟 Conteneur principal */
+.form-container {
+  background-color: rgba(17, 17, 17, 0.9); /* Fond sombre avec transparence */
+  color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  max-width: 800px; /* Augmenté pour correspondre */
+  margin: 40px auto;
+  border: 1px solid #007bff; /* 🔵 Bordure bleue */
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 🔵 Titre */
+.form-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #007bff; /* 🔵 Bleu */
+  text-transform: uppercase;
+}
+
+/* 📏 Organisation en colonnes */
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+/* 🏥 Groupes de champs */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* 🏷️ Labels */
+label {
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 5px;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+/* 🎯 Champs */
+.form-control {
+  width: 100%;
+  padding: 12px;
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #007bff; /* 🔵 Bordure bleue */
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+textarea.form-control {
+  resize: none;
+  min-height: 80px;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.8); /* 🔵 Glow bleu */
+  border-color: #007bff;
+}
+
+/* 🔽 Sélections */
+select.form-control {
+  cursor: pointer;
+}
+
+/* 🔘 Boutons */
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.submit-btn {
+  background-color: #007bff; /* 🔵 Bleu */
+  color: #fff;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  width: 48%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cancel-btn {
+  display: inline-block;
+  width: 48%;
+  text-align: center;
+  background-color: #444;
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.submit-btn:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled),
+.cancel-btn:hover {
+  background-color: #0056b3; /* 🔵 Bleu foncé */
+  transform: scale(1.03);
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .submit-btn, .cancel-btn {
+    width: 100%;
+  }
+}

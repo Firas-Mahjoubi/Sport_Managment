@@ -6,6 +6,8 @@ import { PlayerService } from '../services/player.service';
 import { Player } from '../models/player';
 import { Injury, Severity, Status, Type, ZoneAffectee } from '../models/injury';
 
+
+
 @Component({
   selector: 'app-injury-edit',
   templateUrl: './injury-edit.component.html',
@@ -16,6 +18,8 @@ export class InjuryEditComponent implements OnInit {
   injuryId!: number;
   players: Player[] = [];
   injury!: Injury;
+
+
 
   types = Object.values(Type);
   severities = Object.values(Severity);

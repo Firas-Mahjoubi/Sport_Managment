@@ -62,6 +62,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatchesmainComponent } from './matches/matchesmain/matchesmain.component';
 
 import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.component';
+import { MatchesFooterComponent } from './matches/matches-footer/matches-footer.component';
+import { AdminSubstitutionComponent } from './matches/admin-substitution/admin-substitution.component';
 
 
 import { MatNativeDateModule } from '@angular/material/core';
@@ -71,6 +73,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
+
+import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
 
 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -87,6 +91,8 @@ import { TacticListComponent } from './tactics/tactic-list/tactic-list.component
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
+import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
+import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
 
 
 @NgModule({
@@ -135,12 +141,19 @@ import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/crea
     ListPlayerComponent,
     ListRecoveryPlanComponent,
     CalendarComponent,
+    MatchesFooterComponent,
+    AdminSubstitutionComponent,
     EventFormComponent,
     SessionFormComponent,
     EventDetailsComponent,
 
     MatchesmainComponent,
     MatchesNavbarComponent,
+
+    TacticBoardComponent,
+    SessionDetailsComponent
+    HealthDashboardComponent,
+
   ],
   imports: [
     BrowserModule,
