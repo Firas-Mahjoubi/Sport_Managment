@@ -52,7 +52,7 @@ import { TacticListComponent } from './tactics/tactic-list/tactic-list.component
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 
-
+  
 
 
 const routes: Routes = [
