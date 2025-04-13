@@ -1,0 +1,10 @@
+<div class="divmenu">
+    <h1> Bienvenue sur {{ title }}! </h1>
+    <img width="300" alt="TactiBoard" src="assets/chess.png">
+    <h2> Choisissez votre mode de jeu </h2>
+    <button mat-raised-button routerLink="../online"> Online (1 Joueur) </button>
+    <br/>
+    <br/>
+    <button mat-raised-button routerLink="../local">Local (2 Joueurs) </button>
+    <router-outlet></router-outlet>
+</div>

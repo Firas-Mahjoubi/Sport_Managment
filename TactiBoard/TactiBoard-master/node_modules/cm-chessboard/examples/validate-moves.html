@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cm-chessboard</title>
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0"/>
+    <link rel="stylesheet" href="../styles/page.css"/>
+    <link rel="stylesheet" href="../styles/cm-chessboard.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
+    <style type="text/css">
+        div.board {
+            float: left;
+            max-width: 450px;
+            max-height: 430px;
+            width: calc(100vw - 40px);
+            height: calc(95vw - 40px);
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script nomodule src="../node_modules/browser-es-module-loader/dist/babel-browser-build.js"></script>
+    <script nomodule src="../node_modules/browser-es-module-loader/dist/browser-es-module-loader.js"></script>
+</head>
+<body>
+<h1><a href="../">cm-chessboard</a></h1>
+<h2>Example: Input enabled, move validation with chess.js</h2>
+<p>Input enabled for white. <a href="https://github.com/jhlywa/chess.js">chess.js</a> does the validation and answers
+    with random moves.</p>
+<div class="board" id="board"></div>
+<pre>
+function inputHandler(event) {
+    console.log("event", event)
+    if (event.type === INPUT_EVENT_TYPE.moveDone) {
+        const move = {from: event.squareFrom, to: event.squareTo}
+        const result = chess.move(move)
+        if (result) {
+            event.chessboard.disableMoveInput()
+            setTimeout(() => {
+                event.chessboard.setPosition(chess.fen())
+                const possibleMoves = chess.moves({verbose: true})
+                if (possibleMoves.length > 0) {
+                    const randomMove = possibleMoves[random(0, possibleMoves.length - 1)]
+                    chess.move({from: randomMove.from, to: randomMove.to})
+                    event.chessboard.enableMoveInput(inputHandler, COLOR.white)
+                    event.chessboard.setPosition(chess.fen())
+                }
+            })
+        } else {
+            console.warn("invalid move", move)
+        }
+        return result
+    } else {
+        return true
+    }
+}
+
+const board = new Chessboard(document.getElementById("board"), {
+    position: chess.fen(),
+    sprite: {url: "../assets/images/chessboard-sprite.svg"},
+    orientation: COLOR.white,
+    moveInputMode: MOVE_INPUT_MODE.dragPiece
+})
+board.enableMoveInput(inputHandler, COLOR.white)
+</pre>
+<div id="output"></div>
+<script type="module">
+    import {INPUT_EVENT_TYPE, MOVE_INPUT_MODE, COLOR, Chessboard} from "../src/cm-chessboard/Chessboard.js"
+
+    function random(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min
+    }
+
+    const chess = new Chess()
+
+    function inputHandler(event) {
+        console.log("event", event)
+        if (event.type === INPUT_EVENT_TYPE.moveDone) {
+            const move = {from: event.squareFrom, to: event.squareTo}
+            const result = chess.move(move)
+            if (result) {
+                event.chessboard.disableMoveInput()
+                setTimeout(() => {
+                    event.chessboard.setPosition(chess.fen())
+                    const possibleMoves = chess.moves({verbose: true})
+                    if (possibleMoves.length > 0) {
+                        const randomMove = possibleMoves[random(0, possibleMoves.length - 1)]
+                        chess.move({from: randomMove.from, to: randomMove.to})
+                        event.chessboard.enableMoveInput(inputHandler, COLOR.white)
+                        event.chessboard.setPosition(chess.fen())
+                    }
+                })
+            } else {
+                console.warn("invalid move", move)
+            }
+            return result
+        } else {
+            return true
+        }
+    }
+
+    const board = new Chessboard(document.getElementById("board"), {
+        position: chess.fen(),
+        sprite: {url: "../assets/images/chessboard-sprite.svg"},
+        orientation: COLOR.white,
+        moveInputMode: MOVE_INPUT_MODE.dragPiece
+    })
+    board.enableMoveInput(inputHandler, COLOR.white)
+</script>
+</body>
+</html>

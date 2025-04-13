@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cm-chessboard</title>
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0"/>
+    <link rel="stylesheet" href="../styles/page.css"/>
+    <link rel="stylesheet" href="../styles/cm-chessboard.css"/>
+    <style type="text/css">
+        #board {
+            width: calc(100vw - 40px);
+            height: calc(96vw - 40px);
+        }
+    </style>
+    <script nomodule src="../node_modules/browser-es-module-loader/dist/babel-browser-build.js"></script>
+    <script nomodule src="../node_modules/browser-es-module-loader/dist/browser-es-module-loader.js"></script>
+</head>
+<body>
+<h1><a href="../">cm-chessboard</a></h1>
+<h2>Example: Responsive chessboard</h2>
+<div class="board" id="board"></div>
+<pre>
+new Chessboard(document.getElementById("board"), {position: "start", responsive: true})
+</pre>
+<script type="module">
+    import {Chessboard} from "../src/cm-chessboard/Chessboard.js"
+
+    new Chessboard(document.getElementById("board"), {
+        position: "start",
+        sprite: {url: "../assets/images/chessboard-sprite.svg"},
+        responsive: true
+    })
+</script>
+</body>
+</html>
