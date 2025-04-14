@@ -48,6 +48,8 @@ import { TrainingSessionFormComponent } from './components/training-session-form
 
 import {MatchesmainComponent} from "./matches/matchesmain/matchesmain.component";
 import {MatchesNavbarComponent} from "./matches/matches-navbar/matches-navbar.component";
+import {MatchesFooterComponent} from "./matches/matches-footer/matches-footer.component";
+import {AdminSubstitutionComponent} from "./matches/admin-substitution/admin-substitution.component";
 import { TacticListComponent } from './tactics/tactic-list/tactic-list.component';
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
@@ -55,11 +57,21 @@ import { HomeComponent } from './components/home/home.component';
 import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
 
 
+import {CalendarComponent} from "./AdvancedPlanning/calendar/calendar.component";
+import {EventFormComponent} from "./AdvancedPlanning/calendar/event-form/event-form.component";
+import {SessionFormComponent} from "./AdvancedPlanning/session-form/session-form.component";
+import {EventDetailsComponent} from "./AdvancedPlanning/event-details/event-details.component";
+
+import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+
+
+
 
 
 const routes: Routes = [
 
   { path: 'auth', component: AuthComponent },
+  {path:'calendar',component:CalendarComponent},
   { path: 'reset-password', component: AuthComponent }, // Ensure reset password is mapped
   {path: 'dashboard', component:DashboardComponent, canActivate: [roleGuard(['ADMIN'])]}, // Protect dashboard route
   {path: 'main', component:LandingPageComponent},
@@ -90,6 +102,20 @@ const routes: Routes = [
 
 
   { path: 'match/:matchId', component: MatchDetailsComponent },
+
+
+  {path :'DashboardSidebar',component:SidebarComponent},
+
+
+
+
+
+
+  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
+
+
+
+
   { path: 'Dashboard', component: DashboardComponent },
   {path :'DashboardSidebar',component:AdminSidebarComponent},
   {path :'DashboardHeader',component:AdminHeaderComponent},
@@ -97,6 +123,10 @@ const routes: Routes = [
   { path: 'admin-cards/:matchId', component: AdminCardComponent },
   {path: 'matchesmain', component:MatchesmainComponent},
   {path: 'matchesNavbar', component:MatchesNavbarComponent},
+  {path: 'matchesFooter', component:MatchesFooterComponent},
+  { path: 'admin-substitutions/:matchId', component: AdminSubstitutionComponent }, // 🆕 Route with matchId
+
+
 
 
 
@@ -149,6 +179,11 @@ const routes: Routes = [
 { path: 'list-player', component: ListPlayerComponent },
 {path: '**', redirectTo: 'home'}, 
 
+{ path: 'health-dashboard', component: HealthDashboardComponent },
+
+
+
+{ path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
 ];
 @NgModule({

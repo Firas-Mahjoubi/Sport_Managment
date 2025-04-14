@@ -1,0 +1,106 @@
+<div class="container mt-4">
+  <h2 class="text-center">Manage Substitutions for Match #{{ matchId }}</h2>
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success text-center">
+    {{ successMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger text-center">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Substitution Form -->
+  <form [formGroup]="substitutionForm" (ngSubmit)="addSubstitution()" class="mb-4 card">
+    <div class="form-group">
+      <label for="playerInNumber" class="form-label">Player In Number</label>
+      <input
+        type="number"
+        id="playerInNumber"
+        formControlName="playerInNumber"
+        class="form-control"
+        required
+        min="1"
+        max="99"
+        [class.is-invalid]="substitutionForm.get('playerInNumber')?.invalid && substitutionForm.get('playerInNumber')?.touched"
+      >
+      <div *ngIf="substitutionForm.get('playerInNumber')?.invalid && substitutionForm.get('playerInNumber')?.touched" class="invalid-feedback">
+        Player number must be between 1 and 99.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="playerOutNumber" class="form-label">Player Out Number</label>
+      <input
+        type="number"
+        id="playerOutNumber"
+        formControlName="playerOutNumber"
+        class="form-control"
+        required
+        min="1"
+        max="99"
+        [class.is-invalid]="substitutionForm.get('playerOutNumber')?.invalid && substitutionForm.get('playerOutNumber')?.touched"
+      >
+      <div *ngIf="substitutionForm.get('playerOutNumber')?.invalid && substitutionForm.get('playerOutNumber')?.touched" class="invalid-feedback">
+        Player number must be between 1 and 99.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="timing" class="form-label">Timing (Minute)</label>
+      <input
+        type="number"
+        id="timing"
+        formControlName="timing"
+        class="form-control"
+        required
+        min="1"
+        max="130"
+        [class.is-invalid]="substitutionForm.get('timing')?.invalid && substitutionForm.get('timing')?.touched"
+      >
+      <div *ngIf="substitutionForm.get('timing')?.invalid && substitutionForm.get('timing')?.touched" class="invalid-feedback">
+        Timing must be between 1 and 130 minutes.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="isHomeTeam" class="form-label">Home Team?</label>
+      <select id="isHomeTeam" formControlName="isHomeTeam" class="form-control">
+        <option [value]="true">YES</option>
+        <option [value]="false">No</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success w-100" [disabled]="substitutionForm.invalid">
+      Add Substitution
+    </button>
+  </form>
+
+  <!-- Substitutions Table -->
+  <div *ngIf="substitutions.length > 0; else noSubstitutions" class="dashboard-table-wrapper">
+    <table class="substitution-table">
+      <thead>
+      <tr>
+        <th>Player In</th>
+        <th>Player Out</th>
+        <th>Timing</th>
+        <th>Home Team</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let sub of substitutions; let i = index">
+        <td>{{ sub.playerIn }}</td>
+        <td>{{ sub.playerOut }}</td>
+        <td>{{ sub.minuteOfPlay }}'</td>
+        <td>{{ sub.homeTeam ? 'True' : 'False' }}</td>
+        <td>
+          <button class="btn btn-action" (click)="deleteSubstitution(sub.id)">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- No Substitutions Message -->
+  <ng-template #noSubstitutions>
+    <p class="text-center text-muted">No substitutions recorded for this match.</p>
+  </ng-template>
+</div>

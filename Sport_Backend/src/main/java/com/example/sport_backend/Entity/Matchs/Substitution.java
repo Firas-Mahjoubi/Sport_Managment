@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.engine.internal.Cascade;
 
 @Getter
@@ -24,13 +26,14 @@ public class Substitution {
     Integer playerOutNumber;  // The player number of the player going out
     Boolean isHomeTeam;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "line_up_id")  // Reference to the LineUp
-            @JsonIgnore
-    LineUp lineUp;  // The associated lineup for the substitution
+    @ManyToOne
+    @JoinColumn(name = "line_up_id", nullable = false)
+    @JsonIgnore
+    LineUp lineUp;
 
-    @ManyToOne(cascade= CascadeType.ALL)
-    @JoinColumn(name = "match_id")  // Reference to the match
-            @JsonIgnore
-    Match match;  // The match associated with the substitution
+    @ManyToOne
+    @JoinColumn(name = "match_id", nullable = false)
+    @JsonIgnore
+    Match match;
+
 }

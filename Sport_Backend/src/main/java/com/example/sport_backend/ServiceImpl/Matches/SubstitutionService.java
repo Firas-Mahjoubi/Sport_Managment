@@ -89,6 +89,7 @@ public class SubstitutionService {
 
                     // Map to DTO, automatically including isHomeTeam from entity
                     return new SubstitutionInfoDTO(
+                            sub.getId(),
                             sub.getMinuteOfPlay(),
                             playerIn.getFirstName(),
                             playerIn.getLastName(),
@@ -99,6 +100,16 @@ public class SubstitutionService {
                 })
                 .collect(Collectors.toList());
     }
+    @Transactional
+    public void deleteSubstitution(Long substitutionId) {
+        // Fetch the substitution by ID
+        Substitution substitution = substitutionRepo.findById(substitutionId)
+                .orElseThrow(() -> new RuntimeException("Substitution not found"));
+
+        // Delete the substitution
+        substitutionRepo.delete(substitution);
+    }
+
 
 
 }

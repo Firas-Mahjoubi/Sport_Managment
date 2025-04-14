@@ -1,0 +1,65 @@
+.session-details {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.session-details h2 {
+  margin-top: 0;
+  color: #3f51b5;
+}
+
+.session-details p {
+  margin: 10px 0;
+  color: #333;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.actions button {
+  margin-left: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.actions button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Style pour le bouton Edit */
+.actions button:first-child {
+  background-color: #3f51b5;
+  color: white;
+}
+
+.actions button:first-child:hover {
+  background-color: #303f9f;
+}
+
+/* Style pour le bouton Delete */
+.actions button:nth-child(2) {
+  background-color: #f44336;
+  color: white;
+}
+
+.actions button:nth-child(2):hover {
+  background-color: #d32f2f;
+}
+
+/* Style pour le bouton Close */
+.actions button:last-child {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.actions button:last-child:hover {
+  background-color: #bdbdbd;
+}

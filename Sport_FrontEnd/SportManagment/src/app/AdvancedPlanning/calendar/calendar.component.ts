@@ -1,39 +1,39 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EventFormComponent } from './event-form/event-form.component';
-import { SessionFormComponent } from '../session-form/session-form.component'; // Import du composant SessionForm
-import { EventService } from '../../services/event.service'; // Service pour les événements
-import { EventDetailsComponent } from '../event-details/event-details.component'; // Import du composant EventDetails
-import { SessionService } from '../../services/session.service'; // Service pour les sessions
+import { SessionFormComponent } from '../session-form/session-form.component';
+import { EventService } from '../../services/event.service';
+import { EventDetailsComponent } from '../event-details/event-details.component';
+import { SessionService } from '../../services/session.service';
+import { SessionDetailsComponent } from '../session-details/session-details.component';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent {
-  // Icônes FontAwesome
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
 
-  // Variables pour la gestion du calendrier
-  currentDate: Date = new Date(); // Date actuelle
-  daysInMonth: (number | null)[] = []; // Jours du mois
-  weeks: (number | null)[][] = []; // Semaines du mois
-  selectedDate: Date | null = null; // Jour sélectionné
-  viewMode: 'day' | 'month' | 'year' = 'month'; // Vue par défaut
+  currentDate: Date = new Date();
+  daysInMonth: (number | null)[] = [];
+  weeks: (number | null)[][] = [];
+  selectedDate: Date | null = null;
+  viewMode:  'month'| 'day' | 'year' = 'month';
 
-  // Noms des mois et des jours
+
   monthNames: string[] = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
   dayNames: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-  // Mode sombre
+
   isDarkMode: boolean = false;
 
-  // Tableau pour stocker les événements
+
   events: any[] = [];
 
   constructor(
@@ -42,10 +42,10 @@ export class CalendarComponent {
     private sessionService: SessionService,
   ) {
     this.generateCalendar();
-    this.loadEvents(); // Charger les événements au démarrage
+    this.loadEvents();
   }
 
-  // Générer le calendrier pour le mois en cours
+
   generateCalendar(): void {
     const year = this.currentDate.getFullYear();
     const month = this.currentDate.getMonth();
@@ -67,11 +67,11 @@ export class CalendarComponent {
     this.weeks = this.chunkArray(this.daysInMonth, 7);
   }
 
-  // Charger les événements depuis le backend
+
   loadEvents(): void {
     this.eventService.getEvents().subscribe({
       next: (response) => {
-        this.events = response; // Stocker les événements
+        this.events = response;
       },
       error: (error) => {
         console.error('Error loading events:', error);
@@ -79,102 +79,115 @@ export class CalendarComponent {
     });
   }
 
-  // Passer au mois précédent
+
   prevMonth(): void {
     this.currentDate.setMonth(this.currentDate.getMonth() - 1);
     this.generateCalendar();
   }
 
-  // Passer au mois suivant
+
   nextMonth(): void {
     this.currentDate.setMonth(this.currentDate.getMonth() + 1);
     this.generateCalendar();
   }
 
-  // Passer à l'année précédente
+
   prevYear(): void {
     this.currentDate.setFullYear(this.currentDate.getFullYear() - 1);
     this.generateCalendar();
   }
 
-  // Passer à l'année suivante
+
   nextYear(): void {
     this.currentDate.setFullYear(this.currentDate.getFullYear() + 1);
     this.generateCalendar();
   }
 
-  // Sélectionner un jour
-  // In CalendarComponent
-selectDay(day: number | null): void {
-  if (day !== null) {
-    this.selectedDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day);
-    this.viewMode = 'day'; // Switch to day view
+  selectDay(day: number | null): void {
+    if (day !== null) {
+      this.selectedDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day);
+      this.viewMode = 'day';
 
-    // Open event details if an event is clicked
-    const eventsForDay = this.getEventsForDay(day);
-    if (eventsForDay.length > 0) {
-      const dialogRef = this.dialog.open(EventDetailsComponent, {
-        width: '500px',
-        data: { event: eventsForDay[0] } // Pass the first event of the day
-      });
 
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.loadEvents(); // Reload events if an event was deleted
-        }
-      });
+      const eventsForDay = this.getEventsForDay(day);
+      if (eventsForDay.length > 0) {
+        const dialogRef = this.dialog.open(EventDetailsComponent, {
+          width: '500px',
+          data: { event: eventsForDay[0] }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.loadEvents(); // Recharger les événements si un événement a été supprimé
+          }
+        });
+      }
+
+
+      const sessionsForDay = this.getSessionsForDay(day);
+      if (sessionsForDay.length > 0) {
+        const dialogRef = this.dialog.open(SessionDetailsComponent, {
+          width: '500px',
+          data: { session: sessionsForDay[0] }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.loadSessions();
+          }
+        });
+      }
     }
   }
-}
 
-  // Sélectionner un mois
+
   selectMonth(monthIndex: number): void {
     this.currentDate.setMonth(monthIndex);
-    this.viewMode = 'month'; // Basculer vers la vue mois
+    this.viewMode = 'month';
     this.generateCalendar();
   }
 
-  // Sélectionner une année
+
   selectYear(year: number): void {
     this.currentDate.setFullYear(year);
-    this.viewMode = 'year'; // Basculer vers la vue année
+    this.viewMode = 'year';
   }
 
-  // Obtenir le nom du mois
+
   getMonthName(): string {
     return this.monthNames[this.currentDate.getMonth()];
   }
 
-  // Obtenir l'année
+
   getYear(): number {
     return this.currentDate.getFullYear();
   }
 
-  // Basculer entre le mode clair et sombre
+
   toggleDarkMode(): void {
     this.isDarkMode = !this.isDarkMode;
   }
 
-  // Ouvrir le formulaire pour ajouter un événement
+
   openEventForm(): void {
     const dialogRef = this.dialog.open(EventFormComponent, {
       width: '500px',
-      data: {} // Vous pouvez passer des données au formulaire si nécessaire
+      data: {}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.saveEvent(result); // Envoyer les données au backend
+        this.saveEvent(result);
       }
     });
   }
 
-  // Envoyer les données de l'événement au backend
+
   saveEvent(eventData: any): void {
     this.eventService.addEvent(eventData).subscribe({
       next: (response) => {
         console.log('Event saved successfully:', response);
-        this.loadEvents(); // Recharger les événements après l'ajout
+        this.loadEvents();
       },
       error: (error) => {
         console.error('Error saving event:', error);
@@ -182,21 +195,21 @@ selectDay(day: number | null): void {
     });
   }
 
-  // Ouvrir le formulaire pour ajouter une session
+
   openSessionForm(): void {
-  const dialogRef = this.dialog.open(SessionFormComponent, {
-    width: '500px',
-    data: {} // Vous pouvez passer des données au formulaire si nécessaire
-  });
+    const dialogRef = this.dialog.open(SessionFormComponent, {
+      width: '500px',
+      data: {}
+    });
 
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      this.saveSession(result); // Envoyer les données au backend
-    }
-  });
-}
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.saveSession(result);
+      }
+    });
+  }
 
-  // Envoyer les données de la session au backend
+
   saveSession(sessionData: any): void {
     this.sessionService.addSession(sessionData).subscribe({
       next: (response) => {
@@ -211,7 +224,7 @@ selectDay(day: number | null): void {
 
 
 
-  // Filtrer les événements pour un jour donné
+
   getEventsForDay(day: number | null): any[] {
     if (day === null) return [];
     const date = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day);
@@ -225,7 +238,7 @@ selectDay(day: number | null): void {
     });
   }
 
-  // Diviser un tableau en sous-tableaux de taille donnée
+
   private chunkArray(array: (number | null)[], size: number): (number | null)[][] {
     const result = [];
     for (let i = 0; i < array.length; i += size) {
@@ -233,4 +246,39 @@ selectDay(day: number | null): void {
     }
     return result;
   }
+
+sessions: any[] = [];
+
+
+ngOnInit(): void {
+  this.generateCalendar();
+  this.loadEvents();
+  this.loadSessions();
+}
+
+
+loadSessions(): void {
+  this.sessionService.getAllSessions().subscribe({
+    next: (response) => {
+      this.sessions = response;
+    },
+    error: (error) => {
+      console.error('Error loading sessions:', error);
+    }
+  });
+}
+
+
+getSessionsForDay(day: number | null): any[] {
+  if (day === null) return [];
+  const date = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day);
+  return this.sessions.filter(session => {
+    const sessionDate = new Date(session.date);
+    return (
+      sessionDate.getFullYear() === date.getFullYear() &&
+      sessionDate.getMonth() === date.getMonth() &&
+      sessionDate.getDate() === date.getDate()
+    );
+  });
+}
 }

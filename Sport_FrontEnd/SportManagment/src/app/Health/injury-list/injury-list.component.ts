@@ -3,6 +3,8 @@ import { InjuryService } from '../services/injury.service';
 import { PlayerService } from '../services/player.service';
 import { Player } from '../models/player';
 import { Injury } from '../models/injury';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-injury-list',
@@ -16,10 +18,15 @@ export class InjuryListComponent implements OnInit {
   searchText: string = '';
   selectedPlayer: string = 'all';
 
+
+
+
+
+
   // 🔥 Émet un événement lorsqu'une blessure est archivée
   @Output() injuryArchived: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private injuryService: InjuryService, private playerService: PlayerService) {}
+  constructor(private injuryService: InjuryService, private playerService: PlayerService,  private router: Router) {}
 
   ngOnInit(): void {
     this.loadInjuries();
@@ -37,9 +44,7 @@ export class InjuryListComponent implements OnInit {
     });
   }
 
-  /**
-   * Charge la liste des joueurs depuis le backend
-   */
+  
   loadPlayers(): void {
     this.playerService.getPlayers().subscribe((data: Player[]) => {
       this.players = data;
@@ -47,9 +52,7 @@ export class InjuryListComponent implements OnInit {
     });
   }
 
-  /**
-   * Filtre les blessures en fonction de la recherche et du joueur sélectionné
-   */
+
   filterInjuries(): void {
     this.filteredInjuries = this.injuries.filter(injury => {
       const matchesSearch = injury.type.toLowerCase().includes(this.searchText.toLowerCase()) ||
@@ -84,6 +87,7 @@ export class InjuryListComponent implements OnInit {
           alert(response.message || "Blessure archivée avec succès !");
           this.loadInjuries(); // Recharge la liste après suppression
           this.injuryArchived.emit(); // Notifie que l'archivage est fait
+          this.router.navigate(['/health/injury/archived']); // 🔄 Redirection a
         },
         error: (err) => {
           console.error("❌ Erreur lors de l'archivage", err);
@@ -92,5 +96,9 @@ export class InjuryListComponent implements OnInit {
       });
     }
   }
+
+
+
+
 
 }
