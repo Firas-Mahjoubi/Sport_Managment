@@ -54,6 +54,7 @@ import { TacticListComponent } from './tactics/tactic-list/tactic-list.component
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 import { HomeComponent } from './components/home/home.component';
+import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
 
 
 import {CalendarComponent} from "./AdvancedPlanning/calendar/calendar.component";
@@ -103,14 +104,13 @@ const routes: Routes = [
   { path: 'match/:matchId', component: MatchDetailsComponent },
 
 
-  {path :'DashboardSidebar',component:SidebarComponent},
+  {path :'DashboardSidebar',component:AdminSidebarComponent},
 
 
 
 
 
 
-  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
 
 
 
@@ -141,7 +141,7 @@ const routes: Routes = [
 
 
 
-
+  { path: 'tactic-board', component: TacticBoardComponent },
   { path: 'tactics', component: TacticListComponent, canActivate: [roleGuard(['COACH'])] }, 
   { path: 'tactics/create', component: TacticFormComponent, canActivate: [roleGuard(['COACH'])]  },
   { path: 'tactics/:id', component: TacticFolderComponent, canActivate: [roleGuard(['COACH'])]  },
