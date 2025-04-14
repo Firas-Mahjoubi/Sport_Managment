@@ -104,14 +104,13 @@ const routes: Routes = [
   { path: 'match/:matchId', component: MatchDetailsComponent },
 
 
-  {path :'DashboardSidebar',component:SidebarComponent},
+  {path :'DashboardSidebar',component:AdminSidebarComponent},
 
 
 
 
 
 
-  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
 
 
 

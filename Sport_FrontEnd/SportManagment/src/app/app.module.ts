@@ -147,7 +147,7 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
     MatchesmainComponent,
     MatchesNavbarComponent,
     TacticBoardComponent,
-    SessionDetailsComponent
+    SessionDetailsComponent,
     HealthDashboardComponent,
   ],
   imports: [
