@@ -65,7 +65,7 @@ import {EventDetailsComponent} from "./AdvancedPlanning/event-details/event-deta
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
 
 
-
+  
 
 
 const routes: Routes = [
