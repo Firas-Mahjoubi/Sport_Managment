@@ -1,0 +1,25 @@
+html {
+    background: linear-gradient(130deg, #a1c4fd, #c2e9fb)fixed;
+}
+
+body {
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+}
+
+.divmenu {
+    position: absolute;
+    text-align: center;
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media screen and (min-height: 600px) {
+    .divmenu {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+}
