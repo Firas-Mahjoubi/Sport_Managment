@@ -20,6 +20,7 @@ import { TrainingSessionFormComponent } from './components/training-session-form
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
+import { ExerciseDetailComponent } from './components/exercise-detail/exercise-detail.component';
 //---------------------------------------------//
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
 import { InjuryEditComponent } from './Health/injury-edit/injury-edit.component';
@@ -115,7 +116,7 @@ import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/crea
     AddHealthrecordComponent,
     EditHealthrecordComponent,
     ShowHealthrecordComponent,
-
+    ExerciseDetailComponent,
     HeaderComponent,
     FooterComponent,
     HomeComponent,

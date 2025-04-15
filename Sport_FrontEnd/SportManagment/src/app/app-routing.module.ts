@@ -51,6 +51,7 @@ import {MatchesNavbarComponent} from "./matches/matches-navbar/matches-navbar.co
 import { TacticListComponent } from './tactics/tactic-list/tactic-list.component';
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
+import { ExerciseDetailComponent } from './components/exercise-detail/exercise-detail.component';
 
   
 
@@ -76,6 +77,9 @@ const routes: Routes = [
   { path: 'add-exercise', component: ExerciseFormComponent },
   { path: 'edit-exercise/:id', component: ExerciseFormComponent },
   { path: 'exercise-list', component: ExerciseListComponent },
+
+  /////media///
+  { path: 'exercise-details/:id', component: ExerciseDetailComponent },
     //---------------------Backoffice-training-Ground ------------------------//
 
     { path: 'add-exercise-back', component: BackofficeListExerciceComponent },

@@ -80,9 +80,13 @@
 
           <!-- Buttons -->
           <p class="text-center mt-3">
-            <a href="#" class="btn btn-primary text-white">🔍 View Details</a>
+            <a [routerLink]="['/exercise-details', exercise.id]" class="btn btn-primary text-white">
+              🔍 View Details
+            </a>
+            
             <button class="btn btn-danger ms-2" (click)="deleteExercise(exercise.id)">🗑 Delete</button>
           </p>
+          
         </div>
       </div>
     </div>
