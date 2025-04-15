@@ -10,6 +10,9 @@ import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
+import static org.hibernate.annotations.OnDeleteAction.CASCADE;
+
+
 @Getter
 @Setter
 @ToString
@@ -24,7 +27,8 @@ public class LineUp {
     String formation;
     @ElementCollection
     @Size(max = 11)
-    @Cascade(org.hibernate.annotations.CascadeType.ALL) // Apply cascading here too if needed
+    @Cascade(org.hibernate.annotations.CascadeType.ALL) // Use Hibernate's Cascade if needed (for complex cases)
+
     private List<Long> TeamplayerNumbers;
     @ElementCollection
     @Size(max = 7)
@@ -32,12 +36,12 @@ public class LineUp {
 
     private List<Long> TeamplayerSubsNumbers;
    private Boolean isHomeTeam;
-    @OneToOne
+    @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "match_id") // No unique constraint by default
 
 
-    Match match;
+   private Match match;
 
 
 }

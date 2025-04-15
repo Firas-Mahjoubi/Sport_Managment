@@ -15,6 +15,8 @@ export class AddRecoveryplanComponent implements OnInit {
   playerId!: number;
   injuries: Injury[] = [];
   recoveryPlanForm!: FormGroup;
+  dateError = false;
+  progressValue = 0;
 
   planTypes = Object.values(PlanType);
   planStatuses = Object.values(PlanStatus);
@@ -51,7 +53,7 @@ export class AddRecoveryplanComponent implements OnInit {
       this.playerId = Number(storedPlayerId);
     } else {
       console.error('Aucun joueur sélectionné. Redirection...');
-      this.router.navigate(['/list-player']); // Rediriger si aucun joueur n'est sélectionné
+      this.router.navigate(['/list-player']);
     }
   }
 
@@ -62,8 +64,19 @@ export class AddRecoveryplanComponent implements OnInit {
     });
   }
 
+  validateDates(): void {
+    const startDate = this.recoveryPlanForm.value.startDate;
+    const estimatedEndDate = this.recoveryPlanForm.value.estimatedEndDate;
+    this.dateError = startDate && estimatedEndDate && new Date(startDate) > new Date(estimatedEndDate);
+  }
+
+  updateProgress(event: any): void {
+    this.progressValue = event.target.value;
+    this.recoveryPlanForm.patchValue({ progress: this.progressValue });
+  }
+
   submit(): void {
-    if (this.recoveryPlanForm.invalid) {
+    if (this.recoveryPlanForm.invalid || this.dateError) {
       return;
     }
 
@@ -78,7 +91,7 @@ export class AddRecoveryplanComponent implements OnInit {
     this.recoveryPlanService.createRecoveryPlan(injuryId, newPlan).subscribe({
       next: () => {
         alert('Plan de récupération ajouté avec succès!');
-        this.router.navigate(['/list-player']); // Retour à la liste des joueurs
+        this.router.navigate(['/list-player']);
       },
       error: (err) => console.error('Erreur lors de la création', err)
     });

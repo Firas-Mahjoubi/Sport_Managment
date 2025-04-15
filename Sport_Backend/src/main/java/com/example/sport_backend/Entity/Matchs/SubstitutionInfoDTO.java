@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class SubstitutionInfoDTO {
+    private Long id;
     private int minuteOfPlay;
     private String playerInFirstName;
     private String playerInLastName;
