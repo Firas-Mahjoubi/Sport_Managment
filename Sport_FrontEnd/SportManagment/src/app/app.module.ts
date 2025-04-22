@@ -65,6 +65,7 @@ import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.
 import { MatchesFooterComponent } from './matches/matches-footer/matches-footer.component';
 import { AdminSubstitutionComponent } from './matches/admin-substitution/admin-substitution.component';
 
+
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -72,7 +73,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
+
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+
 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
@@ -146,9 +149,11 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
 
     MatchesmainComponent,
     MatchesNavbarComponent,
+
     TacticBoardComponent,
     SessionDetailsComponent,
     HealthDashboardComponent,
+
   ],
   imports: [
     BrowserModule,
