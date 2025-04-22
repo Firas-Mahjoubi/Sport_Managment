@@ -53,8 +53,12 @@ import {AdminSubstitutionComponent} from "./matches/admin-substitution/admin-sub
 import { TacticListComponent } from './tactics/tactic-list/tactic-list.component';
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
+
+import { ExerciseDetailComponent } from './components/exercise-detail/exercise-detail.component';
+
 import { HomeComponent } from './components/home/home.component';
 import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
+
 
 
 import {CalendarComponent} from "./AdvancedPlanning/calendar/calendar.component";
@@ -87,9 +91,15 @@ const routes: Routes = [
   { path: 'training-session/:id', component: TrainingSessionViewComponent, canActivate: [roleGuard(['COACH'])] },
 
 
+
+
+  /////media///
+  { path: 'exercise-details/:id', component: ExerciseDetailComponent },
+
   { path: 'add-exercise', component: ExerciseFormComponent , canActivate: [roleGuard(['COACH'])]},
   { path: 'edit-exercise/:id', component: ExerciseFormComponent, canActivate: [roleGuard(['COACH'])] },
   { path: 'exercise-list', component: ExerciseListComponent , canActivate: [roleGuard(['COACH'])]},
+
     //---------------------Backoffice-training-Ground ------------------------//
 
     { path: 'add-exercise-back', component: BackofficeListExerciceComponent },
