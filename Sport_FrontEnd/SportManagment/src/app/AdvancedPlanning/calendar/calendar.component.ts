@@ -290,7 +290,6 @@ export class CalendarComponent implements OnInit {
     const lightness = 100 - (intensity * 50);
     return `hsl(${hue}, 70%, ${lightness}%)`;
   }
-
   async exportToPDF(): Promise<void> {
     try {
       const calendarEl = this.calendarElement.nativeElement;
@@ -302,7 +301,7 @@ export class CalendarComponent implements OnInit {
       const elementsToRemove = [
         '.add-event-container',
         '.heatmap-container',
-        '.calendar-header',
+        
         '.view-selector',
         'app-admin-header',
         'app-admin-sidebar'

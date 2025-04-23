@@ -24,7 +24,6 @@
   position: relative;
   overflow: visible;
 }
-
 .calendar {
   font-family: 'Arial', sans-serif;
   max-width: 800px;
@@ -342,28 +341,17 @@
   background-color: #388e3c; /* Couleur verte plus foncée au survol */
 }
 /* Add this at the end of your CSS file */
-/* Add to your component's CSS */
-.month-view .week {
-  display: flex !important;
-  page-break-inside: avoid;
-}
-
-.month-view .day {
-  min-height: 100px;
-  page-break-inside: avoid;
-  position: relative;
-  overflow: visible;
-}
-
-/* Ensure calendar grid fills space */
-.pdf-export-view .month-view {
+.pdf-export-mode {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
   width: 100% !important;
-  padding: 20px !important;
-}
-
-/* Remove empty day spacing */
-.day.empty {
-  visibility: hidden;
+  max-width: 100% !important;
+  height: auto !important;
+  overflow: visible !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
 }
 
 .pdf-export-mode .calendar-container {
@@ -455,4 +443,8 @@
     hsl(240, 50%, 20%) 0%,
     hsl(240, 50%, 60%) 100%
   );
+}
+.pdf-export-view .month-view {
+  width: 100% !important;
+  padding: 20px !important;
 }
