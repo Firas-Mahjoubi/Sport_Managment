@@ -88,6 +88,7 @@ export class CalendarComponent implements OnInit {
     this.sessionService.getAllSessions().subscribe({
       next: (response) => {
         this.sessions = response;
+        this.updateHeatmap();
       },
       error: (error) => {
         console.error('Error loading sessions:', error);
@@ -266,10 +267,20 @@ export class CalendarComponent implements OnInit {
 
     const eventCountMap = new Map<string, number>();
 
+    // Count events
     this.events.forEach(event => {
       const eventDate = new Date(event.date);
       if (eventDate.getMonth() === month && eventDate.getFullYear() === year) {
         const dateKey = `${eventDate.getFullYear()}-${eventDate.getMonth()}-${eventDate.getDate()}`;
+        eventCountMap.set(dateKey, (eventCountMap.get(dateKey) || 0) + 1);
+      }
+    });
+
+    
+    this.sessions.forEach(session => {
+      const sessionDate = new Date(session.date);
+      if (sessionDate.getMonth() === month && sessionDate.getFullYear() === year) {
+        const dateKey = `${sessionDate.getFullYear()}-${sessionDate.getMonth()}-${sessionDate.getDate()}`;
         eventCountMap.set(dateKey, (eventCountMap.get(dateKey) || 0) + 1);
       }
     });
@@ -286,7 +297,7 @@ export class CalendarComponent implements OnInit {
   getHeatmapColor(eventCount: number): string {
     if (this.maxHeatmapEvents === 0) return '#f0f0f0';
     const intensity = eventCount / this.maxHeatmapEvents;
-    const hue = 240;
+    const hue = 240; // Blue color
     const lightness = 100 - (intensity * 50);
     return `hsl(${hue}, 70%, ${lightness}%)`;
   }
@@ -301,7 +312,7 @@ export class CalendarComponent implements OnInit {
       const elementsToRemove = [
         '.add-event-container',
         '.heatmap-container',
-        
+
         '.view-selector',
         'app-admin-header',
         'app-admin-sidebar'
