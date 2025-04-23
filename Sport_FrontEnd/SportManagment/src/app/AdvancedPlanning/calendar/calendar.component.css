@@ -1,13 +1,29 @@
+/* Main container adjustments */
 .calendar-container {
-  max-width: 1200px; /* Vous pouvez ajuster la largeur maximale ici */
-  margin: 0 auto; /* Centrer le calendrier horizontalement */
+  max-width: 1200px;
+  margin: 20px auto;
   padding: 20px;
-  background-color: #fff; /* Fond blanc ou ajuster à votre design */
+  background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  
+  position: relative; /* Changed from absolute */
+  transform: none; /* Removed translate */
+  top: 800px;
+  left: 95px;
+  width: 95%; /* Added responsive width */
 }
 
+.month-view .week {
+  display: flex !important;
+  page-break-inside: avoid;
+}
+
+.month-view .day {
+  min-height: 100px;
+  page-break-inside: avoid;
+  position: relative;
+  overflow: visible;
+}
 
 .calendar {
   font-family: 'Arial', sans-serif;
@@ -326,17 +342,28 @@
   background-color: #388e3c; /* Couleur verte plus foncée au survol */
 }
 /* Add this at the end of your CSS file */
-.pdf-export-mode {
-  position: static !important;
-  top: auto !important;
-  left: auto !important;
-  transform: none !important;
+/* Add to your component's CSS */
+.month-view .week {
+  display: flex !important;
+  page-break-inside: avoid;
+}
+
+.month-view .day {
+  min-height: 100px;
+  page-break-inside: avoid;
+  position: relative;
+  overflow: visible;
+}
+
+/* Ensure calendar grid fills space */
+.pdf-export-view .month-view {
   width: 100% !important;
-  max-width: 100% !important;
-  height: auto !important;
-  overflow: visible !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
+  padding: 20px !important;
+}
+
+/* Remove empty day spacing */
+.day.empty {
+  visibility: hidden;
 }
 
 .pdf-export-mode .calendar-container {
@@ -368,4 +395,64 @@
     break-after: avoid !important;
     break-before: avoid !important;
   }
+}
+.heatmap-container {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.heatmap {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin: 1rem 0;
+}
+
+.heatmap-day {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.heatmap-day:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: 0.9em;
+}
+
+.legend-gradient {
+  width: 200px;
+  height: 20px;
+  background: linear-gradient(90deg,
+    hsl(240, 70%, 95%) 0%,
+    hsl(240, 70%, 50%) 100%
+  );
+  border-radius: 4px;
+}
+
+.legend-max {
+  margin-left: auto;
+  color: #666;
+}
+
+/* Dark mode adjustments */
+.calendar.dark-mode .heatmap-container {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.calendar.dark-mode .legend-gradient {
+  background: linear-gradient(90deg,
+    hsl(240, 50%, 20%) 0%,
+    hsl(240, 50%, 60%) 100%
+  );
 }

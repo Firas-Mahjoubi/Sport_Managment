@@ -84,6 +84,7 @@ import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
 import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -182,7 +183,8 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
         MatIconModule,
         MatFormFieldModule, // ✅ Required for mat-form-field
         MatSelectModule, // ✅ Required for mat-select
-        MatToolbarModule
+        MatToolbarModule,
+        MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
