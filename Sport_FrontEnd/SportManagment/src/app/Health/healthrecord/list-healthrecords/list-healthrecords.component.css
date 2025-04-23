@@ -84,10 +84,13 @@ body {
   transition: all 0.3s ease;
 }
 
+
 /* 🔍 Bouton Voir */
 .btn-view {
   background: linear-gradient(135deg, #0066cc, #004999);
   color: white;
+
+
 }
 
 .btn-view:hover {
@@ -110,14 +113,12 @@ body {
   color: white;
 
 
-
-  width: 160px;  /* Largeur fixe augmentée */
-
 }
 
 .btn-delete:hover {
   background: linear-gradient(135deg, #007BFF, #007BFF);
 }
+
 
 /* 🔙 Bouton Retour au Tableau de Santé */
 .btn-back-health {

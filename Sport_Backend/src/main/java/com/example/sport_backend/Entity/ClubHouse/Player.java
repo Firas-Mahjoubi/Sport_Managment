@@ -18,6 +18,8 @@ import java.util.Set;
 @NoArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @Entity
+
+
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +34,9 @@ public class Player {
     String position;
     Integer playerNumber;
     String performanceStats;
+
+
+
     @ManyToOne
     Team team;
 

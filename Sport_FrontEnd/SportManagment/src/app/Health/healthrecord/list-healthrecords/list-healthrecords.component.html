@@ -10,12 +10,15 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: url('assets/health.jpg') no-repeat center center/cover;
+  background: url('/assets/health.jpg') no-repeat center center/cover;
   filter: brightness(0.4);
   z-index: -1;">
 </div>
 
 <div class="container healthrecord-container mt-4">
+
+
+
   <h2 class="title">🏥 Liste des Health Records</h2>
 
   <!-- 🔍 Filtrage des records -->
@@ -73,7 +76,7 @@
         <td>
           <a [routerLink]="['/health/health-records/show', record.id]" class="btn btn-view btn-sm">🔍 Voir</a>
           <a [routerLink]="['/health/health-records/edit', record.id]" class="btn btn-edit btn-sm">✏️ Modifier</a>
-          <button (click)="deleteHealthRecord(record.id)" class="btn btn-delete btn-sm">🗑️ Supprimer</button>
+           <button (click)="deleteHealthRecord(record.id)" class="btn btn-delete btn-sm">🗑️ Supprimer</button>
         </td>
       </tr>
     </tbody>

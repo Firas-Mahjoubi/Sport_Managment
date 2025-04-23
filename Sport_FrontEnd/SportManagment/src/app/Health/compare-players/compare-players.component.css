@@ -1,0 +1,392 @@
+.compare-wrapper {
+  padding: 2rem;
+  font-family: 'Orbitron', sans-serif;
+  color: #fff;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  min-height: 100vh;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #00ffe7;
+  margin-bottom: 2rem;
+}
+
+.avatars-selection {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+}
+
+.avatar-list {
+  text-align: center;
+}
+
+.avatars {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.avatar {
+  border: 3px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s, border 0.3s;
+  text-align: center;
+}
+
+.avatar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.avatar.selected {
+  border: 3px solid #00ffe7;
+  transform: scale(1.1);
+}
+
+.cards-comparison {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 2rem;
+}
+
+.player-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid #00ffe7;
+  padding: 1.5rem;
+  border-radius: 16px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 0 25px #00ffe7;
+  animation: fadeIn 1s ease-in;
+}
+
+.stats p {
+  margin: 0.4rem 0;
+}
+
+.analyze-btn {
+  display: block;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  background: #00ffe7;
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00ffe7;
+  transition: transform 0.3s ease;
+}
+
+.analyze-btn:hover {
+  transform: scale(1.1);
+}
+
+.result-area {
+  text-align: center;
+  margin-top: 3rem;
+  animation: slideIn 1s ease-out;
+}
+
+.result-animation {
+  background: #111;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 0 30px #00ffe7;
+  animation: pulseGlow 2s infinite alternate;
+}
+
+.winner-name {
+  font-size: 2rem;
+  color: #00ff77;
+}
+
+@keyframes pulseGlow {
+  from {
+    box-shadow: 0 0 20px #00ffe7;
+  }
+  to {
+    box-shadow: 0 0 40px #00ffe7;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+/* 🔙 Bouton retour */
+.btn-back-health {
+  display: inline-block;
+  margin: 30px auto;
+  padding: 12px 25px;
+  background: transparent;
+  color: #00e6e6;
+  border: 2px solid #00e6e6;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-weight: bold;
+  box-shadow: 0 0 8px #00e6e6;
+}
+
+.btn-back-health:hover {
+  background-color: #00e6e6;
+  color: #000;
+  box-shadow: 0 0 15px #00c3ff;
+}
+
+
+
+/* 🔴 Alerte risques dans les cartes */
+.risk-message {
+  margin-top: 10px;
+  padding: 10px;
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff4d4d;
+  color: #d8000c;
+  font-weight: bold;
+  border-radius: 5px;
+  animation: blink 1s infinite;
+}
+
+/* 🔴 Alerte dans la zone de résultat */
+.risk-result {
+  margin: 10px 0;
+  padding: 8px;
+  background: rgba(255, 0, 0, 0.2);
+  border: 1px solid #d8000c;
+  color: #d8000c;
+  font-weight: bold;
+  border-radius: 5px;
+  animation: blink 1s infinite;
+}
+
+/* Clignotement */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+/* (… le reste de tes styles existants …) */
+.player-card.futuristic {
+  border: 2px solid #3498db;
+  background: #2c3e50;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+/* Bouton Analyser */
+.analyze-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 25px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.analyze-btn:disabled {
+  background: #777;
+  cursor: not-allowed;
+}
+
+
+/* Overlay semi-transparent + blur */
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal centré */
+.sorted-modal {
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0,255,255,0.4);
+  text-align: center;
+}
+
+.sorted-modal h2 {
+  margin-bottom: 12px;
+}
+
+.sorted-modal ol {
+  text-align: left;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+
+.close-sorted {
+  background: #ff0033;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+/* 🎮 Bouton de tri néon futuriste */
+.sort-btn {
+  margin: 20px auto;
+  display: block;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #00ffe7;
+  background: linear-gradient(90deg, rgba(0,255,231,0.2) 0%, rgba(0,255,231,0.05) 100%);
+  border: 2px solid #00ffe7;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.sort-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(0,255,231,0.4), transparent 70%);
+  transform: rotate(45deg);
+  animation: rotate-glow 4s linear infinite;
+}
+.sort-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00ffe7, 0 0 40px #00ffe7 inset;
+}
+@keyframes rotate-glow {
+  from { transform: rotate(45deg) translate(0,0); }
+  to   { transform: rotate(405deg) translate(0,0); }
+}
+
+.sorted-modal {
+  background: linear-gradient(45deg, #1c1c1c, #444444);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 25px rgba(0, 255, 255, 0.3);
+  color: #fff;
+  width: 85vw;               /* ➕ Largeur agrandie */
+  max-height: 90vh;          /* ➕ Hauteur agrandie */
+  overflow-y: auto;
+  text-align: center;
+  animation: modalZoomIn 0.5s ease-in-out;
+}
+
+.player-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.player-item:hover {
+  transform: scale(1.05);
+}
+
+.player-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.player-details {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.player-name {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.player-form {
+  color: #888;
+}
+
+.progress-bar-container {
+  width: 60%;
+  height: 10px;
+  background-color: #444;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #00FF00;
+  border-radius: 5px;
+  animation: progress-animation 1s ease-in-out;
+}
+
+.icon-form {
+  font-size: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-icon {
+  transition: transform 0.3s ease;
+}
+
+.form-icon:hover {
+  transform: scale(1.3);
+}
+
+@keyframes progress-animation {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* Animation d’apparition douce et immersive */
+@keyframes modalZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+

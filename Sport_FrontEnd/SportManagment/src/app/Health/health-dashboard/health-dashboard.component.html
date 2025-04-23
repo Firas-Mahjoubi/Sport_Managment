@@ -55,7 +55,6 @@
     <link rel="stylesheet" href="/assets/css/style.css">
 
 
-
   </head>
 
 </header>
@@ -72,6 +71,7 @@
 <div class="dashboard-container">
 
   <div class="grid">
+
     <!-- Blessures -->
     <div class="card injury">
       <div class="card-header">
@@ -107,7 +107,71 @@
         <a routerLink="/list-player" class="btn btn-light">Voir plus</a>
       </div>
     </div>
+    <!-- dashboard.component.html -->
+<div class="card select-players">
+  <div class="card-header">
+    <i class="fas fa-futbol fa-3x animated-icon"></i>
+    <span>Gérer Sélection Terrain</span>
   </div>
+  <div class="card-body">
+    <p>Gérez la sélection  Medical des joueurs sur terrain.</p>
+    <button routerLink="/select-players" class="btn btn-light go-to-selector-btn">
+      ⚽ Voir Plus
+    </button>
+  </div>
+</div>
+
+  </div>
+
+
+
+
+
+ <!-- Gérer PDF -->
+ <div class="card pdf-manager">
+  <div class="card-header">
+    <i class="fas fa-file-pdf fa-3x animated-icon"></i>
+    <span>Générer PDF</span>
+  </div>
+  <div class="card-body">
+    <p>Créez et gérez les rapports PDF des joueurs.</p>
+    <a routerLink="/pdf-manager" class="btn btn-light">Voir plus</a>
+  </div>
+</div>
+
+<!-- Comparer Joueurs -->
+<div class="card compare-players">
+  <div class="card-header">
+    <i class="fas fa-users fa-3x animated-icon"></i>
+    <span>Comparer Joueurs</span>
+  </div>
+  <div class="card-body">
+    <p>Comparez la forme de deux joueurs.</p>
+    <a routerLink="/health/compare-players" class="btn btn-light">Voir plus</a>
+  </div>
+</div>
+
+<!-- Voir Statistiques -->
+<div class="card statistiques">
+  <div class="card-header">
+    <i class="fas fa-chart-bar fa-3x animated-icon"></i>
+    <span>Voir Statistiques</span>
+  </div>
+  <div class="card-body">
+    <p>Consultez les statistiques détaillées de vos joueurs.</p>
+    <a routerLink="/statistique" class="btn btn-light">Voir plus</a>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 
   <footer class="footer-section">
     <div class="container">

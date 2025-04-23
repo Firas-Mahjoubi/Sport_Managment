@@ -62,6 +62,12 @@ import {SessionFormComponent} from "./AdvancedPlanning/session-form/session-form
 import {EventDetailsComponent} from "./AdvancedPlanning/event-details/event-details.component";
 
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+import { PdfManagerComponent } from './Health/pdf-manager/pdf-manager.component';
+
+
+import { ComparePlayersComponent } from './Health/compare-players/compare-players.component';
+import { PlayerTerrainSelectorComponent } from './Health/player-terrain-selector/player-terrain-selector.component';
+import { StatistiqueComponent } from './Health/statistique/statistique.component';
 
 
 
@@ -78,7 +84,7 @@ const routes: Routes = [
   { path: 'training-sessions-exercice/:id', component: TrainingSessionComponent , canActivate: [roleGuard(['COACH'])]},
   { path: 'training-sessions', component: TrainingSessionExerciceComponent , canActivate: [roleGuard(['COACH'])]},
 
-  { path: 'training-session-add', component: TrainingSessionFormComponent , canActivate: [roleGuard(['COACH'])]}, 
+  { path: 'training-session-add', component: TrainingSessionFormComponent , canActivate: [roleGuard(['COACH'])]},
 
   { path: 'training-sessions/new', component: TrainingSessionFormComponent , canActivate: [roleGuard(['COACH'])]},
   { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent, canActivate: [roleGuard(['COACH'])] },
@@ -103,14 +109,10 @@ const routes: Routes = [
   { path: 'match/:matchId', component: MatchDetailsComponent },
 
 
-  {path :'DashboardSidebar',component:SidebarComponent},
+  {path :'DashboardSidebar',component:AdminSidebarComponent},
 
 
 
-
-
-
-  { path: 'tactics', loadChildren: () => import('./tactics/tactics.module').then(m => m.TacticModule) },  // Lazy loading tactics module
 
 
 
@@ -143,10 +145,10 @@ const routes: Routes = [
 
 
 
-  { path: 'tactics', component: TacticListComponent }, 
+  { path: 'tactics', component: TacticListComponent },
   { path: 'tactics/create', component: TacticFormComponent, canActivate: [roleGuard(['COACH'])]  },
   { path: 'tactics/:id', component: TacticFolderComponent, canActivate: [roleGuard(['COACH'])]  },
-  { path: 'tactics/edit/:id', component: TacticFormComponent , canActivate: [roleGuard(['COACH'])] }, 
+  { path: 'tactics/edit/:id', component: TacticFormComponent , canActivate: [roleGuard(['COACH'])] },
 
 
 //skander turkiiiiii injury
@@ -177,13 +179,32 @@ const routes: Routes = [
 { path: 'list-recoveryplan/:playerId', component: ListRecoveryPlanComponent },
 
 { path: 'list-player', component: ListPlayerComponent },
-{path: '**', redirectTo: 'home'}, 
+
 
 { path: 'health-dashboard', component: HealthDashboardComponent },
 
 
+//skander pdf manager
 
-{ path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
+{ path: 'pdf-manager', component: PdfManagerComponent },
+
+//compare player
+
+
+{ path: 'health/compare-players', component: ComparePlayersComponent },
+
+
+// terain skander position
+
+{ path: 'select-players', component: PlayerTerrainSelectorComponent },
+
+//statistique skander
+{ path: 'statistique', component: StatistiqueComponent },
+
+
+
+{path: '**', redirectTo: 'home'},
+
 
 ];
 @NgModule({

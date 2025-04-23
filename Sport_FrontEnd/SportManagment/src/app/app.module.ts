@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -84,11 +85,22 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
+
 import { TacticListComponent } from './tactics/tactic-list/tactic-list.component';
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
 import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
+import { PdfManagerComponent } from './Health/pdf-manager/pdf-manager.component';
+import { ComparePlayersComponent } from './Health/compare-players/compare-players.component';
+import { PlayerTerrainSelectorComponent } from './Health/player-terrain-selector/player-terrain-selector.component';
+import { StatistiqueComponent } from './Health/statistique/statistique.component';
+
+
+
+
+
+
 
 
 @NgModule({
@@ -129,7 +141,7 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
     AdminCardComponent,
     AddRecoveryplanComponent,
     EditRecoveryplanComponent,
- TacticListComponent,
+    TacticListComponent,
     TacticFormComponent,
     TacticFolderComponent,
     CreateTacticDialogComponent,
@@ -146,11 +158,15 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
     MatchesmainComponent,
     MatchesNavbarComponent,
 
-    SessionDetailsComponent
+    SessionDetailsComponent,
 
 
 
     HealthDashboardComponent,
+    PdfManagerComponent,
+    ComparePlayersComponent,
+    PlayerTerrainSelectorComponent,
+    StatistiqueComponent,
 
 
 
@@ -158,6 +174,7 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
   ],
   imports: [
     BrowserModule,
+
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -177,24 +194,20 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
     MatProgressBarModule,
     MatDividerModule,
 
-
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
     MatFormFieldModule,
-     CommonModule,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatDialogModule,
-        MatInputModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatIconModule,
-        MatFormFieldModule, // ✅ Required for mat-form-field
-        MatSelectModule, // ✅ Required for mat-select
-        MatToolbarModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatMenuModule,
+    MatToolbarModule,
+
+
+
+
+
 
   ],
   providers: [],

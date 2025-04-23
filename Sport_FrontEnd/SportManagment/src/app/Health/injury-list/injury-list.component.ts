@@ -21,8 +21,6 @@ export class InjuryListComponent implements OnInit {
 
 
 
-
-
   // 🔥 Émet un événement lorsqu'une blessure est archivée
   @Output() injuryArchived: EventEmitter<void> = new EventEmitter<void>();
 
@@ -43,6 +41,7 @@ export class InjuryListComponent implements OnInit {
       console.log("🚀 Blessures récupérées :", this.injuries); // 🔍 Vérifie les données
     });
   }
+
 
   
   loadPlayers(): void {

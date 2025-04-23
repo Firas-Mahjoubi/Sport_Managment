@@ -11,6 +11,8 @@ import { Player } from '../models/player';
 export class HealthRecordService {
   private apiUrl = 'http://localhost:8088/api/health'; // 📌 Adapte selon ton backend
 
+
+
   constructor(private http: HttpClient) {}
 
 
@@ -38,7 +40,7 @@ export class HealthRecordService {
     return this.http.put<HealthRecord>(`${this.apiUrl}/updateHealthRecord/${id}`, healthRecord);
   }
 
- 
+
   deleteHealthRecord(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/deleteHealthRecord/${id}`);
   }

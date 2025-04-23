@@ -1,0 +1,459 @@
+.futuristic-field {
+  position: relative;
+  width: 100%;
+  max-width: 1400px; /* Augmenter la taille du terrain */
+  height: 700px; /* Augmenter la taille du terrain */
+  margin: auto;
+  background: radial-gradient(ellipse at center, #0f0 0%, #001a00 100%);
+  border: 3px solid #00ff99;
+  border-radius: 20px;
+  box-shadow: 0 0 40px #00ffcc;
+  overflow: hidden;
+}
+
+.goal {
+  width: 60px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  top: 40%;
+  border: 2px solid #0ff;
+  box-shadow: 0 0 15px #00f;
+  border-radius: 10px;
+}
+
+.left-goal {
+  left: -30px;
+}
+
+.right-goal {
+  right: -30px;
+}
+
+.slot {
+  position: absolute;
+  width: 120px;
+  height: 100px;
+  cursor: pointer;
+  transform: perspective(800px) rotateX(15deg);
+}
+
+/* ———————————————————————————————— */
+/*  Formation 4-3-3 (4 défenseurs, 3 milieux, 3 attaquants, 1 gardien) */
+/* ———————————————————————————————— */
+
+/* 🥅 Gardien (tout en bas, centré) */
+.gk  {
+  top: 75%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 🛡️ Défenseurs (4 slots à droite) */
+.cb1 { /* Défenseur central 1 */
+  top: 55%;
+  left: 35%;
+}
+.cb2 { /* Défenseur central 2 */
+  top: 55%;
+  left: 55%;
+}
+.lb  { /* Latéral gauche */
+  top: 55%;
+  left: 20%;
+}
+.rb  { /* Latéral droit */
+  top: 55%;
+  left: 80%;
+}
+
+/* ⚙️ Milieux de terrain (3 slots au centre) */
+.cm1 { /* Milieu central 1 */
+  top: 40%;
+  left: 30%;
+}
+.cm2 { /* Milieu central 2 */
+  top: 40%;
+  left: 50%;
+}
+.cm3 { /* Milieu central 3 */
+  top: 40%;
+  left: 70%;
+}
+
+/* ⚔️ Attaquants (3 slots à gauche) */
+.lw  { /* Ailier gauche */
+  top: 15%;
+  left: 15%;
+}
+.st  { /* Avant-centre */
+  top: 15%;
+  left: 50%;
+}
+.rw  { /* Ailier droit */
+  top: 15%;
+  left: 85%;
+}
+
+
+.holo-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 20px #0ff, 0 0 40px #0ff inset;
+  border-radius: 15px;
+  z-index: 1;
+  transition: all 0.4s ease-in-out;
+}
+
+.slot:hover .holo-glow {
+  background: rgba(0, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.slot-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+}
+
+.slot-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #0ff;
+  text-shadow: 0 0 5px #0ff;
+}
+
+.player-card {
+  padding: 10px;
+  border: 1px solid #0ff;
+  border-radius: 10px;
+  background: rgba(0, 64, 64, 0.6);
+  animation: fadeIn 0.5s ease;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.popup-panel {
+  position: fixed;
+  top: 15%;
+  left: 20%;
+  width: 60%;
+  background: #001f1f;
+  border: 3px solid #00ffcc;
+  box-shadow: 0 0 30px #00ffee;
+  border-radius: 20px;
+  padding: 20px;
+  z-index: 999;
+  animation: slideUp 0.4s ease-out;
+}
+
+.card-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.player-holo-card {
+  background: rgba(0, 255, 255, 0.1);
+  border: 2px solid #0ff;
+  padding: 10px;
+  width: 150px;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.player-holo-card:hover {
+  background: rgba(0, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.avatar {
+  height: 60px;
+  background: url('/assets/avatar.png') center/cover no-repeat;
+  margin-bottom: 8px;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+
+/* Bouton de suppression en haut à droite du slot */
+.slot-content {
+  position: relative;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(255, 0, 0, 0.8);
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 3;
+  transition: background 0.2s;
+}
+
+.remove-btn:hover {
+  background: rgba(255, 0, 0, 1);
+}
+
+
+
+.reset-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 8px 15px;
+  background: #ff0033;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #ff0033;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.reset-btn:hover {
+  background: #ff1a4d;
+}
+
+
+.summary {
+  margin-top: 30px;
+  padding: 20px;
+  background: #002f2f;
+  border: 2px solid #00ffee;
+  border-radius: 15px;
+  color: white;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.player-holo-card.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: grayscale(100%);
+  cursor: not-allowed;
+}
+
+
+/* 🔙 Bouton retour */
+.btn-back-health {
+  display: inline-block;
+  margin: 30px auto;
+  padding: 12px 25px;
+  background: transparent;
+  color: #00e6e6;
+  border: 2px solid #00e6e6;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-weight: bold;
+  box-shadow: 0 0 8px #00e6e6;
+}
+
+.btn-back-health:hover {
+  background-color: #00e6e6;
+  color: #000;
+  box-shadow: 0 0 15px #00c3ff;
+}
+
+
+.player-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.9rem;
+  color: white;
+  text-align: center;
+}
+
+.player-note {
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+
+.note-globale-circle {
+  position: relative;
+  width: 120px;  /* Taille du cercle */
+  height: 120px;  /* Taille du cercle */
+  border-radius: 50%;  /* Pour rendre la forme ronde */
+  background: radial-gradient(circle, #00ff99, #003300); /* Dégradé futuriste */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;  /* Couleur du texte */
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc; /* Ombre futuriste */
+  animation: pulse 1.5s infinite ease-in-out;  /* Animation pour un effet dynamique */
+}
+
+/* Déplacement vers le bas */
+.note-globale-circle span {
+  position: absolute;
+  top: 10px;  /* Décale un peu la note vers le bas */
+}
+
+/* Animation pour un effet de pulsation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+
+/* Style général de la section */
+.futuristic-panel {
+  background: #121212;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #f2f2f2;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.composition-header h3 {
+  font-size: 1.5rem;
+  color: #ff0;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Conteneur des positions */
+.positions-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 10px;
+}
+
+.position-card {
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.position-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 255, 255, 0.3);
+}
+
+/* Nom et statut du joueur */
+.player-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player-name {
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.status {
+  font-size: 1rem;
+  color: #ff5722;
+  font-weight: 600;
+}
+
+/* Label de la position */
+.position-label {
+  font-size: 1.2rem;
+  color: #9e9e9e;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.player-status {
+  background: #00796b;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+/* Design futuriste de l'en-tête */
+.position-card .status {
+  font-size: 1rem;
+  color: #ff0;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px #ff0, 0 0 20px #ff0;
+  }
+  100% {
+    text-shadow: 0 0 30px #ff0, 0 0 50px #ff0;
+  }
+}
+
+
+/* Message de risque en rouge clignotant */
+.risk-message {
+  color: #ff3333;
+  font-weight: bold;
+  margin-top: 6px;
+  animation: blink 1.2s step-start infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+

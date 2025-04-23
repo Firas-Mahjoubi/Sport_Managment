@@ -29,8 +29,6 @@ public class RecoveryPlan {
     LocalDate actualEndDate;
 
 
-
-
     Float progress;
     Integer sessionFrequency;
     Integer sessionDuration;
