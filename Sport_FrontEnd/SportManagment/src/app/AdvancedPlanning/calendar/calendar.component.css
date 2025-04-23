@@ -5,7 +5,9 @@
   background-color: #fff; /* Fond blanc ou ajuster à votre design */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
 }
+
 
 .calendar {
   font-family: 'Arial', sans-serif;
@@ -322,4 +324,48 @@
 
 .session:hover {
   background-color: #388e3c; /* Couleur verte plus foncée au survol */
+}
+/* Add this at the end of your CSS file */
+.pdf-export-mode {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  overflow: visible !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.pdf-export-mode .calendar-container {
+  position: static !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.pdf-export-mode .calendar {
+  position: relative !important;
+  transform: none !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+@media print {
+  .calendar, .calendar * {
+    visibility: visible !important;
+    position: relative !important;
+    float: none !important;
+    page-break-inside: avoid !important;
+  }
+
+  .calendar {
+    break-after: avoid !important;
+    break-before: avoid !important;
+  }
 }

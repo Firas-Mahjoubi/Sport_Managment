@@ -2,9 +2,12 @@
 <app-admin-sidebar></app-admin-sidebar>
 
 <div class="calendar-container">
-<div class="calendar" [class.dark-mode]="isDarkMode">
+ <div #calendarElement class="calendar" [class.dark-mode]="isDarkMode">
 
   <div class="add-event-container">
+    <button mat-raised-button (click)="exportToPDF()" style="margin-left: 10px;">
+      Export to PDF
+    </button>
     <button mat-raised-button (click)="openEventForm()">
       Add Event
     </button>

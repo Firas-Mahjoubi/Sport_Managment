@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ElementRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EventFormComponent } from './event-form/event-form.component';
 import { SessionFormComponent } from '../session-form/session-form.component';
@@ -7,6 +7,9 @@ import { EventDetailsComponent } from '../event-details/event-details.component'
 import { SessionService } from '../../services/session.service';
 import { SessionDetailsComponent } from '../session-details/session-details.component';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 
 @Component({
   selector: 'app-calendar',
@@ -14,6 +17,40 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent {
+  @ViewChild('calendarElement') calendarElement!: ElementRef;
+  async exportToPDF(): Promise<void> {
+    try {
+      const calendarEl = this.calendarElement.nativeElement;
+
+      // Add PDF mode class
+      calendarEl.classList.add('pdf-export-mode');
+
+      // Force redraw
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      const canvas = await html2canvas(calendarEl, {
+        scale: 2,
+        useCORS: true,
+        logging: true,
+        scrollY: -window.scrollY,
+        windowHeight: calendarEl.scrollHeight,
+        windowWidth: calendarEl.scrollWidth
+      });
+
+
+      calendarEl.classList.remove('pdf-export-mode');
+
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('landscape', 'pt', [canvas.width, canvas.height]);
+
+      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+      pdf.save('calendar-export.pdf');
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      this.calendarElement.nativeElement.classList.remove('pdf-export-mode');
+    }
+  }
+
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
 
@@ -31,7 +68,7 @@ export class CalendarComponent {
   dayNames: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 
-  isDarkMode: boolean = false;
+  isDarkMode: boolean = true;
 
 
   events: any[] = [];

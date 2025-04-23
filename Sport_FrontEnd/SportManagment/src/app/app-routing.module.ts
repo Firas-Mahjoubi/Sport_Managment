@@ -72,7 +72,7 @@ const routes: Routes = [
   { path: 'training-sessions-exercice/:id', component: TrainingSessionComponent , canActivate: [roleGuard(['COACH'])]},
   { path: 'training-sessions', component: TrainingSessionExerciceComponent , canActivate: [roleGuard(['COACH'])]},
 
-  { path: 'training-session-add', component: TrainingSessionFormComponent , canActivate: [roleGuard(['COACH'])]}, 
+  { path: 'training-session-add', component: TrainingSessionFormComponent , canActivate: [roleGuard(['COACH'])]},
 
   { path: 'training-sessions/new', component: TrainingSessionFormComponent , canActivate: [roleGuard(['COACH'])]},
   { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent, canActivate: [roleGuard(['COACH'])] },
@@ -122,10 +122,10 @@ const routes: Routes = [
 
 
 
-  { path: 'tactics', component: TacticListComponent }, 
+  { path: 'tactics', component: TacticListComponent },
   { path: 'tactics/create', component: TacticFormComponent, canActivate: [roleGuard(['COACH'])]  },
   { path: 'tactics/:id', component: TacticFolderComponent, canActivate: [roleGuard(['COACH'])]  },
-  { path: 'tactics/edit/:id', component: TacticFormComponent , canActivate: [roleGuard(['COACH'])] }, 
+  { path: 'tactics/edit/:id', component: TacticFormComponent , canActivate: [roleGuard(['COACH'])] },
 
 
 //skander turkiiiiii injury
@@ -156,7 +156,7 @@ const routes: Routes = [
 { path: 'list-recoveryplan/:playerId', component: ListRecoveryPlanComponent },
 
 { path: 'list-player', component: ListPlayerComponent },
-{path: '**', redirectTo: 'home'}, 
+{path: '**', redirectTo: 'home'},
 
 
 ];
