@@ -817,3 +817,242 @@ body {
 @media(max-width:900px){
   .rp-hud{grid-template-columns:1fr;grid-template-areas:"head" "types" "time" "rail"}
 }
+
+
+/* ─── LAYOUT 2 COLONNES ─── */
+.rp-split {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start; /* aligne en haut */
+}
+
+/* Colonne gauche : prend tout l’espace restant */
+.rp-left {
+  flex: 1;
+}
+
+/* Colonne droite : largeur fixe */
+.rp-right {
+  width: 320px;
+}
+
+/* Assure-toi que ton .tab-content prend toute la largeur */
+.tab-content {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+
+/* ===== HOLO‑CONSOLE ===== */
+.holo-console {
+  flex: 1 1 100%;               /* prends toute la largeur disponible */
+  width: 100%;                  /* largeur maximale */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #14171f;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 0 25px #00d0ff55;
+}
+
+
+
+
+.holo-title{
+  color:#00d0ff;
+  font:600 18px "Orbitron",sans-serif;
+  text-align:center;
+  margin:0;
+  letter-spacing:1.5px;
+}
+
+.holo-chart{
+  width:100%;
+  height:260px;             /* grand graphique */
+}
+
+/* KPI rail */
+.holo-kpi{
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+  gap:12px;
+}
+.holo-kpi .k{
+  display:block;
+  text-align:center;
+  padding:10px 0;
+  border:1px solid #00d0ff55;
+  border-radius:8px;
+  backdrop-filter:blur(6px);
+  font-weight:600;
+  font-size:14px;
+}
+.k.neon{color:#00e5ff;}
+.k.done{color:#2ecc71;}
+
+/* Chips filtre */
+.holo-filter{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.chip{
+  background:#1d222f;
+  border:1px solid #00d0ff55;
+  color:#9aa0b5;
+  padding:4px 12px;
+  border-radius:20px;
+  font-size:12px;
+  cursor:pointer;
+  transition:.2s;
+}
+.chip.sel,
+.chip:hover{
+  background:#00d0ff;
+  color:#14171f;
+}
+
+/* Responsive : passe en dessous sur mobile */
+@media(max-width:900px){
+  .holo-console{flex:1 1 100%;margin-top:24px}
+}
+
+.holo-chart{
+  width:100%;
+  height:260px;          /* ou 300‑400px si tu veux plus grand */
+}
+
+
+
+
+
+
+
+
+/* Overlay semi-transparent */
+.injury-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Conteneur modal */
+.injury-modal {
+  background: #1e2130;
+  padding: 24px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 0 30px rgba(0, 255, 247, 0.4);
+}
+
+/* Titre */
+.injury-modal-title {
+  margin-top: 0;
+  color: #00fff7;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Bouton fermer */
+.injury-modal-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Grille de cartes d'historique dans la modal */
+.injury-history-grid-modal {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Réutilise tes styles existants pour .inj-card-history et .row-injury */
+/* ───── Split Layout ───── */
+.injury-split {
+  display: flex;
+  gap: 20px;
+}
+
+/* GAUCHE : condamnation cartes */
+.injury-left {
+  flex: 0 0 45%;
+}
+
+/* DROITE : prend tout le reste */
+.injury-right {
+  flex: 1 1 55%;
+}
+
+/* Carte STAT OVERVIEW */
+.injury-console {
+  background: #14171f;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 0 20px rgba(138,46,255,0.3);
+}
+
+/* Titre */
+.injury-console__title {
+  color: #8a2be2;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* Chaque graphique */
+.injury-console__chart {
+  width: 100%;
+  height: 220px;
+  margin-bottom: 20px;
+}
+
+/* Modal overlay */
+.injury-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.6);
+  display: flex; justify-content: center; align-items: center;
+}
+
+/* Modal content */
+.injury-modal {
+  background: #1c1f26;
+  border-radius: 12px;
+  padding: 24px;
+  width: 80%;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 0 30px rgba(138,46,255,0.5);
+}
+
+/* Close button */
+.injury-modal-close {
+  background: transparent;
+  border: none;
+  color: #ffae00;
+  font-size: 1.2em;
+  position: absolute;
+  top: 16px; right: 16px;
+  cursor: pointer;
+}
+
+

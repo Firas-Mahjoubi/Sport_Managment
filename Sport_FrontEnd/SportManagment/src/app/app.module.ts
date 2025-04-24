@@ -97,6 +97,8 @@ import { PlayerTerrainSelectorComponent } from './Health/player-terrain-selector
 import { StatistiqueComponent } from './Health/statistique/statistique.component';
 
 
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
 
 
 
@@ -204,7 +206,7 @@ import { StatistiqueComponent } from './Health/statistique/statistique.component
     MatMenuModule,
     MatToolbarModule,
 
-
+    NgxEchartsModule.forRoot({ echarts })
 
 
 
