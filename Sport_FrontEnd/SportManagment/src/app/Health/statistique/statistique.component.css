@@ -930,175 +930,259 @@ body {
 
 
 
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:ital,wght@0,400;0,500;1,400&display=swap');
+/* ───────────────────────────────────────────────────────────
+   CONTENEUR PRINCIPAL : plein écran, sans colonnes gauches
+─────────────────────────────────────────────────────────── */
+/* Décalage à gauche pour le titre INJURY STAT */
+.section-title-injury {
+  margin-left: -25rem; /* ajuste cette valeur selon ton besoin */
+}
 
-/* Overlay semi-transparent */
+/* Même décalage pour la barre de boutons */
+.injury-buttons {
+  margin-left: -25rem; /* même ajustement que pour le titre */
+
+}
+
+
+.tab-content-injury {
+  width: 100vw;
+  max-width: none;
+  padding: 2rem;
+  margin: 0;
+  background: #070d1b;
+  font-family: 'Orbitron', ;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+/* ───────────────────────────────────────────────────────────
+   SUPPRESSION DU SPLIT GAUCHE/DROITE
+─────────────────────────────────────────────────────────── */
+.injury-split {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* ───────────────────────────────────────────────────────────
+   DASHBOARD ENTIÈRE LARGEUR
+─────────────────────────────────────────────────────────── */
+.statoverview-card-full {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 2rem;
+  padding: 2rem;
+  background: linear-gradient(145deg,#0a0f1c,#0d1324);
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0,240,255,0.3);
+  margin-left: -10px;
+}
+
+/* TITRE */
+.statoverview-header h2 {
+  margin: 0 0 2rem;
+  color: #00f0ff;
+  text-align: center;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+}
+
+/* ───────────────────────────────────────────────────────────
+   GRID : 2 COLS POUR LES DEUX PREMIERS, LIGNE ENTIÈRE POUR LE 3ᵉ
+─────────────────────────────────────────────────────────── */
+.statoverview-charts-full {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: auto;
+  gap: 2rem;
+}
+
+/* CHAQUE GRAPHIQUE */
+.statoverview-charts-full .statoverview-chart {
+  background: #0b0f1a;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 20px #00f0ff33, 0 0 20px #00f0ff33;
+  transition: transform 0.3s;
+  width: 100%;
+  height: 500px;
+}
+.statoverview-charts-full .statoverview-chart:hover {
+  transform: scale(1.02);
+}
+
+/* LE 3ᵉ GRAPHIQUE PREND TOUTE LA LARGEUR */
+.statoverview-charts-full .line-style {
+  grid-column: 1 / -1;
+  height: 600px;
+}
+
+/* BORDURES NÉON SELON TYPE */
+.radar-style { border: 4px solid #3498db; }
+.pie-style   { border: 4px solid #9b59b6; }
+.line-style  { border: 4px solid #2ecc71; }
+
+/* ───────────────────────────────────────────────────────────
+   BOUTONS NÉON
+─────────────────────────────────────────────────────────── */
+.injury-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.btn-primary-injury,
+.btn-secondary-injury {
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 0.6rem;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary-injury {
+  background: linear-gradient(135deg,#00bfff,#00f0ff);
+  color: #000;
+  box-shadow: 0 0 10px #00bfff88;
+}
+.btn-primary-injury:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00f0ff;
+}
+.btn-secondary-injury {
+  background: linear-gradient(135deg,#9b59b6,#ff1493);
+  color: #fff;
+  box-shadow: 0 0 10px #ff1493aa;
+}
+.btn-secondary-injury:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff1493;
+}
+
+/* ───────────────────────────────────────────────────────────
+   MODALES SLIDE-IN
+─────────────────────────────────────────────────────────── */
 .injury-modal-overlay {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.6);
+  inset: 0;
+  background: rgba(0,0,0,0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 10000;
 }
-
-/* Conteneur modal */
-.injury-modal {
-  background: #1e2130;
-  padding: 24px;
-  border-radius: 12px;
-  width: 80%;
-  max-width: 600px;
-  max-height: 80vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0 0 30px rgba(0, 255, 247, 0.4);
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
 }
-
-/* Titre */
-.injury-modal-title {
-  margin-top: 0;
-  color: #00fff7;
-  font-family: 'Orbitron', sans-serif;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-/* Bouton fermer */
-.injury-modal-close {
-  position: absolute;
-  top: 12px; right: 12px;
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-/* Grille de cartes d'historique dans la modal */
-.injury-history-grid-modal {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  margin-top: 16px;
-}
-
-/* Réutilise tes styles existants pour .inj-card-history et .row-injury */
-/* ───── Split Layout ───── */
-.injury-split {
-  display: flex;
-  gap: 20px;
-}
-
-/* GAUCHE : condamnation cartes */
-.injury-left {
-  flex: 0 0 45%;
-}
-
-/* DROITE : prend tout le reste */
-.injury-right {
-  flex: 1 1 55%;
-}
-
-/* Carte STAT OVERVIEW */
-.injury-console {
-  background: #14171f;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 0 20px rgba(138,46,255,0.3);
-}
-
-/* Titre */
-.injury-console__title {
-  color: #8a2be2;
-  font-family: 'Orbitron', sans-serif;
-  text-align: center;
-  margin-bottom: 16px;
-}
-
-/* Chaque graphique */
-.injury-console__chart {
-  width: 100%;
-  height: 220px;
-  margin-bottom: 20px;
-}
-
-/* Modal overlay */
-.injury-modal-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.6);
-  display: flex; justify-content: center; align-items: center;
-}
-
-/* Modal content */
 .injury-modal {
   background: #1c1f26;
-  border-radius: 12px;
-  padding: 24px;
   width: 80%;
-  max-height: 80%;
-  overflow-y: auto;
-  box-shadow: 0 0 30px rgba(138,46,255,0.5);
+  max-width: 800px;
+  max-height: 90vh;
+  overflow: auto;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 0 30px rgba(57,255,20,0.5);
+  animation: slideInRight 0.4s ease-out both;
+  position: relative;
 }
-
-/* Close button */
 .injury-modal-close {
-  background: transparent;
-  border: none;
-  color: #ffae00;
-  font-size: 1.2em;
   position: absolute;
-  top: 16px; right: 16px;
+  top: 1rem; right: 1rem;
+  background: none; border: none;
+  font-size: 1.6rem;
+  color: #39FF14;
+  text-shadow: 0 0 8px #39FF14;
   cursor: pointer;
+  transition: transform 0.2s;
+}
+.injury-modal-close:hover {
+  transform: scale(1.2);
 }
 
-
-
-
-
-
-/* start overview */
-.statoverview-card {
-  background: linear-gradient(145deg, #0a0f1c, #0d1324);
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
-  padding: 20px;
-  margin-top: 20px;
+/* CARTES DANS LA MODALE */
+.injury-history-grid-modal {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 }
-
-.statoverview-header h2 {
-  color: #00f0ff;
-  text-align: center;
-  margin-bottom: 20px;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 24px;
-  letter-spacing: 2px;
+.inj-card-history {
+  background: rgba(10,15,28,0.9);
+  padding: 1rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 0 15px rgba(0,255,255,0.2);
 }
-
-.statoverview-charts {
+.row-injury {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.row-injury strong {
+  color: #00f0ff;
 }
 
-.statoverview-chart {
-  width: 300px;
-  height: 300px;
-  background: #0b0f1a;
-  border-radius: 20px;
-  box-shadow: inset 0 0 20px #00f0ff33, 0 0 20px #00f0ff33;
-  transition: transform 0.5s;
+
+
+.stats-container {
+  position: relative;
+  width: 100%;
+  height: 150px; /* donne une hauteur fixe pour contenir les deux cercles */
+  margin-top: -5rem;
+  top: 0px; /* Légèrement plus bas de 10% de l'écran */
 }
 
-.statoverview-chart:hover {
-  transform: scale(1.05);
+.stats-floating {
+  position: relative; /* TRÈS IMPORTANT pour que left et right fonctionnent */
+  width: 100%;
+  height: 100%;
 }
 
-/* Animation Glow spécifique aux types de graphiques */
-.radar-style { border: 2px solid #3498db; }
-.pie-style   { border: 2px solid #9b59b6; }
-.line-style  { border: 2px solid #2ecc71; }
+/* Cercle gauche */
+.stat-item.left {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  width: 140px;
+  text-align: center;
+}
+
+/* Cercle droit */
+.stat-item.right {
+  position: absolute;
+  top: 0;
+  right: 500px;
+  width: 140px;
+  text-align: center;
+}
+
+.stat-circle {
+  background: rgba(0, 240, 255, 0.1);
+  border: 2px solid #00f0ff;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px auto;
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: bold;
+  color: #00f0ff;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #ccc;
+}
+
+
+

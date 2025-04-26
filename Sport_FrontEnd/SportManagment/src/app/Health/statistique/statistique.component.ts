@@ -30,9 +30,16 @@ export class StatistiqueComponent implements OnInit {
   selectedHealthRecord: HealthRecord|null = null;
   injuries: Injury[] = [];
   injuryHistory: Injury[] = [];
+
+
   showInjuryHistory = false;
+   showInjuriesModal = false;
+
+
 
   recoveryPlans: RecoveryPlan[] = [];
+
+  selectedPeriod: 'jour' | 'semaine' | 'mois' = 'mois'; // <-- période sélectionnée
 
 
 
@@ -53,6 +60,11 @@ export class StatistiqueComponent implements OnInit {
   radarOpts: EChartsOption = {};
   pieOpts:   EChartsOption = {};
   lineOpts:  EChartsOption = {};
+
+  gaugeOpts!: EChartsOption;
+  heatmapOpts!: EChartsOption;
+  boxplotOpts!: EChartsOption;
+   showAllInjuries: any;
 
   constructor(
     private playerService:   PlayerService,
@@ -118,6 +130,7 @@ export class StatistiqueComponent implements OnInit {
       error:  ()=>this.injuryHistory=[]
     });
   }
+
   private loadRecoveryPlans(id:number){
     this.recoveryService.getRecoveryPlansByPlayerId(id).subscribe({
       next:d=>{ this.recoveryPlans=d; this.computeRPStats(); },
@@ -126,270 +139,338 @@ export class StatistiqueComponent implements OnInit {
   }
 
 
-
-
+  closeModals() {
+    this.showInjuryHistory = false;
+    this.showAllInjuries   = false;
+  }
+  openAll() {
+    this.showAllInjuries  = true;
+    this.showInjuryHistory = false;
+  }
+  openHistory() {
+    this.showInjuryHistory = true;
+    this.showAllInjuries  = false;
+  }
 
 
   /* ============ STATS + CHARTS ============ */
-  private computeRPStats(){
-    const n = this.recoveryPlans.length||1;
+private computeRPStats() {
+  const n = this.recoveryPlans.length || 1;
 
-    /* Moyennes & compteurs */
-    this.avgProgress = Math.round(this.recoveryPlans.reduce((s,p)=>s+p.progress,0)/n);
-    this.avgDuration = Math.round(this.recoveryPlans.reduce((s,p)=>
-        s+(Date.parse(p.estimatedEndDate)-Date.parse(p.startDate))/86400000
-      ,0)/n);
-    this.activeCount = this.recoveryPlans.filter(p=>p.planStatus==='EN_COURS').length;
-    this.doneCount   = this.recoveryPlans.filter(p=>p.planStatus==='TERMINE').length;
+  /* Moyennes & compteurs */
+  this.avgProgress = Math.round(this.recoveryPlans.reduce((s, p) => s + p.progress, 0) / n);
+  this.avgDuration = Math.round(this.recoveryPlans.reduce((s, p) =>
+    s + (Date.parse(p.estimatedEndDate) - Date.parse(p.startDate)) / 86400000, 0) / n);
+  this.activeCount = this.recoveryPlans.filter(p => p.planStatus === 'EN_COURS').length;
+  this.doneCount = this.recoveryPlans.filter(p => p.planStatus === 'TERMINE').length;
 
-    /* Chips types */
-    const bucket:Record<string,number>={};
-    this.recoveryPlans.forEach(p=> bucket[p.planType]=(bucket[p.planType]||0)+1);
-    this.planTypeGroups = Object.entries(bucket).map(([t,c])=>({type:t,count:c}));
+  /* Chips types */
+  const bucket: Record<string, number> = {};
+  this.recoveryPlans.forEach(p => bucket[p.planType] = (bucket[p.planType] || 0) + 1);
+  this.planTypeGroups = Object.entries(bucket).map(([t, c]) => ({ type: t, count: c }));
 
-    /* Mini bar */
-    this.barOpts = {
-      tooltip:{trigger:'axis'},
-      xAxis:{type:'category',data:['Active','Done','Avg Prog %','Avg Dur j'],
-             axisLabel:{color:'#9aa0b5'}},
-      yAxis:{type:'value',axisLabel:{color:'#9aa0b5'}},
-      series:[{type:'bar',
-        data:[this.activeCount,this.doneCount,this.avgProgress,this.avgDuration],
-        itemStyle:{color:'#00bfff'}, barWidth:'40%'}]
-    };
-
-    /* --------- COMBO (bar+line) GRAND --------- */
-    const labels = this.recoveryPlans.length
-                 ? this.recoveryPlans.map((_,i)=>'P'+(i+1)) : ['‑'];
-    const prog   = this.recoveryPlans.length
-                 ? this.recoveryPlans.map(p=>p.progress)    : [0];
-    const dur    = this.recoveryPlans.length
-                 ? this.recoveryPlans.map(p=>
-                     (Date.parse(p.estimatedEndDate)-Date.parse(p.startDate))/86400000
-                   ) : [0];
-
-                   this.comboOpts = {
-                    backgroundColor: '#14171f',  // Fond sombre
-                    animationDuration: 1200,  // Durée de l'animation pour plus de fluidité
-                    animationEasing: 'cubicOut',  // Animation fluide
-
-                    tooltip: {
-                      trigger: 'axis',
-                      backgroundColor: '#1e1e2f',  // Ombre foncée pour le tooltip
-                      borderColor: '#00fff755',  // Bordure néon
-                      borderWidth: 1,
-                      textStyle: {
-                        color: '#ffffff',  // Texte en blanc
-                        fontFamily: 'Orbitron, sans-serif',  // Police futuriste
-                        fontSize: 12  // Taille de la police
-                      }
-                    },
-
-                    legend: {
-                      data: [
-                        {
-                          name: 'Progress',
-                          icon: 'rect',
-                          textStyle: { color: '#00fff7', fontWeight: 'bold', fontSize: 13 }  // Progress avec couleur néon cyan
-                        },
-                        {
-                          name: 'Durée(j)',
-                          icon: 'rect',
-                          textStyle: { color: '#ffae00', fontWeight: 'bold', fontSize: 13 }  // Durée en couleur or néon
-                        }
-                      ],
-                      itemWidth: 14,
-                      itemHeight: 8,
-                      top: 10
-                    },
-
-                    grid: {
-                      left: 40,
-                      right: 30,
-                      bottom: 40,
-                      top: 60,
-                      containLabel: true
-                    },
-
-                    xAxis: {
-                      type: 'category',
-                      data: labels,
-                      axisLine: { lineStyle: { color: '#00fff799' } },  // Lignes en cyan
-                      axisLabel: {
-                        color: '#9aa0b5',  // Couleur gris clair pour les labels
-                        fontFamily: 'Orbitron, sans-serif',  // Police futuriste
-                        fontSize: 12  // Taille de la police
-                      }
-                    },
-
-                    yAxis: [
-                      {
-                        type: 'value',
-                        name: 'Progress %',
-                        axisLine: { lineStyle: { color: '#00fff7' } },  // Ligne en cyan
-                        splitLine: { lineStyle: { color: '#2c2f38' } },  // Lignes de séparation sombres
-                        axisLabel: {
-                          color: '#00fff7',  // Texte des labels en cyan
-                          fontWeight: 'bold',
-                          fontSize: 12  // Taille de la police
-                        }
-                      },
-                      {
-                        type: 'value',
-                        name: 'Durée (j)',
-                        position: 'right',
-                        axisLine: { lineStyle: { color: '#ffae00' } },  // Ligne droite en or
-                        splitLine: { show: false },  // Aucune ligne de séparation pour la droite
-                        axisLabel: {
-                          color: '#ffae00',  // Texte en or néon
-                          fontWeight: 'bold',
-                          fontSize: 12  // Taille de la police
-                        }
-                      }
-                    ],
-
-                    series: [
-                      {
-                        name: 'Progress',
-                        type: 'bar',
-                        data: prog,
-                        itemStyle: {
-                          color: '#00fff7',  // Couleur de la barre en cyan
-                          borderRadius: [4, 4, 0, 0],  // Coins arrondis
-                          shadowBlur: 10,  // Ombre légère
-                          shadowColor: '#00fff777'  // Ombre bleue néon
-                        },
-                        emphasis: {
-                          itemStyle: {
-                            color: '#33fffc',  // Effet néon lors du survol
-                            shadowBlur: 15  // Ombre accrue
-                          }
-                        }
-                      },
-                      {
-                        name: 'Durée(j)',
-                        type: 'line',
-                        yAxisIndex: 1,
-                        data: dur,
-                        smooth: true,
-                        lineStyle: {
-                          width: 3,
-                          color: '#ffae00'  // Ligne or néon
-                        },
-                        itemStyle: {
-                          color: '#ffae00',  // Couleur or néon
-                          borderColor: '#000',  // Bordure sombre
-                          borderWidth: 1  // Largeur de la bordure
-                        },
-                        symbol: 'circle',  // Forme des symboles en cercle
-                        symbolSize: 8,  // Taille des symboles
-                        emphasis: {
-                          itemStyle: {
-                            color: '#ffc94b',  // Couleur de survol en or clair
-                            borderColor: '#14171f',  // Bordure sombre au survol
-                            borderWidth: 2  // Largeur de la bordure au survol
-                          }
-                        }
-                      }
-                    ]
-                  };
-  }
-
-
-
-
-// ============ NOUVEAUX GRAPHIQUES FUTURISTES ============
-private computeInjuryStats() {
-  const types = new Map<string, number>();
-  const severities: number[] = [];
-  const dates: string[] = [];
-
-  for (let inj of this.injuries) {
-    // Répartition par type
-    types.set(inj.type, (types.get(inj.type) || 0) + 1);
-
-    // Gravité
-    severities.push(Number(inj.severity) || 0);
-
-    // Dates
-    if (inj.date) dates.push(new Date(inj.date).toLocaleDateString());
-  }
-
-  // 1. Radar Chart → Gravité et Douleur
-  this.radarOpts = {
-    backgroundColor: '#0b0f1a',
-    tooltip: {},
-    radar: {
-      indicator: [
-        { name: 'Gravité', max: 10 },
-        { name: 'Mobilité', max: 100 },
-        { name: 'Inflammation', max: 100 },
-        { name: 'Guérison', max: 100 },
-        { name: 'Douleur', max: 10 },
-      ],
-      splitLine: { lineStyle: { color: ['#2c3e50'] } },
-      axisLine: { lineStyle: { color: '#3498db' } },
-    },
-    series: [{
-      type: 'radar',
-      data: [{
-        value: [
-          this.average(severities),
-          80, // Dummy value pour Mobilité
-          60, // Dummy value pour Inflammation
-          50, // Dummy value pour Guérison
-          this.average(severities),
-        ],
-        name: 'Statistiques Blessures',
-        areaStyle: { color: 'rgba(52, 152, 219, 0.6)' },
-        lineStyle: { color: '#00f0ff' }
-      }]
-    }]
-  };
-
-  // 2. Pie Chart → Répartition des Types
-  this.pieOpts = {
-    backgroundColor: '#0b0f1a',
-    tooltip: { trigger: 'item' },
-    series: [{
-      name: 'Types',
-      type: 'pie',
-      radius: ['40%', '70%'],
-      avoidLabelOverlap: false,
-      label: { show: false, position: 'center' },
-      emphasis: {
-        label: { show: true, fontSize: '18', fontWeight: 'bold', color: '#00f0ff' }
-      },
-      labelLine: { show: false },
-      data: Array.from(types.entries()).map(([k, v]) => ({
-        name: k,
-        value: v
-      }))
-    }]
-  };
-
-  // 3. Line Chart → Blessures sur le Temps
-  this.lineOpts = {
-    backgroundColor: '#0b0f1a',
-    tooltip: { trigger: 'axis' },
+  /* Mini bar */
+  this.barOpts = {
+    backgroundColor: '#0a0f1c',
+    tooltip: { trigger: 'axis', backgroundColor: '#1c1f2e', borderColor: '#00bfff88', textStyle: { color: '#ffffff' }},
     xAxis: {
       type: 'category',
-      data: dates,
-      axisLabel: { color: '#7f8c8d' }
+      data: ['Active', 'Done', 'Avg Prog %', 'Avg Dur j'],
+      axisLabel: { color: '#9aa0b5', fontFamily: 'Orbitron, sans-serif' },
+      axisLine: { lineStyle: { color: '#00bfff99' } }
     },
     yAxis: {
       type: 'value',
-      axisLabel: { color: '#7f8c8d' }
+      axisLabel: { color: '#9aa0b5', fontFamily: 'Orbitron, sans-serif' },
+      splitLine: { lineStyle: { color: '#2c2f38' } }
     },
     series: [{
-      data: severities,
-      type: 'line',
-      smooth: true,
-      lineStyle: { color: '#00f0ff', width: 3 },
-      areaStyle: { color: 'rgba(0, 240, 255, 0.3)' }
+      type: 'bar',
+      data: [this.activeCount, this.doneCount, this.avgProgress, this.avgDuration],
+      itemStyle: {
+        color: '#00bfff',
+        borderRadius: [6, 6, 0, 0],
+        shadowBlur: 10,
+        shadowColor: '#00bfff77'
+      },
+      barWidth: '35%'
     }]
   };
+
+  /* Grand combo bar + line */
+  const labels = this.recoveryPlans.length ? this.recoveryPlans.map((_, i) => 'P' + (i + 1)) : ['‑'];
+  const prog = this.recoveryPlans.length ? this.recoveryPlans.map(p => p.progress) : [0];
+  const dur = this.recoveryPlans.length ? this.recoveryPlans.map(p =>
+    (Date.parse(p.estimatedEndDate) - Date.parse(p.startDate)) / 86400000
+  ) : [0];
+
+  this.comboOpts = {
+    backgroundColor: '#0a0f1c',
+    tooltip: {
+      trigger: 'axis',
+      backgroundColor: '#1e1e2f',
+      borderColor: '#00fff799',
+      textStyle: { color: '#ffffff', fontFamily: 'Orbitron, sans-serif' }
+    },
+    legend: {
+      data: ['Progress', 'Durée(j)'],
+      textStyle: { color: '#00fff7', fontWeight: 'bold' },
+      top: 10,
+      itemGap: 20
+    },
+    grid: { left: 50, right: 50, bottom: 50, top: 70, containLabel: true },
+    xAxis: {
+      type: 'category',
+      data: labels,
+      axisLine: { lineStyle: { color: '#00fff799' } },
+      axisLabel: { color: '#9aa0b5', fontFamily: 'Orbitron, sans-serif' }
+    },
+    yAxis: [
+      {
+        type: 'value',
+        name: 'Progress %',
+        axisLine: { lineStyle: { color: '#00fff7' } },
+        splitLine: { lineStyle: { color: '#2c2f38' } },
+        axisLabel: { color: '#00fff7', fontWeight: 'bold' }
+      },
+      {
+        type: 'value',
+        name: 'Durée (j)',
+        position: 'right',
+        axisLine: { lineStyle: { color: '#ffae00' } },
+        splitLine: { show: false },
+        axisLabel: { color: '#ffae00', fontWeight: 'bold' }
+      }
+    ],
+    series: [
+      {
+        name: 'Progress',
+        type: 'bar',
+        data: prog,
+        itemStyle: {
+          color: '#00fff7',
+          borderRadius: [6, 6, 0, 0],
+          shadowBlur: 15,
+          shadowColor: '#00fff799'
+        },
+        emphasis: {
+          itemStyle: {
+            color: '#33fffc',
+            shadowBlur: 20
+          }
+        }
+      },
+      {
+        name: 'Durée(j)',
+        type: 'line',
+        yAxisIndex: 1,
+        data: dur,
+        smooth: true,
+        lineStyle: { width: 4, color: '#ffae00' },
+        itemStyle: { color: '#ffae00', borderColor: '#000', borderWidth: 1 },
+        symbol: 'circle',
+        symbolSize: 10,
+        emphasis: {
+          itemStyle: {
+            color: '#ffc94b',
+            borderColor: '#14171f',
+            borderWidth: 2
+          }
+        }
+      }
+    ]
+  };
 }
+
+
+/* ============ NOUVEAUX GRAPHIQUES FUTURISTES POUR INJURIES - MODIFIÉ ============ */
+private computeInjuryStats() {
+  // 1) Agrégations
+  const typeCount: Record<string, number> = {};
+  const zoneSeveritySum: Record<string, number> = {};
+  const zoneCount: Record<string, number> = {};
+  const daySeveritySum: Record<string, number> = {};
+  const dayCount: Record<string, number> = {};
+  const weekSeveritySum: Record<string, number> = {};
+  const weekCount: Record<string, number> = {};
+  const monthSeveritySum: Record<string, number> = {};
+  const monthCount: Record<string, number> = {};
+
+  this.injuries.forEach(inj => {
+    const severityValue = ({ LEGER:3, MODERE:6, GRAVE:9 }[inj.severity] || 0);
+    const d = new Date(inj.date);
+
+    // Type de blessures (Pie Chart)
+    typeCount[inj.type] = (typeCount[inj.type] || 0) + 1;
+
+    // Gravité par zone (Radar Chart)
+    zoneSeveritySum[inj.zoneAffectee] = (zoneSeveritySum[inj.zoneAffectee] || 0) + severityValue;
+    zoneCount[inj.zoneAffectee] = (zoneCount[inj.zoneAffectee] || 0) + 1;
+
+    // Gravité moyenne par jour
+    const dayKey = d.toISOString().split('T')[0];
+    daySeveritySum[dayKey] = (daySeveritySum[dayKey] || 0) + severityValue;
+    dayCount[dayKey] = (dayCount[dayKey] || 0) + 1;
+
+    // Gravité moyenne par semaine
+    const week = this.getWeekNumber(d);
+    const weekKey = `${week}/${d.getFullYear()}`;
+    weekSeveritySum[weekKey] = (weekSeveritySum[weekKey] || 0) + severityValue;
+    weekCount[weekKey] = (weekCount[weekKey] || 0) + 1;
+
+    // Gravité moyenne par mois
+    const mY = `${d.getMonth()+1}/${d.getFullYear()}`;
+    monthSeveritySum[mY] = (monthSeveritySum[mY] || 0) + severityValue;
+    monthCount[mY] = (monthCount[mY] || 0) + 1;
+  });
+
+  // 2) Préparation des données
+  const pieData = Object.entries(typeCount).map(([name,value])=>({ name, value }));
+
+  const zones = Object.keys(zoneSeveritySum);
+  const radarIndicator = zones.map(z=>({ name: z, max: 10 }));
+  const radarValues = zones.map(z=> zoneSeveritySum[z]/zoneCount[z] );
+  const radarData = [{ name: 'Gravité moyenne', value: radarValues }];
+
+  const sortedDays = Object.keys(dayCount).sort();
+  const sortedWeeks = Object.keys(weekCount).sort();
+  const sortedMonths = Object.keys(monthCount).sort((a,b)=>{
+    const [ma,ya]=a.split('/').map(Number), [mb,yb]=b.split('/').map(Number);
+    return ya===yb ? ma-mb : ya-yb;
+  });
+
+  const lineDataDay = sortedDays.map(d => ({
+    date: d,
+    severity: daySeveritySum[d]/dayCount[d]
+  }));
+
+  const lineDataWeek = sortedWeeks.map(w => ({
+    week: w,
+    severity: weekSeveritySum[w]/weekCount[w]
+  }));
+
+  const lineDataMonth = sortedMonths.map(m => ({
+    month: m,
+    severity: monthSeveritySum[m]/monthCount[m]
+  }));
+
+  // 3) Charts agrandis
+
+  // --- Pie Chart ---
+  this.pieOpts = {
+    title: {
+      text: 'Répartition des types de blessures',
+      subtext: '(%)',
+      left: 'center',
+      textStyle:{ color:'#0ff', fontFamily:'Orbitron', fontSize:18 },
+      subtextStyle:{ color:'#0fa', fontFamily:'Orbitron', fontSize:16 }
+    },
+    tooltip:{ trigger:'item', formatter:'{b}: {c} ({d}%)' },
+    legend:{
+      orient:'vertical', left:'left',
+      data: pieData.map(p=>p.name),
+      textStyle:{ color:'#0ff', fontFamily:'Orbitron' }
+    },
+    series:[{
+      type:'pie', radius:'65%',
+      data: pieData,
+      label:{ show:true, formatter:'{b}: {d}%', color:'#fff', fontFamily:'Orbitron' },
+      labelLine:{ lineStyle:{ color:'#0ff' } },
+      itemStyle:{ shadowBlur:20, shadowColor:'#0ff' }
+    }],
+    color:['#39FF14','#0FF','#FF1493','#FF0']
+  };
+
+  // --- Radar Chart ---
+  this.radarOpts = {
+    title:{
+      text:'Gravité moyenne par zone',
+      subtext:'(0–10)',
+      left:'center',
+      textStyle:{ color:'#0ff', fontFamily:'Orbitron', fontSize:18 },
+      subtextStyle:{ color:'#0fa', fontFamily:'Orbitron', fontSize:16 }
+    },
+    tooltip:{ show:true },
+    radar:{
+      indicator: radarIndicator,
+      shape:'circle',
+      radius: '70%',
+      axisLine:{ lineStyle:{ color:'rgba(0,255,255,0.3)' } },
+      splitLine:{ lineStyle:{ color:'rgba(0,255,255,0.2)' } }
+    },
+    series:[{
+      name:'Gravité',
+      type:'radar',
+      data: radarData,
+      itemStyle:{ color:'rgba(0,255,255,0.3)', shadowBlur:25, shadowColor:'#0ff' },
+      lineStyle:{ color:'#0ff', width:3 },
+      areaStyle:{ color:'rgba(0,255,255,0.1)' }
+    }]
+  };
+
+  // --- Line Chart Jour/Semaine/Mois ---
+  this.lineOpts = {
+    baseOption: {
+      timeline: {
+        axisType: 'category',
+        autoPlay: false,
+        playInterval: 3000,
+        data: ['Par Jour', 'Par Semaine', 'Par Mois'],
+        label: { color: '#0ff', fontFamily: 'Orbitron' }
+      },
+      title: {
+        text: 'Gravité moyenne',
+        subtext: 'Jour / Semaine / Mois',
+        left: 'center',
+        textStyle:{ color:'#0ff', fontFamily:'Orbitron', fontSize:18 },
+        subtextStyle:{ color:'#0fa', fontFamily:'Orbitron', fontSize:16 }
+      },
+      tooltip: { trigger: 'axis' },
+      xAxis: { type: 'category', boundaryGap: false, axisLabel:{ color:'#9aa0b5' }, axisLine:{ lineStyle:{ color:'#0ff' } } },
+      yAxis: {
+        type: 'value',
+        min:0, max:10,
+        name:'Gravité (0–10)',
+        nameLocation:'middle',
+        nameTextStyle:{ color:'#0ff', fontFamily:'Orbitron' },
+        axisLine:{ lineStyle:{ color:'#0ff' } },
+        axisLabel:{ color:'#9aa0b5' },
+        splitLine:{ lineStyle:{ color:'#2c2f38' } }
+      },
+      series: [{ type:'line', smooth:true, symbol:'circle', symbolSize:8 }]
+    },
+    options: [
+      {
+        title: { text: 'Gravité Moyenne par Jour' },
+        xAxis: { data: lineDataDay.map(d=>d.date) },
+        series: [{ data: lineDataDay.map(d=>d.severity), areaStyle:{ color:'rgba(57,255,20,0.2)' }, lineStyle:{ color:'#39FF14', width:3 } }]
+      },
+      {
+        title: { text: 'Gravité Moyenne par Semaine' },
+        xAxis: { data: lineDataWeek.map(w=>w.week) },
+        series: [{ data: lineDataWeek.map(w=>w.severity), areaStyle:{ color:'rgba(0,255,255,0.2)' }, lineStyle:{ color:'#0FF', width:3 } }]
+      },
+      {
+        title: { text: 'Gravité Moyenne par Mois' },
+        xAxis: { data: lineDataMonth.map(m=>m.month) },
+        series: [{ data: lineDataMonth.map(m=>m.severity), areaStyle:{ color:'rgba(255,20,147,0.2)' }, lineStyle:{ color:'#FF1493', width:3 } }]
+      }
+    ]
+  };
+}
+
+// Fonction pour récupérer le numéro de semaine d'une date
+private getWeekNumber(d: Date): number {
+  const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  const dayNum = date.getUTCDay() || 7;
+  date.setUTCDate(date.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(date.getUTCFullYear(),0,1));
+  return Math.ceil((((date.getTime() - yearStart.getTime())/86400000)+1)/7);
+}
+
+
+
+
 
 
 

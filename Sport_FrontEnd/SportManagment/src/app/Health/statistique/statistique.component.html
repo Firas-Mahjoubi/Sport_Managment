@@ -116,72 +116,116 @@
 </div>
 
 
-
 <!-- ───── INJURY STAT ───── -->
 <div *ngIf="currentSection === 'icon'" class="tab-content-injury">
 
-  <h3 class="section-title-injury">INJURY STAT</h3>
+    <h3 class="section-title-injury">📊 Injury Analytics Dashboard</h3>
+  <div class="stats-container">
 
-  <!-- Bouton modal pour l'historique -->
-  <button (click)="showInjuryHistory = true" class="btn btn-primary-injury">
-    Voir l'historique des blessures
-  </button>
+    <div class="stats-floating">
+      <!-- Cercle gauche -->
+      <div class="stat-item left">
+        <div class="stat-circle">
+          <span class="stat-number">{{ injuries.length }}</span>
+        </div>
+        <p class="stat-label">Total blessures</p>
+      </div>
+
+
+      <!-- Cercle droit -->
+      <div class="stat-item right">
+        <div class="stat-circle">
+          <span class="stat-number">{{ injuryHistory.length }}</span>
+        </div>
+        <p class="stat-label">Total archivées</p>
+      </div>
+    </div>
+
+  <!-- Ici tes graphiques et tout ton contenu normal -->
+  <div class="graphs">
+    <!-- Tes graphs ici -->
+  </div>
+
+</div>
+
+
+
+  <!-- ───── Boutons ───── -->
+  <div class="injury-buttons">
+    <button (click)="showInjuryHistory = true" class="btn btn-primary-injury">
+      Voir l’historique des blessures
+    </button>
+    <button (click)="showAllInjuries = true" class="btn btn-secondary-injury">
+      Voir toutes les blessures
+    </button>
+  </div>
 
   <!-- ───── Split layout ───── -->
   <div class="injury-split">
 
-    <!-- ▸ GAUCHE : cartes de blessures -->
-    <div class="injury-left">
-      <ng-container *ngIf="injuries.length; else noInjury">
-        <p class="total-line-injury">
-          Total blessures : <strong>{{ injuries.length }}</strong>
-        </p>
-        <div class="injury-grid-new">
-          <div class="inj-card-injury" *ngFor="let inj of injuries">
 
-            <div class="inj-header-injury">
-              <div class="row-injury"><span class="label-injury"><strong>Type :</strong></span> <span>{{ inj.type }}</span></div>
-              <div class="row-injury"><span class="label-injury"><strong>Gravité :</strong></span> <span>{{ inj.severity }}</span></div>
-            </div>
-            <div class="inj-body-injury">
-              <div class="row-injury"><span class="label-injury"><strong>Date :</strong></span> <span>{{ inj.date | date:'dd/MM/yyyy' }}</span></div>
-              <div class="row-injury"><span class="label-injury"><strong>Zone :</strong></span> <span>{{ inj.zoneAffectee }}</span></div>
-              <div class="row-injury"><span class="label-injury"><strong>Status :</strong></span> <span>{{ inj.status }}</span></div>
-              <div class="row-injury"><span class="label-injury"><strong>Cause :</strong></span> <span>{{ inj.cause }}</span></div>
-              <div class="row-injury"><span class="label-injury"><strong>Desc. :</strong></span> <span>{{ inj.description }}</span></div>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-      <ng-template #noInjury>
-        <p class="no-data-injury">Aucune blessure répertoriée.</p>
-      </ng-template>
-    </div>
+    <!-- ▸ DROITE : dashboard full-width -->
+    <div class="statoverview-card-full">
+      <div class="statoverview-charts-full">
 
-    <div class="statoverview-card">
-
-      <div class="statoverview-header">
-        <h2>📊 Injury Analytics Dashboard</h2>
-      </div>
-
-      <div class="statoverview-charts">
-
-        <!-- Radar Chart : Analyse multi-facteurs -->
+        
         <div echarts [options]="radarOpts" class="statoverview-chart radar-style"></div>
-
-        <!-- Pie Chart : Répartition des blessures -->
-        <div echarts [options]="pieOpts" class="statoverview-chart pie-style"></div>
-
-        <!-- Line Chart : Évolution de la gravité -->
-        <div echarts [options]="lineOpts" class="statoverview-chart line-style"></div>
-
+        <div echarts [options]="pieOpts"   class="statoverview-chart pie-style"></div>
+        <div echarts [options]="lineOpts"  class="statoverview-chart line-style"></div>
       </div>
-
     </div>
-
-
 
   </div> <!-- /.injury-split -->
+</div>
+
+<!-- ───── MODAL HISTORIQUE DES BLESSURES ───── -->
+<div *ngIf="showInjuryHistory" class="injury-modal-overlay" (click)="showInjuryHistory = false">
+  <div class="injury-modal" (click)="$event.stopPropagation()">
+    <button class="injury-modal-close" (click)="showInjuryHistory = false">✕</button>
+    <h3 class="injury-modal-title">Historique des blessures</h3>
+    <p>Total archivées : <strong>{{ injuryHistory.length }}</strong></p>
+    <div *ngIf="injuryHistory.length; else noHistory" class="injury-history-grid-modal">
+      <div class="inj-card-history" *ngFor="let inj of injuryHistory">
+        <!-- même structure que tes cards -->
+        <div class="inj-header-injury">
+          <div class="row-injury"><strong>Type :</strong> {{ inj.type }}</div>
+          <div class="row-injury"><strong>Gravité :</strong> {{ inj.severity }}</div>
+        </div>
+        <div class="inj-body-injury">
+          <div class="row-injury"><strong>Date :</strong> {{ inj.date | date:'dd/MM/yyyy' }}</div>
+          <div class="row-injury"><strong>Status :</strong> {{ inj.status }}</div>
+          <div class="row-injury"><strong>Desc. :</strong> {{ inj.description }}</div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noHistory>
+      <p class="no-data-injury">Aucun historique pour ce joueur.</p>
+    </ng-template>
+  </div>
+</div>
+
+<!-- ───── MODAL TOUTES LES BLESSURES ───── -->
+<div *ngIf="showAllInjuries" class="injury-modal-overlay" (click)="showAllInjuries = false">
+  <div class="injury-modal" (click)="$event.stopPropagation()">
+    <button class="injury-modal-close" (click)="showAllInjuries = false">✕</button>
+    <h3 class="injury-modal-title">Toutes les blessures</h3>
+    <p>Total blessures : <strong>{{ injuries.length }}</strong></p>
+    <div class="injury-history-grid-modal">
+      <div class="inj-card-history" *ngFor="let inj of injuries">
+        <div class="inj-header-injury">
+          <div class="row-injury"><strong>Type :</strong> {{ inj.type }}</div>
+          <div class="row-injury"><strong>Gravité :</strong> {{ inj.severity }}</div>
+        </div>
+        <div class="inj-body-injury">
+          <div class="row-injury"><strong>Date :</strong> {{ inj.date | date:'dd/MM/yyyy' }}</div>
+          <div class="row-injury"><strong>Status :</strong> {{ inj.status }}</div>
+          <div class="row-injury"><strong>Desc. :</strong> {{ inj.description }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   <!-- ───── Modal historique ───── -->
   <div class="injury-modal-overlay" *ngIf="showInjuryHistory" (click)="showInjuryHistory = false">
