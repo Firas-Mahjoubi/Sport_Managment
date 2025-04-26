@@ -114,6 +114,9 @@
     <p class="no-data-health">Aucun Health Record pour ce joueur.</p>
   </ng-template>
 </div>
+
+
+
 <!-- ───── INJURY STAT ───── -->
 <div *ngIf="currentSection === 'icon'" class="tab-content-injury">
 
@@ -135,6 +138,7 @@
         </p>
         <div class="injury-grid-new">
           <div class="inj-card-injury" *ngFor="let inj of injuries">
+
             <div class="inj-header-injury">
               <div class="row-injury"><span class="label-injury"><strong>Type :</strong></span> <span>{{ inj.type }}</span></div>
               <div class="row-injury"><span class="label-injury"><strong>Gravité :</strong></span> <span>{{ inj.severity }}</span></div>
@@ -154,19 +158,28 @@
       </ng-template>
     </div>
 
-    <!-- ▸ DROITE : carte unique de STAT OVERVIEW -->
-    <div class="injury-right">
-      <div class="injury-console">
-        <h4 class="injury-console__title">STAT OVERVIEW</h4>
+    <div class="statoverview-card">
 
-        <!-- Radar : répartition par type -->
-        <div echarts [options]="radarOpts" class="injury-console__chart"></div>
-        <!-- Camembert : gravité -->
-        <div echarts [options]="pieOpts"   class="injury-console__chart"></div>
-        <!-- Courbe : blessures par mois -->
-        <div echarts [options]="lineOpts"  class="injury-console__chart"></div>
+      <div class="statoverview-header">
+        <h2>📊 Injury Analytics Dashboard</h2>
       </div>
+
+      <div class="statoverview-charts">
+
+        <!-- Radar Chart : Analyse multi-facteurs -->
+        <div echarts [options]="radarOpts" class="statoverview-chart radar-style"></div>
+
+        <!-- Pie Chart : Répartition des blessures -->
+        <div echarts [options]="pieOpts" class="statoverview-chart pie-style"></div>
+
+        <!-- Line Chart : Évolution de la gravité -->
+        <div echarts [options]="lineOpts" class="statoverview-chart line-style"></div>
+
+      </div>
+
     </div>
+
+
 
   </div> <!-- /.injury-split -->
 
@@ -311,9 +324,9 @@
     <span class="k neon">Avg&nbsp;{{ avgProgress }}%</span>
     <span class="k neon">Dur&nbsp;{{ avgDuration }}j</span>
   </div>
-
+  <h6 class="holo-title"> PlanType : </h6 >
 <!-- Barre filtre -->
-  <div class="holo-filter">
+  <div class="holo-filter" >
     <button class="chip"
             *ngFor="let g of planTypeGroups"
             (click)="toggleType(g.type)"
@@ -325,12 +338,9 @@
 </aside>
 
 
-
   </div> <!-- /rp-split -->
 
 </div>
-
-
 
 
 <div class="bottom-buttons">

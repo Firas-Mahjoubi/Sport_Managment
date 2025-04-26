@@ -1056,3 +1056,49 @@ body {
 }
 
 
+
+
+
+
+/* start overview */
+.statoverview-card {
+  background: linear-gradient(145deg, #0a0f1c, #0d1324);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.statoverview-header h2 {
+  color: #00f0ff;
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+
+.statoverview-charts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.statoverview-chart {
+  width: 300px;
+  height: 300px;
+  background: #0b0f1a;
+  border-radius: 20px;
+  box-shadow: inset 0 0 20px #00f0ff33, 0 0 20px #00f0ff33;
+  transition: transform 0.5s;
+}
+
+.statoverview-chart:hover {
+  transform: scale(1.05);
+}
+
+/* Animation Glow spécifique aux types de graphiques */
+.radar-style { border: 2px solid #3498db; }
+.pie-style   { border: 2px solid #9b59b6; }
+.line-style  { border: 2px solid #2ecc71; }

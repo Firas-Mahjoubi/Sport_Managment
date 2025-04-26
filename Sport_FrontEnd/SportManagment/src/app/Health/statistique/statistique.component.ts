@@ -34,6 +34,9 @@ export class StatistiqueComponent implements OnInit {
 
   recoveryPlans: RecoveryPlan[] = [];
 
+
+
+
   /* ───── KPIs & filtres ───── */
   avgProgress = 0;
   avgDuration = 0;
@@ -295,82 +298,110 @@ export class StatistiqueComponent implements OnInit {
 
 
 
+// ============ NOUVEAUX GRAPHIQUES FUTURISTES ============
+private computeInjuryStats() {
+  const types = new Map<string, number>();
+  const severities: number[] = [];
+  const dates: string[] = [];
 
-  private computeInjuryStats() {
-    // Compteurs
-    const typeBucket: Record<string,number> = {};
-    const sevBucket:  Record<string,number> = {};
-    const timeBucket: Record<string,number> = {};
+  for (let inj of this.injuries) {
+    // Répartition par type
+    types.set(inj.type, (types.get(inj.type) || 0) + 1);
 
-    this.injuries.forEach(i => {
-      typeBucket[i.type]     = (typeBucket[i.type]    || 0) + 1;
-      sevBucket[i.severity]  = (sevBucket[i.severity] || 0) + 1;
-      const month = new Date(i.date).toISOString().slice(0,7);
-      timeBucket[month]      = (timeBucket[month]     || 0) + 1;
-    });
+    // Gravité
+    severities.push(Number(inj.severity) || 0);
 
-    // Préparation des tableaux
-    const types  = Object.keys(typeBucket),
-          tVals  = types.map(t => typeBucket[t]);
-    const sevs   = Object.keys(sevBucket),
-          sVals  = sevs.map(s => sevBucket[s]);
-    const months = Object.keys(timeBucket).sort(),
-          mVals  = months.map(m => timeBucket[m]);
-
-    // 1) Radar (répartition par type)
-    this.radarOpts = {
-      tooltip: {},
-      radar: {
-        indicator: types.map((t,i)=>({
-          name: t, max: Math.max(...tVals)+1
-        }))
-      },
-      series: [{
-        name: 'Types',
-        type: 'radar',
-        data: [{ value: tVals, name: 'Répartition' }],
-        itemStyle: { color: '#00fff7' },
-        areaStyle: { opacity: 0.3 }
-      }]
-    };
-
-    // 2) Pie (gravité)
-    this.pieOpts = {
-      tooltip: { trigger: 'item' },
-      legend: { bottom: 10, textStyle: { color: '#ccc' } },
-      series: [{
-        name: 'Gravité',
-        type: 'pie',
-        radius: ['45%','65%'],
-        label: { formatter: '{b}: {d}%' },
-        data: sevs.map((s,i)=>({ name: s, value: sVals[i] })),
-        itemStyle: { borderColor: '#14171f', borderWidth: 2 }
-      }]
-    };
-
-    // 3) Line (blessures par mois)
-    this.lineOpts = {
-      tooltip: { trigger: 'axis' },
-      xAxis: {
-        type: 'category',
-        data: months,
-        axisLabel: { color: '#9aa0b5' }
-      },
-      yAxis: {
-        type: 'value',
-        axisLabel: { color: '#00fff7' }
-      },
-      series: [{
-        name: 'Blessures/mois',
-        type: 'line',
-        data: mVals,
-        smooth: true,
-        lineStyle: { color: '#ffae00', width: 2 },
-        itemStyle: { color: '#ffae00' },
-        areaStyle: { opacity: 0.1 }
-      }]
-    };
+    // Dates
+    if (inj.date) dates.push(new Date(inj.date).toLocaleDateString());
   }
+
+  // 1. Radar Chart → Gravité et Douleur
+  this.radarOpts = {
+    backgroundColor: '#0b0f1a',
+    tooltip: {},
+    radar: {
+      indicator: [
+        { name: 'Gravité', max: 10 },
+        { name: 'Mobilité', max: 100 },
+        { name: 'Inflammation', max: 100 },
+        { name: 'Guérison', max: 100 },
+        { name: 'Douleur', max: 10 },
+      ],
+      splitLine: { lineStyle: { color: ['#2c3e50'] } },
+      axisLine: { lineStyle: { color: '#3498db' } },
+    },
+    series: [{
+      type: 'radar',
+      data: [{
+        value: [
+          this.average(severities),
+          80, // Dummy value pour Mobilité
+          60, // Dummy value pour Inflammation
+          50, // Dummy value pour Guérison
+          this.average(severities),
+        ],
+        name: 'Statistiques Blessures',
+        areaStyle: { color: 'rgba(52, 152, 219, 0.6)' },
+        lineStyle: { color: '#00f0ff' }
+      }]
+    }]
+  };
+
+  // 2. Pie Chart → Répartition des Types
+  this.pieOpts = {
+    backgroundColor: '#0b0f1a',
+    tooltip: { trigger: 'item' },
+    series: [{
+      name: 'Types',
+      type: 'pie',
+      radius: ['40%', '70%'],
+      avoidLabelOverlap: false,
+      label: { show: false, position: 'center' },
+      emphasis: {
+        label: { show: true, fontSize: '18', fontWeight: 'bold', color: '#00f0ff' }
+      },
+      labelLine: { show: false },
+      data: Array.from(types.entries()).map(([k, v]) => ({
+        name: k,
+        value: v
+      }))
+    }]
+  };
+
+  // 3. Line Chart → Blessures sur le Temps
+  this.lineOpts = {
+    backgroundColor: '#0b0f1a',
+    tooltip: { trigger: 'axis' },
+    xAxis: {
+      type: 'category',
+      data: dates,
+      axisLabel: { color: '#7f8c8d' }
+    },
+    yAxis: {
+      type: 'value',
+      axisLabel: { color: '#7f8c8d' }
+    },
+    series: [{
+      data: severities,
+      type: 'line',
+      smooth: true,
+      lineStyle: { color: '#00f0ff', width: 3 },
+      areaStyle: { color: 'rgba(0, 240, 255, 0.3)' }
+    }]
+  };
+}
+
+
+
+
+
+
+// Helper pour calculer moyenne
+private average(arr: number[]): number {
+  if (!arr.length) return 0;
+  return Math.round(arr.reduce((sum, val) => sum + val, 0) / arr.length);
+}
+
 
 
 
@@ -382,3 +413,5 @@ export class StatistiqueComponent implements OnInit {
     this.selectedTypes.has(t)?this.selectedTypes.delete(t):this.selectedTypes.add(t);
   }
 }
+
+
