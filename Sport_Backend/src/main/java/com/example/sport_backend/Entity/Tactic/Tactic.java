@@ -1,6 +1,7 @@
 package com.example.sport_backend.Entity.Tactic;
 
 import com.example.sport_backend.Entity.ClubHouse.Team;
+import com.example.sport_backend.Entity.ClubHouse.User;
 import com.example.sport_backend.Entity.Enum.TrainingFocus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -50,4 +51,9 @@ public class Tactic {
     @OneToMany(mappedBy = "tactic", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<TacticSimulation> simulations;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false) // Assuming user is required for each tactic
+    @JsonIgnore
+    private User user;
 }
