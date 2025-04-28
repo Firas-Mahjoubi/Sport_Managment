@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTacticDialogComponent } from '../create-tactic-dialog/create-tactic-dialog.component';
 import { take } from 'rxjs/operators';
-// import { AppHeaderComponent } from '../header/app-header.component'; // Adjust the path as necessary
+
 @Component({
   selector: 'app-tactic-list',
   templateUrl: './tactic-list.component.html',
@@ -14,6 +14,8 @@ export class TacticListComponent implements OnInit {
   tactics: Tactic[] = [];
   filteredTactics: Tactic[] = [];
   searchQuery: string = "";
+  currentPage: number = 1; // Start at page 1
+  itemsPerPage: number = 8; // Set the number of items per page
 
   constructor(
     private tacticService: TacticService,
@@ -32,7 +34,14 @@ export class TacticListComponent implements OnInit {
       this.filteredTactics = [...this.tactics]; // Refresh displayed tactics
       console.log("Loaded tactics:", this.tactics);
       this.cdRef.detectChanges(); // Ensure UI updates
+      this.updatePagination();
     });
+  }
+
+  updatePagination(): void {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = this.currentPage * this.itemsPerPage;
+    this.filteredTactics = this.tactics.slice(start, end); // Apply pagination to filtered list
   }
 
   trackById(index: number, tactic: Tactic): number {
@@ -40,7 +49,7 @@ export class TacticListComponent implements OnInit {
   }
 
   openTacticFolder(id: number): void {
-    this.router.navigate([`/tactics/${id}`]);
+    window.location.href = `http://localhost:3000/tactics-board`;
   }
 
   deleteTactic(id: number): void {
@@ -64,6 +73,7 @@ export class TacticListComponent implements OnInit {
     }
 
     this.cdRef.detectChanges(); // Force UI update
+    this.updatePagination(); // Apply pagination after filtering
   }
 
   renameTactic(tactic: Tactic): void {
@@ -92,7 +102,6 @@ export class TacticListComponent implements OnInit {
       width: '400px',
     });
   
-    // Ensure the subscription runs only ONCE
     dialogRef.afterClosed().pipe(take(1)).subscribe((result) => {
       if (result) {
         const newTactic: Tactic = {
@@ -111,5 +120,32 @@ export class TacticListComponent implements OnInit {
       }
     });
   }
-  
+
+  nextPage(): void {
+    this.currentPage++;
+    this.updatePagination();
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePagination();
+    }
+  }
+
+  isChatOpen: boolean = false;
+
+  // Method to open the chat window (toggle visibility)
+  openChat() {
+    this.isChatOpen = true;
+  }
+
+  // Close the chat window
+  closeChat() {
+    this.isChatOpen = false;
+  }
+
+  toggleChat() {
+    this.isChatOpen = !this.isChatOpen; // Toggle the chat window visibility
+  }
 }
