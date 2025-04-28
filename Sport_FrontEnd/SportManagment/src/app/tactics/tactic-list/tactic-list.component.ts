@@ -25,11 +25,18 @@ export class TacticListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadTactics();
+    this.loadTacticsByUser();
   }
 
-  loadTactics(): void {
-    this.tacticService.getAllTactics().subscribe((data) => {
+  loadTacticsByUser(): void {
+    const userId = localStorage.getItem('userId');  // Retrieve the userId from localStorage
+
+    if (!userId) {
+      console.error('User ID is not found in localStorage');
+      return;
+    }
+
+    this.tacticService.getTacticsByUserId(Number(userId)).subscribe((data) => {
       this.tactics = data;
       this.filteredTactics = [...this.tactics]; // Refresh displayed tactics
       console.log("Loaded tactics:", this.tactics);
@@ -55,7 +62,7 @@ export class TacticListComponent implements OnInit {
   deleteTactic(id: number): void {
     if (confirm("Are you sure you want to delete this tactic?")) {
       this.tacticService.deleteTactic(id).subscribe(() => {
-        this.loadTactics(); // Refresh the full list instead of filtering manually
+        this.loadTacticsByUser(); // Refresh the full list instead of filtering manually
       });
     }
   }
@@ -81,16 +88,9 @@ export class TacticListComponent implements OnInit {
     if (newName && newName !== tactic.name) {
       const updatedTactic = { ...tactic, name: newName };
       this.tacticService.updateTactic(tactic.id!, updatedTactic).subscribe(() => {
-        this.loadTactics(); // Reload list instead of manually updating
+        this.loadTacticsByUser(); // Reload list instead of manually updating
       });
     }
-  }
-
-  copyTactic(tactic: Tactic): void {
-    const copiedTactic = { ...tactic, id: undefined, name: tactic.name + " - Copy" };
-    this.tacticService.createTactic(copiedTactic, copiedTactic.teamId!).subscribe(() => {
-      this.loadTactics(); // Reload list to ensure all data is in sync
-    });
   }
 
   moveTactic(tactic: Tactic): void {
@@ -101,25 +101,34 @@ export class TacticListComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateTacticDialogComponent, {
       width: '400px',
     });
-  
+
     dialogRef.afterClosed().pipe(take(1)).subscribe((result) => {
       if (result) {
+        const userId = localStorage.getItem('userId'); // Retrieve the userId from localStorage
+
+        if (!userId) {
+          console.error('User ID is not found in localStorage');
+          return; // Exit if userId is not available
+        }
+
         const newTactic: Tactic = {
           name: result.name,
           description: result.description || "",
           formation: result.formation || "",
           trainingFocus: result.trainingFocus || "",
-          teamId: 1 // Replace with actual team ID
+          teamId: 1, // Replace with actual team ID
+          userId: userId // Add userId to the new tactic
         };
-  
+
         console.log("Creating tactic:", newTactic);
-  
-        this.tacticService.createTactic(newTactic, newTactic.teamId!).subscribe(() => {
-          this.loadTactics(); // Refresh the list
+
+        this.tacticService.createTactic(newTactic, newTactic.teamId!, userId).subscribe(() => {
+          this.loadTacticsByUser(); // Refresh the list
         });
       }
     });
   }
+  
 
   nextPage(): void {
     this.currentPage++;

@@ -9,6 +9,7 @@ export interface Tactic {
   formation: string;
   trainingFocus: string;
   teamId?: number; // Added to send team info when creating a tactic
+  userId?: string; // Added userId to send user info when creating a tactic
 }
 
 @Injectable({
@@ -38,13 +39,16 @@ export class TacticService {
    * Create a new tactic
    * @param tactic - The tactic object
    * @param teamId - The team ID associated with the tactic
+   * @param userId - The user ID of the person creating the tactic
    */
-  createTactic(tactic: Tactic, teamId: number): Observable<Tactic> {
-    return this.http.post<Tactic>(`${this.apiUrl}/createTactic/${teamId}`, tactic, {
+  createTactic(tactic: Tactic, teamId: number, userId: string): Observable<Tactic> {
+    // Add the userId to the tactic object
+    tactic.userId = userId;
+
+    return this.http.post<Tactic>(`${this.apiUrl}/createTactic/${teamId}/${userId}`, tactic, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     });
   }
-  
 
   /**
    * Update an existing tactic
@@ -62,4 +66,8 @@ export class TacticService {
   deleteTactic(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/deleteTactic/${id}`);
   }
+  getTacticsByUserId(userId: number): Observable<Tactic[]> {
+    return this.http.get<Tactic[]>(`${this.apiUrl}/user/${userId}`);
+  }
+
 }
