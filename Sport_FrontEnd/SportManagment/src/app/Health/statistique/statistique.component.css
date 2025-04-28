@@ -1186,3 +1186,242 @@ body {
 
 
 
+/** Health record css  */
+
+
+/* ─── Thème général ─── */
+.tab-content-health {
+  background: #070d1b;
+  color: #e0e0e0;
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* ─── Titre et header ─── */
+.attributes-header .section-title-health,
+.analytics-title {
+  color: #00ffdd; /* vert-bleu néon */
+  text-shadow: 0 0 8px #00ffcc;
+}
+
+/* ─── Bouton principal « Voir les détails » ─── */
+.btn-primary-health {
+  background: linear-gradient(135deg, #00ffdd, #00ccff); /* vert-bleu → cyan */
+  color: #0a0a0a;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(0, 255, 221, 0.6);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary-health:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 255, 221, 0.9);
+}
+
+/* ─── Chart containers ─── */
+.chart {
+  background: #0b0f1a;
+  border-radius: 0.8rem;
+  box-shadow: inset 0 0 20px rgba(0, 255, 221, 0.3), 0 0 20px rgba(0, 255, 221, 0.3);
+  margin-bottom: 1rem;
+}
+
+/* Appliquer un contour rose sur les gros camemberts ou gauge multi-anneaux */
+.chart.large {
+  border: 3px solid #ff69b4; /* rose vif */
+}
+
+
+
+
+
+
+
+
+/* ─── Modal Détails HealthRecord ─── */
+.health-modal-overlay {
+  background: rgba(0,0,0,0.8);
+}
+
+.health-modal {
+  background: #1c1f26;
+  border: 2px solid #ff69b4; /* rose vif */
+  box-shadow: 0 0 30px rgba(255,105,180,0.5);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+/* Bouton fermer en rose */
+.modal-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #ff69b4;
+  text-shadow: 0 0 8px #ff69b4;
+  transition: transform 0.2s;
+}
+.modal-close:hover {
+  transform: scale(1.2);
+}
+
+/* Texte de la modal */
+.modal-title {
+  color: #00ffdd; /* vert-bleu */
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Séparateur visuel */
+.separator-health {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, #00ffdd, #ff69b4);
+  margin: 2rem 0;
+}
+
+
+.health-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+}
+.health-modal {
+  background: #1c1f26;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 90%; max-width: 600px;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 0 30px rgba(0,255,255,0.4);
+  animation: slideInRight 0.4s ease-out both;
+}
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem;
+  background: none; border: none; font-size: 1.5rem;
+  color: #39FF14; cursor: pointer;
+  text-shadow: 0 0 8px #39FF14;
+}
+.health-card-modal {
+  background: rgba(10,15,28,0.9);
+  border-radius: 0.8rem; padding: 1rem;
+  box-shadow: 0 0 15px rgba(0,255,255,0.2);
+}
+.row-health {
+  display: flex; justify-content: space-between;
+  margin-bottom: 0.5rem;
+  color: #fff; font-family: 'Orbitron', sans-serif;
+}
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+
+
+/* ─── Dashboard plein écran ─── */
+.health-analytics-dashboard {
+  width: 100vw;
+  height: calc(100vh - 4rem);
+  padding: 1rem;
+  background: #070d1b;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+}
+
+.analytics-title h1 {
+  margin: 0 0 1rem;
+  font-size: 2rem;  /* Taille du titre plus petite */
+  color: #00e5ff;
+  text-align: center;
+}
+
+/* Grille : 3 colonnes, 2 rangées */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  gap: 1rem;  /* Réduit l'espace entre les éléments */
+  width: 100%;
+  flex: 1;
+}
+
+/* ─── Carte Score + Statut ─── */
+.stat-card {
+  grid-column: span 2;    /* occupe 2 colonnes */
+  display: flex;
+  gap: 1rem;  /* Réduit l'espace entre les éléments dans la carte */
+  padding: 1rem;
+  background: #0b0f1a;
+  border-radius: 0.75rem;  /* Réduit l'arrondi pour un effet plus compact */
+  box-shadow: inset 0 0 30px #00e5ff33, 0 0 20px #00e5ff33;
+  min-height: 300px;   /* Limite la hauteur */
+}
+
+/* Score Santé → gros gauge mais limité */
+.global-gauge {
+  flex: 1;
+  min-height: 250px;  /* réduit la hauteur */
+}
+
+/* Pie Statut → un peu plus petit */
+.pie-small {
+  flex: 1;
+  min-height: 200px;  /* Limite la taille du pie */
+}
+
+/* ─── Mini-jauges ─── */
+.chart {
+  background: #0b0f1a;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 30px #00e5ff33, 0 0 20px #00e5ff33;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mini-jauges (petits graphes) */
+.gauge-mini {
+  min-height: 200px;  /* plus compact */
+}
+
+/* Responsive : une colonne sur mobile */
+@media (max-width: 1024px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+  .stat-card {
+    flex-direction: column;
+  }
+  .global-gauge, .pie-small, .gauge-mini {
+    min-height: 200px;
+  }
+}
+
+
+/* Taille compacte pour certains charts */
+.chart.small-chart {
+  /* On fixe une hauteur plus petite */
+  height: 200px !important;
+  min-height: 180px !important;
+  /* On compacte aussi l’ombre / bordure si besoin */
+  box-shadow: inset 0 0 10px rgba(255,105,180,0.3),
+              0 0 10px rgba(39,255,20,0.3);
+}
+
+/* Ajustement de la grille pour mieux répartir */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+/* Pour les charts “normal” restants */
+.chart {
+  height: calc(50vh - 4rem);
+}

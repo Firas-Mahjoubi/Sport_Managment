@@ -44,4 +44,12 @@ export class HealthRecordService {
   deleteHealthRecord(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/deleteHealthRecord/${id}`);
   }
+
+// 🔥 Nouvelle méthode pour récupérer par playerId
+getHealthRecordByPlayerId(playerId: number): Observable<HealthRecord> {
+  return this.http.get<HealthRecord>(`${this.apiUrl}/getHealthRecordByPlayerId/${playerId}`);
+}
+
+
+
 }

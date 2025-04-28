@@ -26,7 +26,7 @@ export class StatistiqueComponent implements OnInit {
   players:  Player[] = [];
   selectedPlayer: Player|null = null;
   showPlayerList   = false;
-
+  showHealthModal = false;
   selectedHealthRecord: HealthRecord|null = null;
   injuries: Injury[] = [];
   injuryHistory: Injury[] = [];
@@ -66,6 +66,20 @@ export class StatistiqueComponent implements OnInit {
   boxplotOpts!: EChartsOption;
    showAllInjuries: any;
 
+
+   healthRecords: HealthRecord[] = [];
+  // Options ECharts pour HealthRecord
+  fatigueGaugeOptions!: EChartsOption;
+  etatPhysiqueGaugeOptions!: EChartsOption;
+  douleursGaugeOptions!: EChartsOption;
+  globalHealthScoreGaugeOptions!: EChartsOption;
+  statutJoueurPieOptions!: EChartsOption;
+  fatigueLineChartOptions!: EChartsOption;
+  douleursLineChartOptions!: EChartsOption;
+
+
+
+
   constructor(
     private playerService:   PlayerService,
     private healthService:   HealthRecordService,
@@ -73,7 +87,10 @@ export class StatistiqueComponent implements OnInit {
     private recoveryService: RecoveryPlanService ) {}
 
   /* ============ INIT ============ */
-  ngOnInit(){ this.getAllPlayers(); }
+  ngOnInit(){ this.getAllPlayers();
+
+
+   }
 
   /* ============ NAVIGATION ============ */
   toggleSection(sec:string){
@@ -99,16 +116,41 @@ export class StatistiqueComponent implements OnInit {
   selectPlayer(p:Player){
     this.selectedPlayer=p; this.showPlayerList=false;
     this.loadHealthRecord(p.id);
-    this.loadInjuries(p.id);   this.loadArchivedInjuries(p.id);
+    this.loadInjuries(p.id);
+    this.loadArchivedInjuries(p.id);
     this.loadRecoveryPlans(p.id);
   }
 
-  private loadHealthRecord(id:number){
-    this.healthService.getHealthRecordById(id).subscribe({
-      next:hr=>this.selectedHealthRecord=hr,
-      error: ()=>this.selectedHealthRecord=null
+
+
+
+
+  private loadHealthRecord(playerId: number) {
+    this.healthService.getHealthRecordByPlayerId(playerId).subscribe({
+      next: hr => {
+        this.selectedHealthRecord = hr;
+        this.computeHealthRecordStats();  // 🔥 OBLIGATOIRE après avoir reçu le health record
+      },
+      error: () => {
+        this.selectedHealthRecord = null;
+        this.resetChartOptions(); // 🔥 Important pour éviter erreurs
+      }
     });
   }
+
+  private resetChartOptions() {
+    this.fatigueGaugeOptions = {};
+    this.etatPhysiqueGaugeOptions = {};
+    this.douleursGaugeOptions = {};
+    this.globalHealthScoreGaugeOptions = {};
+    this.statutJoueurPieOptions = {};
+    this.fatigueLineChartOptions = {};
+    this.douleursLineChartOptions = {};
+  }
+
+
+
+
 
   private loadInjuries(id:number){
     this.injuryService.getInjuriesByPlayerId(id).subscribe({
@@ -139,6 +181,9 @@ export class StatistiqueComponent implements OnInit {
   }
 
 
+
+
+
   closeModals() {
     this.showInjuryHistory = false;
     this.showAllInjuries   = false;
@@ -147,11 +192,24 @@ export class StatistiqueComponent implements OnInit {
     this.showAllInjuries  = true;
     this.showInjuryHistory = false;
   }
+
   openHistory() {
     this.showInjuryHistory = true;
     this.showAllInjuries  = false;
   }
 
+
+  openHealthModal(playerId: number) {
+    this.showHealthModal = true;
+    this.loadHealthRecord(playerId);
+  }
+
+
+
+
+  closeHealthModal() {
+    this.showHealthModal = false;
+  }
 
   /* ============ STATS + CHARTS ============ */
 private computeRPStats() {
@@ -470,13 +528,6 @@ private getWeekNumber(d: Date): number {
 
 
 
-
-
-
-
-
-
-
 // Helper pour calculer moyenne
 private average(arr: number[]): number {
   if (!arr.length) return 0;
@@ -486,13 +537,412 @@ private average(arr: number[]): number {
 
 
 
-
-
-
   /* Filtre chips */
   toggleType(t:string){
     this.selectedTypes.has(t)?this.selectedTypes.delete(t):this.selectedTypes.add(t);
   }
+
+
+
+
+  // La méthode mapValue pour convertir les valeurs des enums en scores numériques
+  private mapValue(val: string): number {
+    const m: Record<string, number> = {
+      'EXCELLENT': 100,'BON': 80,'MOYEN': 60,'FATIGUE': 30,'BLESSE': 0,
+      'FAIBLE': 100,'MOYENNE': 60,'ELEVEE': 20,
+      'AUCUNE': 100,'LEGERES': 70,'MODEREES': 40,'SEVERES': 10,
+    };
+    return m[val?.toUpperCase().trim()] ?? 50;
+  }
+
+
+
+
+
+
+  // Calcule la note globale pour un HealthRecord
+  public calculateNote(hr: any): number {
+    if (!hr || hr.etatPhysique === 'BLESSE') return 0;
+    const e = this.mapValue(hr.etatPhysique);
+    const f = this.mapValue(hr.fatigue);
+    const d = this.mapValue(hr.douleursMusculaires);
+    return Math.round(0.5 * e + 0.25 * f + 0.25 * d);
+  }
+
+  private computeHealthRecordStats() {
+    if (!this.selectedHealthRecord) {
+      this.resetChartOptions();
+      return;
+    }
+
+    const hr = this.selectedHealthRecord;
+    const fatigue = this.mapValue(hr.fatigue);
+    const etatPhysique = this.mapValue(hr.etatPhysique);
+    const douleurs = this.mapValue(hr.douleursMusculaires);
+    const globalScore = Math.round(0.5 * etatPhysique + 0.25 * fatigue + 0.25 * douleurs);
+
+    // Graphique de la fatigue
+    this.fatigueGaugeOptions = {
+      title: {
+        text: 'Niveau de Fatigue',
+        left: 'center',
+        top: '5%',  // Déplacer vers le haut pour plus de visibilité
+        textStyle: { fontSize: 18, color: '#ccc' }
+      },
+      tooltip: {
+        formatter: '{a} <br/>{b} : {c} %'
+      },
+      series: [{
+        name: 'Fatigue',
+        type: 'gauge',
+        progress: {
+          show: true,
+          width: 18
+        },
+        axisLine: {
+          lineStyle: {
+            width: 18,
+            color: [
+              [0.3, '#91cc75'],
+              [0.7, '#fac858'],
+              [1, '#ee6666']
+            ]
+          }
+        },
+        axisLabel: { distance: 25, color: '#aaa', fontSize: 14 },
+        pointer: { width: 8 },
+        detail: {
+          valueAnimation: true,
+          formatter: '{value}%',
+          fontSize: 24,
+          offsetCenter: [0, '70%']
+        },
+        data: [{ value: fatigue, name: 'Fatigue' }]
+      }]
+    };
+
+    // Graphique de l'état physique
+    this.etatPhysiqueGaugeOptions = {
+      title: {
+        text: 'État Physique',
+        left: '10%',         // avant : 'center', on décale à gauche
+        textAlign: 'left',   // aligne le texte à gauche du point défini
+
+        top: '5%',  // Positionner le titre plus haut pour éviter le chevauchement
+        textStyle: {
+          fontSize: 18,
+          color: '#ff9800'
+        }
+      },
+      tooltip: {
+        formatter: '{a} <br/>{b} : {c}%'
+      },
+      series: [
+        {
+          name: 'État Physique',
+          type: 'gauge',
+
+          center: ['50%', '60%'],
+          radius: '75%',  // Réduire la taille du graphique
+          startAngle: 210,
+          endAngle: -30,
+          min: 0,
+          max: 100,
+          progress: {
+            show: true,
+            width: 18
+          },
+          axisLine: {
+            lineStyle: {
+              width: 18,
+              color: [
+                [0.2, '#f44336'],
+                [0.5, '#ffeb3b'],
+                [1, '#4caf50']
+              ]
+            }
+          },
+          pointer: {
+            icon: 'rect',
+            length: '60%',
+            width: 6,
+            itemStyle: {
+              color: '#ff9800'
+            }
+          },
+          axisTick: {
+            distance: -30,
+            length: 8,
+            lineStyle: {
+              color: '#fff',
+              width: 2
+            }
+          },
+          splitLine: {
+            distance: -35,
+            length: 20,
+            lineStyle: {
+              color: '#fff',
+              width: 3
+            }
+          },
+          axisLabel: {
+            distance: -20,
+            color: '#ccc',
+            fontSize: 14
+          },
+          detail: {
+            valueAnimation: true,
+            fontSize: 32,
+            fontWeight: 'bold',
+            offsetCenter: [0, '70%'],
+            color: '#ff9800',
+            formatter: '{value}%'
+          },
+          data: [
+            {
+              value: etatPhysique,
+              name: 'Physique'
+            }
+          ]
+        }
+      ]
+    };
+
+    // Graphique des douleurs musculaires
+    this.douleursGaugeOptions = {
+      title: {
+        text: 'Douleurs Musculaires',
+        left: '5%',         // avant : 'center', on décale à gauche
+        textAlign: 'left',   // aligne le texte à gauche du point défini
+
+        top: '5%',
+        textStyle: {
+          fontSize: 18,
+          color: '#f44336'
+        }
+      },
+      tooltip: {
+        formatter: '{a} <br/>{b} : {c}%'
+      },
+      series: [
+        {
+          name: 'Douleurs Musculaires',
+          type: 'gauge',
+          center: ['50%', '60%'],
+          radius: '75%',  // Réduire la taille du graphique
+          startAngle: 210,
+          endAngle: -30,
+          min: 0,
+          max: 100,
+          progress: {
+            show: true,
+            width: 18
+          },
+          axisLine: {
+            lineStyle: {
+              width: 18,
+              color: [
+                [0.3, '#f44336'],
+                [0.6, '#ffeb3b'],
+                [1, '#4caf50']
+              ]
+            }
+          },
+          pointer: {
+            icon: 'rect',
+            length: '60%',
+            width: 6,
+            itemStyle: {
+              color: '#f44336'
+            }
+          },
+          axisTick: {
+            distance: -30,
+            length: 8,
+            lineStyle: {
+              color: '#fff',
+              width: 2
+            }
+          },
+          splitLine: {
+            distance: -35,
+            length: 20,
+            lineStyle: {
+              color: '#fff',
+              width: 3
+            }
+          },
+          axisLabel: {
+            distance: -20,
+            color: '#ccc',
+            fontSize: 14
+          },
+          detail: {
+            valueAnimation: true,
+            fontSize: 32,
+            fontWeight: 'bold',
+            offsetCenter: [0, '70%'],
+            color: '#f44336',
+            formatter: '{value}%'
+          },
+          data: [
+            {
+              value: douleurs,
+              name: 'Douleurs'
+            }
+          ]
+        }
+      ]
+    };
+
+    // Graphique du score global de santé
+    this.globalHealthScoreGaugeOptions = {
+      title: {
+        text: 'Score Global de Santé',
+        left: 'center',
+        top: '5%',
+        textStyle: {
+          fontSize: 18,
+          color: '#00e5ff'
+        }
+      },
+      tooltip: {
+        formatter: '{a} <br/>{b} : {c}%'
+      },
+      series: [
+        {
+          name: 'Score Santé',
+          type: 'gauge',
+          center: ['50%', '60%'],
+          radius: '75%',  // Réduire la taille du graphique
+          startAngle: 210,
+          endAngle: -30,
+          min: 0,
+          max: 100,
+          progress: {
+            show: true,
+            width: 18
+          },
+          axisLine: {
+            lineStyle: {
+              width: 18,
+              color: [
+                [0.3, '#ff4c4c'],
+                [0.7, '#ffa500'],
+                [1, '#00e676']
+              ]
+            }
+          },
+          pointer: {
+            icon: 'rect',
+            length: '60%',
+            width: 6,
+            itemStyle: {
+              color: '#00e5ff'
+            }
+          },
+          axisTick: {
+            distance: -30,
+            length: 8,
+            lineStyle: {
+              color: '#fff',
+              width: 2
+            }
+          },
+          splitLine: {
+            distance: -35,
+            length: 20,
+            lineStyle: {
+              color: '#fff',
+              width: 3
+            }
+          },
+          axisLabel: {
+            distance: -20,
+            color: '#ccc',
+            fontSize: 14
+          },
+          detail: {
+            valueAnimation: true,
+            fontSize: 32,
+            fontWeight: 'bold',
+            offsetCenter: [0, '70%'],
+            color: '#00e5ff',
+            formatter: '{value}%'
+          },
+          data: [
+            {
+              value: globalScore,
+              name: 'Santé'
+            }
+          ]
+        }
+      ]
+    };
+
+    // Graphique du statut joueur
+    this.statutJoueurPieOptions = {
+      title: {
+        text: 'Statut Joueur',
+        left: 'center',
+        top: '5%',
+        textStyle: { color: '#fff', fontSize: 18 }
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b} : {c}%'
+      },
+      legend: {
+        bottom: 10,
+        left: 'center',
+        textStyle: { color: '#ccc' }
+      },
+      series: [
+        {
+          name: 'Statut',
+          type: 'pie',
+          radius: ['45%', '70%'],
+          avoidLabelOverlap: false,
+          itemStyle: {
+            borderRadius: 10,
+            borderColor: '#fff',
+            borderWidth: 2
+          },
+          label: {
+            show: true,
+            position: 'center',
+            formatter: (params: any) => {
+              return params.name === 'Sain' ? 'Apte' : 'Fatigué';
+            },
+            fontSize: 22,
+            fontWeight: 'bold',
+            color: '#fff'
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 26,
+              fontWeight: 'bold'
+            }
+          },
+          labelLine: {
+            show: false
+          },
+          data: [
+            { value: globalScore, name: 'Sain' },
+            { value: 100 - globalScore, name: 'Fatigué/Blessé' }
+          ]
+        }
+      ]
+    };
+
+
+
+  }
+
+
+
 }
 
 

@@ -69,51 +69,102 @@
           </div>
         </div>
       </div>
-
-
-     <!-- HEALTH-RECORD STAT (onglet “attributes”) -->
+<!-- === SECTION ATTRIBUTES : HEALTH-RECORD STAT + HEALTH ANALYTICS === -->
 <div *ngIf="currentSection === 'attributes'" class="tab-content-health">
-  <h3 class="section-title-health">HEALTH-RECORD STAT</h3>
 
+  <!-- ─── Header & Bouton ─── -->
+  <div class="attributes-header">
+    <h3 class="section-title-health">HEALTH-RECORD STAT</h3>
+    <button (click)="showHealthModal = true"
+            class="btn btn-primary-health">
+      Voir HealthRecord
+    </button>
+  </div>
+
+  <!-- ─── Si on a un record, on affiche les charts ─── -->
   <ng-container *ngIf="selectedHealthRecord; else noHR">
-    <div class="health-grid">
-      <div class="health-card" >
-        <div class="row-health">
-          <span class="label-health">Date :</span>
-          <span>{{ selectedHealthRecord.date }}</span>
-        </div>
-        <div class="row-health">
-          <span class="label-health">Fatigue :</span>
-          <span>{{ selectedHealthRecord.fatigue }}</span>
-        </div>
-        <div class="row-health">
-          <span class="label-health">État physique :</span>
-          <span>{{ selectedHealthRecord.etatPhysique }}</span>
-        </div>
-        <div class="row-health">
-          <span class="label-health">Douleurs muscu. :</span>
-          <span>{{ selectedHealthRecord.douleursMusculaires }}</span>
-        </div>
-        <div class="row-health">
-          <span class="label-health">Intensité :</span>
-          <span>{{ selectedHealthRecord.intensite }}</span>
-        </div>
-        <div class="row-health">
-          <span class="label-health">Statut joueur :</span>
-          <span>{{ selectedHealthRecord.statusJoueur }}</span>
-        </div>
-        <div class="row-health">
-          <span class="label-health">Commentaire :</span>
-          <span>{{ selectedHealthRecord.commentaire }}</span>
-        </div>
+    <hr class="separator-health" />
+    <div class="health-analytics-dashboard">
+
+      <div class="analytics-title">
+        <h1>HEALTH ANALYTICS 2080</h1>
       </div>
+
+      <div class="analytics-grid">
+
+        <!-- ─── Carte Score + Statut ─── -->
+        <div class="stat-card">
+          <div echarts
+               [options]="globalHealthScoreGaugeOptions"
+               class="chart global-gauge">
+          </div>
+          <div echarts
+               [options]="statutJoueurPieOptions"
+               class="chart pie-small">
+          </div>
+        </div>
+
+        <!-- ─── Mini-jauges ─── -->
+        <div echarts
+             [options]="fatigueGaugeOptions"
+             class="chart gauge-mini">
+        </div>
+        <div echarts
+             [options]="etatPhysiqueGaugeOptions"
+             class="chart gauge-mini">
+        </div>
+        <div echarts
+             [options]="douleursGaugeOptions"
+             class="chart gauge-mini">
+        </div>
+
+        <!-- (facultatif) vos line-charts ici si besoin -->
+
+      </div>
+
     </div>
+
   </ng-container>
 
   <ng-template #noHR>
     <p class="no-data-health">Aucun Health Record pour ce joueur.</p>
   </ng-template>
+
+  <!-- ─── Modal Détails HealthRecord ─── -->
+  <div *ngIf="showHealthModal" class="health-modal-overlay" (click)="showHealthModal = false">
+    <div class="health-modal" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="showHealthModal = false">✕</button>
+      <h3 class="modal-title">Détails du HealthRecord</h3>
+
+      <ng-container *ngIf="selectedHealthRecord; else noHRModal">
+        <div class="health-card-modal">
+          <div class="row-health"><span class="label-health">Date :</span>
+                                   <span>{{ selectedHealthRecord.date }}</span></div>
+          <div class="row-health"><span class="label-health">Fatigue :</span>
+                                   <span>{{ selectedHealthRecord.fatigue }}</span></div>
+          <div class="row-health"><span class="label-health">État physique :</span>
+                                   <span>{{ selectedHealthRecord.etatPhysique }}</span></div>
+          <div class="row-health"><span class="label-health">Douleurs muscu. :</span>
+                                   <span>{{ selectedHealthRecord.douleursMusculaires }}</span></div>
+          <div class="row-health"><span class="label-health">Intensité :</span>
+                                   <span>{{ selectedHealthRecord.intensite }}</span></div>
+          <div class="row-health"><span class="label-health">Statut joueur :</span>
+                                   <span>{{ selectedHealthRecord.statusJoueur }}</span></div>
+          <div class="row-health"><span class="label-health">Commentaire :</span>
+                                   <span>{{ selectedHealthRecord.commentaire }}</span></div>
+        </div>
+      </ng-container>
+
+      <ng-template #noHRModal>
+        <p class="no-data-health">Aucun detail à afficher.</p>
+      </ng-template>
+    </div>
+  </div>
+
 </div>
+
+
+
 
 
 <!-- ───── INJURY STAT ───── -->
@@ -148,8 +199,6 @@
 
 </div>
 
-
-
   <!-- ───── Boutons ───── -->
   <div class="injury-buttons">
     <button (click)="showInjuryHistory = true" class="btn btn-primary-injury">
@@ -167,8 +216,6 @@
     <!-- ▸ DROITE : dashboard full-width -->
     <div class="statoverview-card-full">
       <div class="statoverview-charts-full">
-
-        
         <div echarts [options]="radarOpts" class="statoverview-chart radar-style"></div>
         <div echarts [options]="pieOpts"   class="statoverview-chart pie-style"></div>
         <div echarts [options]="lineOpts"  class="statoverview-chart line-style"></div>
@@ -252,15 +299,7 @@
       </ng-template>
     </div>
   </div>
-
 </div>
-
-
-
-
-
-
-
 
 
 
@@ -352,6 +391,8 @@
       </ng-template>
     </div>
 
+
+
     <!-- ▸ COLONNE DROITE : holo‑console -->
 <aside class="holo-console">
 
@@ -381,8 +422,7 @@
 
 </aside>
 
-
-  </div> <!-- /rp-split -->
+  </div>
 
 </div>
 

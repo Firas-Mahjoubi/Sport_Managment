@@ -95,7 +95,10 @@ public class HealthServiceIMPL  implements IHealthService {
         healthRepositories.deleteById(id);
     }
 
-
+    @Override
+    public HealthRecord findByPlayerId(Long playerId) {
+        return healthRepositories.findByPlayerId(playerId);
+    }
 
 
 }
