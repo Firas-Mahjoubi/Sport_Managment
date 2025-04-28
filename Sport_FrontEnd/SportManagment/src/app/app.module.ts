@@ -94,6 +94,7 @@ import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.com
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
 import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
 import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
+import { AiChatComponent } from './tactics/ai-chat/ai-chat.component';
 
 
 @NgModule({
@@ -154,6 +155,7 @@ import { SessionDetailsComponent } from './AdvancedPlanning/session-details/sess
     TacticBoardComponent,
     SessionDetailsComponent,
     HealthDashboardComponent,
+    AiChatComponent,
 
   ],
   imports: [
