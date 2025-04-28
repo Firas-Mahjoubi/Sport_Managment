@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { MediaExercice } from '../models/media-exercice.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,11 @@ export class ExerciseService {
 
   constructor(private http: HttpClient) {}
 
+  getMediaByExerciseId(id: number): Observable<MediaExercice[]> {
+    return this.http.get<MediaExercice[]>(`${this.apiUrl}/exercise/${id}`);
+  }
+  
+
  // ✅ 1. Get All Exercises
  getAllExercises(): Observable<any> {
   return this.http.get(`${this.apiUrl}/getExercices`);
@@ -17,8 +23,9 @@ export class ExerciseService {
 
 // ✅ 2. Get Exercise by ID (For Editing)
 getExerciseById(exerciseId: number): Observable<any> {
-  return this.http.get(`${this.apiUrl}/exercise/${exerciseId}`);
+  return this.http.get(`${this.apiUrl}/getExercise/${exerciseId}`);
 }
+
 
 // ✅ 3. Create a New Exercise
 createExercise(exercise: any): Observable<any> {

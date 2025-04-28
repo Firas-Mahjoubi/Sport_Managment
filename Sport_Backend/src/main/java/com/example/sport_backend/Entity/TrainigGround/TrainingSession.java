@@ -44,7 +44,7 @@ public class TrainingSession {
     String endTime;    // Change from LocalDateTime to String
 
 
-    //LocalDateTime startTime;
+
     //LocalDateTime endTime;
     String location;
     // ✅ Participants Section
