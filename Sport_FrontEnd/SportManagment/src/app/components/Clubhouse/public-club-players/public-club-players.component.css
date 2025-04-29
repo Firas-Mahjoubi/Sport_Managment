@@ -1,0 +1,45 @@
+/* Ajouter dans votre fichier CSS global */
+.card-hover {
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .hover-zoom:hover {
+    transform: scale(1.05);
+  }
+  
+  .gradient-overlay {
+    background: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.7) 90%);
+    height: 50%;
+  }
+  
+  .btn-icon {
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 0.5rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .btn-icon:hover {
+    transform: translateY(-2px);
+  }
+  
+  .bg-dark {
+    background: #1a1a1a !important;
+  }
+  
+  .text-primary {
+    color: #6c63ff !important;
+  }
+  
+  .border-0 {
+    border: none !important;
+  }

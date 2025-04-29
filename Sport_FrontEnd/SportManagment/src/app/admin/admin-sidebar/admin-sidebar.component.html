@@ -21,6 +21,59 @@
         <i class="bi bi-grid"></i>
         <span>User-Dashboard</span>
       </a>
+    </li><!-- End Dashboard Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-menu-button-wide"></i><span>Club/Player</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a class="nav-link" [routerLink]="['/add-club']">
+            <i class="bi bi-circle"></i><span>Add Club</span>
+          </a>
+        </li>
+        
+        <li>
+          <a class="nav-link" [routerLink]="['/clubs']">
+            <i class="bi bi-circle"></i><span>Clubs</span>
+          </a>
+        </li>
+        
+        <li>
+          <a class="nav-link" [routerLink]="['/players']">
+            <i class="bi bi-circle"></i><span>Players</span>
+          </a>
+        </li>
+        
+        <li>
+          <a class="nav-link" [routerLink]="['/add-player']">
+            <i class="bi bi-circle"></i><span>Add Player</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" [routerLink]="['/teams']">
+            <i class="bi bi-circle"></i><span>Teams</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" [routerLink]="['/add-team']">
+            <i class="bi bi-circle"></i><span>Add Team</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" [routerLink]="['/leagues']">
+            <i class="bi bi-circle"></i><span>Leagues</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" [routerLink]="['/add-league']">
+            <i class="bi bi-circle"></i><span>Add Leagues</span>
+          </a>
+        </li>
+        
+      </ul>
+    </li><!-- End Components Nav -->
    
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#matches-nav" data-bs-toggle="collapse" href="#">

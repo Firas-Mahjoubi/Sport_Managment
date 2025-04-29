@@ -1,0 +1,35 @@
+<app-admin-sidebar></app-admin-sidebar>
+<app-admin-header></app-admin-header>
+<div class="content-wrapper">
+  <div class="container my-5">
+  <h2 class="text-center text-primary mb-4"><i class="bi bi-trophy-fill"></i> Leagues</h2>
+
+  <div class="table-responsive shadow rounded-4 overflow-hidden">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col"><i class="bi bi-flag"></i> Name</th>
+          <th scope="col"><i class="bi bi-globe"></i> Country</th>
+          <th scope="col"><i class="bi bi-image"></i> Logo</th>
+          <th scope="col" class="text-center"><i class="bi bi-gear"></i> Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let league of leagues">
+          <td>{{ league.name }}</td>
+          <td>{{ league.nation }}</td>
+          <td>
+            <img [src]="league.logourl || 'assets/default-logo.png'" 
+                 alt="League Logo" class="rounded shadow-sm" 
+                 width="60" height="60" style="object-fit: contain;">
+          </td>
+          <td class="text-center">
+            <button class="btn btn-outline-danger btn-sm px-3" (click)="deleteLeague(league.id!)">
+              <i class="bi bi-trash3-fill"></i> Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
