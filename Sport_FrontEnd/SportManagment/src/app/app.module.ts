@@ -20,6 +20,7 @@ import { TrainingSessionFormComponent } from './components/training-session-form
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
+import { ExerciseDetailComponent } from './components/exercise-detail/exercise-detail.component';
 //---------------------------------------------//
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
 import { InjuryEditComponent } from './Health/injury-edit/injury-edit.component';
@@ -109,6 +110,8 @@ import { PublicClubsComponent } from './components/Clubhouse/public-clubs/public
 import { PublicClubPlayersComponent } from './components/Clubhouse/public-club-players/public-club-players.component';
 import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr/public-player-qr.component';
 
+import { AiChatComponent } from './tactics/ai-chat/ai-chat.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 
 @NgModule({
@@ -137,7 +140,7 @@ import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr
     AddHealthrecordComponent,
     EditHealthrecordComponent,
     ShowHealthrecordComponent,
-
+    ExerciseDetailComponent,
     HeaderComponent,
     FooterComponent,
     HomeComponent,
@@ -169,6 +172,8 @@ import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr
     TacticBoardComponent,
     SessionDetailsComponent,
     HealthDashboardComponent,
+    AiChatComponent,
+    AdminDashboardComponent,
 
     ClubFormComponent,
     ClubListComponent,

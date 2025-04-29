@@ -158,6 +158,11 @@ public class TrainingGroundServiceIMPL implements ItrainingGroundService {
         mediaRepositories.deleteById(id);
     }
 
+    @Override
+    public Exercice findById(Long id) {
+        return exerciceRepositories.findById(id)
+                .orElseThrow(() -> new RuntimeException("Exercice not found"));
+    }
 
 
 

@@ -9,6 +9,7 @@
     <div>
       <button class="btn btn-success" routerLink="/add-exercise">+ Create Exercise</button>
     </div>
+  
   </div>
 
   <!-- 🔎 Search and Filter Row -->
@@ -24,11 +25,18 @@
       </select>
     </div>
   </div>
-
+  <div class="col-md-6">
+  <div class="floating-button">
+    <button mat-fab color="primary" (click)="toggleChat()" >
+      Ask AI
+    </button>
+  </div>
+  <app-ai-chat *ngIf="isChatOpen"></app-ai-chat>
+</div>
   <br><br>
 
   <div class="row">
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let exercise of filteredExercises()">
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let exercise of paginatedExercises">
       <div class="custom-media d-block shadow-lg p-3 rounded">
 
         <!-- Image Section -->
@@ -81,26 +89,37 @@
 
           <!-- Buttons -->
           <p class="text-center mt-3">
-            <a href="#" class="btn btn-primary text-white">🔍 View Details</a>
+            <a [routerLink]="['/exercise-details', exercise.id]" class="btn btn-primary text-white">
+              🔍 View Details
+            </a>
+            
             <button class="btn btn-danger ms-2" (click)="deleteExercise(exercise.id)">🗑 Delete</button>
           </p>
+          
         </div>
       </div>
     </div>
+    
   </div>
 
   <div class="row justify-content-center">
     <div class="col-lg-7 text-center">
       <br>
       <div class="custom-pagination">
-        <a href="#">1</a>
-        <span>2</span>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
+        <button 
+          class="btn btn-outline-primary mx-1"
+          *ngFor="let page of [].constructor(totalPages); let i = index"
+          [class.active]="i + 1 === currentPage"
+          (click)="changePage(i + 1)">
+          {{ i + 1 }}
+        </button>
       </div>
+      
     </div>
+  
   </div>
+ 
+  
 </div>
 
 <br><br>

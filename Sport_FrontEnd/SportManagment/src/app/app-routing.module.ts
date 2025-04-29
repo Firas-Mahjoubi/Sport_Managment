@@ -53,8 +53,12 @@ import {AdminSubstitutionComponent} from "./matches/admin-substitution/admin-sub
 import { TacticListComponent } from './tactics/tactic-list/tactic-list.component';
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
+
+import { ExerciseDetailComponent } from './components/exercise-detail/exercise-detail.component';
+
 import { HomeComponent } from './components/home/home.component';
 import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
+
 
 
 import {CalendarComponent} from "./AdvancedPlanning/calendar/calendar.component";
@@ -63,6 +67,7 @@ import {SessionFormComponent} from "./AdvancedPlanning/session-form/session-form
 import {EventDetailsComponent} from "./AdvancedPlanning/event-details/event-details.component";
 
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 //maram
 import { ClubFormComponent } from './components/Clubhouse/club-form/club-form.component';
@@ -84,6 +89,8 @@ import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr
 
 
 const routes: Routes = [
+  { path: 'user', component: AdminDashboardComponent }, // Protect dashboard route
+
 
   { path: 'auth', component: AuthComponent },
   {path:'calendar',component:CalendarComponent},
@@ -102,9 +109,15 @@ const routes: Routes = [
   { path: 'training-session/:id', component: TrainingSessionViewComponent, canActivate: [roleGuard(['COACH'])] },
 
 
+
+
+  /////media///
+  { path: 'exercise-details/:id', component: ExerciseDetailComponent },
+
   { path: 'add-exercise', component: ExerciseFormComponent , canActivate: [roleGuard(['COACH'])]},
   { path: 'edit-exercise/:id', component: ExerciseFormComponent, canActivate: [roleGuard(['COACH'])] },
   { path: 'exercise-list', component: ExerciseListComponent , canActivate: [roleGuard(['COACH'])]},
+
     //---------------------Backoffice-training-Ground ------------------------//
 
     { path: 'add-exercise-back', component: BackofficeListExerciceComponent },
@@ -153,7 +166,6 @@ const routes: Routes = [
 
 
 
-  { path: 'Dashboard', component: DashboardComponent },
   {path :'DashboardSidebar',component:AdminSidebarComponent},
   {path :'DashboardHeader',component:AdminHeaderComponent},
   { path: 'admin-goals/:matchId', component: AdminGoalComponent },
@@ -204,7 +216,8 @@ const routes: Routes = [
 
 
 //skander turkiiiiii recoveryplan
-{path: 'home', component: HomeComponent},
+
+ // {path: 'home', component: HomeComponent},
 
 { path: 'add-recoveryplan', component: AddRecoveryplanComponent },
 { path: 'edit-recoveryplan/:injuryId/:planId', component: EditRecoveryplanComponent },

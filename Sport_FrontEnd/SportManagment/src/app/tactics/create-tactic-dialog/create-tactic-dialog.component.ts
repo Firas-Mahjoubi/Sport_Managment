@@ -30,7 +30,22 @@ export class CreateTacticDialogComponent {
 
   createTactic(): void {
     if (this.tacticForm.valid) {
-      this.dialogRef.close(this.tacticForm.value);
+      // Retrieve the userId from localStorage
+      const userId = localStorage.getItem('userId');
+      
+      if (userId) {
+        // Include the userId in the form data before closing the dialog
+        const tacticData = {
+          ...this.tacticForm.value,  // Get form data
+          userId: userId  // Add userId to the form data
+        };
+
+        // Close the dialog and pass the data including userId
+        this.dialogRef.close(tacticData);
+      } else {
+        // Handle the case where userId is not found in localStorage
+        console.error('User ID is not found in localStorage');
+      }
     }
   }
 

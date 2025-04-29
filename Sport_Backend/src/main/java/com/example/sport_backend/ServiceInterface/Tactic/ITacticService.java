@@ -5,9 +5,10 @@ import com.example.sport_backend.Entity.Tactic.Tactic;
 import java.util.List;
 
 public interface ITacticService {
-    Tactic createTactic(Tactic tactic , long idTeam);
+    Tactic createTactic(Tactic tactic , long idTeam, long idUser);
     Tactic updateTactic(Long id, Tactic updatedTactic);
     void deleteTactic(Long id);
     List<Tactic> getAllTactics();
     List<Tactic> getTacticsByTeam(Long teamId);
+    List<Tactic> getTacticsByUser(Long idUser);
 }

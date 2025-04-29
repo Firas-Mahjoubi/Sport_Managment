@@ -64,5 +64,36 @@ export class ExerciseListComponent implements OnInit {
       return matchesSearch && matchesFilter;
     });
   }
-  
+  isChatOpen: boolean = false;
+
+  // Method to open the chat window (toggle visibility)
+  openChat() {
+    this.isChatOpen = true;
+  }
+
+  // Close the chat window
+  closeChat() {
+    this.isChatOpen = false;
+  }
+
+  toggleChat() {
+    this.isChatOpen = !this.isChatOpen; // Toggle the chat window visibility
+  }
+  currentPage: number = 1;
+itemsPerPage: number = 3;
+
+get paginatedExercises() {
+  const filtered = this.filteredExercises();
+  const start = (this.currentPage - 1) * this.itemsPerPage;
+  return filtered.slice(start, start + this.itemsPerPage);
+}
+
+get totalPages(): number {
+  return Math.ceil(this.filteredExercises().length / this.itemsPerPage);
+}
+
+changePage(page: number) {
+  this.currentPage = page;
+}
+
 }
