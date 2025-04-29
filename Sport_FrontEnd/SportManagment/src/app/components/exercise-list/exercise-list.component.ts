@@ -64,5 +64,20 @@ export class ExerciseListComponent implements OnInit {
       return matchesSearch && matchesFilter;
     });
   }
+  isChatOpen: boolean = false;
+
+  // Method to open the chat window (toggle visibility)
+  openChat() {
+    this.isChatOpen = true;
+  }
+
+  // Close the chat window
+  closeChat() {
+    this.isChatOpen = false;
+  }
+
+  toggleChat() {
+    this.isChatOpen = !this.isChatOpen; // Toggle the chat window visibility
+  }
   
 }
