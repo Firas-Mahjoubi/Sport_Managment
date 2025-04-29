@@ -25,50 +25,15 @@ import java.util.List;
 public class CardController {
     private final CardService cardService;
 
+
+
     @GetMapping("/getcardsformatch/{matchId}")
     public ResponseEntity<List<CardDTO>> getCardsForMatch(@PathVariable Long matchId) {
         List<CardDTO> cards = cardService.getCardsForMatch(matchId);
         return ResponseEntity.ok(cards);
     }
-    // Updated endpoint for uploading CSV
-    @PostMapping("/uploadCards/{matchId}")
-    public ResponseEntity<String> uploadCards(
-            @PathVariable long matchId,
-            @RequestParam("file") MultipartFile file) {
-        if (file.isEmpty()) {
-            return ResponseEntity.badRequest().body("Please upload a CSV file.");
-        }
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-            String line;
-            List<Card> cards = new ArrayList<>();
-            br.readLine(); // Skip header row (cardType,playerNumber,isHomeTeam,cardTime)
 
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                if (data.length != 4) {
-                    return ResponseEntity.badRequest().body("Invalid CSV format. Expected: cardType,playerNumber,isHomeTeam,cardTime");
-                }
-
-                Card card = new Card();
-                // Convert String to CardType enum
-                try {
-                    card.setCardType(CardType.valueOf(data[0].trim().toUpperCase())); // e.g., "YELLOW" -> CardType.YELLOW
-                } catch (IllegalArgumentException e) {
-                    return ResponseEntity.badRequest().body("Invalid card type: " + data[0] + ". Must be YELLOW or RED.");
-                }
-                card.setNumberOfPlayer(Integer.parseInt(data[1].trim()));
-                boolean isHomeTeam = Boolean.parseBoolean(data[2].trim());
-                card.setCardTime(Integer.parseInt(data[3].trim()));
-
-                cardService.addCard(matchId, isHomeTeam, card.getNumberOfPlayer(), card);
-                cards.add(card);
-            }
-            return ResponseEntity.ok("Successfully uploaded and processed " + cards.size() + " cards.");
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error processing CSV: " + e.getMessage());
-        }
-    }
 
     @PostMapping("addCard/{matchId}")
     public Card addCard(@PathVariable Long matchId, @RequestParam boolean isHomeTeam, @RequestBody Card card) {

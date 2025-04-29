@@ -31,8 +31,8 @@
         @Enumerated(EnumType.STRING)
         Categories categories;
 
-        @ManyToMany(mappedBy = "teams") // ❌ Removed CascadeType.ALL (Avoids unwanted deletions)
-        @JsonIgnore // ✅ Prevents infinite recursion
+        @ManyToMany(mappedBy = "teams")
+        @JsonIgnore
         List<Match> matches;
 
         @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)

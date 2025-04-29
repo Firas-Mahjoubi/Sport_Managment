@@ -9,10 +9,16 @@ import com.example.sport_backend.Entity.Matchs.Match;
 import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
 import com.example.sport_backend.Repositories.matches.CardRepo;
 import com.example.sport_backend.Repositories.matches.MatchesRepo;
+import com.opencsv.CSVReader;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,6 +63,7 @@ public class CardService {
 
         return cardRepo.save(card);
     }
+
     @Transactional(readOnly = true)
     public List<CardDTO> getCardsForMatch(Long matchId) {
         // Fetch the match
@@ -78,7 +85,6 @@ public class CardService {
                 .collect(Collectors.toList());
     }
 
-
     @Transactional(readOnly = true)
     public Long countRedCardsForPlayer(String firstName, String lastName, String teamName) {
         return cardRepo.countCardsByPlayerAndTeam(firstName, lastName, teamName, CardType.RED);
@@ -87,5 +93,52 @@ public class CardService {
     @Transactional(readOnly = true)
     public Long countYellowCardsForPlayer(String firstName, String lastName, String teamName) {
         return cardRepo.countCardsByPlayerAndTeam(firstName, lastName, teamName, CardType.YELLOW);
+    }
+
+    // NEW: Method for CSV upload
+    @Transactional
+    public String uploadCardsFromCsv(Long matchId, MultipartFile file) throws IOException {
+        Match match = matchRepo.findById(matchId)
+                .orElseThrow(() -> new RuntimeException("Match not found"));
+
+        List<Card> cards = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
+             CSVReader csvReader = new CSVReader(reader)) {
+
+            // Skip header row
+            String[] headers = csvReader.readNext();
+            if (headers == null) {
+                throw new IllegalArgumentException("CSV file is empty.");
+            }
+
+            String[] line;
+            while ((line = csvReader.readNext()) != null) {
+                if (line.length < 4) {
+                    throw new IllegalArgumentException("Invalid CSV format: Each row must have 4 columns.");
+                }
+
+                Card card = new Card();
+                card.setCardType(CardType.valueOf(line[0].trim().toUpperCase())); // CardType (YELLOW/RED)
+                int playerNumber = Integer.parseInt(line[1].trim());              // PlayerNumber
+                boolean isHomeTeam = Boolean.parseBoolean(line[2].trim());        // IsHomeTeam
+                card.setCardTime(Integer.parseInt(line[3].trim()));               // CardTime
+
+                // Validate data
+                if (playerNumber < 1 || playerNumber > 99) {
+                    throw new IllegalArgumentException("Player number must be between 1 and 99.");
+                }
+                if (card.getCardTime() < 1 || card.getCardTime() > 130) {
+                    throw new IllegalArgumentException("Card time must be between 1 and 130.");
+                }
+
+                // Reuse existing addCard method
+                cards.add(addCard(matchId, isHomeTeam, playerNumber, card));
+            }
+        } catch (Exception e) {
+            throw new IOException("Error processing CSV file: " + e.getMessage(), e);
+        }
+
+        return "Successfully uploaded " + cards.size() + " cards.";
     }
 }

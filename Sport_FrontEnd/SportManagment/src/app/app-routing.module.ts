@@ -55,13 +55,13 @@ import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 import { HomeComponent } from './components/home/home.component';
 
-
 import {CalendarComponent} from "./AdvancedPlanning/calendar/calendar.component";
 import {EventFormComponent} from "./AdvancedPlanning/calendar/event-form/event-form.component";
 import {SessionFormComponent} from "./AdvancedPlanning/session-form/session-form.component";
 import {EventDetailsComponent} from "./AdvancedPlanning/event-details/event-details.component";
 
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+import {AskQuestionComponent} from "./matches/ask-question/ask-question.component";
 
 
 
@@ -94,10 +94,11 @@ const routes: Routes = [
     { path: 'add-exercise-back', component: BackofficeListExerciceComponent },
   //---------------------------------------------//
 
-  { path: 'matches', component: MatchesHomeComponent },
+  { path: 'matches', component: MatchesHomeComponent, canActivate: [roleGuard(['PLAYER'])] },
 
   { path: 'gameweeks', component: GameweekSliderComponent },
-  { path: 'admindash', component: AdminMatchComponent },
+  { path: 'admindash', component: AdminMatchComponent , canActivate: [roleGuard(['ADMIN'])]},
+  {path:'ask-question',component:AskQuestionComponent},
 
 
   { path: 'match/:matchId', component: MatchDetailsComponent },
@@ -118,7 +119,7 @@ const routes: Routes = [
   {path :'DashboardHeader',component:AdminHeaderComponent},
   { path: 'admin-goals/:matchId', component: AdminGoalComponent },
   { path: 'admin-cards/:matchId', component: AdminCardComponent },
-  {path: 'matchesmain', component:MatchesmainComponent},
+  {path: 'matchesmain', component:MatchesmainComponent , canActivate: [roleGuard(['PLAYER'])]},
   {path: 'matchesNavbar', component:MatchesNavbarComponent},
   {path: 'matchesFooter', component:MatchesFooterComponent},
   { path: 'admin-substitutions/:matchId', component: AdminSubstitutionComponent }, // 🆕 Route with matchId
@@ -175,13 +176,12 @@ const routes: Routes = [
 { path: 'list-recoveryplan/:playerId', component: ListRecoveryPlanComponent },
 
 { path: 'list-player', component: ListPlayerComponent },
-{path: '**', redirectTo: 'home'},
 
 { path: 'health-dashboard', component: HealthDashboardComponent },
+{path: '**', redirectTo: 'home'},
 
 
 
-{ path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
 ];
 @NgModule({
