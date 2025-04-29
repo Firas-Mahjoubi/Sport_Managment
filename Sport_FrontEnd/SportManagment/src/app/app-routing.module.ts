@@ -178,7 +178,8 @@ const routes: Routes = [
 
 
 //skander turkiiiiii recoveryplan
-{path: 'home', component: HomeComponent},
+
+ // {path: 'home', component: HomeComponent},
 
 { path: 'add-recoveryplan', component: AddRecoveryplanComponent },
 { path: 'edit-recoveryplan/:injuryId/:planId', component: EditRecoveryplanComponent },
