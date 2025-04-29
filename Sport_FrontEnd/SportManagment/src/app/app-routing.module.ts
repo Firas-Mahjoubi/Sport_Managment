@@ -67,12 +67,15 @@ import {SessionFormComponent} from "./AdvancedPlanning/session-form/session-form
 import {EventDetailsComponent} from "./AdvancedPlanning/event-details/event-details.component";
 
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 ////////////
   
 
 
 const routes: Routes = [
+  { path: 'user', component: AdminDashboardComponent }, // Protect dashboard route
+
 
   { path: 'auth', component: AuthComponent },
   {path:'calendar',component:CalendarComponent},
@@ -125,7 +128,6 @@ const routes: Routes = [
 
 
 
-  { path: 'Dashboard', component: DashboardComponent },
   {path :'DashboardSidebar',component:AdminSidebarComponent},
   {path :'DashboardHeader',component:AdminHeaderComponent},
   { path: 'admin-goals/:matchId', component: AdminGoalComponent },

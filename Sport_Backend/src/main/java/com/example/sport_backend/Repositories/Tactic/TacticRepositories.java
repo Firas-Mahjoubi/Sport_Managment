@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface TacticRepositories extends JpaRepository<Tactic, Long> {
     List<Tactic> findByTeamId(Long teamId);
+    List<Tactic> findByUserId(Long userId);
 }
