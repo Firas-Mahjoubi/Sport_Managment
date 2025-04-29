@@ -1,12 +1,17 @@
 package com.example.sport_backend.Controllers.ClubHouse;
 
 import com.example.sport_backend.Entity.ClubHouse.Player;
+import com.example.sport_backend.Entity.ClubHouse.PlayerRequest;
+import com.example.sport_backend.Repositories.ClubHouse.PlayerRepo;
 import com.example.sport_backend.ServiceImpl.ClubHouse.PlayerServiceIMPL;
 import com.example.sport_backend.ServiceInterface.ClubHouse.IPlayerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 @RestController
 @RequiredArgsConstructor
@@ -28,7 +33,7 @@ public class PlayerController {
     }
 
     @PostMapping("/addplayer")
-    public Player addPlayer(@RequestBody Player player) {
+    public Player addPlayer(@ModelAttribute PlayerRequest player) throws IOException {
         return iPlayerService.addPlayer(player);
     }
 
@@ -47,6 +52,25 @@ public class PlayerController {
     @GetMapping("/players/without-healthrecord")
     public List<Player> getPlayersWithoutHealthRecord() {
         return iPlayerService.getPlayersWithoutHealthRecord();
+    }
+
+    private final PlayerRepo playerRepository;
+    @GetMapping("/image/{id}")
+    public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
+        Player player = playerRepository.findById(id).orElseThrow();
+        byte[] image = player.getImageUrl(); // type byte[]
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_JPEG) // ou IMAGE_PNG selon ton image
+                .body(image);
+    }
+
+    @GetMapping("/sorted")
+    public List<Player> getSortedPlayers(
+            @RequestParam String field,
+            @RequestParam(defaultValue = "asc") String direction
+    ) {
+        return iPlayerService.getSortedPlayers(field, direction);
     }
 
 

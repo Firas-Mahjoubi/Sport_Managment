@@ -24,8 +24,9 @@
         Long id;
 
         String name;
+        //String category;
         String Stadium;
-        String logoUrl;
+        String LogoUrl;
 
 
         @Enumerated(EnumType.STRING)
@@ -39,9 +40,10 @@
         @JsonIgnore
         List<User> users;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-                @JsonIgnore
-        Club club;
+        @ManyToOne
+        @JoinColumn(name = "club_id")
+        private Club club;
+
 
         @JsonIgnore
         @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
