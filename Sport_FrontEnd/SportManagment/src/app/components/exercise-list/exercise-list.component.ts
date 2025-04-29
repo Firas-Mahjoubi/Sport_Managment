@@ -79,5 +79,21 @@ export class ExerciseListComponent implements OnInit {
   toggleChat() {
     this.isChatOpen = !this.isChatOpen; // Toggle the chat window visibility
   }
-  
+  currentPage: number = 1;
+itemsPerPage: number = 3;
+
+get paginatedExercises() {
+  const filtered = this.filteredExercises();
+  const start = (this.currentPage - 1) * this.itemsPerPage;
+  return filtered.slice(start, start + this.itemsPerPage);
+}
+
+get totalPages(): number {
+  return Math.ceil(this.filteredExercises().length / this.itemsPerPage);
+}
+
+changePage(page: number) {
+  this.currentPage = page;
+}
+
 }
