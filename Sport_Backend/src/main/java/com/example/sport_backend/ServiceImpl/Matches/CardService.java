@@ -2,10 +2,7 @@ package com.example.sport_backend.ServiceImpl.Matches;
 
 import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Entity.ClubHouse.Team;
-import com.example.sport_backend.Entity.Matchs.Card;
-import com.example.sport_backend.Entity.Matchs.CardDTO;
-import com.example.sport_backend.Entity.Matchs.CardType;
-import com.example.sport_backend.Entity.Matchs.Match;
+import com.example.sport_backend.Entity.Matchs.*;
 import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
 import com.example.sport_backend.Repositories.matches.CardRepo;
 import com.example.sport_backend.Repositories.matches.MatchesRepo;
@@ -19,7 +16,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -36,6 +35,44 @@ public class CardService {
 
         // Delete the card from the repository
         cardRepo.delete(card);
+    }
+
+    public List<CardStatsDto> getTopPlayersByCardTypeAndLeague(CardType cardType, Long leagueId) {
+        List<Card> cards = cardRepo.findByCardType(cardType);
+
+        Map<Player, Integer> cardCountMap = new HashMap<>();
+
+        for (Card card : cards) {
+            Player player = card.getCardTaker();
+            if (player != null && player.getTeam() != null) {
+                Team team = player.getTeam();
+                if (team.getClub() != null && team.getClub().getLeague() != null &&
+                        team.getClub().getLeague().getId().equals(leagueId)) {
+
+                    cardCountMap.put(player, cardCountMap.getOrDefault(player, 0) + 1);
+                }
+            }
+        }
+
+        return cardCountMap.entrySet().stream()
+                .sorted((e1, e2) -> Integer.compare(e2.getValue(), e1.getValue()))
+                .limit(5)
+                .map(entry -> {
+                    Player player = entry.getKey();
+                    String teamName = player.getTeam() != null ? player.getTeam().getName() : "Unknown";
+                    String fullName = player.getFirstName() + " " + player.getLastName();
+                    return new CardStatsDto(fullName, player.getImage(), teamName, entry.getValue());
+                })
+                .collect(Collectors.toList());
+    }
+
+
+    public List<CardStatsDto> getTopRedCardPlayers(Long leagueId) {
+        return getTopPlayersByCardTypeAndLeague(CardType.RED, leagueId);
+    }
+
+    public List<CardStatsDto> getTopYellowCardPlayers(Long leagueId) {
+        return getTopPlayersByCardTypeAndLeague(CardType.YELLOW, leagueId);
     }
 
     @Transactional

@@ -90,6 +90,8 @@ import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.com
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
 import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
 import { AskQuestionComponent } from './matches/ask-question/ask-question.component';
+import { MatchesStatsComponent } from './matches/matches-stats/matches-stats.component';
+import { StatsChartsComponent } from './matches/stats-charts/stats-charts.component';
 
 
 @NgModule({
@@ -152,7 +154,9 @@ import { AskQuestionComponent } from './matches/ask-question/ask-question.compon
 
 
     HealthDashboardComponent,
-          AskQuestionComponent
+          AskQuestionComponent,
+          MatchesStatsComponent,
+          StatsChartsComponent
 
 
 

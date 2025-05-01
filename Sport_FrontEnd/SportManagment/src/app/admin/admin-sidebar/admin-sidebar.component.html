@@ -102,40 +102,24 @@
       </ul>
     </li><!-- End Components Nav -->
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#matches-nav" data-bs-toggle="collapse" href="#">
+      <a class="nav-link collapsed" data-bs-target="#match-nav" data-bs-toggle="collapse" href="#">
         <img src="/assets/admin/img/match-de-foot-en-direct.png" alt="Matches" class="rounded-circle" width="24" height="24">
-        <span>Matches</span>
+        <span>Match</span>
         <i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="matches-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <ul id="match-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
-          <a href="#">
-            <i class="bi bi-circle"></i><span>Goals</span>
+          <a [routerLink]="['/admindash']" routerLinkActive="active">
+            <i class="bi bi-circle"></i><span>Match Management</span>
           </a>
         </li>
         <li>
-          <a href="#">
-            <i class="bi bi-circle"></i><span>Cards</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="bi bi-circle"></i><span>Match</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="bi bi-circle"></i><span>Lineup</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="bi bi-circle"></i><span>Substitution</span>
+          <a [routerLink]="['/matchstat']" routerLinkActive="active">
+            <i class="bi bi-circle"></i><span>Stats</span>
           </a>
         </li>
       </ul>
-    </li><!-- End Matches Nav -->
-
+    </li>
 
 
     <li class="nav-item">

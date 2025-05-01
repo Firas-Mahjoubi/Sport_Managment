@@ -62,7 +62,8 @@ import {EventDetailsComponent} from "./AdvancedPlanning/event-details/event-deta
 
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
 import {AskQuestionComponent} from "./matches/ask-question/ask-question.component";
-
+import {MatchesStatsComponent} from "./matches/matches-stats/matches-stats.component";
+import {StatsChartsComponent} from "./matches/stats-charts/stats-charts.component";
 
 
 
@@ -99,7 +100,8 @@ const routes: Routes = [
   { path: 'gameweeks', component: GameweekSliderComponent },
   { path: 'admindash', component: AdminMatchComponent , canActivate: [roleGuard(['ADMIN'])]},
   {path:'ask-question',component:AskQuestionComponent},
-
+  {path:'matchstat',component:MatchesStatsComponent},
+  { path: 'league/:id/stats', component: StatsChartsComponent }, // <-- Add this route
 
   { path: 'match/:matchId', component: MatchDetailsComponent },
 

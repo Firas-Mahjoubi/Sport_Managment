@@ -32,6 +32,7 @@ public class Player {
     String position;
     Integer playerNumber;
     String performanceStats;
+    String image;
     @ManyToOne
     Team team;
 
