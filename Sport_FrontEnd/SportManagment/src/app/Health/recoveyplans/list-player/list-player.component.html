@@ -1,18 +1,20 @@
 <!-- 🌌 Arrière-plan avec une image -->
-<div style="
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: url('assets/player.jpg') no-repeat center center/cover;
-  filter: brightness(0.4);
-  z-index: -1;">
-</div>
+<div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: url('assets/player.jpg') no-repeat center center/cover; filter: brightness(0.4); z-index: -1;"></div>
 
 <div class="container player-container mt-4">
   <h2 class="title">⚽ Liste des Joueurs</h2>
+  <!-- Champ de recherche -->
 
+<input
+type="text"
+class="form-control mb-3"
+placeholder="🔍 Rechercher par nom de famille"
+[(ngModel)]="searchTerm"
+(input)="filterPlayers()"
+/>
+
+
+  <!-- Table des joueurs -->
   <table class="table table-striped table-hover player-table">
     <thead>
       <tr>
@@ -25,7 +27,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let player of players">
+      <tr *ngFor="let player of visiblePlayers()">
         <td>{{ player.id }}</td>
         <td>{{ player.lastName }}</td>
         <td>{{ player.firstName }}</td>
@@ -39,6 +41,56 @@
       </tr>
     </tbody>
   </table>
+
+  <!-- 🔮 Pagination Futuriste -->
+  <div *ngIf="totalPages > 1" class="futuristic-pagination mt-4">
+    <button
+      class="page-button prev"
+      [disabled]="currentPage === 1"
+      (click)="changePage(currentPage - 1)">
+      «
+    </button>
+
+    <div class="page-indicators">
+      <!-- Toujours afficher la première page -->
+      <span
+        class="page-circle"
+        [class.active]="currentPage === 1"
+        (click)="changePage(1)">
+        1
+      </span>
+
+      <!-- Afficher ... si currentPage > 4 -->
+      <span *ngIf="currentPage > 4" class="dots">...</span>
+
+      <!-- Pages dynamiques du milieu -->
+      <span
+        *ngFor="let page of visiblePagesNumbers()"
+        class="page-circle"
+        [class.active]="currentPage === page"
+        (click)="changePage(page)">
+        {{ page }}
+      </span>
+
+      <!-- Afficher ... si currentPage < totalPages - 3 -->
+      <span *ngIf="currentPage < totalPages - 3" class="dots">...</span>
+
+      <!-- Toujours afficher la dernière page -->
+      <span
+        class="page-circle"
+        [class.active]="currentPage === totalPages"
+        (click)="changePage(totalPages)">
+        {{ totalPages }}
+      </span>
+    </div>
+
+    <button
+      class="page-button next"
+      [disabled]="currentPage === totalPages"
+      (click)="changePage(currentPage + 1)">
+      »
+    </button>
+  </div>
 </div>
 
 <!-- 🔘 Boutons en bas -->

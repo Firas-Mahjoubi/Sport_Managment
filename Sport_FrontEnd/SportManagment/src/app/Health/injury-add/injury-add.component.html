@@ -21,7 +21,7 @@
         <label for="player">👤 Joueur :</label>
         <select id="player" formControlName="player" class="form-control">
           <option *ngFor="let player of players" [value]="player.id + ''">
-            {{ player.firstName }} {{ player.lastName }} (#{{ player.playerNumber }})
+            {{ player.firstName }} {{ player.lastName }} ({{ player.playerNumber }})
           </option>
         </select>
       </div>

@@ -85,32 +85,32 @@ body {
 
 /* 🔍 Bouton Voir */
 .btn-view {
-  background: linear-gradient(135deg, #0066cc, #004999);
+  background: linear-gradient(135deg, #ff4d4d, #ff4d4d);
   color: white;
 }
 
 .btn-view:hover {
-  background: linear-gradient(135deg, #004999, #003377);
+  background: linear-gradient(135deg, #ff4d4d, #ff4d4d);
 }
 
 /* ✏️ Bouton Modifier */
 .btn-edit {
-  background: linear-gradient(135deg, #ffcc00, #e6b800);
+  background: linear-gradient(135deg, #ff4d4d, #ff4d4d);
   color: white;
 }
 
 .btn-edit:hover {
-  background: linear-gradient(135deg, #e6b800, #cc9900);
+  background: linear-gradient(135deg, #ff4d4d, #ff4d4d);
 }
 
 /* 🗑️ Bouton Supprimer */
 .btn-delete {
-  background: linear-gradient(135deg, #ff4d4d, #e60000);
+  background: linear-gradient(135deg, #ff4d4d, #ff4d4d);
   color: white;
 }
 
 .btn-delete:hover {
-  background: linear-gradient(135deg, #e60000, #cc0000);
+  background: linear-gradient(135deg, #ff4d4d, #ff4d4d);
 }
 
 /* 🔲 Boutons désactivés */
@@ -202,3 +202,93 @@ button[disabled], .btn[disabled] {
   transform: scale(1.05);
 }
 
+
+
+
+
+
+/*pagination*/
+
+.futuristic-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.page-indicators {
+  display: flex;
+  gap: 10px;
+}
+
+.page-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 0, 0, 0.08);
+  color: red;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid red;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+  backdrop-filter: blur(3px);
+}
+
+.page-circle:hover {
+  background: red;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px red;
+}
+
+.page-circle.active {
+  background: red;
+  color: white;
+  box-shadow: 0 0 15px red, 0 0 30px red;
+}
+
+.page-button {
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: red;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.page-button:hover:not(:disabled) {
+  transform: scale(1.3);
+  color: #ff0000;
+}
+
+.page-button:disabled {
+  color: red; /* conserve la couleur normale */
+  opacity: 1;
+  filter: none;
+  cursor: default;
+  pointer-events: none; /* évite l'interaction */
+  background: transparent; /* évite un fond gris natif */
+  box-shadow: none;
+  color: rgba(0, 47, 255, 0.3);
+  cursor: not-allowed;
+}
+
+
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+.dots {
+  color: #ff4d4d;
+  font-size: 20px;
+  margin: 0 6px;
+  font-weight: bold;
+  opacity: 0.6;
+}

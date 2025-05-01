@@ -89,15 +89,18 @@ body {
   transform: scale(1.05);
 }
 
+
 /* 🔘 Boutons en bas */
 .bottom-buttons {
   position: fixed;
   bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   display: flex;
+  justify-content: space-between; /* Utilise space-between pour espacer les boutons */
   gap: 15px;
   z-index: 1000;
+  padding: 0 20px; /* Espace entre les bords de l'écran et les boutons */
 }
 
 /* 🔙 Bouton Retour */
@@ -136,4 +139,122 @@ body {
 .btn-recovery:hover {
   background-color: #009900;
   transform: scale(1.05);
+}
+
+
+
+
+
+
+/*pagination*/
+
+.futuristic-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.page-indicators {
+  display: flex;
+  gap: 10px;
+}
+
+.page-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 153, 0, 0.08);  /* Changement ici */
+  color: #009900;  /* Changement ici */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #009900;  /* Changement ici */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(0, 153, 0, 0.3);  /* Changement ici */
+  backdrop-filter: blur(3px);
+}
+
+.page-circle:hover {
+  background: #009900;  /* Changement ici */
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px #009900;  /* Changement ici */
+}
+
+.page-circle.active {
+  background: #009900;  /* Changement ici */
+  color: white;
+  box-shadow: 0 0 15px #009900, 0 0 30px #009900;  /* Changement ici */
+}
+
+.page-button {
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: #009900;  /* Changement ici */
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.page-button:hover:not(:disabled) {
+  transform: scale(1.3);
+  color: #006600;  /* Changement ici */
+}
+
+.page-button:disabled {
+  color: #009900;  /* Changement ici */
+  opacity: 1;
+  filter: none;
+  cursor: default;
+  pointer-events: none;
+  background: transparent;
+  box-shadow: none;
+  color: rgba(0, 153, 0, 0.3);  /* Changement ici */
+}
+
+.dots {
+  color: #009900;  /* Changement ici */
+  font-size: 20px;
+  margin: 0 6px;
+  font-weight: bold;
+  opacity: 0.6;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
+
+/* Style pour le champ de recherche */
+.search-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-container input {
+  width: 300px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.search-container input:focus {
+  border-color: #007bff; /* Bordure bleue lors du focus */
+}
+
+
+
+/* Style pour le placeholder du champ de recherche */
+input::placeholder {
+  color: #009900;  /* Couleur turquoise */
+  opacity: 1;  /* S'assurer que la couleur est bien visible */
 }

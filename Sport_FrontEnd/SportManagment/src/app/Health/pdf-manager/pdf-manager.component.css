@@ -128,3 +128,88 @@ body {
     font-size: 0.9rem;
   }
 }
+
+
+.futuristic-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  animation: fadeIn 1s ease-in-out;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.page-indicators {
+  display: flex;
+  gap: 10px;
+}
+
+.page-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 230, 230, 0.08);  /* 🟦 Nouvelle couleur */
+  color: #00e6e6;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #00e6e6;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(0, 230, 230, 0.3);
+  backdrop-filter: blur(3px);
+}
+
+.page-circle:hover {
+  background: #00e6e6;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px #00e6e6;
+}
+
+.page-circle.active {
+  background: #00e6e6;
+  color: white;
+  box-shadow: 0 0 15px #00e6e6, 0 0 30px #00e6e6;
+}
+
+.page-button {
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: #00e6e6;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.page-button:hover:not(:disabled) {
+  transform: scale(1.3);
+  color: #00cccc;
+}
+
+.page-button:disabled {
+  color: rgba(0, 230, 230, 0.3);
+  opacity: 1;
+  cursor: default;
+  pointer-events: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.dots {
+  color: #00e6e6;
+  font-size: 20px;
+  margin: 0 6px;
+  font-weight: bold;
+  opacity: 0.6;
+}
+
+
+
+
+input::placeholder {
+  color: #00e6e6;
+  opacity: 1; /* Pour s'assurer que la couleur soit bien visible */
+}

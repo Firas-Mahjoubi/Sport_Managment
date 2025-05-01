@@ -1,24 +1,7 @@
-<!-- ➕ Bouton Ajouter un Health Record -->
-<a [routerLink]="['/health/health-records/add']" class="btn-add-health">
-  ➕ Ajouter Health Record
-</a>
-
 <!-- 🌌 Arrière-plan avec une image en HTML -->
-<div style="
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: url('/assets/health.jpg') no-repeat center center/cover;
-  filter: brightness(0.4);
-  z-index: -1;">
-</div>
+<div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: url('/assets/health.jpg') no-repeat center center/cover; filter: brightness(0.4); z-index: -1;"></div>
 
 <div class="container healthrecord-container mt-4">
-
-
-
   <h2 class="title">🏥 Liste des Health Records</h2>
 
   <!-- 🔍 Filtrage des records -->
@@ -57,7 +40,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let record of filteredRecords">
+      <tr *ngFor="let record of currentPageRecords">
         <td>{{ record.name }}</td>
         <td>{{ record.date | date:'dd/MM/yyyy' }}</td>
         <td>
@@ -76,11 +59,64 @@
         <td>
           <a [routerLink]="['/health/health-records/show', record.id]" class="btn btn-view btn-sm">🔍 Voir</a>
           <a [routerLink]="['/health/health-records/edit', record.id]" class="btn btn-edit btn-sm">✏️ Modifier</a>
-           <button (click)="deleteHealthRecord(record.id)" class="btn btn-delete btn-sm">🗑️ Supprimer</button>
+          <button (click)="deleteHealthRecord(record.id)" class="btn btn-delete btn-sm">🗑️ Supprimer</button>
         </td>
       </tr>
     </tbody>
   </table>
+<!-- 🔮 Pagination Futuriste Avancée pour Health Record -->
+<div *ngIf="totalPages > 1" class="futuristic-pagination mt-4">
+  <!-- Bouton Précédent -->
+  <button
+    class="page-button prev"
+    [disabled]="currentPage === 1"
+    (click)="changePage(currentPage - 1)">
+    «
+  </button>
+
+  <div class="page-indicators">
+    <!-- Toujours afficher la première page -->
+    <span
+      class="page-circle"
+      [class.active]="currentPage === 1"
+      (click)="changePage(1)">
+      1
+    </span>
+
+    <!-- Afficher ... si currentPage > 4 -->
+    <span *ngIf="currentPage > 4" class="dots">...</span>
+
+    <!-- Pages dynamiques du milieu -->
+    <span
+      *ngFor="let page of visiblePages()"
+      class="page-circle"
+      [class.active]="currentPage === page"
+      (click)="changePage(page)">
+      {{ page }}
+    </span>
+
+    <!-- Afficher ... si currentPage < totalPages - 3 -->
+    <span *ngIf="currentPage < totalPages - 3" class="dots">...</span>
+
+    <!-- Toujours afficher la dernière page -->
+    <span
+      class="page-circle"
+      [class.active]="currentPage === totalPages"
+      (click)="changePage(totalPages)">
+      {{ totalPages }}
+    </span>
+  </div>
+
+  <!-- Bouton Suivant -->
+  <button
+    class="page-button next"
+    [disabled]="currentPage === totalPages"
+    (click)="changePage(currentPage + 1)">
+    »
+  </button>
+</div>
+
+
 </div>
 
 <!-- 🔙 Bouton Retour au Tableau de Santé -->

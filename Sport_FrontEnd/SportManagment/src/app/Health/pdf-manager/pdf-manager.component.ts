@@ -15,21 +15,93 @@ export class PdfManagerComponent implements OnInit {
   players: Player[] = [];
   customNotes: string = '';
 
+
+  currentPage: number = 1;
+  totalPages: number = 1;
+  playersPerPage: number = 7;
+
+
+
+  searchTerm: string = '';
+  filteredPlayers: Player[] = [];
+
   constructor(
     private playerService: PlayerService,
     private recoveryPlanService: RecoveryPlanService
   ) {}
 
+
+  visiblePlayers(): Player[] {
+    const sourceList = this.searchTerm && this.searchTerm.trim() !== ''
+      ? this.filteredPlayers
+      : this.players;
+
+    const startIndex = (this.currentPage - 1) * this.playersPerPage;
+    const endIndex = startIndex + this.playersPerPage;
+
+    return sourceList.slice(startIndex, endIndex);
+  }
+
+
+ // Calculer les pages visibles à afficher
+ visiblePagesNumbers(): number[] {
+  const pages = [];
+  const totalPages = this.totalPages;
+  const currentPage = this.currentPage;
+
+  const pageStart = Math.max(2, currentPage - 2);
+  const pageEnd = Math.min(totalPages - 1, currentPage + 2);
+
+  for (let i = pageStart; i <= pageEnd; i++) {
+    pages.push(i);
+  }
+  return pages;
+}
+
+// Changer de page
+changePage(page: number): void {
+  if (page < 1 || page > this.totalPages) return;
+  this.currentPage = page;
+}
+
+
+
+
   ngOnInit(): void {
     this.loadPlayers();
   }
 
+
+
   loadPlayers(): void {
     this.playerService.getPlayers().subscribe({
-      next: data => this.players = data,
-      error: err => console.error('Erreur chargement joueurs :', err)
+      next: (data) => {
+        this.players = data;
+
+        this.totalPages = Math.ceil(this.players.length / this.playersPerPage);
+        this.filterPlayers(); // Appliquer un filtre initial
+        // Calcul du total des pages
+      },
+      error: (err) => {
+        console.error('Erreur lors du chargement des joueurs :', err);
+      }
     });
   }
+
+
+  filterPlayers(): void {
+    const term = this.searchTerm.toLowerCase();
+    this.filteredPlayers = this.players.filter(player =>
+      player.lastName.toLowerCase().includes(term)
+    );
+    this.totalPages = Math.ceil(this.filteredPlayers.length / this.playersPerPage);
+    this.currentPage = 1;
+  }
+
+
+
+
+
 
   async generatePdf(player: Player): Promise<void> {
     const doc = new jsPDF('p', 'mm', 'a4');
@@ -113,6 +185,8 @@ export class PdfManagerComponent implements OnInit {
             doc.addPage();
             y = 20;
           }
+
+
 
           // Ajout au contenu QR
           qrCodeData.push(
