@@ -1,0 +1,125 @@
+.section-title {
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  color: #2c3e50;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #3498db 0%, #9b59b6 100%);
+}
+
+.player-card {
+  transition: all 0.3s ease;
+  border-radius: 15px;
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.hover-effect:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.player-avatar {
+  width: 120px !important;
+  height: 120px !important;
+  object-fit: cover;
+  border: 3px solid #fff;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.image-wrapper {
+  background: linear-gradient(45deg, #3498db, #9b59b6);
+  padding: 5px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #3498db 0%, #9b59b6 100%);
+  
+  -webkit-text-fill-color: #fff;
+}
+
+.btn-action {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.btn-edit {
+  background: rgba(52, 152, 219, 0.1);
+  color: #3498db;
+}
+
+.btn-edit:hover {
+  background: #3498db;
+  color: white;
+}
+
+.btn-view {
+  background: rgba(46, 204, 113, 0.1);
+  color: #2ecc71;
+}
+
+.btn-view:hover {
+  background: #2ecc71;
+  color: white;
+}
+
+.btn-delete {
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.btn-delete:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+.status-indicator {
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9em;
+}
+
+.status-indicator.active {
+  background: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+}
+
+.status-indicator.inactive {
+  background: rgba(241, 196, 15, 0.15);
+  color: #f1c40f;
+}
+
+.info-item {
+  background: rgba(236, 240, 241, 0.3);
+  padding: 10px;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.content-wrapper {
+  margin-left: 250px; /* adapte à la largeur de ta sidebar */
+  padding: 2rem;
+}
+
+@media (max-width: 992px) {
+  .content-wrapper {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}

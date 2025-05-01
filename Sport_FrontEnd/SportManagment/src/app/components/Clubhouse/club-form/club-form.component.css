@@ -1,0 +1,21 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+mat-card {
+  background-color: #000000;
+  border-radius: 15px;
+}
+
+input {
+  color: #212529 !important; /* noir ou couleur visible */
+}
+
+mat-form-field {
+  background-color: #000000;
+}
+
+button {
+  font-weight: bold;
+}

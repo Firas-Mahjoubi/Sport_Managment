@@ -1,0 +1,66 @@
+<div class="container mt-5">
+    <!-- Titre principal -->
+    <h2 class="section-title text-center mb-5">🏆 Our Clubs</h2>
+  
+    <!-- 🔎 Input de recherche -->
+    <div class="d-flex justify-content-center mb-4">
+      <input
+        type="text"
+        class="form-control w-50"
+        [(ngModel)]="searchKeyword"
+        (input)="searchClubs()"
+        placeholder="Rechercher un club par nom ou lieu..." />
+    </div>
+  
+
+    <!-- 📥 Bouton Export -->
+  <div class="text-center my-4">
+    <button class="btn btn-success" (click)="exportClubsCsv()">
+      📥 Export Clubs to CSV
+    </button>
+  </div>
+
+    <!-- Affichage conditionnel -->
+    <div *ngIf="clubs.length > 0; else noClubsFound">
+      <!-- ✅ Liste des clubs -->
+      <div class="row g-4">
+        <div *ngFor="let club of clubs" class="col-md-4">
+          <div class="elite-card shadow-lg rounded-4 overflow-hidden hover-effect">
+            <div class="card-header-gradient position-relative">
+              <div class="image-wrapper">
+                <img [src]="club.imageUrl ? 'http://localhost:8088/clubs/image/' + club.id : 'assets/default-club.png'" 
+                     alt="Club Logo" 
+                     class="club-logo rounded-3 mx-auto"
+                     (error)="club.imageUrl = 'assets/default-club.png'">
+              </div>
+            </div>
+  
+            <div class="card-body text-center pt-4 pb-3 px-4">
+              <h3 class="club-name mb-3">{{ club.name }}</h3>
+  
+              <button class="btn btn-premium" (click)="viewPlayers(club.id)">
+                <i class="fas fa-users me-2"></i>View Players
+              </button>
+
+              <button class="btn btn-outline-primary mt-2" (click)="exportClubPdf(club.id)">
+                📄 Export Club PDF
+              </button>
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- 🔴 Template affiché si aucun club trouvé -->
+    <ng-template #noClubsFound>
+        <div class="text-center mt-5 animate__animated animate__fadeIn">
+          <i class="fas fa-frown fa-5x text-muted mb-3"></i>
+          <h4 class="text-muted">No matching club found.</h4>
+            <p class="text-secondary">Try adjusting your search or checking the spelling.</p>
+
+        </div>
+      </ng-template>
+  </div>
+  

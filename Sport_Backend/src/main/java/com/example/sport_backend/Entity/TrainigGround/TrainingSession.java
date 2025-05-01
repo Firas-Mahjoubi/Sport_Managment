@@ -5,6 +5,8 @@ import com.example.sport_backend.Entity.ClubHouse.Team;
 import com.example.sport_backend.Entity.ClubHouse.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -27,16 +29,22 @@ public class TrainingSession {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     Long id;
-
+    @NotBlank(message = "Le nom est obligatoire")
+    @Size(min = 3, message = "Le nom doit contenir au moins 3 caractères")
     String name;
+    @NotBlank()
     String intensity;  // Low, Medium, High
+    @NotBlank()
     String category;   // Attacking, Tactical, Physical
+    @NotBlank()
     LocalDate date;
+    @NotBlank()
     String startTime;  // Change from LocalDateTime to String
+    @NotBlank()
     String endTime;    // Change from LocalDateTime to String
 
 
-    //LocalDateTime startTime;
+
     //LocalDateTime endTime;
     String location;
     // ✅ Participants Section

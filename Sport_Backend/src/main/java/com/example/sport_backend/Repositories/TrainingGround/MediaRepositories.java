@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface MediaRepositories extends JpaRepository<MediaExercice, Long> {
     List<MediaExercice> findByExerciceId(Long exerciceId);
+    
 }
 

@@ -2,12 +2,15 @@ package com.example.sport_backend.Controllers.TrainingGround;
 
 
 
+import com.example.sport_backend.DTO.MediaLinkDTO;
 import com.example.sport_backend.Entity.TrainigGround.Exercice;
 import com.example.sport_backend.Entity.TrainigGround.MediaExercice;
 import com.example.sport_backend.Entity.TrainigGround.Tag;
 import com.example.sport_backend.Entity.TrainigGround.TrainingSession;
+import com.example.sport_backend.Repositories.TrainingGround.MediaRepositories;
 import com.example.sport_backend.ServiceInterface.TrainingGround.ItrainingGroundService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +26,7 @@ import java.util.Set;
 
 public class TrainingGroundController {
     private final ItrainingGroundService itrainingGroundService;
+
 
     ///////////--------------------------TrainingSession----------------------------////////////////
     @PostMapping("AddTrainingSession")
@@ -66,7 +70,10 @@ public class TrainingGroundController {
     public List<Exercice> getAllExercises() {
         return itrainingGroundService.getAllExercises();
     }
-
+    @GetMapping("/getExercise/{id}")
+    public Exercice getExerciseById(@PathVariable Long id) {
+        return itrainingGroundService.getExerciseById(id);
+    }
 
     // ✅ 2. Ajouter des exercices à une session existante
     @PostMapping("/{sessionId}/add-exercises")
@@ -116,9 +123,23 @@ public class TrainingGroundController {
     }
 
     // ✅ Supprimer un média
-    @DeleteMapping("/{id}")
+    @DeleteMapping("deleteMediaExercice/{id}")
     public void deleteMedia(@PathVariable Long id) {
         itrainingGroundService.deleteMedia(id);
+    }
+
+
+    @PostMapping("/media/link")
+    public ResponseEntity<?> linkMedia(@RequestBody MediaLinkDTO dto){
+        Exercice exercice = itrainingGroundService.findById(dto.getExerciseId()); // throws if not found
+
+        MediaExercice media = new MediaExercice();
+        media.setMediaType(dto.getType());
+        media.setMediaUrl(dto.getFirebaseUrl());
+        media.setExercice(exercice);
+
+        itrainingGroundService.saveMedia(media);
+        return ResponseEntity.ok("Media linked");
     }
 
 }
