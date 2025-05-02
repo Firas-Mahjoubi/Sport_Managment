@@ -47,7 +47,12 @@ export class TacticFormComponent implements OnInit {
           this.router.navigate(['/tactics']);
         });
       } else {
-        this.tacticService.createTactic(tactic, this.tacticForm.get('teamId')?.value).subscribe(() => {
+        const userId = localStorage.getItem('userId'); // Retrieve the userId from localStorage
+        if (!userId) {
+          console.error('User ID is not found in localStorage');
+          return; // Exit if userId is not available
+        }
+        this.tacticService.createTactic(tactic, this.tacticForm.get('teamId')?.value, userId).subscribe(() => {
           this.router.navigate(['/tactics']);
         });
       }

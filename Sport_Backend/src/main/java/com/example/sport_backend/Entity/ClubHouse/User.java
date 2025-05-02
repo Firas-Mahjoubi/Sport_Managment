@@ -1,6 +1,8 @@
 package com.example.sport_backend.Entity.ClubHouse;
 
 import com.example.sport_backend.Entity.Enum.Role;
+import com.example.sport_backend.Entity.Tactic.Tactic;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -44,6 +46,10 @@ public class User implements UserDetails {
 
     @ManyToOne
     Team team;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Tactic> tactics; // Add this to maintain the reverse relationship
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

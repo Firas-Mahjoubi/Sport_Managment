@@ -61,15 +61,19 @@ export class AuthComponent {
     const url = this.isLogin
       ? "http://localhost:8088/api/auth/login"
       : "http://localhost:8088/api/auth/register";
-
+  
     this.http.post(url, this.authForm.value).subscribe({
       next: (response: any) => {
         this.message = response.message;
         this.messageColor = 'green';
-        if (response.role) {
-          localStorage.setItem("userRole", response.role); // Save role in localStorage
+        
+        if (response.userId) {
+          // Store userId in localStorage after login or registration
+          localStorage.setItem("userId", response.userId);
+          localStorage.setItem("userRole", response.role);  // Save role in localStorage
+  
+          // Redirect based on user role
           this.redirectToRole(response.role);
-          localStorage.setItem("userId", response.id);
         }
       },
       error: (err) => {
@@ -78,6 +82,8 @@ export class AuthComponent {
       }
     });
   }
+  
+  
   redirectToRole(role: string) {
     switch (role) {
       case 'ADMIN':

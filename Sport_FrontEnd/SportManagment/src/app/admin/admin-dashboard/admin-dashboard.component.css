@@ -1,0 +1,32 @@
+/* Add this to your global styles.css */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px; /* Adjust to the width of your sidebar */
+    height: 100%;
+    background-color: #343a40; /* Sidebar background */
+    padding-top: 60px; /* Adjust according to your header height */
+    z-index: 1000; /* Make sure the sidebar is on top */
+  }
+  
+ /* Ensure the main content shifts right to avoid overlap with the sidebar */
+.main-content {
+    width: calc(100% - 290px); /* Adjust to the width of your sidebar */
+    margin-left: 280px; /* Adjust this value to the width of your sidebar */
+    padding-top: 60px;  /* Adjust according to your header height */
+  }
+  
+  /* For the table card, add some margin and padding for a neat layout */
+  .card {
+    margin: 10px auto; /* Center the card in the container */
+    padding: 10px; /* Add padding inside the card */
+  }
+  
+  /* Optional: Make sure the table is fully responsive */
+  .table {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  

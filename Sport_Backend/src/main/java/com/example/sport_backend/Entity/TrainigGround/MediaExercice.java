@@ -1,5 +1,6 @@
 package com.example.sport_backend.Entity.TrainigGround;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -18,7 +19,7 @@ public class MediaExercice {
 
     String mediaType; // "image" ou "video"
     String mediaUrl;  // URL de stockage du fichier
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "exercice_id", nullable = false)
     private Exercice exercice;
