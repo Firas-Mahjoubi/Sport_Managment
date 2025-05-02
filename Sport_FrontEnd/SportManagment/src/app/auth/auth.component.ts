@@ -87,7 +87,7 @@ export class AuthComponent {
   redirectToRole(role: string) {
     switch (role) {
       case 'ADMIN':
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['user']);
         break;
       case 'PLAYER':
         this.router.navigate(['/player-dashboard']);

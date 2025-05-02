@@ -74,7 +74,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 
 
 const routes: Routes = [
-  { path: 'user', component: AdminDashboardComponent }, // Protect dashboard route
+  { path: 'user', component: AdminDashboardComponent ,canActivate : [roleGuard(['ADMIN'])]}, // Protect dashboard route
 
 
   { path: 'auth', component: AuthComponent },
@@ -189,8 +189,6 @@ const routes: Routes = [
 { path: 'list-recoveryplan/:playerId', component: ListRecoveryPlanComponent },
 
 { path: 'list-player', component: ListPlayerComponent },
-{path: '**', redirectTo: 'home'}, 
-
 { path: 'health-dashboard', component: HealthDashboardComponent },
 
 

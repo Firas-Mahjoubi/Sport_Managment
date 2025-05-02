@@ -26,12 +26,7 @@
     </div>
   </div>
   <div class="col-md-6">
-  <div class="floating-button">
-    <button mat-fab color="primary" (click)="toggleChat()" >
-      Ask AI
-    </button>
-  </div>
-  <app-ai-chat *ngIf="isChatOpen"></app-ai-chat>
+
 </div>
   <br><br>
 
@@ -115,7 +110,12 @@
     </div>
   
   </div>
- 
+  <div class="floating-button">
+    <button mat-fab color="primary" (click)="toggleChat()" >
+      Ask AI
+    </button>
+  </div>
+  <app-ai-chat *ngIf="isChatOpen"></app-ai-chat>
   
 </div>
 

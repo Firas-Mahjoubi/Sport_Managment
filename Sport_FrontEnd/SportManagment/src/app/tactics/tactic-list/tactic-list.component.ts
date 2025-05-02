@@ -58,6 +58,7 @@ export class TacticListComponent implements OnInit {
   openTacticFolder(id: number): void {
     window.location.href = `http://localhost:3000/tactics-board`;
   }
+  
 
   deleteTactic(id: number): void {
     if (confirm("Are you sure you want to delete this tactic?")) {
