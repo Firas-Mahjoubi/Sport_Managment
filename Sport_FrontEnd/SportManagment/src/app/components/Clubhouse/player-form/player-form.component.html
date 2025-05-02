@@ -1,0 +1,121 @@
+
+<app-admin-sidebar></app-admin-sidebar>
+<div class="container d-flex justify-content-center align-items-center my-5">
+  <div class="card player-card shadow-lg rounded-3 border-0" style="width: 800px; background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);">
+    <div class="card-header bg-transparent border-0 py-4">
+      <h2 class="text-center form-title fw-bold text-uppercase text-primary mb-0" style="letter-spacing: 2px;">Add New Player</h2>
+    </div>
+
+    <form (ngSubmit)="addPlayer()" #playerForm="ngForm" enctype="multipart/form-data" class="needs-validation" novalidate>
+      <div class="card-body px-5 pt-0">
+
+        <!-- First Name & Last Name -->
+        <div class="row gx-4">
+          <div class="col-md-6 mb-4">
+            <div class="form-floating">
+              <input type="text" id="firstName" class="form-control rounded-pill border-1 border-primary" 
+                     [(ngModel)]="player.firstName" name="firstName" required 
+                     placeholder="First Name*">
+              <label for="firstName" class="ms-3 text-muted">First Name</label>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="form-floating">
+              <input type="text" id="lastName" class="form-control rounded-pill border-1 border-primary" 
+                     [(ngModel)]="player.lastName" name="lastName" required 
+                     placeholder="Last Name*">
+              <label for="lastName" class="ms-3 text-muted">Last Name</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="mb-4">
+          <div class="form-floating">
+            <input type="date" id="birthDate" class="form-control rounded-pill border-1 border-primary" 
+                   [(ngModel)]="player.birthDate" name="birthDate" required>
+            <label for="birthDate" class="ms-3 text-muted">Date of Birth</label>
+          </div>
+        </div>
+
+        <!-- Position & Number -->
+        <div class="row gx-4">
+          <div class="col-md-6 mb-4">
+            <div class="form-floating">
+              <select id="position" class="form-select rounded-pill border-1 border-primary" 
+                      [(ngModel)]="player.position" name="position" required>
+                <option value="attacker">Attacker</option>
+                <option value="medium">Medium</option>
+                <option value="defender">Defender</option>
+                <option value="goalkeeper">Goalkeeper</option>
+              </select>
+              <label for="position" class="ms-3 text-muted">Position</label>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="form-floating">
+              <input type="number" id="playerNumber" class="form-control rounded-pill border-1 border-primary" 
+                     [(ngModel)]="player.playerNumber" name="playerNumber" 
+                     placeholder="Number">
+              <label for="playerNumber" class="ms-3 text-muted">Number</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Club & Category -->
+        <div class="row gx-4">
+          <div class="col-md-6 mb-4">
+            <div class="form-floating">
+              <select id="club" class="form-select rounded-pill border-1 border-primary" 
+                      [(ngModel)]="player.clubId" name="clubId" required>
+                <option *ngFor="let club of clubs" [value]="club.id">{{ club.name }}</option>
+              </select>
+              <label for="club" class="ms-3 text-muted">Club*</label>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="form-floating">
+              <select id="category" class="form-select rounded-pill border-1 border-primary" 
+                      [(ngModel)]="player.category" name="category" required>
+                <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+              </select>
+              <label for="category" class="ms-3 text-muted">Category*</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance Stats -->
+        <div class="mb-4">
+          <div class="form-floating">
+            <input type="text" id="performanceStats" class="form-control rounded-pill border-1 border-primary" 
+                   [(ngModel)]="player.performanceStats" name="performanceStats" 
+                   placeholder="Performance Stats">
+            <label for="performanceStats" class="ms-3 text-muted">Performance Stats</label>
+          </div>
+        </div>
+
+        <!-- File Upload -->
+        <div class="mb-4">
+          <label class="form-label text-muted">Upload Photo</label>
+          <div class="custom-file-upload rounded-3 border-2 border-dashed border-primary bg-light">
+            <input type="file" id="playerImage" class="form-control" (change)="onFileSelected($event)" hidden>
+            <label for="playerImage" class="d-block text-center p-4 cursor-pointer">
+              <i class="fas fa-cloud-upload-alt fa-2x text-primary mb-2"></i>
+              <h6 class="mb-1 text-dark">Drag and drop or click to upload</h6>
+              <small class="text-muted">PNG, JPG up to 2MB</small>
+            </label>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center mt-5">
+          <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold shadow-sm" 
+                  style="transition: all 0.3s ease;">
+            <i class="fas fa-plus-circle me-2"></i>ADD PLAYER
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>

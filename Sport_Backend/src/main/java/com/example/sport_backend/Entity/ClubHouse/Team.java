@@ -24,24 +24,26 @@
         Long id;
 
         String name;
+        //String category;
         String Stadium;
-        String logoUrl;
+        String LogoUrl;
 
 
         @Enumerated(EnumType.STRING)
         Categories categories;
 
-        @ManyToMany(mappedBy = "teams") // ❌ Removed CascadeType.ALL (Avoids unwanted deletions)
-        @JsonIgnore // ✅ Prevents infinite recursion
+        @ManyToMany(mappedBy = "teams")
+        @JsonIgnore
         List<Match> matches;
 
         @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
         @JsonIgnore
         List<User> users;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-                @JsonIgnore
-        Club club;
+        @ManyToOne
+        @JoinColumn(name = "club_id")
+        private Club club;
+
 
         @JsonIgnore
         @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)

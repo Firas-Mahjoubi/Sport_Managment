@@ -72,7 +72,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 
-
+//maram
+import { ClubFormComponent } from './components/Clubhouse/club-form/club-form.component';
+import { ClubListComponent } from './components/Clubhouse/club-list/club-list.component';
+import { PlayerFormComponent }from  './components/Clubhouse/player-form/player-form.component';
+import { TeamFormComponent }from  './components/Clubhouse/team-form/team-form.component';
+import { TeamListComponent }from  './components/Clubhouse/team-list/team-list.component';
+import { LeagueFormComponent }from  './components/Clubhouse/league-form/league-form.component';
+import { LeagueListComponent }from  './components/Clubhouse/league-list/league-list.component';
+import { PlayerListComponent }from  './components/Clubhouse/player-list/player-list.component';
+import { PlayerDetailComponent } from './components/Clubhouse/player-detail/player-detail.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
@@ -94,6 +104,13 @@ import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.com
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
 import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
 import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
+import { AskQuestionComponent } from './matches/ask-question/ask-question.component';
+import { ClubDetailComponent } from './components/Clubhouse/club-detail/club-detail.component';
+import { PlayersByClubComponent } from './components/Clubhouse/players-by-club/players-by-club.component';
+import { PublicClubsComponent } from './components/Clubhouse/public-clubs/public-clubs.component';
+import { PublicClubPlayersComponent } from './components/Clubhouse/public-club-players/public-club-players.component';
+import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr/public-player-qr.component';
+
 import { AiChatComponent } from './tactics/ai-chat/ai-chat.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
@@ -153,12 +170,37 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     MatchesmainComponent,
     MatchesNavbarComponent,
 
+    SessionDetailsComponent,
+
+
+
+    HealthDashboardComponent,
+          AskQuestionComponent
+
+
+
+
     TacticBoardComponent,
     SessionDetailsComponent,
     HealthDashboardComponent,
     AiChatComponent,
     AdminDashboardComponent,
 
+    ClubFormComponent,
+    ClubListComponent,
+    LeagueFormComponent,
+    LeagueListComponent,
+    PlayerListComponent,
+    PlayerFormComponent,
+    TeamFormComponent,
+    TeamListComponent,
+    PlayerDetailComponent,
+    ClubDetailComponent,
+    PlayersByClubComponent,
+    PublicClubsComponent,
+    PublicClubPlayersComponent,
+    PublicPlayerQrComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -180,7 +222,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 
     MatProgressBarModule,
     MatDividerModule,
-
+    QRCodeModule ,
 
     MatDialogModule,
     MatDatepickerModule,

@@ -16,6 +16,20 @@
 
   margin-bottom: 80px;
 }
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+
+  .pagination-controls button {
+    margin: 0 10px;
+    padding: 5px 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
 .footer{
   margin-top: 80px;
 }
