@@ -1,0 +1,19 @@
+<div class="container">
+  <h2 class="text-center my-4">Ask a Question</h2>
+  <div *ngIf="errorMessage" class="alert alert-danger text-center">
+    {{ errorMessage }}
+  </div>
+  <div class="chat-container">
+    <div *ngFor="let message of messages" class="message" [ngClass]="{'user-message': message.isUser, 'ai-message': !message.isUser}">
+      {{ message.text }}
+    </div>
+    <div *ngIf="loading" class="message ai-message loading">
+      Thinking...
+    </div>
+  </div>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Type your question..." [(ngModel)]="question" (keyup.enter)="askQuestion()" [disabled]="loading">
+    <button class="btn btn-primary" (click)="askQuestion()" [disabled]="loading || !question.trim()">Ask</button>
+    <button class="btn btn-secondary" (click)="clearChat()" [disabled]="loading || !messages.length">Clear</button>
+  </div>
+</div>

@@ -104,6 +104,7 @@ import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.com
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
 import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
 import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
+import { AskQuestionComponent } from './matches/ask-question/ask-question.component';
 import { ClubDetailComponent } from './components/Clubhouse/club-detail/club-detail.component';
 import { PlayersByClubComponent } from './components/Clubhouse/players-by-club/players-by-club.component';
 import { PublicClubsComponent } from './components/Clubhouse/public-clubs/public-clubs.component';
@@ -168,6 +169,16 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 
     MatchesmainComponent,
     MatchesNavbarComponent,
+
+    SessionDetailsComponent,
+
+
+
+    HealthDashboardComponent,
+          AskQuestionComponent
+
+
+
 
     TacticBoardComponent,
     SessionDetailsComponent,

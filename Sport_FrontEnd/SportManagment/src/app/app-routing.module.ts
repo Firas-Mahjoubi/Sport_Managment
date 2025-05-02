@@ -60,13 +60,16 @@ import { HomeComponent } from './components/home/home.component';
 import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
 
 
-
 import {CalendarComponent} from "./AdvancedPlanning/calendar/calendar.component";
 import {EventFormComponent} from "./AdvancedPlanning/calendar/event-form/event-form.component";
 import {SessionFormComponent} from "./AdvancedPlanning/session-form/session-form.component";
 import {EventDetailsComponent} from "./AdvancedPlanning/event-details/event-details.component";
 
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+import {AskQuestionComponent} from "./matches/ask-question/ask-question.component";
+
+
+
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 //maram
@@ -101,7 +104,7 @@ const routes: Routes = [
   { path: 'training-sessions-exercice/:id', component: TrainingSessionComponent , canActivate: [roleGuard(['COACH'])]},
   { path: 'training-sessions', component: TrainingSessionExerciceComponent , canActivate: [roleGuard(['COACH'])]},
 
-  { path: 'training-session-add', component: TrainingSessionFormComponent , canActivate: [roleGuard(['COACH'])]}, 
+  { path: 'training-session-add', component: TrainingSessionFormComponent , canActivate: [roleGuard(['COACH'])]},
 
   { path: 'training-sessions/new', component: TrainingSessionFormComponent , canActivate: [roleGuard(['COACH'])]},
   { path: 'training-sessions/edit/:id', component: TrainingSessionFormComponent, canActivate: [roleGuard(['COACH'])] },
@@ -123,13 +126,15 @@ const routes: Routes = [
     { path: 'add-exercise-back', component: BackofficeListExerciceComponent },
   //---------------------------------------------//
 
-  { path: 'matches', component: MatchesHomeComponent },
+  { path: 'matches', component: MatchesHomeComponent, canActivate: [roleGuard(['PLAYER'])] },
 
   { path: 'gameweeks', component: GameweekSliderComponent },
-  { path: 'adminMatch', component: AdminMatchComponent },
+  { path: 'admindash', component: AdminMatchComponent , canActivate: [roleGuard(['ADMIN'])]},
+  {path:'ask-question',component:AskQuestionComponent},
 
 
   { path: 'match/:matchId', component: MatchDetailsComponent },
+
 
 
   {path :'DashboardSidebar',component:AdminSidebarComponent},
@@ -170,7 +175,7 @@ const routes: Routes = [
   {path :'DashboardHeader',component:AdminHeaderComponent},
   { path: 'admin-goals/:matchId', component: AdminGoalComponent },
   { path: 'admin-cards/:matchId', component: AdminCardComponent },
-  {path: 'matchesmain', component:MatchesmainComponent},
+  {path: 'matchesmain', component:MatchesmainComponent , canActivate: [roleGuard(['PLAYER'])]},
   {path: 'matchesNavbar', component:MatchesNavbarComponent},
   {path: 'matchesFooter', component:MatchesFooterComponent},
   { path: 'admin-substitutions/:matchId', component: AdminSubstitutionComponent }, // 🆕 Route with matchId
@@ -191,11 +196,12 @@ const routes: Routes = [
 
 
 
+
   { path: 'tactic-board', component: TacticBoardComponent },
   { path: 'tactics', component: TacticListComponent, canActivate: [roleGuard(['COACH'])] }, 
   { path: 'tactics/create', component: TacticFormComponent, canActivate: [roleGuard(['COACH'])]  },
   { path: 'tactics/:id', component: TacticFolderComponent, canActivate: [roleGuard(['COACH'])]  },
-  { path: 'tactics/edit/:id', component: TacticFormComponent , canActivate: [roleGuard(['COACH'])] }, 
+  { path: 'tactics/edit/:id', component: TacticFormComponent , canActivate: [roleGuard(['COACH'])] },
 
 
 //skander turkiiiiii injury
@@ -227,13 +233,12 @@ const routes: Routes = [
 { path: 'list-recoveryplan/:playerId', component: ListRecoveryPlanComponent },
 
 { path: 'list-player', component: ListPlayerComponent },
-{path: '**', redirectTo: 'home'}, 
 
 { path: 'health-dashboard', component: HealthDashboardComponent },
+{path: '**', redirectTo: 'home'},
 
 
 
-{ path: '**', redirectTo: 'auth' }, // Redirect unknown routes to login
 
 ];
 @NgModule({
