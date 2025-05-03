@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -98,12 +99,27 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
+
 import { TacticListComponent } from './tactics/tactic-list/tactic-list.component';
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
 import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
 import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
+
+import { PdfManagerComponent } from './Health/pdf-manager/pdf-manager.component';
+import { ComparePlayersComponent } from './Health/compare-players/compare-players.component';
+import { PlayerTerrainSelectorComponent } from './Health/player-terrain-selector/player-terrain-selector.component';
+import { StatistiqueComponent } from './Health/statistique/statistique.component';
+
+
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
+
+
+
+
+
 import { AskQuestionComponent } from './matches/ask-question/ask-question.component';
 import { ClubDetailComponent } from './components/Clubhouse/club-detail/club-detail.component';
 import { PlayersByClubComponent } from './components/Clubhouse/players-by-club/players-by-club.component';
@@ -115,6 +131,7 @@ import { AiChatComponent } from './tactics/ai-chat/ai-chat.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { TacticstatestiqueComponent } from './tactics/tacticstatestique/tacticstatestique.component';
 import { PlotlyModule } from 'angular-plotly.js';
+
 
 
 @NgModule({
@@ -155,7 +172,7 @@ import { PlotlyModule } from 'angular-plotly.js';
     AdminCardComponent,
     AddRecoveryplanComponent,
     EditRecoveryplanComponent,
- TacticListComponent,
+    TacticListComponent,
     TacticFormComponent,
     TacticFolderComponent,
     CreateTacticDialogComponent,
@@ -177,7 +194,14 @@ import { PlotlyModule } from 'angular-plotly.js';
 
 
     HealthDashboardComponent,
+
+    PdfManagerComponent,
+    ComparePlayersComponent,
+    PlayerTerrainSelectorComponent,
+    StatistiqueComponent,
+
           AskQuestionComponent,
+
 
 
 
@@ -207,6 +231,7 @@ import { PlotlyModule } from 'angular-plotly.js';
   ],
   imports: [
     BrowserModule,
+
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -225,13 +250,27 @@ import { PlotlyModule } from 'angular-plotly.js';
 
     MatProgressBarModule,
     MatDividerModule,
+
+
     QRCodeModule ,
+
 
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
     MatFormFieldModule,
+
+    FormsModule,
+    ReactiveFormsModule,
+    MatMenuModule,
+    MatToolbarModule,
+
+    NgxEchartsModule.forRoot({ echarts })
+
+
+
+
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -244,6 +283,7 @@ import { PlotlyModule } from 'angular-plotly.js';
     MatSelectModule, // ✅ Required for mat-select
     MatToolbarModule,
     
+
 
   ],
   providers: [],

@@ -1,0 +1,138 @@
+<!-- Grand Titre -->
+<div class="main-title">
+  <h1>  -------------------------------------------Gestion Médicale d'Équipe-----------------------------------------------</h1>
+</div>
+
+<!-- 1) Note Globale -->
+<div class="note-globale-circle">
+  <span [style.color]="getProgressColor(teamGlobalNote)">
+    <br>
+    {{ teamGlobalNote }}/100
+  </span>
+</div>
+
+<div class="futuristic-field">
+  <div class="goal left-goal"></div>
+  <div class="goal right-goal"></div>
+  <button (click)="resetFormation()" class="reset-btn">Réinitialiser</button>
+
+  <!-- Slots joueurs -->
+  <div *ngFor="let pos of positions"
+       [ngClass]="['slot', pos.class]"
+       (click)="selectPosition(pos)">
+    <div class="holo-glow"></div>
+    <div class="slot-content">
+
+      <!-- S’il y a un joueur sélectionné ici -->
+      <ng-container *ngIf="selectedPlayers[pos.key] as pl; else emptySlot">
+        <button class="remove-btn"
+                (click)="removePlayer(pos.key); $event.stopPropagation()">×
+        </button>
+        <div class="player-card animated">
+          <!-- Nom -->
+          <div class="player-name">
+            <strong>{{ pl.firstName }} {{ pl.lastName }}</strong>
+          </div>
+          <!-- Note individuelle -->
+          <div class="player-note">
+            🧠
+            <span [style.color]="getProgressColor(playerNotes[pl.id])">
+              {{ playerNotes[pl.id] }}/100
+            </span>
+          </div>
+
+
+
+
+          <!-- Statut -->
+          <div *ngIf="getPlayerStatus(pl.id)" class="status">
+            {{ getPlayerStatus(pl.id) }}
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #emptySlot>
+        <div class="slot-label animated">{{ pos.label }}</div>
+      </ng-template>
+
+    </div>
+  </div>
+</div>
+
+<!-- POPUP Sélection -->
+<div class="popup-panel" *ngIf="showPlayerPopup">
+  <h2>Sélectionner joueur pour {{ selectedPosition?.label }}</h2>
+  <div class="card-container">
+    <div class="player-holo-card"
+         *ngFor="let player of availablePlayers"
+         [class.disabled]="isPlayerDisabled(player.id)"
+         (click)="!isPlayerDisabled(player.id) && assignPlayerToPosition(player)">
+      <div class="avatar"></div>
+      <div class="info">
+        <div>{{ player.firstName }} {{ player.lastName }}</div>
+        <div class="position-tag">{{ player.position }}</div>
+        <div class="note">
+          🧠
+          <strong *ngIf="!getPlayerStatus(player.id)">
+            {{ playerNotes[player.id] }}/100
+          </strong>
+          <span *ngIf="getPlayerStatus(player.id)">
+            {{ getPlayerStatus(player.id) }}
+          </span>
+        </div>
+        <div class="progress-bar" *ngIf="!getPlayerStatus(player.id)">
+          <div class="progress"
+               [ngStyle]="{
+                 'width': playerNotes[player.id] + '%',
+                 'background-color': getProgressColor(playerNotes[player.id])
+               }">
+          </div>
+        </div>
+
+ <!-- 🚨 Nouveau : affichage du risque si note < 40 -->
+ <div *ngIf="playerNotes[player.id] < 40 && !getPlayerStatus(player.id)"
+ class="risk-message">
+⚠️ Risque de blessure !
+</div>
+
+
+      </div>
+    </div>
+  </div>
+  <button class="close-btn" (click)="closePopup()">✖</button>
+</div>
+
+<!-- Résumé avec design futuriste -->
+<div class="summary futuristic-panel">
+  <h2 class="title">Gestion Médicale d'Équipe</h2>
+  <div class="composition-header">
+    <h3>Compo Actuelle :</h3>
+  </div>
+  <div class="positions-container">
+    <div *ngFor="let pos of positions" class="position-card">
+      <div class="position-label">
+        <span>{{ pos.label }}:</span>
+      </div>
+      <div class="player-info">
+        <ng-container *ngIf="selectedPlayers[pos.key]; else emptySlot">
+          <div class="player-name">
+            <strong>{{ selectedPlayers[pos.key].firstName }} {{ selectedPlayers[pos.key].lastName }}</strong>
+          </div>
+          <div class="player-status">
+            <span class="status">En jeu</span>
+          </div>
+        </ng-container>
+        <ng-template #emptySlot>
+          <span class="status">[Vide]</span>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bouton retour -->
+<div class="bottom-buttons">
+  <a [routerLink]="['/health-dashboard']" class="btn-back-health">
+    ⬅️ Retour au Tableau de Santé
+  </a>
+</div>

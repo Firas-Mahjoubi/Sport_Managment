@@ -19,7 +19,12 @@ import java.util.Set;
 @NoArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @Entity
+
+
+
+=======
 @Builder
+
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +40,7 @@ public class Player {
     Integer playerNumber;
     String performanceStats;
 
+
     @Transient
     private String teamName;
 
@@ -45,6 +51,7 @@ public class Player {
     LocalDate birthDate;
     @Lob
     byte[] imageUrl;
+
 
     @ManyToOne
     @JoinColumn(name = "team_id")
