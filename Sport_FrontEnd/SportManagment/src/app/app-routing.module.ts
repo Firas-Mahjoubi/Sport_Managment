@@ -87,11 +87,13 @@ import { PlayersByClubComponent } from './components/Clubhouse/players-by-club/p
 import { PublicClubsComponent } from './components/Clubhouse/public-clubs/public-clubs.component';
 import { PublicClubPlayersComponent } from './components/Clubhouse/public-club-players/public-club-players.component';
 import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr/public-player-qr.component';
+import { TacticstatestiqueComponent } from './tactics/tacticstatestique/tacticstatestique.component';
 ////////////
   
 
 
 const routes: Routes = [
+  {path: 'tacticstatic', component: TacticstatestiqueComponent}, // 🆕 Route for TacticListComponent
   { path: 'user', component: AdminDashboardComponent }, // Protect dashboard route
 
 
@@ -235,7 +237,7 @@ const routes: Routes = [
 { path: 'list-player', component: ListPlayerComponent },
 
 { path: 'health-dashboard', component: HealthDashboardComponent },
-{path: '**', redirectTo: 'home'},
+{path: '**', redirectTo: 'auth'}, // Redirect to auth for any unknown routes
 
 
 

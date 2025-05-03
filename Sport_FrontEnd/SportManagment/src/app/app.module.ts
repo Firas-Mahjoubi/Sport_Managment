@@ -113,6 +113,8 @@ import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr
 
 import { AiChatComponent } from './tactics/ai-chat/ai-chat.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { TacticstatestiqueComponent } from './tactics/tacticstatestique/tacticstatestique.component';
+import { PlotlyModule } from 'angular-plotly.js';
 
 
 @NgModule({
@@ -175,7 +177,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 
 
     HealthDashboardComponent,
-          AskQuestionComponent
+          AskQuestionComponent,
 
 
 
@@ -200,6 +202,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     PublicClubsComponent,
     PublicClubPlayersComponent,
     PublicPlayerQrComponent,
+    TacticstatestiqueComponent
     
   ],
   imports: [
@@ -229,18 +232,18 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     MatNativeDateModule,
     MatInputModule,
     MatFormFieldModule,
-     CommonModule,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatDialogModule,
-        MatInputModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatIconModule,
-        MatFormFieldModule, // ✅ Required for mat-form-field
-        MatSelectModule, // ✅ Required for mat-select
-        MatToolbarModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatInputModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatFormFieldModule, // ✅ Required for mat-form-field
+    MatSelectModule, // ✅ Required for mat-select
+    MatToolbarModule,
+    
 
   ],
   providers: [],
