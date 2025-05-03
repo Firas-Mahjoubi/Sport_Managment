@@ -2,6 +2,7 @@ package com.example.sport_backend.Controllers.Matches;
 
 import com.example.sport_backend.Entity.Matchs.Card;
 import com.example.sport_backend.Entity.Matchs.CardDTO;
+import com.example.sport_backend.Entity.Matchs.CardType;
 import com.example.sport_backend.Entity.Matchs.Match;
 import com.example.sport_backend.Repositories.matches.CardRepo;
 import com.example.sport_backend.Repositories.matches.MatchesRepo;
@@ -10,7 +11,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -20,11 +25,14 @@ import java.util.List;
 public class CardController {
     private final CardService cardService;
 
+
+
     @GetMapping("/getcardsformatch/{matchId}")
     public ResponseEntity<List<CardDTO>> getCardsForMatch(@PathVariable Long matchId) {
         List<CardDTO> cards = cardService.getCardsForMatch(matchId);
         return ResponseEntity.ok(cards);
     }
+
 
 
     @PostMapping("addCard/{matchId}")

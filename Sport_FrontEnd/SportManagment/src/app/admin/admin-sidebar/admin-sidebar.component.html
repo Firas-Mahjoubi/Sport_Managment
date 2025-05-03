@@ -21,6 +21,65 @@
         <i class="bi bi-grid"></i>
         <span>User-Dashboard</span>
       </a>
+    </li><!-- End Dashboard Nav -->
+    <li class="nav-item">
+      <a class="nav-link " routerLink="/tacticstatic">
+        <img src="/assets/admin/img/tactic.png" alt="Matches" class="rounded-circle" width="24" height="24">
+        <span>tactic statics</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-menu-button-wide"></i><span>Club/Player</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a class="nav-link" [routerLink]="['/add-club']">
+            <i class="bi bi-circle"></i><span>Add Club</span>
+          </a>
+        </li>
+        
+        <li>
+          <a class="nav-link" [routerLink]="['/clubs']">
+            <i class="bi bi-circle"></i><span>Clubs</span>
+          </a>
+        </li>
+        
+        <li>
+          <a class="nav-link" [routerLink]="['/players']">
+            <i class="bi bi-circle"></i><span>Players</span>
+          </a>
+        </li>
+        
+        <li>
+          <a class="nav-link" [routerLink]="['/add-player']">
+            <i class="bi bi-circle"></i><span>Add Player</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" [routerLink]="['/teams']">
+            <i class="bi bi-circle"></i><span>Teams</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" [routerLink]="['/add-team']">
+            <i class="bi bi-circle"></i><span>Add Team</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" [routerLink]="['/leagues']">
+            <i class="bi bi-circle"></i><span>Leagues</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" [routerLink]="['/add-league']">
+            <i class="bi bi-circle"></i><span>Add Leagues</span>
+          </a>
+        </li>
+        
+      </ul>
+    </li><!-- End Components Nav -->
    
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#matches-nav" data-bs-toggle="collapse" href="#">
@@ -58,6 +117,7 @@
     </li><!-- End Matches Nav -->
 
 
+
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#Training-Ground-nav" href="#">
         <img src="/assets/admin/img/trainingground.png" alt="Training-Ground" class="rounded-circle" width="24" height="24">
@@ -74,10 +134,10 @@
           <a routerLink="/training-sessions">
             <i class="bi bi-circle"></i><span>Training Sessions</span>
           </a>
-        </li> 
+        </li>
       </ul>
     </li>
-    
+
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
@@ -146,48 +206,6 @@
     <li class="nav-heading">Pages</li>
 
 
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-faq.html">
-        <i class="bi bi-question-circle"></i>
-        <span>F.A.Q</span>
-      </a>
-    </li><!-- End F.A.Q Page Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-contact.html">
-        <i class="bi bi-envelope"></i>
-        <span>Contact</span>
-      </a>
-    </li><!-- End Contact Page Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-register.html">
-        <i class="bi bi-card-list"></i>
-        <span>Register</span>
-      </a>
-    </li><!-- End Register Page Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-login.html">
-        <i class="bi bi-box-arrow-in-right"></i>
-        <span>Login</span>
-      </a>
-    </li><!-- End Login Page Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-error-404.html">
-        <i class="bi bi-dash-circle"></i>
-        <span>Error 404</span>
-      </a>
-    </li><!-- End Error 404 Page Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-blank.html">
-        <i class="bi bi-file-earmark"></i>
-        <span>Blank</span>
-      </a>
-    </li><!-- End Blank Page Nav -->
 
   </ul>
 

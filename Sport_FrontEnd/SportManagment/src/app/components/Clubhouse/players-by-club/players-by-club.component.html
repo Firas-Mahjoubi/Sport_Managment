@@ -1,0 +1,51 @@
+<div class="container-fluid px-5">
+  <!-- En-tête avec effet de parallaxe -->
+  <div class="parallax-header text-center py-6 mb-5 position-relative overflow-hidden">
+    <div class="parallax-bg"></div>
+    <h3 class="display-5 fw-bold text-dark mb-3 position-relative">
+      <i class="bi bi-people-fill me-3"></i>Club Squad
+    </h3>
+    
+  </div>
+
+  <!-- Grille de joueurs améliorée -->
+  <div class="row g-4 justify-content-center">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let player of players">
+      <div class="card-player hover-lift rounded-4 overflow-hidden shadow-lg">
+        <!-- Carte joueur -->
+        <div class="card-inner bg-dark-2 position-relative">
+          
+          <!-- Image avec effet de hover -->
+          <div class="player-media position-relative overflow-hidden">
+            <div class="player-media d-flex align-items-center justify-content-center bg-white" style="height: auto;">
+              <img 
+                [src]="'http://localhost:8088/players/image/' + player.id" 
+                alt="{{ player.firstName }} {{ player.lastName }}"
+                class="player-image"
+                (error)="player.imageUrl = 'assets/default-player.png'">
+            </div>
+            
+            
+            <div class="player-overlay bg-gradient-primary"></div>
+          </div>
+
+          <!-- Corps de la carte -->
+          <div class="card-body px-4 py-3 text-center">
+            <!-- Badge position -->
+            <div class="position-badge bg-primary text-white rounded-pill py-1 px-3 mb-3">
+              {{ player.position }}
+            </div>
+
+            <!-- Nom du joueur -->
+            <h4 class="player-name text-dark mb-2">
+              {{ player.firstName }}
+              <span class="d-block fw-bold">{{ player.lastName }}</span>
+            </h4>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
