@@ -11,7 +11,8 @@
 
 /* 🌟 Titre avec effet néon */
 .title {
-
+  left: 10px;                    /* décalage vers la gauche */
+  font-size: 5rem;               /* agrandi */
   top : 80%;
   font-size: 2.5rem;
   color: red;
@@ -38,10 +39,19 @@
   margin-left: 50px;
 }
 
-/* 💡 Styles des cartes avec effet néon */
+
+.site-navigation {
+ right: -200px;
+ font-size: 1.25rem; /* Ajustez cette valeur selon vos besoins */
+}
+
+
+
+
 .card {
   width: 320px;
-  padding: 25px;
+  height: 180px; /* 🆕 hauteur réduite (par exemple) */
+  padding: 15px; /* 🆕 padding réduit */
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
@@ -51,6 +61,7 @@
   position: relative;
   overflow: hidden;
 }
+
 
 /* Effet de lumière néon */
 .card::before {
@@ -283,5 +294,120 @@
 }
 
 
+
+
+
+
+
+/* 🎡 Carousel 3D */
+
+
+
+.carousel-container {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+.circular-carousel {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  cursor: grab;
+}
+.card-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220px;
+  height: 260px;
+  margin: -130px 0 0 -110px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+  transform: rotateY(calc(var(--i) * 60deg)) translateZ(600px);
+  transition: transform 0.5s, opacity 0.5s;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.card-item a {
+
+  display: inline-block;
+  margin-top: -20px;
+  background: #00ffee;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+
+.card-item a:hover {
+
+  background: #0ff;
+  color: black;
+}
+
+
+
+
+.card-item i {
+  margin-top: -20px;
+
+  font-size: 3rem;
+}
+
+.card-item h4 {
+  margin-top: -20px;
+  margin: 1rem 0;
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+  .card-item {
+    width: 160px;
+    height: 200px;
+    margin: -100px 0 0 -80px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .card, .card-item {
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    transform: none !important;
+    position: static;
+  }
+
+  .carousel-container {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .circular-carousel {
+    display: none; /* ou alternative mobile */
+  }
+}
 
 
