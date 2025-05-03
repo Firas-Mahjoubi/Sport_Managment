@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,6 +20,10 @@ import java.util.Set;
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @Entity
 
+
+
+=======
+@Builder
 
 public class Player {
     @Id
@@ -36,9 +41,24 @@ public class Player {
     String performanceStats;
 
 
+    @Transient
+    private String teamName;
+
+    @Transient
+    private String clubName;
+
+    @Column(name = "birth_date")
+    LocalDate birthDate;
+    @Lob
+    byte[] imageUrl;
+
 
     @ManyToOne
-    Team team;
+    @JoinColumn(name = "team_id")
+    private Team team;
+    @ManyToOne()
+    private Club club;
+
 
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "player")
@@ -52,5 +72,6 @@ public class Player {
     @JsonIgnore
     @ManyToMany(mappedBy = "players")
     private Set<TrainingSession> trainingSessions = new HashSet<>();
+
 
 }

@@ -53,7 +53,11 @@ import {AdminSubstitutionComponent} from "./matches/admin-substitution/admin-sub
 import { TacticListComponent } from './tactics/tactic-list/tactic-list.component';
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
+
+import { ExerciseDetailComponent } from './components/exercise-detail/exercise-detail.component';
+
 import { HomeComponent } from './components/home/home.component';
+import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
 
 
 import {CalendarComponent} from "./AdvancedPlanning/calendar/calendar.component";
@@ -62,6 +66,7 @@ import {SessionFormComponent} from "./AdvancedPlanning/session-form/session-form
 import {EventDetailsComponent} from "./AdvancedPlanning/event-details/event-details.component";
 
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+
 import { PdfManagerComponent } from './Health/pdf-manager/pdf-manager.component';
 
 
@@ -69,11 +74,37 @@ import { ComparePlayersComponent } from './Health/compare-players/compare-player
 import { PlayerTerrainSelectorComponent } from './Health/player-terrain-selector/player-terrain-selector.component';
 import { StatistiqueComponent } from './Health/statistique/statistique.component';
 
+import {AskQuestionComponent} from "./matches/ask-question/ask-question.component";
 
 
+
+
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+
+//maram
+import { ClubFormComponent } from './components/Clubhouse/club-form/club-form.component';
+import { ClubListComponent } from './components/Clubhouse/club-list/club-list.component';
+import { PlayerFormComponent }from  './components/Clubhouse/player-form/player-form.component';
+import { TeamFormComponent }from  './components/Clubhouse/team-form/team-form.component';
+import { TeamListComponent }from  './components/Clubhouse/team-list/team-list.component';
+import { LeagueFormComponent }from  './components/Clubhouse/league-form/league-form.component';
+import { LeagueListComponent }from  './components/Clubhouse/league-list/league-list.component';
+import { PlayerListComponent }from  './components/Clubhouse/player-list/player-list.component';
+import { PlayerDetailComponent }from  './components/Clubhouse/player-detail/player-detail.component';
+import { ClubDetailComponent } from './components/Clubhouse/club-detail/club-detail.component';
+import { PlayersByClubComponent } from './components/Clubhouse/players-by-club/players-by-club.component';
+import { PublicClubsComponent } from './components/Clubhouse/public-clubs/public-clubs.component';
+import { PublicClubPlayersComponent } from './components/Clubhouse/public-club-players/public-club-players.component';
+import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr/public-player-qr.component';
+import { TacticstatestiqueComponent } from './tactics/tacticstatestique/tacticstatestique.component';
+////////////
+  
 
 
 const routes: Routes = [
+  {path: 'tacticstatic', component: TacticstatestiqueComponent}, // 🆕 Route for TacticListComponent
+  { path: 'user', component: AdminDashboardComponent }, // Protect dashboard route
+
 
   { path: 'auth', component: AuthComponent },
   {path:'calendar',component:CalendarComponent},
@@ -92,18 +123,25 @@ const routes: Routes = [
   { path: 'training-session/:id', component: TrainingSessionViewComponent, canActivate: [roleGuard(['COACH'])] },
 
 
+
+
+  /////media///
+  { path: 'exercise-details/:id', component: ExerciseDetailComponent },
+
   { path: 'add-exercise', component: ExerciseFormComponent , canActivate: [roleGuard(['COACH'])]},
   { path: 'edit-exercise/:id', component: ExerciseFormComponent, canActivate: [roleGuard(['COACH'])] },
   { path: 'exercise-list', component: ExerciseListComponent , canActivate: [roleGuard(['COACH'])]},
+
     //---------------------Backoffice-training-Ground ------------------------//
 
     { path: 'add-exercise-back', component: BackofficeListExerciceComponent },
   //---------------------------------------------//
 
-  { path: 'matches', component: MatchesHomeComponent },
+  { path: 'matches', component: MatchesHomeComponent, canActivate: [roleGuard(['PLAYER'])] },
 
   { path: 'gameweeks', component: GameweekSliderComponent },
-  { path: 'adminMatch', component: AdminMatchComponent },
+  { path: 'admindash', component: AdminMatchComponent , canActivate: [roleGuard(['ADMIN'])]},
+  {path:'ask-question',component:AskQuestionComponent},
 
 
   { path: 'match/:matchId', component: MatchDetailsComponent },
@@ -112,17 +150,46 @@ const routes: Routes = [
   {path :'DashboardSidebar',component:AdminSidebarComponent},
 
 
+  {path :'DashboardSidebar',component:AdminSidebarComponent},
+
+
+//maram
+{ path: 'add-club', component: ClubFormComponent },
+{ path: 'clubs', component: ClubListComponent },  // ✅ Route for clubs
+{ path: 'edit-club/:id', component: ClubFormComponent }, // ✅ Route pour modifier
+{ path: 'add-player', component: PlayerFormComponent },
+{ path: 'edit-player/:id', component: PlayerFormComponent },
+{ path: 'teams', component: TeamListComponent },
+{ path: 'players', component: PlayerListComponent },
+{ path: 'add-team', component: TeamFormComponent },
+{ path: 'edit-team/:id', component: TeamFormComponent },
+{ path: 'leagues', component: LeagueListComponent },
+{ path: 'add-league', component: LeagueFormComponent },
+{ path: 'players/:id', component: PlayerDetailComponent },
+{ path: 'club-details/:id', component: ClubDetailComponent },
+{ path: 'players-by-club/:id', component: PlayersByClubComponent },
+{ path: 'clubs-public', component: PublicClubsComponent },
+{ path: 'public-club-players/:id', component: PublicClubPlayersComponent },
+{ path: 'public-player-qr/:id', component: PublicPlayerQrComponent },
 
 
 
 
 
-  { path: 'Dashboard', component: DashboardComponent },
+
+
+
+
+
+
+
+
+
   {path :'DashboardSidebar',component:AdminSidebarComponent},
   {path :'DashboardHeader',component:AdminHeaderComponent},
   { path: 'admin-goals/:matchId', component: AdminGoalComponent },
   { path: 'admin-cards/:matchId', component: AdminCardComponent },
-  {path: 'matchesmain', component:MatchesmainComponent},
+  {path: 'matchesmain', component:MatchesmainComponent , canActivate: [roleGuard(['PLAYER'])]},
   {path: 'matchesNavbar', component:MatchesNavbarComponent},
   {path: 'matchesFooter', component:MatchesFooterComponent},
   { path: 'admin-substitutions/:matchId', component: AdminSubstitutionComponent }, // 🆕 Route with matchId
@@ -145,7 +212,12 @@ const routes: Routes = [
 
 
 
+
   { path: 'tactics', component: TacticListComponent },
+
+  { path: 'tactic-board', component: TacticBoardComponent },
+  { path: 'tactics', component: TacticListComponent, canActivate: [roleGuard(['COACH'])] }, 
+
   { path: 'tactics/create', component: TacticFormComponent, canActivate: [roleGuard(['COACH'])]  },
   { path: 'tactics/:id', component: TacticFolderComponent, canActivate: [roleGuard(['COACH'])]  },
   { path: 'tactics/edit/:id', component: TacticFormComponent , canActivate: [roleGuard(['COACH'])] },
@@ -169,7 +241,8 @@ const routes: Routes = [
 
 
 //skander turkiiiiii recoveryplan
-{path: 'home', component: HomeComponent},
+
+ // {path: 'home', component: HomeComponent},
 
 { path: 'add-recoveryplan', component: AddRecoveryplanComponent },
 { path: 'edit-recoveryplan/:injuryId/:planId', component: EditRecoveryplanComponent },
@@ -182,6 +255,7 @@ const routes: Routes = [
 
 
 { path: 'health-dashboard', component: HealthDashboardComponent },
+{path: '**', redirectTo: 'auth'}, // Redirect to auth for any unknown routes
 
 
 //skander pdf manager

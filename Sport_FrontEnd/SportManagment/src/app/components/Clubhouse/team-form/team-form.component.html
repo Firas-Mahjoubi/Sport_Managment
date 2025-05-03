@@ -1,0 +1,84 @@
+<app-admin-sidebar></app-admin-sidebar>
+
+<div class="container-fluid bg-light-blue py-6">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6 col-xl-5">
+      <div class="card shadow-glass border-0 rounded-4 overflow-hidden">
+        <div class="card-header bg-gradient-primary px-5 py-4 border-0">
+          <h2 class="text-dark mb-0 fw-bold display-6">
+            <i class="bi bi-plus-circle-dotted me-3"></i>Create New Team
+          </h2>
+        </div>
+
+        <div class="card-body px-5 py-4">
+          <form (ngSubmit)="saveTeam()" #teamForm="ngForm" class="needs-validation" novalidate>
+            <!-- NameClub Field -->
+            <div class="form-group mb-4">
+              <label for="name" class="form-label small text-uppercase text-muted fw-bold">
+                <i class="bi bi-building me-2"></i>Club Name
+              </label>
+              <div class="input-group input-group-lg border-rounded">
+                <span class="input-group-text bg-transparent border-end-0">
+                  <i class="bi bi-pencil-square text-primary"></i>
+                </span>
+                <input 
+                  type="text" 
+                  id="name" 
+                  class="form-control border-start-0 ps-2" 
+                  [(ngModel)]="team.name" 
+                  name="name" 
+                  required
+                  placeholder="Enter club name..."
+                >
+              </div>
+              <div *ngIf="teamForm.controls['name']?.invalid && teamForm.controls['name']?.touched" 
+                   class="text-danger small mt-2">
+                <i class="bi bi-exclamation-circle me-2"></i>Club name is required
+              </div>
+            </div>
+
+            <!-- Team Category Field -->
+            <div class="form-group mb-5">
+              <label for="categories" class="form-label small text-uppercase text-muted fw-bold">
+                <i class="bi bi-diagram-3 me-2"></i>Team Category
+              </label>
+              <div class="input-group input-group-lg border-rounded">
+                <span class="input-group-text bg-transparent border-end-0">
+                  <i class="bi bi-tag-fill text-primary"></i>
+                </span>
+                <select 
+                  id="categories" 
+                  class="form-select border-start-0 ps-2" 
+                  [(ngModel)]="team.categories" 
+                  name="categories" 
+                  required
+                >
+                  <option value="" disabled selected>Select a category...</option>
+                  <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+                </select>
+              </div>
+              <div *ngIf="teamForm.controls['categories']?.invalid && teamForm.controls['categories']?.touched" 
+                   class="text-danger small mt-2">
+                <i class="bi bi-exclamation-circle me-2"></i>Please select a category
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid">
+              <button 
+                type="submit" 
+                [disabled]="teamForm.invalid" 
+                class="btn btn-gradient-primary btn-lg rounded-pill py-3 fw-bold"
+                [ngClass]="{'btn-disabled': teamForm.invalid}"
+              >
+                <i class="bi bi-plus-circle me-2"></i>
+                {{ team.id ? 'Update Team' : 'Create Team' }}
+                <i class="bi bi-arrow-right-short ms-2"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

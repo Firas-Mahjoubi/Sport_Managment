@@ -135,3 +135,83 @@ body {
 .add-button button:hover {
   transform: scale(1.15);
 }
+/* Style for the Floating Button */
+/* Style for the Floating Button */
+.floating-button {
+  position: fixed;
+  bottom: 80px; /* Adjust this to be above the add button */
+  right: 20px;
+  cursor: pointer;
+  font-size: 15px;
+  z-index: 999;
+}
+
+.floating-button mat-icon {
+  font-size: 24px;
+}
+
+/* Style for the Add Button */
+.add-button {
+  position: fixed;
+  bottom: 20px; /* This is for the add button */
+  right: 20px;
+  z-index: 1000; /* Ensure this is below the floating button */
+}
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.chat-header button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.chat-header button:hover {
+  color: #ffc107;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Pagination Button Styling */
+.pagination button {
+  background-color: #007bff; /* Blue background */
+  color: white; /* White text */
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.pagination button:hover {
+  background-color: #0056b3; /* Darker blue when hovered */
+  transform: scale(1.05); /* Slightly grow the button on hover */
+}
+
+.pagination button:disabled {
+  background-color: #cccccc; /* Grey background when disabled */
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+  transform: none; /* Prevent grow effect on disabled buttons */
+}
+
+.pagination span {
+  align-self: center;
+  font-size: 18px;
+  margin: 0 10px;
+  color: #fff; /* White text for the page number */
+}
