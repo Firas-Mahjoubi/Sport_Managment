@@ -40,6 +40,9 @@ public class Player {
     String performanceStats;
 
 
+    String image;
+
+
     @Transient
     private String teamName;
 

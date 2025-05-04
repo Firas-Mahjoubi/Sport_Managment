@@ -3,9 +3,7 @@ package com.example.sport_backend.ServiceImpl.Matches;
 
 import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Entity.ClubHouse.Team;
-import com.example.sport_backend.Entity.Matchs.Goal;
-import com.example.sport_backend.Entity.Matchs.GoalResponseDTO;
-import com.example.sport_backend.Entity.Matchs.Match;
+import com.example.sport_backend.Entity.Matchs.*;
 import com.example.sport_backend.Repositories.ClubHouse.PlayerRepo;
 import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
 import com.example.sport_backend.Repositories.matches.GoalRepo;
@@ -14,7 +12,9 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -28,6 +28,34 @@ public class GoalService  {
     public Long getGoalsByPlayerAndTeam(String firstName, String lastName, String teamName) {
         return goalRepo.countGoalsByPlayerAndTeam(firstName, lastName, teamName);
     }
+    public PlayerStatsDto getTopScorerInLeague(Long leagueId) {
+        List<Goal> goals = goalRepo.findGoalsByLeagueId(leagueId);
+
+        // Count goals by Player
+        Map<Player, Integer> goalCounts = new HashMap<>();
+        for (Goal goal : goals) {
+            Player scorer = goal.getScorer();
+            if (scorer != null) {
+                goalCounts.put(scorer, goalCounts.getOrDefault(scorer, 0) + 1);
+            }
+        }
+
+        // Find the player with the most goals
+        Player topScorer = goalCounts.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElseThrow(() -> new RuntimeException("No goals with scorers found"));
+
+        int goalsCount = goalCounts.get(topScorer);
+        String teamName = topScorer.getTeam() != null ? topScorer.getTeam().getName() : "Unknown Team";
+        String fullName = topScorer.getFirstName() + " " + topScorer.getLastName();
+        String image = topScorer.getImage();
+
+        return new PlayerStatsDto(topScorer.getPlayerNumber(), fullName, teamName, goalsCount, image);
+    }
+
+
+
 
     @Transactional
     public void deleteGoal(Long goalId) {

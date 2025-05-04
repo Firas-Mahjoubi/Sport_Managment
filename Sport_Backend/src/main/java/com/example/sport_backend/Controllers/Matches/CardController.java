@@ -1,9 +1,6 @@
 package com.example.sport_backend.Controllers.Matches;
 
-import com.example.sport_backend.Entity.Matchs.Card;
-import com.example.sport_backend.Entity.Matchs.CardDTO;
-import com.example.sport_backend.Entity.Matchs.CardType;
-import com.example.sport_backend.Entity.Matchs.Match;
+import com.example.sport_backend.Entity.Matchs.*;
 import com.example.sport_backend.Repositories.matches.CardRepo;
 import com.example.sport_backend.Repositories.matches.MatchesRepo;
 import com.example.sport_backend.ServiceImpl.Matches.CardService;
@@ -32,7 +29,15 @@ public class CardController {
         List<CardDTO> cards = cardService.getCardsForMatch(matchId);
         return ResponseEntity.ok(cards);
     }
+    @GetMapping("/top-red/{leagueId}")
+    public List<CardStatsDto> getTopRedCardPlayersByLeague(@PathVariable Long leagueId) {
+        return cardService.getTopRedCardPlayers(leagueId);
+    }
 
+    @GetMapping("/top-yellow/{leagueId}")
+    public List<CardStatsDto> getTopYellowCardPlayersByLeague(@PathVariable Long leagueId) {
+        return cardService.getTopYellowCardPlayers(leagueId);
+    }
 
 
     @PostMapping("addCard/{matchId}")

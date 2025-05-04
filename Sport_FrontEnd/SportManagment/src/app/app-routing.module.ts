@@ -75,7 +75,8 @@ import { PlayerTerrainSelectorComponent } from './Health/player-terrain-selector
 import { StatistiqueComponent } from './Health/statistique/statistique.component';
 
 import {AskQuestionComponent} from "./matches/ask-question/ask-question.component";
-
+import {MatchesStatsComponent} from "./matches/matches-stats/matches-stats.component";
+import {StatsChartsComponent} from "./matches/stats-charts/stats-charts.component";
 
 
 
@@ -98,7 +99,7 @@ import { PublicClubPlayersComponent } from './components/Clubhouse/public-club-p
 import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr/public-player-qr.component';
 import { TacticstatestiqueComponent } from './tactics/tacticstatestique/tacticstatestique.component';
 ////////////
-  
+
 
 
 const routes: Routes = [
@@ -142,7 +143,8 @@ const routes: Routes = [
   { path: 'gameweeks', component: GameweekSliderComponent },
   { path: 'admindash', component: AdminMatchComponent , canActivate: [roleGuard(['ADMIN'])]},
   {path:'ask-question',component:AskQuestionComponent},
-
+  {path:'matchstat',component:MatchesStatsComponent},
+  { path: 'league/:id/stats', component: StatsChartsComponent }, // <-- Add this route
 
   { path: 'match/:matchId', component: MatchDetailsComponent },
 
@@ -216,7 +218,7 @@ const routes: Routes = [
 
 
   { path: 'tactic-board', component: TacticBoardComponent },
-  { path: 'tactics', component: TacticListComponent, canActivate: [roleGuard(['COACH'])] }, 
+  { path: 'tactics', component: TacticListComponent, canActivate: [roleGuard(['COACH'])] },
 
   { path: 'tactics/create', component: TacticFormComponent, canActivate: [roleGuard(['COACH'])]  },
   { path: 'tactics/:id', component: TacticFolderComponent, canActivate: [roleGuard(['COACH'])]  },
@@ -256,6 +258,7 @@ const routes: Routes = [
 
 
 { path: 'health-dashboard', component: HealthDashboardComponent },
+
 
 
 //skander pdf manager
