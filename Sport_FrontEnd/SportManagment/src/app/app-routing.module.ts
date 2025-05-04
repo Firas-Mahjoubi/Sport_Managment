@@ -213,7 +213,7 @@ const routes: Routes = [
 
 
 
-  { path: 'tactics', component: TacticListComponent },
+
 
   { path: 'tactic-board', component: TacticBoardComponent },
   { path: 'tactics', component: TacticListComponent, canActivate: [roleGuard(['COACH'])] }, 
@@ -254,8 +254,8 @@ const routes: Routes = [
 { path: 'list-player', component: ListPlayerComponent },
 
 
+
 { path: 'health-dashboard', component: HealthDashboardComponent },
-{path: '**', redirectTo: 'auth'}, // Redirect to auth for any unknown routes
 
 
 //skander pdf manager

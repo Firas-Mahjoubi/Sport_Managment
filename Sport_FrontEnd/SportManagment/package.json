@@ -20,10 +20,6 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
-
-    "@fortawesome/angular-fontawesome": "^1.0.0",
-    "@fortawesome/fontawesome-free": "^6.7.2",
-
     "@babel/preset-env": "^7.27.1",
     "@babel/preset-react": "^7.27.1",
     "@fortawesome/angular-fontawesome": "^0.13.0",
@@ -37,7 +33,8 @@
 
     "angularx-qrcode": "^16.0.2",
     "bootstrap": "^5.3.3",
-    "chart.js": "^4.4.9",
+    "html2canvas": "^1.4.1",
+    "html2pdf.js": "^0.10.3",
     "echarts": "^5.6.0",
     "jspdf": "^3.0.1",
     "ng2-charts": "^8.0.0",
@@ -73,6 +70,7 @@
     "@angular-devkit/build-angular": "^16.2.16",
     "@angular/cli": "^16.2.16",
     "@angular/compiler-cli": "^16.2.0",
+    "@types/html2canvas": "^1.0.0",
     "@types/axios": "^0.14.4",
     "@types/jasmine": "~4.3.0",
 

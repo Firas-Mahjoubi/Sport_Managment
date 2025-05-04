@@ -106,6 +106,7 @@ import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.com
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
 import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
 import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { PdfManagerComponent } from './Health/pdf-manager/pdf-manager.component';
 import { ComparePlayersComponent } from './Health/compare-players/compare-players.component';
@@ -260,6 +261,19 @@ import { PlotlyModule } from 'angular-plotly.js';
     MatNativeDateModule,
     MatInputModule,
     MatFormFieldModule,
+     CommonModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatInputModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatIconModule,
+        MatFormFieldModule, // ✅ Required for mat-form-field
+        MatSelectModule, // ✅ Required for mat-select
+        MatToolbarModule,
+        MatTooltipModule
 
     FormsModule,
     ReactiveFormsModule,
