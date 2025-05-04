@@ -280,29 +280,9 @@ import { PlotlyModule } from 'angular-plotly.js';
         MatFormFieldModule, // ✅ Required for mat-form-field
         MatSelectModule, // ✅ Required for mat-select
         MatToolbarModule,
-        MatTooltipModule
+    MatTooltipModule,
 
-    FormsModule,
-    ReactiveFormsModule,
-    MatMenuModule,
-    MatToolbarModule,
-
-    NgxEchartsModule.forRoot({ echarts })
-
-
-
-
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatInputModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatIconModule,
-    MatFormFieldModule, // ✅ Required for mat-form-field
-    MatSelectModule, // ✅ Required for mat-select
-    MatToolbarModule,
+   NgxEchartsModule.forRoot({ echarts })
     
 
 
