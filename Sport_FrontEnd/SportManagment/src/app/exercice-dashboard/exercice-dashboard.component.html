@@ -1,0 +1,40 @@
+<app-admin-header></app-admin-header>
+<app-admin-sidebar></app-admin-sidebar>
+
+<!-- Main Content Wrapper -->
+<div class="main-content">
+  <div class="stats-grid">
+    <div class="card">
+      <h4>Total Exercises</h4>
+      <p>{{ stats?.totalExercises }}</p>
+    </div>
+    <div class="card">
+      <h4>Total Sessions</h4>
+      <p>{{ stats?.totalSessions }}</p>
+    </div>
+    <div class="card">
+      <h4>Average Players/Session</h4>
+      <p>{{ stats?.averageAttendingPlayers | number:'1.1-1' }}</p>
+    </div>
+  </div>
+
+  <!-- Chart Container -->
+  <h3>Statistics Overview</h3>
+  <canvas id="statsChart" width="400" height="200"></canvas>
+
+  <h3>Top Used Exercises</h3>
+  <ul class="exercise-list">
+    <li *ngFor="let e of stats?.topUsedExercises">
+      <strong>{{ e[0] }}</strong> – <span>{{ e[1] }} uses</span>
+    </li>
+  </ul>
+
+  <h3>Upcoming Sessions</h3>
+  <div class="upcoming-sessions">
+    <ul>
+      <li *ngFor="let s of stats?.upcomingSessions">
+        <strong>{{ s.name }}</strong> – {{ s.date }} at {{ s.startTime }}
+      </li>
+    </ul>
+  </div>
+</div>

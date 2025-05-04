@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -21,6 +22,7 @@ import { ExerciseFormComponent } from './components/exercise-form/exercise-form.
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
 import { ExerciseDetailComponent } from './components/exercise-detail/exercise-detail.component';
+
 //---------------------------------------------//
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
 import { InjuryEditComponent } from './Health/injury-edit/injury-edit.component';
@@ -96,6 +98,7 @@ import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.compon
 import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
 import { AiChatComponent } from './tactics/ai-chat/ai-chat.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { ExerciceDashboardComponent } from './exercice-dashboard/exercice-dashboard.component';
 
 
 @NgModule({
@@ -158,6 +161,8 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     HealthDashboardComponent,
     AiChatComponent,
     AdminDashboardComponent,
+    ExerciceDashboardComponent
+    
 
   ],
   imports: [
@@ -170,7 +175,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     RouterModule,
     CommonModule,
     FontAwesomeModule,
-
+    
     MatTableModule,
     MatIconModule,
     MatButtonModule,
@@ -180,13 +185,15 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 
     MatProgressBarModule,
     MatDividerModule,
-
+   
+    
 
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
     MatFormFieldModule,
+    
      CommonModule,
         CommonModule,
         FormsModule,
@@ -198,7 +205,9 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
         MatIconModule,
         MatFormFieldModule, // ✅ Required for mat-form-field
         MatSelectModule, // ✅ Required for mat-select
-        MatToolbarModule
+        MatToolbarModule,
+        
+        
 
   ],
   providers: [],

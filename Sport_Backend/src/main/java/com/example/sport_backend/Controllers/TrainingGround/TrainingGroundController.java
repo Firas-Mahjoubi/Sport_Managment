@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -142,4 +143,8 @@ public class TrainingGroundController {
         return ResponseEntity.ok("Media linked");
     }
 
+    @GetMapping("/stats")
+    public ResponseEntity<Map<String, Object>> getStats() {
+        return ResponseEntity.ok(itrainingGroundService.getDashboardStats());
+    }
 }

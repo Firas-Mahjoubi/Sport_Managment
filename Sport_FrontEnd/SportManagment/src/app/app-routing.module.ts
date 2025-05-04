@@ -35,7 +35,6 @@ import {AdminHeaderComponent} from "./admin/admin-header/admin-header.component"
 import {AdminMatchComponent} from "./matches/admin-match/admin-match.component";
 import {AdminGoalComponent} from "./matches/admin-goal/admin-goal.component";
 import {AdminCardComponent} from "./matches/admin-card/admin-card.component";
-
 import { AddRecoveryplanComponent } from './Health/recoveyplans/add-recoveryplan/add-recoveryplan.component';
 
 import { ListPlayerComponent } from './Health/recoveyplans/list-player/list-player.component';
@@ -43,8 +42,9 @@ import { ListRecoveryPlanComponent } from './Health/recoveyplans/list-recoverypl
 import { EditRecoveryplanComponent } from './Health/recoveyplans/edit-recoveryplan/edit-recoveryplan.component';
 import { ShowRecoveryplanComponent } from './Health/recoveyplans/show-recoveryplan/show-recoveryplan.component';
 
-import{BackofficeListExerciceComponent} from './components/backoffice-list-exercice/backoffice-list-exercice.component';
+import {BackofficeAddExerciceComponent} from './components/backoffice-add-exercice/backoffice-add-exercice.component';
 import { TrainingSessionFormComponent } from './components/training-session-form/training-session-form.component';
+
 
 import {MatchesmainComponent} from "./matches/matchesmain/matchesmain.component";
 import {MatchesNavbarComponent} from "./matches/matches-navbar/matches-navbar.component";
@@ -68,6 +68,7 @@ import {EventDetailsComponent} from "./AdvancedPlanning/event-details/event-deta
 
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { ExerciceDashboardComponent } from './exercice-dashboard/exercice-dashboard.component';
 
 ////////////
   
@@ -105,7 +106,9 @@ const routes: Routes = [
 
     //---------------------Backoffice-training-Ground ------------------------//
 
-    { path: 'add-exercise-back', component: BackofficeListExerciceComponent },
+    { path: 'dashex', component: BackofficeAddExerciceComponent },
+    { path: 'dash-ex', component: ExerciceDashboardComponent },
+    
   //---------------------------------------------//
 
   { path: 'matches', component: MatchesHomeComponent },
@@ -113,9 +116,7 @@ const routes: Routes = [
   { path: 'gameweeks', component: GameweekSliderComponent },
   { path: 'adminMatch', component: AdminMatchComponent },
 
-
   { path: 'match/:matchId', component: MatchDetailsComponent },
-
 
   {path :'DashboardSidebar',component:AdminSidebarComponent},
 
