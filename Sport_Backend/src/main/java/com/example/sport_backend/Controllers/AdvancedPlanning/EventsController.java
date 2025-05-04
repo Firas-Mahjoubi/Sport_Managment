@@ -32,9 +32,9 @@ public class EventsController {
     public ResponseEntity<Event> updateEvent(@RequestBody Event e) {
         Event updatedEvent = eventsService.updateEvent(e);
         if (updatedEvent != null) {
-            return ResponseEntity.ok(updatedEvent); // Retourne 200 OK avec l'événement mis à jour
+            return ResponseEntity.ok(updatedEvent);
         } else {
-            return ResponseEntity.notFound().build(); // Retourne 404 si l'événement n'existe pas
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -48,13 +48,13 @@ public class EventsController {
     @DeleteMapping("/removeEventById/{idEvent}")
     public ResponseEntity<Void> removeEvent(@PathVariable long idEvent) {
         System.out.println("Suppression de l'événement avec ID : " + idEvent);
-        boolean isDeleted = eventsService.removeEvent(idEvent);  // Appelle le service pour supprimer l'événement
+        boolean isDeleted = eventsService.removeEvent(idEvent);
         if (isDeleted) {
             System.out.println("Événement supprimé avec succès");
-            return ResponseEntity.noContent().build();  // Renvoie un code 204 si la suppression a réussi
+            return ResponseEntity.noContent().build();
         }
         System.out.println("Événement non trouvé pour ID : " + idEvent);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // Renvoie un code 404 si l'événement n'a pas été trouvé
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  
     }
 
 

@@ -1,0 +1,74 @@
+<div class="header">
+  <app-admin-header></app-admin-header>
+</div>
+
+<div class="sidebar">
+  <app-admin-sidebar></app-admin-sidebar>
+</div>
+
+<!-- Content wrapper with left margin to account for sidebar -->
+<div class="content-wrapper">
+  <div class="container d-flex">
+
+    <!-- Leagues Sidebar (NOW part of content, not main sidebar) -->
+    <div class="league-sidebar">
+      <h3>Leagues</h3>
+      <ul class="league-list">
+        <li *ngFor="let league of leagues">
+          <div class="league-entry" (click)="toggleLeagueDropdown(league.id)">
+            <img [src]="league.logourl" alt="{{ league.name }}" />
+            <span>{{ league.name }}</span>
+          </div>
+          <ul *ngIf="openedLeagueId === league.id" class="dropdown-options">
+            <li (click)="showStats(league.id, 'scorer')" [class.active]="activeStatType === 'scorer' && selectedLeagueId === league.id">Top Scorer</li>
+            <li (click)="showStats(league.id, 'red')" [class.active]="activeStatType === 'red' && selectedLeagueId === league.id">Top Red Cards</li>
+            <li (click)="showStats(league.id, 'yellow')" [class.active]="activeStatType === 'yellow' && selectedLeagueId === league.id">Top Yellow Cards</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+  <div class="main-content">
+    <div *ngIf="topScorer && activeStatType === 'scorer'" class="section">
+      <h2>Top Scorer</h2>
+      <div class="card">
+        <img [src]="topScorer.image" alt="Player Image" />
+        <h3>{{ topScorer.fullName }}</h3>
+        <p><strong>Team:</strong> {{ topScorer.teamName }}</p>
+        <p><strong>Number:</strong> {{ topScorer.playerNumber }}</p>
+        <p><strong>Goals:</strong> {{ topScorer.goals }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="redCardStats.length && activeStatType === 'red'" class="section">
+      <h2>Top 5 Players with Red Cards</h2>
+      <div class="card-list">
+        <div class="card" *ngFor="let player of redCardStats">
+          <img [src]="player.image" alt="Player Image" />
+          <p>{{ player.fullName }}</p>
+          <p><strong>Team:</strong> {{ player.teamName }}</p>
+          <p><strong>Red Cards:</strong> {{ player.numberOfCards }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="yellowCardStats.length && activeStatType === 'yellow'" class="section">
+      <h2>Top 5 Players with Yellow Cards</h2>
+      <div class="card-list">
+        <div class="card" *ngFor="let player of yellowCardStats">
+          <img [src]="player.image" alt="Player Image" />
+          <p>{{ player.fullName }}</p>
+          <p><strong>Team:</strong> {{ player.teamName }}</p>
+          <p><strong>Yellow Cards:</strong> {{ player.numberOfCards }}</p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div *ngIf="error" class="error">
+      {{ error }}
+    </div>
+  </div>
+</div>
+</div>

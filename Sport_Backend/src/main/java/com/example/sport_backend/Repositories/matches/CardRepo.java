@@ -12,8 +12,9 @@ import java.util.List;
 
 @Repository
 public interface CardRepo extends JpaRepository<Card,Long> {
-    List<Card> findByMatch(Match match);
 
+    List<Card> findByMatch(Match match);
+    List<Card>findByCardType(CardType cardType);
 
     @Query("SELECT COUNT(c) FROM Card c " +
             "JOIN c.cardTaker p " +

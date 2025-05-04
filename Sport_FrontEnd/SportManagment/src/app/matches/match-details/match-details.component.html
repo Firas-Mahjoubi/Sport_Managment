@@ -1,7 +1,6 @@
 <div class="navbar">
-<app-matches-navbar></app-matches-navbar>
+  <app-matches-navbar></app-matches-navbar>
 </div>
-
 
 <div class="match-details-container">
   <!-- League Info -->
@@ -27,13 +26,36 @@
       <img [src]="matchDetails?.awayTeamLogo" alt="{{ matchDetails?.awayTeam }}" class="team-logo">
     </div>
   </div>
+  <div class="predictions-section">
+    <h4>Predictions</h4>
+
+    <div class="predictions-container">
+      <!-- Home Prediction -->
+      <div class="prediction home-prediction">
+        <p class="team-name">{{ matchDetails?.homeTeam }} Exepected Goals</p>
+        <p class="team-prediction">{{ homePrediction !== null ? homePrediction : 'Loading...' }}</p>
+      </div>
+
+      <!-- Away Prediction -->
+      <div class="prediction away-prediction">
+        <p class="team-name">{{ matchDetails?.awayTeam }} Expected Goals</p>
+        <p class="team-prediction">{{ awayPrediction !== null ? awayPrediction : 'Loading...' }}</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
 
   <!-- Goals Section -->
   <div class="section">
     <div class="goals-container">
       <!-- Home Goals -->
       <div class="home-section">
-          <div *ngFor="let goal of homeGoals" class="goal-card home-goal">
+        <div *ngFor="let goal of homeGoals" class="goal-card home-goal">
           <p><strong>{{ goal.scorerFirstName }} {{ goal.scorerLastName }}</strong> ⚽ ({{ goal.timing }}')</p>
           <p *ngIf="goal.assisterFirstName">Assist: {{ goal.assisterFirstName }} {{ goal.assisterLastName }}</p>
           <p class="goal-result">{{ goal.Result }}</p>

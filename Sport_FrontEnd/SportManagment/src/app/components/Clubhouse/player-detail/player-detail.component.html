@@ -1,0 +1,91 @@
+
+
+<div class="container mt-5">
+  <div class="card shadow-lg border-0 overflow-hidden">
+      <!-- En-tête avec dégradé -->
+      <div class="card-header-gradient py-5">
+          <div class="text-center">
+              <div class="avatar-wrapper position-relative d-inline-block">
+                <img 
+                [src]="player?.imageUrl ? player?.imageUrl : 'assets/default-avatar.png'" 
+                (error)="onImageError($event)" 
+                alt="Player Avatar"
+                class="rounded-circle shadow-lg player-avatar" />
+              </div>
+              <h1 class="mt-4 text-white player-name">
+                  {{ player?.firstName }} 
+                  <span class="d-block">{{ player?.lastName }}</span>
+              </h1>
+              <div class="badge bg-light text-primary fs-5 mt-2">
+                  {{ player?.position | titlecase }}
+              </div>
+          </div>
+      </div>
+
+      <!-- Corps de la carte -->
+      <div class="card-body px-lg-5 py-4">
+          <div class="row g-4">
+              <!-- Colonne gauche -->
+              <div class="col-md-6">
+                  <div class="info-card bg-light p-4 rounded-3">
+                      <h5 class="section-title mb-4"><i class="fas fa-id-card me-2"></i>Player Identity</h5>
+                      <ul class="list-unstyled">
+                          <li class="d-flex align-items-center mb-3">
+                              <i class="fas fa-hashtag text-primary me-3 fa-lg"></i>
+                              <div>
+                                  <span class="text-muted small">Number</span>
+                                  <div class="fw-bold">{{ player?.playerNumber || 'N/A' }}</div>
+                              </div>
+                          </li>
+                          <li class="d-flex align-items-center mb-3">
+                              <i class="fas fa-chart-line text-primary me-3 fa-lg"></i>
+                              <div>
+                                  <span class="text-muted small">Performance</span>
+                                  <div class="fw-bold">{{ player?.performanceStats || 'No stats available' }}</div>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+
+              <!-- Colonne droite -->
+              <div class="col-md-6">
+                  <div class="info-card bg-light p-4 rounded-3">
+                      <h5 class="section-title mb-4"><i class="fas fa-info-circle me-2"></i>Additional Info</h5>
+                      <ul class="list-unstyled">
+                          <li class="d-flex align-items-center mb-3">
+                              <i class="fas fa-birthday-cake text-primary me-3 fa-lg"></i>
+                              <div>
+                                  <span class="text-muted small">Birth Date</span>
+                                  <div class="fw-bold">{{ player?.birthDate | date: 'dd MMM yyyy' }}</div>
+                              </div>
+                          </li>
+                          <li class="d-flex align-items-center mb-3">
+                              <i class="fas fa-users text-primary me-3 fa-lg"></i>
+                              <div>
+                                  <span class="text-muted small">Club & Team</span>
+                                  <div class="fw-bold">{{ player?.clubName }}</div>
+                                  <div class="text-muted small">{{ player?.teamName }}</div>
+                              </div>
+                          </li>
+                          <li class="d-flex align-items-center">
+                              <i class="fas fa-heartbeat text-primary me-3 fa-lg"></i>
+                              <div>
+                                  <span class="text-muted small">Status</span>
+                                  <div class="fw-bold badge status-badge">{{ player?.status || 'Unknown' }}</div>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Bouton de retour -->
+          <div class="text-center mt-5">
+              <a routerLink="/players" class="btn btn-primary btn-lg px-5 rounded-pill back-button">
+                  <i class="fas fa-arrow-left me-2"></i>Back to Players
+              </a>
+          </div>
+      </div>
+  </div>
+</div>

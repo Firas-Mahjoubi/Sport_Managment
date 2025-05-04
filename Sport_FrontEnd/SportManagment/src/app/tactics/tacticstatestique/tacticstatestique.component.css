@@ -1,0 +1,8 @@
+canvas {
+    margin-left: 200px; /* Adjust this value to the width of your sidebar */
+  }
+  #barChart {
+    width: 600px; /* Custom width */
+    height: 400px; /* Custom height */
+  }
+  

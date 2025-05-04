@@ -10,16 +10,60 @@ import { Router } from '@angular/router';
 export class AdminMatchComponent implements OnInit {
   leagueName: string = '';
   gameWeek: number = 1;
-  matchesByLeague: { [key: string]: any[] } = {}; // Store matches by league
+  matchesByLeague: { [key: string]: any[] } = {};
   loading: boolean = false;
   errorMessage: string = '';
   successMessage: string = '';
+  selectedFile: File | null = null;
+  uploading: boolean = false;
   private baseUrl = 'http://localhost:8088';
 
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.getMatches();
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+      if (this.selectedFile.type !== 'application/pdf') {
+        this.errorMessage = 'Please select a valid PDF file.';
+        this.selectedFile = null;
+      } else {
+        this.errorMessage = '';
+      }
+      input.value = ''; // Reset input to allow re-uploading the same file
+    }
+  }
+
+  uploadPDF(): void {
+    if (!this.selectedFile) {
+      this.errorMessage = 'Please select a PDF file to upload.';
+      return;
+    }
+
+    this.uploading = true;
+    this.errorMessage = '';
+    this.successMessage = '';
+
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+
+    this.http.post(`${this.baseUrl}/upload-pdf`, formData, { responseType: 'text' }).subscribe({
+      next: (response) => {
+        this.uploading = false;
+        this.successMessage = response; // e.g., "File uploaded successfully: 1634567890123-file.pdf"
+        this.selectedFile = null;
+      },
+      error: (err) => {
+        this.uploading = false;
+        this.errorMessage = err.error || 'Failed to upload PDF. Please try again.';
+        this.selectedFile = null;
+        console.error('Upload error:', err);
+      }
+    });
   }
 
   generateMatches(): void {
@@ -66,7 +110,6 @@ export class AdminMatchComponent implements OnInit {
     this.http.get(`${this.baseUrl}/get-matches-by-game-week?gameWeek=${this.gameWeek}`).subscribe({
       next: (response: any) => {
         if (response) {
-          // Keep the matches organized by league instead of flattening
           this.matchesByLeague = response;
         } else {
           this.matchesByLeague = {};
@@ -93,6 +136,5 @@ export class AdminMatchComponent implements OnInit {
     this.router.navigate(['/admin-substitutions', matchId]);
   }
 
-  // Helper to get Object keys for *ngFor
   Object = Object;
 }

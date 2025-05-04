@@ -1,0 +1,51 @@
+<app-admin-sidebar></app-admin-sidebar>
+
+<div class="content-wrapper">
+  <h2 class="text-center mb-5 elite-title">🏅 Our Clubs Registry</h2>
+
+  <div class="luxury-table-container shadow-royal rounded-4 overflow-hidden">
+    <table class="table table-luxury align-middle mb-0">
+      <thead class="table-header-gold">
+        <tr>
+          <th scope="col" class="text-center">Logo</th>
+          <th scope="col">Club Name</th>
+          <th scope="col"><i class="fas fa-map-pin me-2"></i>Location</th>
+          <th scope="col"><i class="fas fa-calendar-star me-2"></i>Founded</th>
+          <th scope="col" class="text-center">Management</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let club of clubs" class="luxury-row">
+          <td class="text-center">
+            <div style="width: 50px; height: 50px; margin: auto; overflow: hidden;">
+              <img [src]="club.imageUrl"
+                   alt="Club Logo"
+                   class="club-logo"
+                   (error)="club.imageUrl = 'assets/default-club.png'"
+                   style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+          </td>
+          
+          <td class="club-name">{{ club.name }}</td>
+          <td class="location-text">
+            <span class="location-badge">{{ club.location }}</span>
+          </td>
+          <td class="foundation-year">{{ club.foundationYear }}</td>
+          <td class="text-center">
+            <div class="d-flex justify-content-center gap-3">
+              <button class="btn btn-luxury btn-edit" (click)="editClub(club)">
+                <i class="fas fa-pen-nib"></i>
+              </button>
+              <button class="btn btn-luxury btn-view" (click)="viewClubDetails(club.id)">
+                <i class="fas fa-binoculars"></i>
+              </button>
+              <button class="btn btn-luxury btn-delete" (click)="deleteClub(club.id)">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

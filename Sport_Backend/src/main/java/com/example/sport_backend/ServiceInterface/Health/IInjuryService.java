@@ -30,6 +30,9 @@ public interface IInjuryService {
 
 
     List<InjuryHistory> getAllArchivedInjuries();
+
+
+
 }
 
 

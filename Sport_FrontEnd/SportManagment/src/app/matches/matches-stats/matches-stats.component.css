@@ -1,0 +1,152 @@
+.container {
+  max-width: 1200px; /* Wider for a dashboard */
+  margin: auto;
+  padding: 20px;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif; /* Professional font stack */
+}
+.content-wrapper {
+  margin-left: 280px; /* Matches admin sidebar width */
+  padding: 20px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+/* Leagues sidebar inside content */
+.league-sidebar {
+  width: 260px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+  height: fit-content;
+}
+
+.sidebar h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+.league-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.league-entry {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.league-entry:hover {
+  background-color: #e6e6e6;
+}
+
+.league-entry img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  object-fit: contain;
+}
+
+.dropdown-options {
+  list-style: none;
+  margin-top: 5px;
+  margin-left: 35px;
+  padding: 0;
+}
+
+.dropdown-options li {
+
+  cursor: pointer;
+
+}
+.dropdown-options li::before {
+  content: '\2022'; /* Unicode for the bullet character */
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px; /* Bullet size */
+  color: #333; /* Bullet color */
+}
+.main-content {
+  flex: 1;
+  padding: 10px;
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: -20px; /* move left by 10px */
+}
+
+
+
+
+
+.section h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* always 3 columns */
+  gap: 24px;
+  justify-content: center; /* centers the entire grid */
+  width: fit-content;
+  margin: 0 auto;
+}
+
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #c8102e, #a50d25);
+  color: white;
+  border-radius: 16px;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 300px;
+  min-height: 140px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.card-content {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-content h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.card-content p {
+  font-size: 13px;
+  margin: 2px 0;
+  color: #f0f0f0;
+}
+
+.card-content .stat-value {
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.card img {
+  height: 100px;
+  object-fit: contain;
+  z-index: 1;
+}
+
+
+

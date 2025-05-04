@@ -6,6 +6,7 @@ import com.example.sport_backend.Entity.Health.InjuryHistory;
 import com.example.sport_backend.ServiceImpl.ClubHouse.PlayerServiceIMPL;
 import com.example.sport_backend.ServiceImpl.Health.InjuryServiceIMPL;
 import com.example.sport_backend.ServiceInterface.Health.IInjuryService;
+import com.example.sport_backend.ServiceInterface.Health.IRecoveryPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ public class InjuryController {
 
     @Autowired
     private IInjuryService injuryService;
+
 
 
     @GetMapping("/getAllInjuries")
@@ -82,6 +84,7 @@ public class InjuryController {
     public ResponseEntity<List<InjuryHistory>> getArchivedInjuries() {
         return ResponseEntity.ok(injuryService.getAllArchivedInjuries());
     }
+
 
 
 

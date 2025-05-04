@@ -35,29 +35,24 @@ public class Injury {
     LocalDate date;
 
 
-
     @Enumerated(EnumType.STRING)
     Type type;
-
-
 
     @Enumerated(EnumType.STRING)
     Severity severity;
 
-
     String description;
-
 
 
     @Enumerated(EnumType.STRING)
     Status status;
 
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "La zone affectée est obligatoire.")
+
     ZoneAffectee zoneAffectee;
 
 
-    @Size(max = 255, message = "La cause ne peut pas dépasser 255 caractères.")
+
     String cause;
 
 

@@ -1,0 +1,52 @@
+
+  .card-team:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+  }
+
+  .gradient-text {
+    background: linear-gradient(45deg, #007bff, #3b5bdb);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .transition-all {
+    transition: all 0.3s ease-in-out;
+  }
+
+  .icon-wrapper {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-hover-icon:hover i {
+    transform: rotate(-15deg);
+    transition: transform 0.3s ease;
+  }
+
+  .blur-effect {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 60px;
+    height: 60px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    filter: blur(10px);
+  }
+  ::ng-deep .content-wrapper {
+    margin-left: 250px; /* ajuste selon la largeur exacte de ta sidebar */
+    padding: 2rem;
+  }
+  
+  @media (max-width: 992px) {
+    ::ng-deep .content-wrapper {
+      margin-left: 0;
+      padding: 1rem;
+    }
+  }
