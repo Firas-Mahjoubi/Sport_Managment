@@ -149,3 +149,79 @@
   background-color: #e6b800;
   transform: scale(1.05);
 }
+
+
+/*pahination*/
+
+.recovery-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.page-indicators {
+  display: flex;
+  gap: 10px;
+}
+
+.page-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 153, 0, 0.08);
+  color: #009900;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #009900;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(0, 153, 0, 0.3);
+  backdrop-filter: blur(3px);
+}
+
+.page-circle:hover {
+  background: #009900;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px #009900;
+}
+
+.page-circle.active {
+  background: #009900;
+  color: white;
+  box-shadow: 0 0 15px #009900, 0 0 30px #009900;
+}
+
+.page-button {
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: #009900;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.page-button:hover:not(:disabled) {
+  transform: scale(1.3);
+  color: #006600;
+}
+
+.page-button:disabled {
+  color: rgba(0, 153, 0, 0.3);
+  cursor: default;
+  pointer-events: none;
+  background: transparent;
+}
+
+.dots {
+  color: #009900;
+  font-size: 20px;
+  margin: 0 6px;
+  font-weight: bold;
+  opacity: 0.6;
+}
