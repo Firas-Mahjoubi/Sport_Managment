@@ -42,5 +42,10 @@ export class InjuryService {
     return this.http.delete<{ message: string }>(`http://localhost:8088/api/injuries/injury/${injuryId}/archive`);
   }
 
+  getInjuriesByPlayerId(playerId: number): Observable<Injury[]> {
+    return this.http.get<Injury[]>(`${this.apiUrl}/player/${playerId}/injuries`);
+  }
+
+
 
 }

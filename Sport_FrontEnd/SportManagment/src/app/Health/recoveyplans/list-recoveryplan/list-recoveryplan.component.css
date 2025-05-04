@@ -1,105 +1,227 @@
+/* 🌟 Conteneur principal */
 .recovery-plan-table-container {
-  padding: 24px;
-  background: linear-gradient(135deg, #f0f7ff, #e9eff5);
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
+  background-color: rgba(17, 17, 17, 0.9);
+  color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  margin: 40px auto;
+  max-width: 1100px;
+  border: 1px solid #00ff00;
+  font-family: 'Poppins', sans-serif;
 }
 
+/* 🔵 Titre de la table */
 .table-title {
-  font-size: 24px;
+  text-align: center;
+  font-size: 32px;
   font-weight: bold;
-  color: #0056b3;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  margin-bottom: 20px;
+  color: #00ff00;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 10px rgba(0, 255, 0, 0.7);
 }
 
+/* 🎯 Style général du tableau */
 .modern-table {
   width: 100%;
-  background: white;
-  border-radius: 12px;
+  border-collapse: collapse;
   overflow: hidden;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  box-shadow: 0px 4px 10px rgba(0, 255, 0, 0.3);
 }
 
-th.mat-header-cell {
-  background-color: #007bff;
-  color: white;
+.modern-table th, .modern-table td {
+  padding: 14px;
+  text-align: left;
+  font-size: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modern-table th {
+  background-color: rgba(0, 255, 0, 0.9);
+  color: #000;
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 14px;
-  padding: 12px;
 }
 
-td.mat-cell {
-  padding: 14px;
-  font-size: 14px;
-  color: #333;
-}
-
+/* 🎨 Style pour la section joueur */
 .player-info {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .player-avatar {
-  width: 36px;
-  height: 36px;
-  background: #007bff;
-  color: white;
-  font-weight: bold;
+  width: 40px;
+  height: 40px;
+  background-color: #007bff;
+  color: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  text-transform: uppercase;
-  box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
-}
-
-.injury-badge {
-  padding: 4px 8px;
-  background-color: #ffcc00;
-  color: #333;
-  border-radius: 12px;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
-  text-transform: capitalize;
 }
 
+/* 🔥 Badge pour le type de blessure */
+.injury-badge {
+  background-color: #ff4d4d;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* 📊 Barre de progression */
 .progress-bar {
-  width: 100%;
-  height: 14px;
-  background-color: #f0f0f0;
-  border-radius: 8px;
+  background-color: #444;
+  border-radius: 5px;
   overflow: hidden;
-  position: relative;
+  height: 20px;
+  margin: 5px 0;
 }
 
 .progress-fill {
-  height: 100%;
   background-color: #28a745;
+  height: 100%;
   text-align: center;
-  color: white;
+  line-height: 20px;
+  color: #fff;
   font-weight: bold;
-  font-size: 12px;
-  line-height: 14px;
-  transition: width 0.4s ease-in-out;
+  transition: width 0.3s ease;
 }
 
-.delete-icon {
-  color: #dc3545;
-  transition: transform 0.3s ease;
+/* 🔘 Boutons d'action */
+.mat-icon-button {
+  margin: 0 4px;
 }
 
-.delete-icon:hover {
-  transform: scale(1.3);
-}
-
+/* ⏳ Loader */
 .loading {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .recovery-plan-table-container {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .table-title {
+    font-size: 28px;
+  }
+
+  .modern-table th, .modern-table td {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+
+/* 🔙 Boutons de retour */
+.button-container {
   display: flex;
   justify-content: center;
-  margin-top: 16px;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.btn-back {
+  background-color: #00cc66;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-back:hover {
+  background-color: #e6b800;
+  transform: scale(1.05);
+}
+
+
+/*pahination*/
+
+.recovery-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.page-indicators {
+  display: flex;
+  gap: 10px;
+}
+
+.page-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 153, 0, 0.08);
+  color: #009900;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #009900;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(0, 153, 0, 0.3);
+  backdrop-filter: blur(3px);
+}
+
+.page-circle:hover {
+  background: #009900;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px #009900;
+}
+
+.page-circle.active {
+  background: #009900;
+  color: white;
+  box-shadow: 0 0 15px #009900, 0 0 30px #009900;
+}
+
+.page-button {
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: #009900;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.page-button:hover:not(:disabled) {
+  transform: scale(1.3);
+  color: #006600;
+}
+
+.page-button:disabled {
+  color: rgba(0, 153, 0, 0.3);
+  cursor: default;
+  pointer-events: none;
+  background: transparent;
+}
+
+.dots {
+  color: #009900;
+  font-size: 20px;
+  margin: 0 6px;
+  font-weight: bold;
+  opacity: 0.6;
 }

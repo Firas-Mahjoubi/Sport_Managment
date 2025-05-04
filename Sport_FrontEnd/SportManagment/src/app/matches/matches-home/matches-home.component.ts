@@ -33,6 +33,11 @@ export class MatchesHomeComponent implements OnInit {
   selectedGameWeek: number = 1;
   apiUrl = 'http://localhost:8088';
 
+  // Pagination
+  currentPage: number = 1;
+  leaguesPerPage: number = 3;
+  paginatedLeagues: League[] = [];
+
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
@@ -44,11 +49,15 @@ export class MatchesHomeComponent implements OnInit {
     this.http.get<League[]>(`${this.apiUrl}/leagues/getallleague`).subscribe(
       (data) => {
         this.leagues = data;
+        this.updatePaginatedLeagues();
       },
       (error) => {
         console.error('Error fetching leagues:', error);
       }
     );
+  }
+  get totalPages(): number {
+    return Math.ceil(this.leagues.length / this.leaguesPerPage);
   }
 
   fetchMatches(): void {
@@ -71,6 +80,26 @@ export class MatchesHomeComponent implements OnInit {
     if (this.selectedGameWeek !== gameWeek) {
       this.selectedGameWeek = gameWeek;
       this.fetchMatches();
+    }
+  }
+
+  updatePaginatedLeagues(): void {
+    const startIndex = (this.currentPage - 1) * this.leaguesPerPage;
+    const endIndex = startIndex + this.leaguesPerPage;
+    this.paginatedLeagues = this.leagues.slice(startIndex, endIndex);
+  }
+
+  nextPage(): void {
+    if ((this.currentPage * this.leaguesPerPage) < this.leagues.length) {
+      this.currentPage++;
+      this.updatePaginatedLeagues();
+    }
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedLeagues();
     }
   }
 }

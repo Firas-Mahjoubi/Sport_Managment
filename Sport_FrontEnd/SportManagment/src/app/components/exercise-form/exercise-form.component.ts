@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';  // ✅ Import NgForm
 import { ExerciseService } from '../../services/exercise.service';
 import { TagService } from '../../services/tag.service';
 
@@ -16,6 +17,7 @@ export class ExerciseFormComponent implements OnInit, AfterViewInit {
   isSubmitting: boolean = false;  // ✅ Prevents double submission
 
   @ViewChild('successModal') successModal!: ElementRef;
+  @ViewChild('exerciseForm') exerciseForm!: NgForm; // ✅ Capture form reference
 
   exercise: any = {
     name: '',
@@ -86,32 +88,36 @@ export class ExerciseFormComponent implements OnInit, AfterViewInit {
     );
   }
 
-  // ✅ Save or Update Exercise (Fixed duplicate submission issue)
+  // ✅ Save or Update Exercise (Includes Validation Check)
   saveExercise(): void {
     if (this.isSubmitting) return;  // ✅ Prevent multiple submissions
-    this.isSubmitting = true;
+    if (this.exerciseForm.invalid) {
+      this.exerciseForm.form.markAllAsTouched();  // ✅ Force validation messages to show
+      return;
+    }
 
+    this.isSubmitting = true;
     this.exercise.tags = this.selectedTags.map(id => ({ id }));
 
     if (this.isEditing) {
       this.exerciseService.updateExercise(this.exerciseId!, this.exercise).subscribe(() => {
-        this.showModal();
-        setTimeout(() => {
-          this.hideModal();
-          this.router.navigate(['/exercise-list']);
-          this.isSubmitting = false; // ✅ Reset submission state
-        }, 2000);
+        this.handleSuccess();
       });
     } else {
       this.exerciseService.createExercise(this.exercise).subscribe(() => {
-        this.showModal();
-        setTimeout(() => {
-          this.hideModal();
-          this.router.navigate(['/exercise-list']);
-          this.isSubmitting = false; // ✅ Reset submission state
-        }, 2000);
+        this.handleSuccess();
       });
     }
+  }
+
+  // ✅ Handle Successful Save
+  private handleSuccess() {
+    this.showModal();
+    setTimeout(() => {
+      this.hideModal();
+      this.router.navigate(['/exercise-list']);
+      this.isSubmitting = false;  // ✅ Reset submission state
+    }, 2000);
   }
 
   showModal() {

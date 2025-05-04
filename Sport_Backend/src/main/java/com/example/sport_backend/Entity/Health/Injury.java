@@ -8,6 +8,9 @@ import com.example.sport_backend.Entity.Enum.ZoneAffectee;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -28,7 +31,9 @@ public class Injury {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+
     LocalDate date;
+
 
     @Enumerated(EnumType.STRING)
     Type type;
@@ -38,11 +43,15 @@ public class Injury {
 
     String description;
 
+
     @Enumerated(EnumType.STRING)
     Status status;
 
     @Enumerated(EnumType.STRING)
+
     ZoneAffectee zoneAffectee;
+
+
 
     String cause;
 

@@ -1,0 +1,154 @@
+
+
+<header class="site-navbar py-4" role="banner">
+
+  <div class="container">
+    <div class="d-flex align-items-center">
+      <div class="site-logo">
+        <a href="index.html">
+          <img src="/assets/images/logo.png" alt="Logo">
+        </a>
+      </div>
+      <div class="ml-auto">
+        <nav class="site-navigation position-relative text-right" role="navigation">
+          <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+            <li><a [routerLink]="'/main'" class="nav-link">Home</a></li>
+
+            <li><a href="matches.html" class="nav-link">Matches</a></li>
+            <li><a href="players.html" class="nav-link">Players</a></li>
+
+            <li><a [routerLink]="'/health-dashboard'" class="nav-link">Health</a></li>
+
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+
+        </nav>
+
+        <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right text-white"><span
+            class="icon-menu h3 text-white"></span></a>
+      </div>
+    </div>
+  </div>
+
+  <head>
+
+    <title>Soccer &mdash; Website by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/jquery-ui.css">
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/assets/css/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="/assets/css/jquery.fancybox.min.css">
+
+    <link rel="stylesheet" href="/assets/css/bootstrap-datepicker.css">
+
+    <link rel="stylesheet" href="/assets/fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="/assets/css/aos.css">
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+
+  </head>
+
+</header>
+
+<!-- 🎬 Arrière-plan Vidéo Fonctionnel -->
+<video id="bgVideo" class="bg-video" autoplay loop muted playsinline>
+  <source src="assets/background.mp4" type="video/mp4">
+  Votre navigateur ne supporte pas les vidéos HTML5.
+</video>
+
+<!-- Ajoute un overlay invisible pour détecter le clic et forcer la lecture -->
+<div id="video-overlay"></div>
+
+
+
+
+<!-- Carousel Circulaire de Cartes -->
+<div class="carousel-container">
+
+  <div id="circular-carousel" class="circular-carousel">
+    <!-- Carte Blessures -->
+    <div class="card-item injury" style="--i:0">
+      <i class="fas fa-user-injured fa-2x"></i>
+      <h4>Blessures</h4>
+      <p>Suivi des blessures et des traitements.</p>
+      <a routerLink="/health/injury">Voir plus</a>
+    </div>
+
+    <!-- Carte Dossiers Médicaux -->
+    <div class="card-item records" style="--i:1">
+      <i class="fas fa-file-medical fa-2x"></i>
+      <h4>Dossiers Médicaux</h4>
+      <p>Accédez aux dossiers et à l'historique médical.</p>
+      <a routerLink="/health/health-records">Voir plus</a>
+    </div>
+
+    <!-- Carte Récupération -->
+    <div class="card-item recovery" style="--i:2">
+      <i class="fas fa-heartbeat fa-2x"></i>
+      <h4>Récupération</h4>
+      <p>Suivi des plans de récupération et des progrès.</p>
+      <a routerLink="/list-player">Voir plus</a>
+    </div>
+
+    <!-- Carte PDF Manager -->
+    <div class="card-item pdf-manager" style="--i:3">
+      <i class="fas fa-file-pdf fa-2x"></i>
+      <h4>PDF</h4>
+      <p>Générez des rapports personnalisés en PDF.</p>
+      <a routerLink="/pdf-manager">Voir plus</a>
+    </div>
+
+    <!-- Carte Comparer -->
+    <div class="card-item compare" style="--i:4">
+      <i class="fas fa-users fa-2x"></i>
+      <h4>Comparer</h4>
+      <p>Comparez les joueurs pour optimiser les performances.</p>
+      <a routerLink="/health/compare-players">Voir plus</a>
+    </div>
+
+    <!-- Carte Statistiques -->
+    <div class="card-item stats" style="--i:5">
+      <i class="fas fa-chart-bar fa-2x"></i>
+      <h4>Statistiques</h4>
+      <p>Analyse des performances et des indicateurs clés.</p>
+      <a routerLink="/statistique">Voir plus</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+   <!-- .site-wrap -->
+
+
+   <script src="/assets/js/jquery-3.3.1.min.js"></script>
+   <script src="/assets/js/jquery-ui.js"></script>
+   <script src="/assets/js/jquery-migrate-3.0.1.min.js"></script>
+   <script src="/assets/js/popper.min.js"></script>
+   <script src="/assets/js/bootstrap.min.js"></script>
+   <script src="/assets/js/owl.carousel.min.js"></script>
+   <script src="/assets/js/jquery.stellar.min.js"></script>
+   <script src="/assets/js/jquery.countdown.min.js"></script>
+   <script src="/assets/js/bootstrap-datepicker.min.js"></script>
+   <script src="/assets/js/jquery.easing.1.3.js"></script>
+   <script src="/assets/js/aos.js"></script>
+   <script src="/assets/js/jquery.fancybox.min.js"></script>
+   <script src="/assets/js/jquery.sticky.js"></script>
+   <script src="/assets/js/jquery.mb.YTPlayer.min.js"></script>
+
+
+   <script src="/assets/js/main.js"></script>
+

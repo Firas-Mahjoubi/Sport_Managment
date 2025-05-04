@@ -1,21 +1,35 @@
-<div class="recovery-plan-table-container">
+<!-- 🌌 Arrière-plan avec une image -->
+<div style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('/assets/player.jpg') no-repeat center center/cover;
+  filter: brightness(0.4);
+  z-index: -1;"></div>
 
+<div class="recovery-plan-table-container">
   <h2 class="table-title">⚽ Plans de Récupération des Joueurs</h2>
 
-  <table mat-table [dataSource]="recoveryPlans" class="mat-elevation-z8 modern-table">
-
-    <!-- Joueur -->
+  <table mat-table [dataSource]="paginatedRecoveryPlans" class="mat-elevation-z8 modern-table">
+    <!-- Colonnes ici inchangées -->
+    <!-- player -->
     <ng-container matColumnDef="player">
       <th mat-header-cell *matHeaderCellDef> 👤 Joueur </th>
       <td mat-cell *matCellDef="let plan">
         <div class="player-info">
-          <div class="player-avatar">{{ plan.injury.player.firstName[0] }}{{ plan.injury.player.lastName[0] }}</div>
-          <div>{{ plan.injury.player.firstName }} {{ plan.injury.player.lastName }}</div>
+          <div class="player-avatar">
+            {{ plan.injury.player.firstName[0] }}{{ plan.injury.player.lastName[0] }}
+          </div>
+          <div>
+            {{ plan.injury.player.firstName }} {{ plan.injury.player.lastName }}
+          </div>
         </div>
       </td>
     </ng-container>
 
-    <!-- Type de blessure -->
+    <!-- injuryType -->
     <ng-container matColumnDef="injuryType">
       <th mat-header-cell *matHeaderCellDef> 🩺 Type de blessure </th>
       <td mat-cell *matCellDef="let plan">
@@ -23,13 +37,15 @@
       </td>
     </ng-container>
 
-    <!-- Fin estimée -->
+    <!-- estimatedEndDate -->
     <ng-container matColumnDef="estimatedEndDate">
       <th mat-header-cell *matHeaderCellDef> 📅 Fin estimée </th>
-      <td mat-cell *matCellDef="let plan"> {{ plan.estimatedEndDate | date: 'dd/MM/yyyy' }} </td>
+      <td mat-cell *matCellDef="let plan">
+        {{ plan.estimatedEndDate | date: 'dd/MM/yyyy' }}
+      </td>
     </ng-container>
 
-    <!-- Progression -->
+    <!-- progress -->
     <ng-container matColumnDef="progress">
       <th mat-header-cell *matHeaderCellDef> 📊 Progression </th>
       <td mat-cell *matCellDef="let plan">
@@ -41,20 +57,16 @@
       </td>
     </ng-container>
 
-    <!-- Actions -->
+    <!-- actions -->
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> 🛠️ Actions </th>
       <td mat-cell *matCellDef="let plan">
-      <!-- ✅ Bouton Afficher -->
-<button mat-icon-button color="accent" (click)="showRecoveryPlan(plan)">
-  <mat-icon>visibility</mat-icon>
-</button>
-
- <!-- ✅ Bouton Modifier -->
- <button mat-icon-button color="primary" (click)="editRecoveryPlan(plan)">
-  <mat-icon>edit</mat-icon>
-</button>
-
+        <button mat-icon-button color="accent" (click)="showRecoveryPlan(plan)">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="editRecoveryPlan(plan)">
+          <mat-icon>edit</mat-icon>
+        </button>
         <button mat-icon-button color="warn" (click)="deletePlan(plan)">
           <mat-icon class="delete-icon">delete</mat-icon>
         </button>
@@ -65,9 +77,58 @@
     <tr mat-row *matRowDef="let row; columns: ['player', 'injuryType', 'estimatedEndDate', 'progress', 'actions']"></tr>
   </table>
 
-  <!-- Loader pendant chargement -->
   <div class="loading" *ngIf="loading">
     <mat-spinner diameter="50" color="primary"></mat-spinner>
   </div>
 
+  <!-- 💙 Pagination Recovery Plan -->
+  <div *ngIf="totalPages > 1" class="recovery-pagination mt-4">
+    <button
+      class="page-button prev"
+      [disabled]="currentPage === 1"
+      (click)="changePage(currentPage - 1)">
+      «
+    </button>
+
+    <div class="page-indicators">
+      <span
+        class="page-circle"
+        [class.active]="currentPage === 1"
+        (click)="changePage(1)">
+        1
+      </span>
+
+      <span *ngIf="currentPage > 4" class="dots">...</span>
+
+      <span
+        *ngFor="let page of visiblePagesNumbers()"
+        class="page-circle"
+        [class.active]="currentPage === page"
+        (click)="changePage(page)">
+        {{ page }}
+      </span>
+
+      <span *ngIf="currentPage < totalPages - 3" class="dots">...</span>
+
+      <span
+        class="page-circle"
+        [class.active]="currentPage === totalPages"
+        (click)="changePage(totalPages)">
+        {{ totalPages }}
+      </span>
+    </div>
+
+    <button
+      class="page-button next"
+      [disabled]="currentPage === totalPages"
+      (click)="changePage(currentPage + 1)">
+      »
+    </button>
+  </div>
+</div>
+
+<!-- 🏥 Boutons de retour -->
+<div class="button-container">
+  <a [routerLink]="['/list-player']" class="btn-back">⬅️ Retour à la liste des joueurs</a>
+  <a [routerLink]="['/health-dashboard']" class="btn-back">🏥 Retour au tableau de bord</a>
 </div>

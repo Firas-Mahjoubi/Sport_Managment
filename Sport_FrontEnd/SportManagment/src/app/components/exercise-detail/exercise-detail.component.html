@@ -1,0 +1,75 @@
+<app-header></app-header>
+<br><br><br><br><br><br><br>
+
+<div class="container training-session-container">
+    <div class="col-12 title-section d-flex justify-content-between align-items-center">
+      <h2 class="heading">Training Exercises</h2>
+      
+      <!-- ✅ Right-aligned button -->
+      <div>
+        <a *ngIf="exercise" [href]="'http://localhost:3000/tactics-board?tacticFor=' + exercise.id" class="btn btn-success" target="_blank">
+            ✏️ Open Tactic Board
+          </a>
+          
+      </div>
+    </div>
+
+    <div *ngIf="exercise">
+     <!-- Image Section -->
+     <div class="img mb-4">
+        <a href="#">
+          <img [src]="exercise.imageUrl ? exercise.imageUrl : defaultImage" alt="Exercise Image"
+            class="img-fluid rounded">
+        </a>
+      </div>
+
+      <!-- Text Content -->
+      <div class="text">
+        <h5 class="mb-4 fw-bold text-danger">{{ exercise.name }}</h5>
+        <p class="text-muted">{{ exercise.description }}</p>
+
+        <div class="exercise-details">
+          <p class="d-flex align-items-center">
+            <i class="fas fa-dumbbell text-warning me-2"></i>
+            <strong class="text-white me-1">Fitness Level:</strong> {{ exercise.fitnessLevel }}
+          </p>
+
+          <p class="d-flex align-items-center">
+            <i class="fas fa-brain text-success me-2"></i>
+            <strong class="text-white me-1">Technique Level:</strong> {{ exercise.techniqueLevel }}
+          </p>
+
+          <p class="d-flex align-items-center">
+            <i class="fas fa-chess-board text-info me-2"></i>
+            <strong class="text-white me-1">Tactical Level:</strong> {{ exercise.tacticLevel }}
+          </p>
+
+          <p class="d-flex align-items-center">
+            <i class="fas fa-users text-secondary me-2"></i>
+            <strong class="text-white me-1">Group Size:</strong> {{ exercise.groupSize }}
+          </p>
+
+          <p class="d-flex align-items-center">
+            <i class="fas fa-clock text-dark me-2"></i>
+            <strong class="text-white me-1">Duration:</strong> {{ exercise.durationMinutes }} min
+          </p>
+        </div>
+
+      
+    
+  
+  </div>
+  <div *ngIf="mediaList.length > 0; else noMedia">
+  <h4 class="mt-4">Linked Tactic Media:</h4>
+  <div *ngFor="let media of mediaList" class="mb-3">
+    <img *ngIf="media.mediaType === 'image'" [src]="media.mediaUrl" class="img-fluid" />
+    <video *ngIf="media.mediaType === 'video'" [src]="media.mediaUrl" controls class="img-fluid"></video>
+  </div>
+</div>
+  
+  
+  <ng-template #noMedia>
+    <p class="text-muted">No tactic media linked yet.</p>
+  </ng-template>
+
+

@@ -7,17 +7,21 @@ import { Player } from '../models/player';
   providedIn: 'root'
 })
 export class PlayerService {
-  private baseUrl = 'http://localhost:8088';
+  private baseUrl = 'http://localhost:8088/players';
 
   constructor(private http: HttpClient) {}
 
-  // ✅ Récupère tous les joueurs
+
   getPlayers(): Observable<Player[]> {
     return this.http.get<Player[]>(`${this.baseUrl}/getallplayers`);
   }
 
-  // ✅ Récupère les joueurs sans HealthRecord
+
   getPlayersWithoutHealthRecord(): Observable<Player[]> {
     return this.http.get<Player[]>(`${this.baseUrl}/players/without-healthrecord`);
   }
+
+
+
+
 }

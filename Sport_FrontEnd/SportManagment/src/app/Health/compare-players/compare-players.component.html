@@ -1,0 +1,160 @@
+<div class="compare-wrapper">
+  <h1 class="title">Comparaison des Joueurs</h1>
+
+
+  <!-- 🔘 Bouton pour ouvrir le modal trié -->
+  <button class="sort-btn" (click)="openSortedList()">
+    🔽 Trier les joueurs par forme
+  </button>
+
+  <div class="overlay" *ngIf="showSortedList">
+    <div class="sorted-modal">
+      <h2>Joueurs triés par forme (décroissant)</h2>
+      <ol>
+        <li *ngFor="let p of sortedPlayers">
+          <div class="player-item">
+            <!-- Affichage de l'avatar et du nom -->
+            <img [src]="p.avatarUrl || '/assets/fifa.jpg'" class="player-avatar" />
+            <div class="player-details">
+              <span class="player-name">{{ p.firstName }} {{ p.lastName }}</span>
+              <span class="player-form">Forme: {{ calculateNote(p.healthRecord) }}/100</span>
+            </div>
+            <!-- Barre de progression animée -->
+            <div class="progress-bar-container">
+              <div class="progress-bar" [style.width.%]="calculateNote(p.healthRecord)"></div>
+            </div>
+            <!-- Icône de forme -->
+            <div class="icon-form">
+              <span *ngIf="calculateNote(p.healthRecord) > 80" class="form-icon">💪</span>
+              <span *ngIf="calculateNote(p.healthRecord) <= 80 && calculateNote(p.healthRecord) > 50" class="form-icon">⚡</span>
+              <span *ngIf="calculateNote(p.healthRecord) <= 50" class="form-icon">💥</span>
+            </div>
+          </div>
+        </li>
+      </ol>
+      <button class="close-sorted" (click)="closeSortedList()">✖ Fermer</button>
+    </div>
+
+
+  </div>
+
+  <!-- sélection avatars -->
+  <div class="avatars-selection">
+    <div class="avatar-list">
+      <h2>Choisir Joueur 1</h2>
+      <div class="avatars">
+        <div class="avatar"
+             *ngFor="let p of players"
+             [class.selected]="selected1?.id === p.id"
+             (click)="selectPlayer(p,1)">
+          <img [src]="p.avatarUrl||'/assets/fifa.jpg'" />
+          <span>{{p.firstName}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="avatar-list">
+      <h2>Choisir Joueur 2</h2>
+      <div class="avatars">
+        <div class="avatar"
+             *ngFor="let p of players"
+             [class.selected]="selected2?.id === p.id"
+             (click)="selectPlayer(p,2)">
+          <img [src]="p.avatarUrl||'/assets/fifa.jpg'" />
+          <span>{{p.firstName}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- fiches joueurs -->
+  <div class="cards-comparison">
+    <!-- Joueur 1 -->
+    <div *ngIf="selected1 && healthRecords1" class="player-card futuristic">
+      <h3>{{selected1.firstName}} {{selected1.lastName}}</h3>
+      <p>Position: {{selected1.position}}</p>
+      <p>Numéro: {{selected1.playerNumber}}</p>
+      <div class="stats">
+        <p>💤 Fatigue: {{healthRecords1.fatigue}}</p>
+        <p>💪 État Physique: {{healthRecords1.etatPhysique}}</p>
+        <p>⚡ Douleurs: {{healthRecords1.douleursMusculaires}}</p>
+      </div>
+      <!-- cas blessé -->
+      <div *ngIf="healthRecords1.etatPhysique==='BLESSE'" class="risk-message injured">
+        ⚠️ {{selected1.firstName}} est <strong>blessé</strong> !
+      </div>
+      <!-- cas risque -->
+      <div *ngIf="riskAlert1 && healthRecords1.etatPhysique!=='BLESSE'"
+           class="risk-message warning">
+        ⚠️ {{selected1.firstName}} présente un <strong>risque</strong> de blessure !
+      </div>
+    </div>
+
+    <!-- Joueur 2 -->
+    <div *ngIf="selected2 && healthRecords2" class="player-card futuristic">
+      <h3>{{selected2.firstName}} {{selected2.lastName}}</h3>
+      <p>Position: {{selected2.position}}</p>
+      <p>Numéro: {{selected2.playerNumber}}</p>
+      <div class="stats">
+        <p>💤 Fatigue: {{healthRecords2.fatigue}}</p>
+        <p>💪 État Physique: {{healthRecords2.etatPhysique}}</p>
+        <p>⚡ Douleurs: {{healthRecords2.douleursMusculaires}}</p>
+      </div>
+      <div *ngIf="healthRecords2.etatPhysique==='BLESSE'" class="risk-message injured">
+        ⚠️ {{selected2.firstName}} est <strong>blessé</strong> !
+      </div>
+      <div *ngIf="riskAlert2 && healthRecords2.etatPhysique!=='BLESSE'"
+           class="risk-message warning">
+        ⚠️ {{selected2.firstName}} présente un <strong>risque</strong> de blessure !
+      </div>
+    </div>
+  </div>
+
+  <button class="analyze-btn"
+          [disabled]="!selected1||!selected2"
+          (click)="analyze()">Analyser</button>
+
+  <!-- Résultats -->
+  <div class="result-area" *ngIf="analysisResult">
+    <div class="result-animation">
+      <h3>Résultats de l'Analyse</h3>
+      <p>{{selected1.firstName}} - Note: {{note1}}</p>
+      <p>{{selected2.firstName}} - Note: {{note2}}</p>
+
+      <!-- afficheur risque/blessure -->
+      <div *ngIf="healthRecords1.etatPhysique==='BLESSE'"
+           class="risk-result injured blink">
+        ⚠️ {{selected1.firstName}} est blessé !
+      </div>
+      <div *ngIf="riskAlert1 && healthRecords1.etatPhysique!=='BLESSE'"
+           class="risk-result warning blink">
+        ⚠️ {{selected1.firstName}} risque la blessure !
+      </div>
+
+      <div *ngIf="healthRecords2.etatPhysique==='BLESSE'"
+           class="risk-result injured blink">
+        ⚠️ {{selected2.firstName}} est blessé !
+      </div>
+      <div *ngIf="riskAlert2 && healthRecords2.etatPhysique!=='BLESSE'"
+           class="risk-result warning blink">
+        ⚠️ {{selected2.firstName}} risque la blessure !
+      </div>
+
+      <div *ngIf="winner; else egalite">
+        <h2 class="winner-name">🏆 {{winner.firstName}} est le plus prêt !</h2>
+      </div>
+      <ng-template #egalite>
+        <h2>⚖️ Égalité parfaite !</h2>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="bottom-buttons">
+  <a [routerLink]="['/health-dashboard']" class="btn-back-health">
+    ⬅️ Retour au Tableau de Santé
+  </a>
+</div>
+
+

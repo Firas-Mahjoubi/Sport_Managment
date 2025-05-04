@@ -1,63 +1,102 @@
-<form [formGroup]="addForm" (ngSubmit)="onSubmit()">
-  <!-- Sélection du joueur -->
-  <label for="player">Joueur :</label>
-  <select class="form-control" formControlName="player" (change)="updateName()">
-    <option *ngFor="let player of players" [ngValue]="player">
-      {{ player.firstName }} {{ player.lastName }}
-    </option>
-  </select>
-  <small *ngIf="addForm.get('player')?.invalid && addForm.get('player')?.touched" class="text-danger">
-    Sélectionner un joueur est obligatoire.
-  </small>
+<!-- 🌌 Arrière-plan avec une image -->
+<div style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('/assets/healthrecord.jpg') no-repeat center center/cover;
+  filter: brightness(0.4);
+  z-index: -1;">
+</div>
 
-  <!-- Nom (rempli automatiquement) -->
-  <label for="name">Nom :</label>
-  <input type="text" class="form-control" formControlName="name" readonly>
-  <small *ngIf="addForm.get('name')?.invalid" class="text-danger">
-    Le nom est requis.
-  </small>
+<!-- 📦 Formulaire d'ajout -->
+<div class="form-container">
+  <h2 class="form-title">➕ Ajouter un Health Record</h2>
 
-  <!-- Date -->
-  <label for="date">Date :</label>
-  <input type="date" class="form-control" formControlName="date">
-  <small *ngIf="addForm.get('date')?.invalid && addForm.get('date')?.touched" class="text-danger">
-    La date est obligatoire.
-  </small>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()" class="healthrecord-form">
+    <div class="form-row">
+      <!-- Joueur -->
+      <div class="form-group">
+        <label for="player">👤 Joueur :</label>
+        <select class="form-control" formControlName="player" (change)="updateName()">
+          <option *ngFor="let player of players" [ngValue]="player">
+            {{ player.firstName }} {{ player.lastName }}
+          </option>
+        </select>
+      </div>
+    </div>
 
-  <!-- Fatigue -->
-  <label for="fatigue">Fatigue :</label>
-  <select class="form-control" formControlName="fatigue">
-    <option *ngFor="let f of Fatigue | keyvalue" [value]="f.value">{{ f.value }}</option>
-  </select>
+    <div class="form-row">
+      <!-- Date -->
+      <div class="form-group">
+        <label for="date">📅 Date :</label>
+        <input type="date" class="form-control" formControlName="date">
+      </div>
+    </div>
 
-  <!-- État Physique -->
-  <label for="etatPhysique">État Physique :</label>
-  <select class="form-control" formControlName="etatPhysique">
-    <option *ngFor="let e of EtatPhysique | keyvalue" [value]="e.value">{{ e.value }}</option>
-  </select>
+    <div class="form-row">
+      <!-- Fatigue -->
+      <div class="form-group">
+        <label for="fatigue">😴 Fatigue :</label>
+        <select class="form-control" formControlName="fatigue">
+          <option *ngFor="let f of Fatigue | keyvalue" [value]="f.value">{{ f.value }}</option>
+        </select>
+      </div>
+    </div>
 
-  <!-- Douleurs Musculaires -->
-  <label for="douleursMusculaires">Douleurs Musculaires :</label>
-  <select class="form-control" formControlName="douleursMusculaires">
-    <option *ngFor="let d of DouleursMusculaires | keyvalue" [value]="d.value">{{ d.value }}</option>
-  </select>
+    <div class="form-row">
+      <!-- État Physique -->
+      <div class="form-group">
+        <label for="etatPhysique">💪 État Physique :</label>
+        <select class="form-control" formControlName="etatPhysique">
+          <option *ngFor="let e of EtatPhysique | keyvalue" [value]="e.value">{{ e.value }}</option>
+        </select>
+      </div>
+    </div>
 
-  <!-- Intensité -->
-  <label for="intensite">Intensité :</label>
-  <select class="form-control" formControlName="intensite">
-    <option *ngFor="let i of Intensite | keyvalue" [value]="i.value">{{ i.value }}</option>
-  </select>
+    <div class="form-row">
+      <!-- Douleurs Musculaires -->
+      <div class="form-group">
+        <label for="douleursMusculaires">⚡ Douleurs Musculaires :</label>
+        <select class="form-control" formControlName="douleursMusculaires">
+          <option *ngFor="let d of DouleursMusculaires | keyvalue" [value]="d.value">{{ d.value }}</option>
+        </select>
+      </div>
+    </div>
 
-  <!-- Statut du joueur -->
-  <label for="statusJoueur">Statut du Joueur :</label>
-  <select class="form-control" formControlName="statusJoueur">
-    <option *ngFor="let s of StatusJoueur | keyvalue" [value]="s.value">{{ s.value }}</option>
-  </select>
+    <div class="form-row">
+      <!-- Intensité -->
+      <div class="form-group">
+        <label for="intensite">🔥 Intensité :</label>
+        <select class="form-control" formControlName="intensite">
+          <option *ngFor="let i of Intensite | keyvalue" [value]="i.value">{{ i.value }}</option>
+        </select>
+      </div>
+    </div>
 
-  <!-- Commentaire -->
-  <label for="commentaire">Commentaire :</label>
-  <textarea class="form-control" formControlName="commentaire"></textarea>
+    <div class="form-row">
+      <!-- Statut du joueur -->
+      <div class="form-group">
+        <label for="statusJoueur">🚦 Statut du Joueur :</label>
+        <select class="form-control" formControlName="statusJoueur">
+          <option *ngFor="let s of StatusJoueur | keyvalue" [value]="s.value">{{ s.value }}</option>
+        </select>
+      </div>
+    </div>
+    
+    <!-- Commentaire (pleine largeur) -->
+    <div class="form-group">
+      <label for="commentaire">📝 Commentaire :</label>
+      <textarea class="form-control" formControlName="commentaire"></textarea>
+    </div>
 
-  <!-- Bouton de soumission -->
-  <button type="submit" class="btn btn-primary" [disabled]="addForm.invalid">Ajouter</button>
-</form>
+    <!-- Boutons -->
+    <div class="form-buttons">
+      <button type="submit" [disabled]="addForm.invalid" class="submit-btn">
+        ✅ Ajouter
+      </button>
+      <a [routerLink]="['/health/health-records']" class="cancel-btn">❌ Annuler</a>
+    </div>
+  </form>
+</div>

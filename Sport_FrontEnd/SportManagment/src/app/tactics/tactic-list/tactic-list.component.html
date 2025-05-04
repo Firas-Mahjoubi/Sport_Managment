@@ -52,11 +52,30 @@
       </div>
     </div>
 
+    <!-- Pagination Controls -->
+   <!-- Pagination Controls -->
+<div class="pagination">
+  <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }}</span>
+  <button (click)="nextPage()" [disabled]="filteredTactics.length < itemsPerPage">Next</button>
+</div>
+
+
     <!-- Floating Add Button -->
     <div class="add-button">
       <button mat-fab color="primary" (click)="openCreateDialog()">
         <mat-icon>+</mat-icon>
       </button>
     </div>
+    <div class="floating-button">
+      <button mat-fab color="primary" (click)="toggleChat()">
+        Ask AI
+      </button>
+    </div>
+    <app-ai-chat *ngIf="isChatOpen"></app-ai-chat>
+
   </div>
+
+  <!-- AI Chat Component -->
+  
 </body>

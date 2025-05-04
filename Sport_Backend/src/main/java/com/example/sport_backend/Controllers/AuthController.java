@@ -4,7 +4,6 @@ import com.example.sport_backend.Entity.ClubHouse.User;
 import com.example.sport_backend.Entity.Enum.Role;
 import com.example.sport_backend.Repositories.ClubHouse.UserRepositories;
 import com.example.sport_backend.ServiceImpl.ClubHouse.EmailService;
-import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,7 +12,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -61,6 +59,7 @@ public class AuthController {
             return ResponseEntity.ok(Map.of(
                     "message", "Login successful!",
                     "role", user.getRole().name(), // ✅ Convert Enum Role to String
+                    "userId", user.getId().toString(),  // Include userId in the response
                     "email", user.getEmail()
             ));
         } else {
@@ -136,7 +135,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(Map.of("message", "Error: Email already exists!"));
         }
         if (user.getRole() == null) {
-            user.setRole(Role.COACH);
+            user.setRole(Role.COACH); // Set default role to COACH
         }
         // Encrypt password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -148,18 +147,16 @@ public class AuthController {
 
         userRepository.save(user);
 
-        // Debugging Logs
-        System.out.println("✅ User saved successfully: " + user.getEmail());
-        System.out.println("✅ Sending verification email...");
-
         // Send verification email
         String verificationLink = "http://localhost:8088/api/auth/verify?token=" + verificationToken;
         emailService.sendVerificationEmail(user.getEmail(), verificationLink);
 
-        System.out.println("✅ Verification email sent successfully!");
-
-        return ResponseEntity.ok(Map.of("message", "User registered successfully! Please check your email for verification."));
+        return ResponseEntity.ok(Map.of(
+                "message", "User registered successfully! Please check your email for verification.",
+                "userId", user.getId().toString() // Send userId in the response
+        ));
     }
+
 
 
 

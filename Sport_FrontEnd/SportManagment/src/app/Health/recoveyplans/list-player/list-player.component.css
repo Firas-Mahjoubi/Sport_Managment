@@ -1,0 +1,260 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+/* 📦 Conteneur principal */
+.player-container {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px) brightness(0.8);
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 6px 20px rgba(0, 255, 128, 0.5);
+  border: 1px solid rgba(0, 255, 128, 0.5);
+}
+
+/* 🏆 Titre */
+.title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #00ff80;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 10px rgba(0, 255, 128, 0.7);
+}
+
+/* 📋 Tableau stylisé */
+.player-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  box-shadow: 0px 4px 10px rgba(0, 255, 128, 0.3);
+}
+
+.player-table th, .player-table td {
+  padding: 14px;
+  text-align: left;
+  font-size: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.player-table th {
+  background: rgba(0, 255, 128, 0.9);
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.player-table tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.player-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transition: 0.3s ease-in-out;
+}
+
+/* 🔘 Boutons */
+.btn {
+  font-weight: bold;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 13px;
+  border: none;
+}
+
+.btn-sm {
+  padding: 8px 14px;
+  font-size: 12px;
+}
+
+/* ✅ Bouton Sélectionner */
+.btn-select {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-select:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+
+/* 🔘 Boutons en bas */
+.bottom-buttons {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between; /* Utilise space-between pour espacer les boutons */
+  gap: 15px;
+  z-index: 1000;
+  padding: 0 20px; /* Espace entre les bords de l'écran et les boutons */
+}
+
+/* 🔙 Bouton Retour */
+.btn-back-health {
+  background-color: #00cc66;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-back-health:hover {
+  background-color: #e6b800;
+  transform: scale(1.05);
+}
+
+/* 🏥 Bouton Voir Recovery Plan */
+.btn-recovery {
+  background-color: #00ff00;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-recovery:hover {
+  background-color: #009900;
+  transform: scale(1.05);
+}
+
+
+
+
+
+
+/*pagination*/
+
+.futuristic-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.page-indicators {
+  display: flex;
+  gap: 10px;
+}
+
+.page-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 153, 0, 0.08);  /* Changement ici */
+  color: #009900;  /* Changement ici */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #009900;  /* Changement ici */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(0, 153, 0, 0.3);  /* Changement ici */
+  backdrop-filter: blur(3px);
+}
+
+.page-circle:hover {
+  background: #009900;  /* Changement ici */
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px #009900;  /* Changement ici */
+}
+
+.page-circle.active {
+  background: #009900;  /* Changement ici */
+  color: white;
+  box-shadow: 0 0 15px #009900, 0 0 30px #009900;  /* Changement ici */
+}
+
+.page-button {
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: #009900;  /* Changement ici */
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.page-button:hover:not(:disabled) {
+  transform: scale(1.3);
+  color: #006600;  /* Changement ici */
+}
+
+.page-button:disabled {
+  color: #009900;  /* Changement ici */
+  opacity: 1;
+  filter: none;
+  cursor: default;
+  pointer-events: none;
+  background: transparent;
+  box-shadow: none;
+  color: rgba(0, 153, 0, 0.3);  /* Changement ici */
+}
+
+.dots {
+  color: #009900;  /* Changement ici */
+  font-size: 20px;
+  margin: 0 6px;
+  font-weight: bold;
+  opacity: 0.6;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
+
+/* Style pour le champ de recherche */
+.search-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-container input {
+  width: 300px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.search-container input:focus {
+  border-color: #007bff; /* Bordure bleue lors du focus */
+}
+
+
+
+/* Style pour le placeholder du champ de recherche */
+input::placeholder {
+  color: #009900;  /* Couleur turquoise */
+  opacity: 1;  /* S'assurer que la couleur est bien visible */
+}

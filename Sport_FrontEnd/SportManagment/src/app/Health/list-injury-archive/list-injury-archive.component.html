@@ -1,3 +1,15 @@
+<!-- 🌌 Arrière-plan avec une image en HTML -->
+<div style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('/assets/injury1.jpg') no-repeat center center/cover;
+  filter: brightness(0.4);
+  z-index: -1;">
+</div>
+
 <div class="container mt-4">
   <h2 class="text-center">📜 Blessures Archivées</h2>
 
@@ -10,9 +22,7 @@
         <th>Gravité</th>
         <th>Description</th>
         <th>Status</th>
-        <th>Durée</th>
-        <th>Traitement</th>
-        <th>Actions</th>
+
       </tr>
     </thead>
     <tbody>
@@ -31,10 +41,14 @@
         <td>{{ injury.severity }}</td>
         <td>{{ injury.description }}</td>
         <td>{{ injury.status }}</td>
-        <td>{{ injury.duration }} jours</td>
-        <td>{{ injury.treatment }}</td>
-       
+
+
+
       </tr>
     </tbody>
   </table>
 </div>
+<!-- 🔙 Bouton Retour -->
+<a [routerLink]="['/health/injury']" class="btn-back">
+  ⬅️ Retour à la Liste des Blessures
+</a>

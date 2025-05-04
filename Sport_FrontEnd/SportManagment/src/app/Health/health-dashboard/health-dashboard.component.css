@@ -1,0 +1,413 @@
+/* 🎬 Vidéo en arrière-plan */
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* 🌟 Titre avec effet néon */
+.title {
+  left: 10px;                    /* décalage vers la gauche */
+  font-size: 5rem;               /* agrandi */
+  top : 80%;
+  font-size: 2.5rem;
+  color: red;
+  text-shadow: 0px 0px 15px red;
+  margin-bottom: 20px;
+  text-align: right;
+  margin-right: 10px;
+  margin-top: 50px;
+  animation: flicker 1.5s infinite alternate;
+}
+
+/* 🔥 Animation du texte (flickering) */
+@keyframes flicker {
+  0% { opacity: 1; }
+  100% { opacity: 0.8; text-shadow: 0px 0px 20px red; }
+}
+
+/* 📌 Grille des cartes : aligne à gauche en colonne */
+.grid {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  margin-left: 50px;
+}
+
+
+.site-navigation {
+ right: -200px;
+ font-size: 1.25rem; /* Ajustez cette valeur selon vos besoins */
+}
+
+
+
+
+.card {
+  width: 320px;
+  height: 180px; /* 🆕 hauteur réduite (par exemple) */
+  padding: 15px; /* 🆕 padding réduit */
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* Effet de lumière néon */
+.card::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: rgba(255, 0, 0, 0.5);
+  filter: blur(10px);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* 🎮 Animation des icônes */
+.animated-icon {
+  display: block;
+  margin: auto;
+  animation: pulse 1.5s infinite alternate;
+}
+
+/* Effet de hover avec glow */
+.card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 0, 0, 1);
+}
+
+/* Couleurs spécifiques */
+.injury {
+  background: linear-gradient(45deg, #8B0000, #FF0000);
+}
+
+.records {
+  background: linear-gradient(45deg, #002B5B, #007BFF);
+}
+
+.recovery {
+  background: linear-gradient(45deg, #004d00, #00ff00);
+}
+
+/* 🔥 Effet futuriste des boutons */
+.btn-light {
+  background: black;
+  color: white;
+  border: 2px solid white;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Effet interactif au survol */
+.btn-light:hover {
+  background: white;
+  color: black;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+  transform: scale(1.05);
+}
+
+/* 🌟 Animation pulsation */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.2); opacity: 1; }
+}
+
+.site-navigation {
+  display: flex;
+  justify-content: flex-end; /* Aligne tout le menu à droite */
+
+}
+
+.site-menu {
+  list-style: none;
+  display: flex;
+  gap: 20px; /* Espacement entre les éléments */
+}
+
+.site-menu li {
+  display: inline-block;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white; /* Ajuste selon ton design */
+  padding: 10px 15px;
+}
+
+
+.pdf-button-container {
+  position: absolute; /* Pour positionner le bouton de manière absolue */
+  right: 20px; /* Décalage à droite */
+  top: 50%; /* Centrer verticalement */
+  transform: translateY(-50%); /* Ajuster le centrage */
+}
+
+.btn-generate-pdf {
+  background-color: #007bff; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  border: none; /* Pas de bordure */
+  padding: 10px 20px; /* Espacement intérieur */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Curseur en forme de main */
+  transition: background-color 0.3s; /* Transition pour effet au survol */
+}
+
+.btn-generate-pdf:hover {
+  background-color: #0056b3; /* Couleur de fond au survol */
+}
+
+
+
+
+/* Définition de la carte PDF Manager */
+.card.pdf-manager {
+  background: linear-gradient(45deg, #8e44ad, #c0392b);
+  margin-left: auto;  /* Pousse la carte vers la droite */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 0;  /* Enlève l'espace en haut */
+}
+
+/* Définition de la carte Comparer les Joueurs */
+.card.compare-players {
+  background: linear-gradient(45deg, #f39c12, #d35400);
+  margin-left: auto;  /* Pousse la carte vers la droite */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 0;  /* Enlève l'espace en haut */
+}
+
+
+
+
+
+/* 🎮 Carte "Gérer Sélection Terrain" */
+.card.select-players {
+  background: linear-gradient(45deg, #1a1a1a, #004d00); /* Fond dégradé vert foncé */
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6); /* Ombre néon rouge */
+  backdrop-filter: blur(8px); /* Flou de fond */
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Effet de lumière néon pour la carte */
+.card.select-players::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: rgba(255, 0, 0, 0.5);
+  filter: blur(10px);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card.select-players:hover::before {
+  opacity: 1;
+}
+
+/* Animation de l'icône */
+.animated-icon {
+  display: block;
+  margin: auto;
+  animation: pulse 1.5s infinite alternate; /* Animation pulsée */
+}
+
+/* Effet de survol de la carte */
+.card.select-players:hover {
+  transform: scale(1.1); /* Agrandissement de la carte */
+  box-shadow: 0 0 30px rgba(255, 0, 0, 1); /* Lumière rouge au survol */
+}
+
+/* 🌟 Titre avec effet néon */
+.card-header {
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 0px 0px 15px red; /* Ombre néon rouge */
+  margin-bottom: 20px;
+  animation: flicker 1.5s infinite alternate; /* Animation de scintillement */
+}
+
+/* Animation flicker pour le titre */
+@keyframes flicker {
+  0% { opacity: 1; }
+  100% { opacity: 0.8; text-shadow: 0px 0px 20px red; }
+}
+
+/* 💡 Contenu du bouton futuriste */
+.go-to-selector-btn {
+  background: black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid white;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Lumière blanche */
+}
+
+.go-to-selector-btn:hover {
+  background: white;
+  color: black;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 1); /* Lumière au survol */
+  transform: scale(1.05);
+}
+
+/* 💡 Texte du bouton */
+.card-body p {
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+/* 🎡 Carousel 3D */
+
+
+
+.carousel-container {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+.circular-carousel {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  cursor: grab;
+}
+.card-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220px;
+  height: 260px;
+  margin: -130px 0 0 -110px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+  transform: rotateY(calc(var(--i) * 60deg)) translateZ(600px);
+  transition: transform 0.5s, opacity 0.5s;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.card-item a {
+
+  display: inline-block;
+  margin-top: -20px;
+  background: #00ffee;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+
+.card-item a:hover {
+
+  background: #0ff;
+  color: black;
+}
+
+
+
+
+.card-item i {
+  margin-top: -20px;
+
+  font-size: 3rem;
+}
+
+.card-item h4 {
+  margin-top: -20px;
+  margin: 1rem 0;
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+  .card-item {
+    width: 160px;
+    height: 200px;
+    margin: -100px 0 0 -80px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .card, .card-item {
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    transform: none !important;
+    position: static;
+  }
+
+  .carousel-container {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .circular-carousel {
+    display: none; /* ou alternative mobile */
+  }
+}
+
+

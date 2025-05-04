@@ -16,20 +16,16 @@ export interface RecoveryPlan {
   injury: Injury;
 
 
-
-  
 }
 
 
-
-
-// Enums associés
 // Enums associés (frontend Angular)
 export enum PlanType {
   PHYSIOTHERAPY = 'PHYSIOTHERAPY',
   REST = 'REST',
   STRENGTH_TRAINING = 'STRENGTH_TRAINING'
 }
+
 
 export enum PlanStatus {
   EN_COURS = 'EN_COURS',

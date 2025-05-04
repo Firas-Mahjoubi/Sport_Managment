@@ -1,17 +1,46 @@
-<mat-card *ngIf="recoveryPlan">
-  <mat-card-title>Plan de Récupération #{{ recoveryPlan.id }}</mat-card-title>
-  <mat-card-content>
-    <p><strong>Description :</strong> {{ recoveryPlan.planDescription }}</p>
-    <p><strong>Date de début :</strong> {{ recoveryPlan.startDate }}</p>
-    <p><strong>Date estimée de fin :</strong> {{ recoveryPlan.estimatedEndDate }}</p>
-    <p><strong>Date réelle de fin :</strong> {{ recoveryPlan.actualEndDate || 'Non renseignée' }}</p>
-    <p><strong>Progression :</strong> {{ recoveryPlan.progress }}%</p>
-    <p><strong>Fréquence des séances :</strong> {{ recoveryPlan.sessionFrequency }} par semaine</p>
-    <p><strong>Durée de chaque séance :</strong> {{ recoveryPlan.sessionDuration }} minutes</p>
-    <p><strong>Type de plan :</strong> {{ recoveryPlan.planType }}</p>
-    <p><strong>Date de prochaine revue :</strong> {{ recoveryPlan.nextReviewDate }}</p>
-    <p><strong>Ajustements :</strong> {{ recoveryPlan.adjustments }}</p>
-    <p><strong>Statut :</strong> {{ recoveryPlan.planStatus }}</p>
-    <p><strong>Injury Concernée :</strong> {{ recoveryPlan.injury.description }}</p>
-  </mat-card-content>
-</mat-card>
+<!-- 🌌 Arrière-plan avec une image -->
+<div style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('/assets/player.jpg') no-repeat center center/cover;
+  filter: brightness(0.3);
+  z-index: -1;">
+</div>
+
+<!-- 🏥 Conteneur principal -->
+<div class="recovery-plan-container">
+  <mat-card *ngIf="recoveryPlan" class="recovery-card">
+    <mat-card-title>🏥 Plan de Récupération #{{ recoveryPlan.id }}</mat-card-title>
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+      <p><strong>📝 Description :</strong> {{ recoveryPlan.planDescription }}</p>
+      <p><strong>📅 Date de début :</strong> {{ recoveryPlan.startDate | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>📆 Date estimée de fin :</strong> {{ recoveryPlan.estimatedEndDate | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>✅ Date réelle de fin :</strong> {{ recoveryPlan.actualEndDate ? (recoveryPlan.actualEndDate | date: 'dd/MM/yyyy') : 'Non renseignée' }}</p>
+      <p><strong>📊 Progression :</strong> {{ recoveryPlan.progress }}%</p>
+
+      <!-- 🔥 Barre de progression -->
+      <mat-progress-bar mode="determinate" [value]="recoveryPlan.progress"></mat-progress-bar>
+
+      <p><strong>📅 Fréquence des séances :</strong> {{ recoveryPlan.sessionFrequency }} / semaine</p>
+      <p><strong>⏳ Durée de chaque séance :</strong> {{ recoveryPlan.sessionDuration }} minutes</p>
+      <p><strong>🛠️ Type de plan :</strong> {{ recoveryPlan.planType }}</p>
+      <p><strong>🔄 Prochaine revue :</strong> {{ recoveryPlan.nextReviewDate | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>📝 Ajustements :</strong> {{ recoveryPlan.adjustments }}</p>
+      <p><strong>📌 Statut :</strong> {{ recoveryPlan.planStatus }}</p>
+      <p><strong>⚠️ Blessure concernée :</strong> {{ recoveryPlan.injury.description }}</p>
+    </mat-card-content>
+
+
+    <!-- 🔙 Bouton Retour -->
+    <mat-card-actions>
+      <button mat-button color="primary" [routerLink]="['/list-recoveryplan', recoveryPlan.injury.player.id]">
+        ⬅️ Retour à la liste
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

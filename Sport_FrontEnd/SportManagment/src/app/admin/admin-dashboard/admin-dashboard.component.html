@@ -1,0 +1,64 @@
+<app-admin-header></app-admin-header>
+<app-admin-sidebar></app-admin-sidebar>
+
+<!-- Dashboard Main Content -->
+<div class="container-fluid main-content">
+  <div class="row">
+    <!-- Left side columns for stats or summary -->
+    <div class="col-lg-9 col-md-8">
+      <div *ngIf="loading" class="alert alert-info">Loading...</div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Dashboard Content: User Table -->
+      <div *ngIf="!loading && userData.length > 0" class="d-flex justify-content-center">
+        <div class="card w-100" style="max-width: 100%; margin-top: 20px;">
+          <div class="card-header">
+            <h5>User Dashboard</h5>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>phoneNumber</th>
+                  <th>Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of userData">
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.phoneNumber }}</td>
+                  <td>{{ user.role }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- No Users Found -->
+      <div *ngIf="!loading && userData.length === 0">
+        <div class="alert alert-warning">No users found.</div>
+      </div>
+    </div>
+
+    <!-- Right side columns for additional information -->
+    <div class="col-lg-3 col-md-4">
+      <!-- Quick Stats or other information -->
+      <div class="card">
+        <div class="card-header">
+          <h5>Quick Stats</h5>
+        </div>
+        <div class="card-body">
+          <p>Total Users: {{ userData.length }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

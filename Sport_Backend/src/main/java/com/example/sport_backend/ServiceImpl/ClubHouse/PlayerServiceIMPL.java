@@ -1,23 +1,30 @@
 package com.example.sport_backend.ServiceImpl.ClubHouse;
 
-import com.example.sport_backend.Entity.ClubHouse.Player;
+import com.example.sport_backend.Entity.ClubHouse.*;
+
+import com.example.sport_backend.Entity.Enum.Categories;
+import com.example.sport_backend.Repositories.ClubHouse.ClubRepo;
 import com.example.sport_backend.Repositories.ClubHouse.PlayerRepo;
+import com.example.sport_backend.Repositories.ClubHouse.TeamRepositories;
 import com.example.sport_backend.ServiceInterface.ClubHouse.IPlayerService;
-import com.example.sport_backend.ServiceInterface.ClubHouse.ITeamService;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.IOException;
 import java.util.List;
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class PlayerServiceIMPL implements IPlayerService {
 
 
 
-    public PlayerRepo playerRepo;
+    private final PlayerRepo playerRepo;
+    private final ClubRepo clubRepo;
+    private final TeamRepositories teamRepositories;
+
 
     @Override
     public List<Player> getAllPlayers() {
@@ -26,13 +33,46 @@ public class PlayerServiceIMPL implements IPlayerService {
 
     @Override
     public Player getPlayerById(Long id) {
-        return playerRepo.findById(id).orElse(null);
+        Player player = playerRepo.findById(id).orElse(null);
+        if (player == null) return null;
+
+        // Team name
+        if (player.getTeam() != null) {
+            player.setTeamName(player.getTeam().getName());
+
+            // Club name via team
+            if (player.getTeam().getClub() != null) {
+                player.setClubName(player.getTeam().getClub().getName());
+            } else {
+                player.setClubName("Not assigned");
+            }
+
+        } else {
+            player.setTeamName("Not assigned");
+            player.setClubName("Not assigned");
+        }
+
+        return player;
     }
 
-    @Override
-    public Player addPlayer(Player player) {
 
-        return playerRepo.save(player);
+
+    @Override
+    public Player addPlayer(PlayerRequest player) throws IOException {
+        Club club=clubRepo.findById(player.getClubId()).orElseThrow(()->new EntityNotFoundException("Club not found"));
+        Team team =teamRepositories.findByNameAndCategorie(club.getName(), Categories.valueOf(player.getCategory().toString())).orElseThrow(()->new EntityNotFoundException("Team not found"));
+
+        return playerRepo.save(Player.builder()
+                        .FirstName(player.getFirstName())
+                        .LastName(player.getLastName())
+                        .imageUrl(player.getImageUrl().getBytes())
+                        .playerNumber(player.getPlayerNumber())
+                        .position(player.getPosition())
+                        .performanceStats(player.getPerformanceStats())
+                        .birthDate(player.getBirthDate()) // ✅ AJOUT ICI
+                        .club(club)
+                        .team(team)
+                        .build());
     }
 
     @Override
@@ -52,4 +92,14 @@ public class PlayerServiceIMPL implements IPlayerService {
     public List<Player> getPlayersWithoutHealthRecord() {
         return playerRepo.findPlayersWithoutHealthRecord();
     }
+
+    @Override
+    public List<Player> getSortedPlayers(String field, String direction) {
+        if (direction.equalsIgnoreCase("desc")) {
+            return playerRepo.findAll(org.springframework.data.domain.Sort.by(field).descending());
+        } else {
+            return playerRepo.findAll(org.springframework.data.domain.Sort.by(field).ascending());
+        }
+    }
+
 }

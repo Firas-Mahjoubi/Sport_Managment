@@ -1,0 +1,105 @@
+
+<app-admin-sidebar></app-admin-sidebar>
+<div class="container-fluid gradient-bg">
+  <div class="row justify-content-center py-5">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+      <div class="card shadow-neumorphic rounded-4 border-0 overflow-hidden">
+        <!-- En-tête avec effet de vague -->
+        <div class="card-header wave-header position-relative pt-5 pb-4">
+          <h2 class="text-white text-center mb-0 display-5 fw-bold">
+            <i class="bi bi-trophy-fill me-2"></i>
+            {{ isEditMode ? 'Edit League' : 'Create League' }}
+          </h2>
+          <div class="wave-wrapper">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+          </div>
+        </div>
+
+        <!-- Corps du formulaire -->
+        <div class="card-body px-4 px-md-5 pt-4 pb-5">
+          <form (ngSubmit)="saveLeague()" #leagueForm="ngForm">
+            <!-- Champ Nom -->
+            <div class="form-floating mb-4">
+              <input 
+                type="text" 
+                id="name" 
+                class="form-control border-0 rounded-3 input-glass" 
+                [(ngModel)]="league.name" 
+                name="name" 
+                required
+                placeholder="Premier League"
+              >
+              <label for="name" class="small text-muted">
+                <i class="bi bi-fonts me-2"></i>League Name
+              </label>
+              <div class="invalid-feedback d-flex align-items-center mt-2">
+                <i class="bi bi-exclamation-circle me-2"></i>Please enter a valid name
+              </div>
+            </div>
+
+            <!-- Champ Pays -->
+            <div class="form-floating mb-4">
+              <input 
+                type="text" 
+                id="nation" 
+                class="form-control border-0 rounded-3 input-glass" 
+                [(ngModel)]="league.nation" 
+                name="nation" 
+                required
+                placeholder="England"
+              >
+              <label for="nation" class="small text-muted">
+                <i class="bi bi-globe-europe-africa me-2"></i>Country
+              </label>
+              <div class="invalid-feedback d-flex align-items-center mt-2">
+                <i class="bi bi-exclamation-circle me-2"></i>Please enter a country
+              </div>
+            </div>
+
+           <!-- Champ Logo -->
+<div class="form-floating mb-4">
+  <input 
+    type="url" 
+    id="logourl" 
+    class="form-control border-0 rounded-3 input-glass" 
+    [(ngModel)]="league.logourl" 
+    name="logourl" 
+    placeholder="https://example.com/logo.png"
+  >
+  <label for="logourl" class="small text-muted">
+    <i class="bi bi-image me-2"></i>Logo URL
+  </label>
+
+  <!-- Prévisualisation du logo -->
+  <div class="logo-preview mt-3" *ngIf="league.logourl">
+    <img 
+      [src]="league.logourl || 'assets/default-league.png'" 
+      alt="Logo preview" 
+      class="img-thumbnail rounded-circle shadow-sm"
+      width="120"
+      height="120"
+      (error)="league.logourl = 'assets/default-league.png'">
+  </div>
+</div>
+
+            <!-- Bouton de soumission -->
+            <div class="d-grid mt-4">
+              <button 
+                type="submit" 
+                class="btn btn-glow-primary rounded-pill py-3 fw-bold"
+                [disabled]="leagueForm.invalid"
+                [ngClass]="{'btn-disabled': leagueForm.invalid}"
+              >
+                <i class="bi bi-cloud-arrow-up me-2"></i>
+                {{ isEditMode ? 'Update League' : 'Publish League' }}
+                <i class="bi bi-lightning-charge-fill ms-2"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

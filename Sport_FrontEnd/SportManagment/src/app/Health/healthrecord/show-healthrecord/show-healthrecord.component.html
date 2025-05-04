@@ -1,38 +1,51 @@
+<!-- 🌌 Arrière-plan sombre avec une image -->
+<div style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('/assets/health.jpg') no-repeat center center/cover;
+  filter: brightness(0.4);
+  z-index: -1;">
+</div>
+
 <div class="container mt-4">
-  <div class="card shadow-lg p-4">
+  <h2 class="text-center">🏥 Détails du Dossier de Santé</h2>
+
+  <!-- 🔙 Bouton Retour -->
+  <div class="text-left">
+    <a routerLink="/health/health-records" class="btn btn-back">
+      ⬅️ Retour à la Liste des Dossiers de Santé
+    </a>
+  </div>
+
+  <!-- ⏳ Affichage du chargement -->
+  <div *ngIf="loading" class="text-center">
+    <p>⏳ Chargement...</p>
+  </div>
+
+  <!-- ❌ Erreur si le health record n'existe pas -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- ✅ Affichage des détails -->
+  <div *ngIf="healthRecord" class="card">
     <div class="card-body">
-      <h2 class="card-title text-primary text-center mb-4">Détails du Health Record</h2>
+      <h5 class="card-title">Nom: {{ healthRecord.name }}</h5>
+      <p class="card-text"><strong>Date :</strong> {{ healthRecord.date | date:'dd/MM/yyyy' }}</p>
+      <p class="card-text"><strong>Fatigue :</strong> {{ healthRecord.fatigue }}</p>
+      <p class="card-text"><strong>État Physique :</strong> {{ healthRecord.etatPhysique }}</p>
+      <p class="card-text"><strong>Douleurs Musculaires :</strong> {{ healthRecord.douleursMusculaires }}</p>
+      <p class="card-text"><strong>Intensité :</strong> {{ healthRecord.intensite }}</p>
+      <p class="card-text"><strong>Statut du Joueur :</strong> {{ healthRecord.statusJoueur }}</p>
+      <p class="card-text"><strong>Commentaire :</strong> {{ healthRecord.commentaire }}</p>
 
-      <!-- ✅ Affichage du chargement -->
-      <div *ngIf="loading" class="alert alert-info d-flex align-items-center">
-        <span class="spinner-border spinner-border-sm me-2"></span> Chargement en cours...
-      </div>
-
-      <!-- ✅ Affichage d'une erreur -->
-      <div *ngIf="errorMessage" class="alert alert-danger text-center">
-        <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ errorMessage }}
-      </div>
-
-      <!-- ✅ Affichage des détails du Health Record -->
-      <div *ngIf="healthRecord">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><strong>Nom :</strong> {{ healthRecord.name }}</li>
-          <li class="list-group-item"><strong>Date :</strong> {{ healthRecord.date }}</li>
-          <li class="list-group-item"><strong>Fatigue :</strong> {{ healthRecord.fatigue }}</li>
-          <li class="list-group-item"><strong>État Physique :</strong> {{ healthRecord.etatPhysique }}</li>
-          <li class="list-group-item"><strong>Douleurs Musculaires :</strong> {{ healthRecord.douleursMusculaires }}</li>
-          <li class="list-group-item"><strong>Intensité :</strong> {{ healthRecord.intensite }}</li>
-          <li class="list-group-item"><strong>Statut du Joueur :</strong> {{ healthRecord.statusJoueur }}</li>
-          <li class="list-group-item"><strong>Commentaire :</strong> {{ healthRecord.commentaire }}</li>
-        </ul>
-      </div>
-
-      <!-- ✅ Bouton Retour -->
-      <div class="text-center mt-4">
-        <button class="btn btn-outline-primary" (click)="goBack()">
-          ⬅ Retour
-        </button>
-      </div>
+      <!-- 🔙 Bouton Retour au Dashboard Santé -->
+      <a routerLink="/health-dashboard" class="btn btn-primary">
+        🔙 Retour au Tableau de Santé
+      </a>
     </div>
   </div>
 </div>

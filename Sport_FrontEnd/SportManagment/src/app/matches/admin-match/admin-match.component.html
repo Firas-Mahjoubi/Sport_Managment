@@ -1,10 +1,10 @@
 <div class="header">
-<app-admin-header></app-admin-header>
+  <app-admin-header></app-admin-header>
 </div>
 <div class="sidebar">
-  <app-admin-sidebar> </app-admin-sidebar>
- </div>
-  <div class="content-wrapper">
+  <app-admin-sidebar></app-admin-sidebar>
+</div>
+<div class="content-wrapper">
   <div class="container">
     <h2 class="text-center my-4">Match Generator</h2>
 
@@ -35,6 +35,18 @@
       <div class="col-md-6">
         <button class="btn btn-success w-100" (click)="getMatches()" [disabled]="loading">
           {{ loading ? 'Loading...' : 'Get Matches' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- PDF Upload Section -->
+    <div class="row mb-4 dashboard-controls">
+      <div class="col-md-6">
+        <input type="file" class="form-control" accept=".pdf" (change)="onFileSelected($event)" />
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-info w-100" (click)="uploadPDF()" [disabled]="!selectedFile || uploading">
+          {{ uploading ? 'Uploading...' : 'Upload PDF' }}
         </button>
       </div>
     </div>
@@ -98,4 +110,4 @@
       </div>
     </div>
   </div>
-  </div>
+</div>

@@ -4,6 +4,7 @@ import { Player } from '../models/player';
 import { Injury, Severity, Status, ZoneAffectee, Type } from '../models/injury';
 import { InjuryService } from '../services/injury.service';
 import { PlayerService } from '../services/player.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class InjuryAddComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private injuryService: InjuryService,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private router: Router // 🔥 Injection du Router
   ) {}
 
   ngOnInit(): void {
@@ -76,6 +78,7 @@ export class InjuryAddComponent implements OnInit {
 
       this.injuryService.addInjury(newInjury).subscribe(() => {
         alert('Blessure ajoutée avec succès !');
+        this.router.navigate(['/health/injury']); // 🚀 Redirection automatique
       });
     }
   }

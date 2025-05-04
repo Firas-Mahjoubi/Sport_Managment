@@ -1,13 +1,91 @@
-.recoveryplan-card {
-  background-color: #1a1a1a;
-  color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
-  max-width: 600px;
+/* 🌌 Arrière-plan et mise en page */
+.show-recovery-container {
+  background-color: rgba(17, 17, 17, 0.9);
+  color: #fff;
+  padding: 30px;
+  border-radius: 12px;
   margin: 40px auto;
-  font-family: 'Arial', sans-serif;
+  max-width: 800px;
+  border: 1px solid #00ff00;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0px 4px 10px rgba(0, 255, 0, 0.3);
+  backdrop-filter: blur(8px);
 }
-mat-list-item {
-  border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+
+/* 🔵 Titre */
+.show-recovery-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #00ff00;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 10px rgba(0, 255, 0, 0.7);
+}
+
+/* 📌 Mat Card */
+mat-card {
+  background: rgba(0, 0, 0, 0.8) !important;
+  color: white !important;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #00ff00;
+  box-shadow: 0px 4px 10px rgba(0, 255, 0, 0.3);
+}
+
+/* 🏥 Infos du plan de récupération */
+.recovery-info p {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.recovery-info strong {
+  color: #00ff00;
+}
+
+/* 📊 Barre de progression */
+mat-progress-bar {
+  height: 10px !important;
+  border-radius: 5px;
+}
+
+/* 🔘 Boutons */
+.mat-card-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn-back {
+  background-color: #00cc66;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-back:hover {
+  background-color: #e6b800;
+  transform: scale(1.05);
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .show-recovery-container {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .show-recovery-title {
+    font-size: 24px;
+  }
+
+  .recovery-info p {
+    font-size: 14px;
+  }
 }
