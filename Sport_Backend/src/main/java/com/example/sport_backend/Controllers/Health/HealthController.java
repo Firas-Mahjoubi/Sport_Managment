@@ -62,5 +62,16 @@ public class HealthController {
         return ResponseEntity.ok(healthRecord.getPlayer());
     }
 
+    // 🔥 Nouvelle méthode pour récupérer par playerId
+    @GetMapping("/getHealthRecordByPlayerId/{playerId}")
+    public ResponseEntity<HealthRecord> getHealthRecordByPlayerId(@PathVariable Long playerId) {
+        HealthRecord healthRecord = healthService.findByPlayerId(playerId);
+        if (healthRecord != null) {
+            return ResponseEntity.ok(healthRecord);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }

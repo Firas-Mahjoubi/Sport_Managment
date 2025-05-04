@@ -1,0 +1,111 @@
+<!-- 🌌 Arrière-plan avec une image -->
+<div style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('/assets/health.jpg') no-repeat center center/cover;
+  filter: brightness(0.4);
+  z-index: -1;">
+</div>
+
+<div class="pdf-manager-container">
+  <h2 class="title">⚽ Liste des Joueurs</h2>
+  <input
+  type="text"
+  class="form-control mb-3"
+  placeholder="🔍 Rechercher par nom de famille"
+  [(ngModel)]="searchTerm"
+  (input)="filterPlayers()"
+/>
+
+
+  <table class="table table-striped table-hover player-table">
+    <thead>
+      <tr>
+        <th>👤 Nom</th>
+        <th>🏆 Prénom</th>
+        <th>📌 Position</th>
+        <th>🎽 Numéro</th>
+        <th>📄 Gérer PDF</th> <!-- Nouvelle colonne pour générer le PDF -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let player of visiblePlayers()"
+      >
+        <td>{{ player.lastName }}</td>
+        <td>{{ player.firstName }}</td>
+        <td>{{ player.position }}</td>
+        <td>{{ player.playerNumber }}</td>
+        <td>
+          <button (click)="generatePdf(player)" class="btn btn-generate-pdf">📄 Générer PDF</button> <!-- Bouton pour générer le PDF -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- 🔮 Pagination Futuriste -->
+  <div *ngIf="totalPages > 1" class="futuristic-pagination mt-4">
+    <button
+      class="page-button prev"
+      [disabled]="currentPage === 1"
+      (click)="changePage(currentPage - 1)">
+      «
+    </button>
+
+    <div class="page-indicators">
+      <!-- Toujours afficher la première page -->
+      <span
+        class="page-circle"
+        [class.active]="currentPage === 1"
+        (click)="changePage(1)">
+        1
+      </span>
+
+      <!-- Afficher ... si currentPage > 4 -->
+      <span *ngIf="currentPage > 4" class="dots">...</span>
+
+      <!-- Pages dynamiques du milieu -->
+      <span
+        *ngFor="let page of visiblePagesNumbers()"
+        class="page-circle"
+        [class.active]="currentPage === page"
+        (click)="changePage(page)">
+        {{ page }}
+      </span>
+
+      <!-- Afficher ... si currentPage < totalPages - 3 -->
+      <span *ngIf="currentPage < totalPages - 3" class="dots">...</span>
+
+      <!-- Toujours afficher la dernière page -->
+      <span
+        class="page-circle"
+        [class.active]="currentPage === totalPages"
+        (click)="changePage(totalPages)">
+        {{ totalPages }}
+      </span>
+    </div>
+
+    <button
+      class="page-button next"
+      [disabled]="currentPage === totalPages"
+      (click)="changePage(currentPage + 1)">
+      »
+    </button>
+
+  </div>
+
+<!-- 🔘 Boutons en bas -->
+<div class="bottom-buttons">
+  <!-- 🔙 Bouton Retour au Tableau de Santé -->
+  <a [routerLink]="['/health-dashboard']" class="btn-back-health">
+    ⬅️ Retour au Tableau de Santé
+  </a>
+</div>
+
+
+</div>
+
+

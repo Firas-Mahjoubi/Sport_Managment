@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -98,12 +99,28 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
+
 import { TacticListComponent } from './tactics/tactic-list/tactic-list.component';
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
 import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
 import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+import { PdfManagerComponent } from './Health/pdf-manager/pdf-manager.component';
+import { ComparePlayersComponent } from './Health/compare-players/compare-players.component';
+import { PlayerTerrainSelectorComponent } from './Health/player-terrain-selector/player-terrain-selector.component';
+import { StatistiqueComponent } from './Health/statistique/statistique.component';
+
+
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
+
+
+
+
+
 import { AskQuestionComponent } from './matches/ask-question/ask-question.component';
 
 import { MatchesStatsComponent } from './matches/matches-stats/matches-stats.component';
@@ -116,6 +133,9 @@ import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr
 
 import { AiChatComponent } from './tactics/ai-chat/ai-chat.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { TacticstatestiqueComponent } from './tactics/tacticstatestique/tacticstatestique.component';
+import { PlotlyModule } from 'angular-plotly.js';
+
 
 
 @NgModule({
@@ -156,7 +176,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     AdminCardComponent,
     AddRecoveryplanComponent,
     EditRecoveryplanComponent,
- TacticListComponent,
+    TacticListComponent,
     TacticFormComponent,
     TacticFolderComponent,
     CreateTacticDialogComponent,
@@ -182,6 +202,14 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
           MatchesStatsComponent,
           StatsChartsComponent,
 
+    PdfManagerComponent,
+    ComparePlayersComponent,
+    PlayerTerrainSelectorComponent,
+    StatistiqueComponent,
+
+          AskQuestionComponent,
+
+
 
 
 
@@ -206,9 +234,12 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     PublicClubPlayersComponent,
     PublicPlayerQrComponent,
 
+    TacticstatestiqueComponent
+    
   ],
   imports: [
     BrowserModule,
+
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -227,7 +258,10 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 
     MatProgressBarModule,
     MatDividerModule,
+
+
     QRCodeModule ,
+
 
     MatDialogModule,
     MatDatepickerModule,
@@ -245,7 +279,32 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
         MatIconModule,
         MatFormFieldModule, // ✅ Required for mat-form-field
         MatSelectModule, // ✅ Required for mat-select
-        MatToolbarModule
+        MatToolbarModule,
+        MatTooltipModule
+
+    FormsModule,
+    ReactiveFormsModule,
+    MatMenuModule,
+    MatToolbarModule,
+
+    NgxEchartsModule.forRoot({ echarts })
+
+
+
+
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatInputModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatFormFieldModule, // ✅ Required for mat-form-field
+    MatSelectModule, // ✅ Required for mat-select
+    MatToolbarModule,
+    
+
 
   ],
   providers: [],

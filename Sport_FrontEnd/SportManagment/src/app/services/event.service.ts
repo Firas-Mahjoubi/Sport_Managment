@@ -26,15 +26,14 @@ export class EventService {
     return this.http.get<Event>(`${this.apiUrl}/getEventById/${idEvent}`);
   }
 
-  
+
 removeEvent(idEvent: number): Observable<void> {
   return this.http.delete<void>(`${this.apiUrl}/removeEventById/${idEvent}`);
 }
 
 
-
-
 }
+
 
 // Interface pour représenter un événement
 export interface Event {

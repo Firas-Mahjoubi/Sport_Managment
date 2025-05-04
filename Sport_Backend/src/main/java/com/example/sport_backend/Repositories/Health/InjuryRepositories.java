@@ -31,4 +31,7 @@ public interface InjuryRepositories extends JpaRepository<Injury, Long> {
 
 
 
+
+
+
 }

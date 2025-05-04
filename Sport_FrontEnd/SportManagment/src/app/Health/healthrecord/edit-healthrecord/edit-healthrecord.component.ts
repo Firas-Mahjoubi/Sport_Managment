@@ -15,11 +15,12 @@ export class EditHealthrecordComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string = '';
 
-  // Définition des valeurs ENUM
-  fatigueEnum = ['FAIBLE', 'MOYENNE', 'ELEVEE'];
-  etatPhysiqueEnum = ['BON', 'MOYEN', 'MAUVAIS'];
-  douleursEnum = ['AUCUNE', 'LEGERE', 'MODEREE', 'SEVERE'];
-  intensiteEnum = ['FAIBLE', 'MOYENNE', 'FORTE'];
+// Définition des valeurs ENUM mises à jour
+fatigueEnum = ['FAIBLE', 'MOYENNE', 'ELEVEE'];  // Correspond à Fatigue
+etatPhysiqueEnum = ['EXCELLENT', 'BON', 'MOYEN', 'FATIGUE', 'BLESSE'];  // Correspond à EtatPhysique
+douleursEnum = ['AUCUNE', 'LEGERES', 'MODEREES', 'SEVERES'];  // Correspond à DouleursMusculaires
+intensiteEnum = ['FAIBLE', 'MOYENNE', 'HAUTE'];  // Correspond à Intensite
+
 
   constructor(
     private fb: FormBuilder,

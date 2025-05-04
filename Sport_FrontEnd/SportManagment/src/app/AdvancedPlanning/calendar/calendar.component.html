@@ -2,9 +2,12 @@
 <app-admin-sidebar></app-admin-sidebar>
 
 <div class="calendar-container">
-<div class="calendar" [class.dark-mode]="isDarkMode">
+ <div #calendarElement class="calendar" [class.dark-mode]="isDarkMode">
 
   <div class="add-event-container">
+    <button mat-raised-button (click)="exportToPDF()" style="margin-left: 10px;">
+      Export to PDF
+    </button>
     <button mat-raised-button (click)="openEventForm()">
       Add Event
     </button>
@@ -73,6 +76,25 @@
       </div>
     </div>
   </div>
+
+  <!-- Add this after your month view -->
+<div *ngIf="viewMode === 'month'" class="heatmap-container">
+  <h3>Event Density Heatmap</h3>
+  <div class="heatmap">
+    <div *ngFor="let day of heatmapDays"
+    class="heatmap-day"
+    [style.backgroundColor]="getHeatmapColor(day.eventCount)"
+    [matTooltip]="(day.date | date:'mediumDate') + ': ' + day.eventCount + ' events'">
+</div>
+  </div>
+  <div class="heatmap-legend">
+    <span>Low</span>
+    <div class="legend-gradient"></div>
+    <span>High</span>
+    <span class="legend-max">Max: {{ maxHeatmapEvents }} events/day</span>
+  </div>
+</div>
+
 
   <div *ngIf="viewMode === 'year'" class="year-view">
     <div class="year-grid">

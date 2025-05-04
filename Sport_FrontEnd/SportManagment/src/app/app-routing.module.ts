@@ -66,9 +66,18 @@ import {SessionFormComponent} from "./AdvancedPlanning/session-form/session-form
 import {EventDetailsComponent} from "./AdvancedPlanning/event-details/event-details.component";
 
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+
+import { PdfManagerComponent } from './Health/pdf-manager/pdf-manager.component';
+
+
+import { ComparePlayersComponent } from './Health/compare-players/compare-players.component';
+import { PlayerTerrainSelectorComponent } from './Health/player-terrain-selector/player-terrain-selector.component';
+import { StatistiqueComponent } from './Health/statistique/statistique.component';
+
 import {AskQuestionComponent} from "./matches/ask-question/ask-question.component";
 import {MatchesStatsComponent} from "./matches/matches-stats/matches-stats.component";
 import {StatsChartsComponent} from "./matches/stats-charts/stats-charts.component";
+
 
 
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
@@ -88,11 +97,13 @@ import { PlayersByClubComponent } from './components/Clubhouse/players-by-club/p
 import { PublicClubsComponent } from './components/Clubhouse/public-clubs/public-clubs.component';
 import { PublicClubPlayersComponent } from './components/Clubhouse/public-club-players/public-club-players.component';
 import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr/public-player-qr.component';
+import { TacticstatestiqueComponent } from './tactics/tacticstatestique/tacticstatestique.component';
 ////////////
 
 
 
 const routes: Routes = [
+  {path: 'tacticstatic', component: TacticstatestiqueComponent}, // 🆕 Route for TacticListComponent
   { path: 'user', component: AdminDashboardComponent }, // Protect dashboard route
 
 
@@ -138,6 +149,8 @@ const routes: Routes = [
   { path: 'match/:matchId', component: MatchDetailsComponent },
 
 
+  {path :'DashboardSidebar',component:AdminSidebarComponent},
+
 
   {path :'DashboardSidebar',component:AdminSidebarComponent},
 
@@ -160,6 +173,7 @@ const routes: Routes = [
 { path: 'clubs-public', component: PublicClubsComponent },
 { path: 'public-club-players/:id', component: PublicClubPlayersComponent },
 { path: 'public-player-qr/:id', component: PublicPlayerQrComponent },
+
 
 
 
@@ -199,8 +213,13 @@ const routes: Routes = [
 
 
 
+
+
+
+
   { path: 'tactic-board', component: TacticBoardComponent },
   { path: 'tactics', component: TacticListComponent, canActivate: [roleGuard(['COACH'])] },
+
   { path: 'tactics/create', component: TacticFormComponent, canActivate: [roleGuard(['COACH'])]  },
   { path: 'tactics/:id', component: TacticFolderComponent, canActivate: [roleGuard(['COACH'])]  },
   { path: 'tactics/edit/:id', component: TacticFormComponent , canActivate: [roleGuard(['COACH'])] },
@@ -236,10 +255,32 @@ const routes: Routes = [
 
 { path: 'list-player', component: ListPlayerComponent },
 
+
+
 { path: 'health-dashboard', component: HealthDashboardComponent },
-{path: '**', redirectTo: 'auth'},
 
 
+
+//skander pdf manager
+
+{ path: 'pdf-manager', component: PdfManagerComponent },
+
+//compare player
+
+
+{ path: 'health/compare-players', component: ComparePlayersComponent },
+
+
+// terain skander position
+
+{ path: 'select-players', component: PlayerTerrainSelectorComponent },
+
+//statistique skander
+{ path: 'statistique', component: StatistiqueComponent },
+
+
+
+{path: '**', redirectTo: 'home'},
 
 
 ];

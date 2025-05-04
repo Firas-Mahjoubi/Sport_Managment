@@ -1,0 +1,434 @@
+<div class="fifa-interface">
+  <div class="top-bar">
+    <button class="tab" [ngClass]="{ 'active': currentSection === 'bio' }"
+            (click)="toggleSection('bio')">PLAYER BIO</button>
+
+    <button class="tab" [ngClass]="{ 'active': currentSection === 'details' }"
+            (click)="toggleSection('details')">PLAYER DETAILS</button>
+
+    <!-- nouveau nom -->
+    <button class="tab" [ngClass]="{ 'active': currentSection === 'attributes' }"
+            (click)="toggleSection('attributes')">HEALTH‑RECORD STAT</button>
+
+    <!-- nouveau nom + même section “icon” -->
+    <button class="tab" [ngClass]="{ 'active': currentSection === 'icon' }"
+            (click)="toggleSection('icon')">INJURY STAT</button>
+
+    <!-- dernier renommé -->
+    <button class="tab" [ngClass]="{ 'active': currentSection === 'traits' }"
+            (click)="toggleSection('traits')">RECOVERY‑PLAN STAT</button>
+
+
+  </div>
+
+  <div class="player-content">
+    <div class="player-card">
+      <img src="assets/card.png" alt="Player" class="player-avatar" />
+      <div class="player-info">
+        <h2>{{ selectedPlayer?.firstName }} {{ selectedPlayer?.lastName }}</h2>
+        <p>{{ selectedPlayer?.position }}</p>
+        <div class="rating-box" (click)="togglePlayerList()">
+          <p>{{ selectedPlayer?.position }}</p>
+        </div>
+      </div>
+
+      <!-- Liste des joueurs affichée uniquement si on est dans la section BIO -->
+      <div *ngIf="showPlayerList && currentSection === 'bio'" class="player-list">
+        <ul>
+          <li *ngFor="let player of players" (click)="selectPlayer(player)">
+            {{ player.firstName }} {{ player.lastName }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content-container">
+      <div *ngIf="currentSection === 'bio'" class="tab-content">
+
+      </div>
+
+      <div *ngIf="currentSection === 'details'" class="tab-content-details">
+        <h3 class="section-title-details">PLAYER DETAILS</h3>
+
+        <div class="details-grid">
+          <div class="detail-row">
+            <span class="detail-label">Nom :</span>
+            <span class="detail-value">{{ selectedPlayer?.firstName }} {{ selectedPlayer?.lastName }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Position :</span>
+            <span class="detail-value">{{ selectedPlayer?.position }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Numéro :</span>
+            <span class="detail-value">{{ selectedPlayer?.playerNumber }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Perf. Stats :</span>
+            <span class="detail-value">{{ selectedPlayer?.performanceStats }}</span>
+          </div>
+        </div>
+      </div>
+<!-- === SECTION ATTRIBUTES : HEALTH-RECORD STAT + HEALTH ANALYTICS === -->
+<div *ngIf="currentSection === 'attributes'" class="tab-content-health">
+
+  <!-- ─── Header & Bouton ─── -->
+  <div class="attributes-header">
+    <h3 class="section-title-health">HEALTH-RECORD STAT</h3>
+    <button (click)="showHealthModal = true"
+            class="btn btn-primary-health">
+      Voir HealthRecord
+    </button>
+  </div>
+
+  <!-- ─── Si on a un record, on affiche les charts ─── -->
+  <ng-container *ngIf="selectedHealthRecord; else noHR">
+    <hr class="separator-health" />
+    <div class="health-analytics-dashboard">
+
+      <div class="analytics-title">
+        <h1>HEALTH ANALYTICS 2080</h1>
+      </div>
+
+      <div class="analytics-grid">
+
+        <!-- ─── Carte Score + Statut ─── -->
+        <div class="stat-card">
+          <div echarts
+               [options]="globalHealthScoreGaugeOptions"
+               class="chart global-gauge">
+          </div>
+          <div echarts
+               [options]="statutJoueurPieOptions"
+               class="chart pie-small">
+          </div>
+        </div>
+
+        <!-- ─── Mini-jauges ─── -->
+        <div echarts
+             [options]="fatigueGaugeOptions"
+             class="chart gauge-mini">
+        </div>
+        <div echarts
+             [options]="etatPhysiqueGaugeOptions"
+             class="chart gauge-mini">
+        </div>
+        <div echarts
+             [options]="douleursGaugeOptions"
+             class="chart gauge-mini">
+        </div>
+
+        <!-- (facultatif) vos line-charts ici si besoin -->
+
+      </div>
+
+    </div>
+
+  </ng-container>
+
+  <ng-template #noHR>
+    <p class="no-data-health">Aucun Health Record pour ce joueur.</p>
+  </ng-template>
+
+  <!-- ─── Modal Détails HealthRecord ─── -->
+  <div *ngIf="showHealthModal" class="health-modal-overlay" (click)="showHealthModal = false">
+    <div class="health-modal" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="showHealthModal = false">✕</button>
+      <h3 class="modal-title">Détails du HealthRecord</h3>
+
+      <ng-container *ngIf="selectedHealthRecord; else noHRModal">
+        <div class="health-card-modal">
+          <div class="row-health"><span class="label-health">Date :</span>
+                                   <span>{{ selectedHealthRecord.date }}</span></div>
+          <div class="row-health"><span class="label-health">Fatigue :</span>
+                                   <span>{{ selectedHealthRecord.fatigue }}</span></div>
+          <div class="row-health"><span class="label-health">État physique :</span>
+                                   <span>{{ selectedHealthRecord.etatPhysique }}</span></div>
+          <div class="row-health"><span class="label-health">Douleurs muscu. :</span>
+                                   <span>{{ selectedHealthRecord.douleursMusculaires }}</span></div>
+          <div class="row-health"><span class="label-health">Intensité :</span>
+                                   <span>{{ selectedHealthRecord.intensite }}</span></div>
+          <div class="row-health"><span class="label-health">Statut joueur :</span>
+                                   <span>{{ selectedHealthRecord.statusJoueur }}</span></div>
+          <div class="row-health"><span class="label-health">Commentaire :</span>
+                                   <span>{{ selectedHealthRecord.commentaire }}</span></div>
+        </div>
+      </ng-container>
+
+      <ng-template #noHRModal>
+        <p class="no-data-health">Aucun detail à afficher.</p>
+      </ng-template>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- ───── INJURY STAT ───── -->
+<div *ngIf="currentSection === 'icon'" class="tab-content-injury">
+
+    <h3 class="section-title-injury">📊 Injury Analytics Dashboard</h3>
+  <div class="stats-container">
+
+    <div class="stats-floating">
+      <!-- Cercle gauche -->
+      <div class="stat-item left">
+        <div class="stat-circle">
+          <span class="stat-number">{{ injuries.length }}</span>
+        </div>
+        <p class="stat-label">Total blessures</p>
+      </div>
+
+
+      <!-- Cercle droit -->
+      <div class="stat-item right">
+        <div class="stat-circle">
+          <span class="stat-number">{{ injuryHistory.length }}</span>
+        </div>
+        <p class="stat-label">Total archivées</p>
+      </div>
+    </div>
+
+  <!-- Ici tes graphiques et tout ton contenu normal -->
+  <div class="graphs">
+    <!-- Tes graphs ici -->
+  </div>
+
+</div>
+
+  <!-- ───── Boutons ───── -->
+  <div class="injury-buttons">
+    <button (click)="showInjuryHistory = true" class="btn btn-primary-injury">
+      Voir l’historique des blessures
+    </button>
+    <button (click)="showAllInjuries = true" class="btn btn-secondary-injury">
+      Voir toutes les blessures
+    </button>
+  </div>
+
+  <!-- ───── Split layout ───── -->
+  <div class="injury-split">
+
+
+    <!-- ▸ DROITE : dashboard full-width -->
+    <div class="statoverview-card-full">
+      <div class="statoverview-charts-full">
+        <div echarts [options]="radarOpts" class="statoverview-chart radar-style"></div>
+        <div echarts [options]="pieOpts"   class="statoverview-chart pie-style"></div>
+        <div echarts [options]="lineOpts"  class="statoverview-chart line-style"></div>
+      </div>
+    </div>
+
+  </div> <!-- /.injury-split -->
+</div>
+
+<!-- ───── MODAL HISTORIQUE DES BLESSURES ───── -->
+<div *ngIf="showInjuryHistory" class="injury-modal-overlay" (click)="showInjuryHistory = false">
+  <div class="injury-modal" (click)="$event.stopPropagation()">
+    <button class="injury-modal-close" (click)="showInjuryHistory = false">✕</button>
+    <h3 class="injury-modal-title">Historique des blessures</h3>
+    <p>Total archivées : <strong>{{ injuryHistory.length }}</strong></p>
+    <div *ngIf="injuryHistory.length; else noHistory" class="injury-history-grid-modal">
+      <div class="inj-card-history" *ngFor="let inj of injuryHistory">
+        <!-- même structure que tes cards -->
+        <div class="inj-header-injury">
+          <div class="row-injury"><strong>Type :</strong> {{ inj.type }}</div>
+          <div class="row-injury"><strong>Gravité :</strong> {{ inj.severity }}</div>
+        </div>
+        <div class="inj-body-injury">
+          <div class="row-injury"><strong>Date :</strong> {{ inj.date | date:'dd/MM/yyyy' }}</div>
+          <div class="row-injury"><strong>Status :</strong> {{ inj.status }}</div>
+          <div class="row-injury"><strong>Desc. :</strong> {{ inj.description }}</div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noHistory>
+      <p class="no-data-injury">Aucun historique pour ce joueur.</p>
+    </ng-template>
+  </div>
+</div>
+
+<!-- ───── MODAL TOUTES LES BLESSURES ───── -->
+<div *ngIf="showAllInjuries" class="injury-modal-overlay" (click)="showAllInjuries = false">
+  <div class="injury-modal" (click)="$event.stopPropagation()">
+    <button class="injury-modal-close" (click)="showAllInjuries = false">✕</button>
+    <h3 class="injury-modal-title">Toutes les blessures</h3>
+    <p>Total blessures : <strong>{{ injuries.length }}</strong></p>
+    <div class="injury-history-grid-modal">
+      <div class="inj-card-history" *ngFor="let inj of injuries">
+        <div class="inj-header-injury">
+          <div class="row-injury"><strong>Type :</strong> {{ inj.type }}</div>
+          <div class="row-injury"><strong>Gravité :</strong> {{ inj.severity }}</div>
+        </div>
+        <div class="inj-body-injury">
+          <div class="row-injury"><strong>Date :</strong> {{ inj.date | date:'dd/MM/yyyy' }}</div>
+          <div class="row-injury"><strong>Status :</strong> {{ inj.status }}</div>
+          <div class="row-injury"><strong>Desc. :</strong> {{ inj.description }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- ───── Modal historique ───── -->
+  <div class="injury-modal-overlay" *ngIf="showInjuryHistory" (click)="showInjuryHistory = false">
+    <div class="injury-modal" (click)="$event.stopPropagation()">
+      <button class="injury-modal-close" (click)="showInjuryHistory = false">✕</button>
+      <h3 class="injury-modal-title">Historique des blessures</h3>
+      <p>Total archivées : <strong>{{ injuryHistory.length }}</strong></p>
+
+      <div *ngIf="injuryHistory.length; else noHistory" class="injury-history-grid-modal">
+        <div class="inj-card-history" *ngFor="let i of injuryHistory">
+          <div class="inj-header-injury">
+            <div class="row-injury"><span class="label-injury"><strong>Type :</strong></span> <span>{{ i.type }}</span></div>
+            <div class="row-injury"><span class="label-injury"><strong>Gravité :</strong></span> <span>{{ i.severity }}</span></div>
+          </div>
+          <div class="inj-body-injury">
+            <div class="row-injury"><span class="label-injury"><strong>Date :</strong></span> <span>{{ i.date | date:'dd/MM/yyyy' }}</span></div>
+            <div class="row-injury"><span class="label-injury"><strong>Desc. :</strong></span> <span>{{ i.description }}</span></div>
+            <div class="row-injury"><span class="label-injury"><strong>Status :</strong></span> <span>{{ i.status }}</span></div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noHistory>
+        <p class="no-data-injury">Aucun historique pour ce joueur.</p>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- RECOVERY PLAN STAT -->
+<div *ngIf="currentSection === 'traits'" class="tab-content">
+
+  <h3 class="section-title">RECOVERY PLAN STAT</h3>
+
+  <!-- split layout -->
+  <div class="rp-split">
+
+    <!-- ▸ COLONNE GAUCHE : tes cards d’origine -->
+    <div class="rp-left">
+      <ng-container *ngIf="recoveryPlans?.length; else noPlan">
+        <p class="total-line">
+          Total plans : <strong>{{ recoveryPlans.length }}</strong>
+        </p>
+        <div class="plan-grid">
+          <div class="plan-card" *ngFor="let plan of recoveryPlans; index as i">
+            <!-- en-tête -->
+            <div class="plan-header">
+              <div class="plan-title">
+                <span class="plan-index">Plan {{ i + 1 }}</span>
+                <span class="plan-injury">
+                  {{ plan.injury.type }} — {{ plan.injury.severity }}
+                </span>
+              </div>
+              <div class="plan-status">
+                <strong>Status :</strong>
+                <span [ngClass]="{
+                  'en-cours':  plan.planStatus === 'EN_COURS',
+                  'termine':   plan.planStatus === 'TERMINE',
+                  'suspendu':  plan.planStatus === 'SUSPENDU'
+                }">{{ plan.planStatus }}</span>
+              </div>
+            </div>
+            <!-- détails -->
+            <div class="plan-body">
+              <div class="row">
+                <span class="label">Description :</span>
+                <span>{{ plan.planDescription }}</span>
+              </div>
+              <div class="row">
+                <span class="label">Début :</span>
+                <span>{{ plan.startDate }}</span>
+              </div>
+              <div class="row">
+                <span class="label">Fin estimée :</span>
+                <span>{{ plan.estimatedEndDate }}</span>
+              </div>
+              <div class="row" *ngIf="plan.actualEndDate">
+                <span class="label">Fin réelle :</span>
+                <span>{{ plan.actualEndDate }}</span>
+              </div>
+              <div class="row">
+                <span class="label">Progression :</span>
+                <div class="progress-bar-neon">
+                  <div class="progress-neon"
+                       [style.width.%]="plan.progress"></div>
+                </div>
+                <span>{{ plan.progress }} %</span>
+              </div>
+              <div class="row">
+                <span class="label">Séances/semaine :</span>
+                <span>{{ plan.sessionFrequency }}</span>
+              </div>
+              <div class="row">
+                <span class="label">Durée séance :</span>
+                <span>{{ plan.sessionDuration }} min</span>
+              </div>
+              <div class="row">
+                <span class="label">Type :</span>
+                <span>{{ plan.planType }}</span>
+              </div>
+              <div class="row">
+                <span class="label">Prochaine revue :</span>
+                <span>{{ plan.nextReviewDate }}</span>
+              </div>
+              <div class="row">
+                <span class="label">Ajustements :</span>
+                <span>{{ plan.adjustments }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noPlan>
+        <p class="no-data">Aucun Recovery Plan pour ce joueur.</p>
+      </ng-template>
+    </div>
+
+
+
+    <!-- ▸ COLONNE DROITE : holo‑console -->
+<aside class="holo-console">
+
+  <!-- Titre flottant -->
+  <h4 class="holo-title">RECOVERY DASH</h4>
+
+  <!-- Grand graphique mixte -->
+  <div echarts [options]="comboOpts" class="holo-chart"></div>
+
+  <!-- Bandes KPI néon -->
+  <div class="holo-kpi">
+    <span class="k neon">Active&nbsp;{{ activeCount }}</span>
+    <span class="k done">Done&nbsp;{{ doneCount }}</span>
+    <span class="k neon">Avg&nbsp;{{ avgProgress }}%</span>
+    <span class="k neon">Dur&nbsp;{{ avgDuration }}j</span>
+  </div>
+  <h6 class="holo-title"> PlanType : </h6 >
+<!-- Barre filtre -->
+  <div class="holo-filter" >
+    <button class="chip"
+            *ngFor="let g of planTypeGroups"
+            (click)="toggleType(g.type)"
+            [class.sel]="selectedTypes.has(g.type)">
+      {{ g.type }} --------> Nbr: {{ g.count }}
+    </button>
+  </div>
+
+</aside>
+
+  </div>
+
+</div>
+
+
+<div class="bottom-buttons">
+  <a [routerLink]="['/health-dashboard']" class="btn-back-health">
+    ⬅️ Retour au Tableau de Santé
+  </a>
+</div>

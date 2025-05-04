@@ -1,0 +1,1427 @@
+.fifa-interface {
+  background-color: #0f1923;
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+  padding: 20px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-around;
+  background-color: #1e2a38;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #00ff94aa;
+}
+
+.tab {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: 0.3s;
+  letter-spacing: 1px;
+}
+
+.tab:hover,
+.tab.active {
+  border-bottom: 3px solid #00ff94;
+  color: #00ff94;
+}
+
+.player-content {
+  display: flex;
+  gap: 20px;
+}
+
+.player-card {
+  background-color: #1e2a38;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  flex: 0 0 220px;
+  box-shadow: 0 0 10px #00ff9480;
+}
+
+.player-avatar {
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  border: 3px solid #00ff94;
+  box-shadow: 0 0 12px #00ff94aa;
+}
+
+.player-info h2 {
+  font-size: 24px;
+  margin: 5px 0;
+  text-shadow: 0 0 10px #00ff94;
+}
+
+.rating-box {
+  background-color: #00ff94;
+  color: #0f1923;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 22px;
+  margin-top: 10px;
+  font-weight: bold;
+  box-shadow: 0 0 10px #00ff94cc;
+}
+
+.attributes-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex: 1;
+}
+
+.attribute-column {
+  background-color: #1e2a38;
+  padding: 15px;
+  border-radius: 15px;
+  flex: 1 1 30%;
+  min-width: 200px;
+  transition: transform 0.3s;
+  box-shadow: 0 0 8px #00ff9477;
+}
+
+.attribute-column:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 12px #00ff94cc;
+}
+
+.attribute-column h3 {
+  color: #00ff94;
+  font-size: 18px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.attribute-column .value {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #00ff94;
+  text-shadow: 0 0 5px #00ff94aa;
+}
+
+.attribute-column p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #ccc;
+}
+
+
+/* Animation à l'apparition */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.player-card, .attribute-column {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Pulse sur le rating */
+.rating-box h1 {
+  animation: pulse-glow 1.5s infinite;
+}
+
+@keyframes pulse-glow {
+  0% {
+    text-shadow: 0 0 5px #00ff94, 0 0 10px #00ff94;
+  }
+  50% {
+    text-shadow: 0 0 15px #00ff94, 0 0 30px #00ff94;
+  }
+  100% {
+    text-shadow: 0 0 5px #00ff94, 0 0 10px #00ff94;
+  }
+}
+
+/* Transition sur les tabs */
+.tab {
+  position: relative;
+  overflow: hidden;
+}
+
+.tab::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background: #00ff94;
+  transition: width 0.3s ease;
+}
+
+.tab:hover::after {
+  width: 100%;
+}
+
+/* Glow autour du nom du joueur */
+.player-info h2 {
+  text-shadow: 0 0 10px #00ff94;
+  animation: name-glow 2s infinite alternate;
+}
+
+@keyframes name-glow {
+  0% {
+    text-shadow: 0 0 10px #00ff94;
+  }
+  100% {
+    text-shadow: 0 0 20px #00ff94;
+  }
+}
+
+
+/* Style pour la liste des joueurs avec un cadre autour de chaque joueur */
+.player-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.player-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 0;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.player-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.player-item.selected {
+  border-color: #4CAF50;
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.player-item p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.player-item p:first-child {
+  font-weight: bold;
+}
+
+
+.bottom-buttons {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000; /* S'assurer que le bouton est au-dessus des autres éléments */
+}
+
+.btn-back-health {
+  display: flex;
+  align-items: center;
+  background-color: #1e1e1e;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-back-health:hover {
+  background-color: #333;
+  transform: scale(1.05);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-back-health svg {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .btn-back-health {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+
+details summary {cursor:pointer;font-weight:600;margin:8px 0;}
+details ul {list-style:none;padding:0;margin:0}
+details li {
+  background:#1e1e1e;border:1px solid #444;border-radius:6px;
+  margin:4px 0;padding:6px 10px;font-size:14px;
+}
+
+
+
+/* STYLE GLOBALS */
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #1c1f26;
+  color: #ccc;
+}
+
+/* En-tête de section */
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Affichage des plans */
+.plan-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.plan-card {
+  background: linear-gradient(145deg, #1d1f2b, #222535);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #444;
+}
+
+.plan-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* En-tête de plan */
+.plan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #444;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.plan-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-index {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.plan-injury {
+  font-size: 14px;
+  color: #8b8f9e;
+  font-weight: 500;
+}
+
+.plan-status {
+  font-size: 14px;
+  color: #f1c40f;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: rgba(241, 196, 15, 0.1);
+}
+
+/* Status classes */
+.en-cours {
+  color: #e67e22;
+}
+
+.termine {
+  color: #2ecc71;
+}
+
+.suspendu {
+  color: #e74c3c;
+}
+
+/* Corps du plan (détails) */
+.plan-body {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0;
+}
+
+.label {
+  font-weight: 600;
+  color: #b0bec5;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #444;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 4px 0;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, #1e90ff, #00bfff);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* Adaptation pour mobile */
+@media (max-width: 768px) {
+  .plan-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Styles pour la section des blessures */
+.tab-content-injury {
+  background: #1c1f26;
+  color: #ccc;
+  padding: 20px;
+}
+
+/* En-tête de la section */
+.section-title-injury {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Bouton d'affichage de l'historique */
+.btn-primary-injury {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary-injury:hover {
+  background-color: #2980b9;
+}
+
+/* Affichage des blessures actuelles */
+.injury-grid-new {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.inj-card-injury {
+  background: linear-gradient(145deg, #1d1f2b, #222535);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #444;
+}
+
+.inj-card-injury:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* Corps des blessures */
+.inj-body-injury {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+.row-injury {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0;
+}
+
+.label-injury {
+  font-weight: 600;
+  color: #b0bec5;
+}
+
+.no-data-injury {
+  color: #e74c3c;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* Historique des blessures */
+.injury-history-grid-new {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.inj-card-history {
+  background: linear-gradient(145deg, #1d1f2b, #222535);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #444;
+}
+
+.inj-card-history:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Container principal */
+.tab-content-attributes {
+  background: #12171e;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 1s ease;
+}
+
+/* Titre de la section */
+.section-title-attributes {
+  font-size: 30px;
+  font-weight: 800;
+  color: #00c7ff;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  border-bottom: 2px solid #00c7ff;
+  padding-bottom: 10px;
+}
+
+/* Zone des statistiques */
+.health-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Ligne de statut */
+.stat-line {
+  background: #1d222a;
+  padding: 12px 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.stat-line:hover {
+  transform: scale(1.05);
+  background: #2a303a;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.stat-label {
+  font-size: 18px;
+  color: #cfd8dc;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background: #444d56;
+  border-radius: 4px;
+  margin-top: 6px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #00bcd4, #ff4081);
+  border-radius: 4px;
+}
+
+/* Message de donnée manquante */
+.no-data {
+  text-align: center;
+  font-size: 18px;
+  color: #f44336;
+  margin-top: 20px;
+}
+
+/* Animation fade-in */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stat-line {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stat-value {
+    font-size: 16px;
+  }
+
+  .stat-label {
+    font-size: 16px;
+  }
+}
+
+
+/* Container spécifique Health-Record */
+.tab-content-health {
+  background: #1c1f26;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* Titre de section */
+.section-title-health {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #00bfff;
+  padding-bottom: 8px;
+}
+
+/* Grille à une colonne */
+.health-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* Carte Health-Record */
+.health-card {
+  background: linear-gradient(145deg, #1d1f2b, #222535);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #444;
+}
+
+.health-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* Lignes label + valeur */
+.row-health {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  color: #ddd;
+}
+
+.label-health {
+  font-weight: 600;
+  color: #b0bec5;
+}
+
+/* Message “aucune donnée” */
+.no-data-health {
+  text-align: center;
+  font-size: 16px;
+  color: #e74c3c;
+  margin-top: 20px;
+}
+
+/* Adaptation mobile */
+@media (max-width: 768px) {
+  .health-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Container spécifique Player Details */
+.tab-content-details {
+  background: linear-gradient(145deg, #1d1f2b, #222535);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  border: 2px solid #444;
+  max-width: 600px;
+  margin: auto;
+}
+
+/* Titre de section */
+.section-title-details {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #00bfff;
+  padding-bottom: 8px;
+}
+
+/* Grille des détails */
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Chaque ligne de détail */
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1e2028;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.detail-row:hover {
+  background: #2a2b36;
+  transform: translateX(4px);
+}
+
+/* Label à gauche */
+.detail-label {
+  color: #b0bec5;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* Valeur à droite */
+.detail-value {
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  max-width: 70%;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .detail-value {
+    text-align: left;
+    margin-top: 4px;
+  }
+}
+
+
+/* ===== HUD RECOVERY PLAN ===== */
+.rp-hud{
+  display:grid;
+  grid-template-columns:1fr 230px;
+  grid-template-areas:
+    "head rail"
+    "types rail"
+    "time rail";
+  gap:22px;
+  background:#0f1118;
+  padding:26px;
+  border-radius:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,.6);
+  color:#e0e0e0;
+  font-family:'Orbitron',sans-serif;
+}
+.rp-header{grid-area:head;display:flex;justify-content:space-between;align-items:center}
+.rp-header h2{color:#00e5ff;font-size:22px;letter-spacing:2px}
+.rp-total{color:#ffeb3b;font-weight:700}
+
+.rp-types{grid-area:types}
+.rp-types h3{color:#00e5ff;font-size:16px;margin-bottom:10px}
+.type-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#1d1f2b;padding:5px 10px;border-radius:9999px;
+  margin:3px 5px;font-size:12px;font-weight:600;
+  border:1px solid #444;transition:.3s;
+}
+.type-chip:hover{background:#273046}
+
+.rp-timeline{grid-area:time;display:flex;flex-direction:column;gap:12px}
+.rp-row{display:grid;grid-template-columns:170px 1fr 130px;align-items:center;gap:10px}
+
+.rp-info{display:flex;flex-direction:column;gap:2px}
+.rp-index{color:#00bfff;font-weight:700}
+.rp-injury{font-size:12px;color:#9aa0b5}
+.rp-status{font-size:11px;padding:2px 6px;border-radius:4px;text-align:center}
+.rp-status.en_cours{background:#ff98001a;color:#ff9800}
+.rp-status.termine {background:#4caf501a;color:#4caf50}
+.rp-status.suspendu{background:#e539351a;color:#e53935}
+
+.rp-barbox{background:#222;height:8px;border-radius:5px;overflow:hidden}
+.rp-bar{height:100%;background:linear-gradient(90deg,#00bfff,#1e90ff);transition:width .6s}
+
+.rp-dates{display:flex;justify-content:space-between;font-size:11px;color:#b0bec5}
+
+.rp-rail{grid-area:rail;background:#1d1f2b;border:1px solid #444;
+  padding:14px;border-radius:10px;text-align:center}
+.rp-rail h4{color:#00e5ff;font-size:15px;margin-bottom:10px}
+.rail-row{display:flex;justify-content:space-between;margin:6px 0;font-size:12px}
+.rail-row span:last-child{font-weight:700;color:#fff}
+
+/* Responsive */
+@media(max-width:900px){
+  .rp-hud{grid-template-columns:1fr;grid-template-areas:"head" "types" "time" "rail"}
+}
+
+
+/* ─── LAYOUT 2 COLONNES ─── */
+.rp-split {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start; /* aligne en haut */
+}
+
+/* Colonne gauche : prend tout l’espace restant */
+.rp-left {
+  flex: 1;
+}
+
+/* Colonne droite : largeur fixe */
+.rp-right {
+  width: 320px;
+}
+
+/* Assure-toi que ton .tab-content prend toute la largeur */
+.tab-content {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+
+/* ===== HOLO‑CONSOLE ===== */
+.holo-console {
+  flex: 1 1 100%;               /* prends toute la largeur disponible */
+  width: 100%;                  /* largeur maximale */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #14171f;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 0 25px #00d0ff55;
+}
+
+
+
+
+.holo-title{
+  color:#00d0ff;
+  font:600 18px "Orbitron",sans-serif;
+  text-align:center;
+  margin:0;
+  letter-spacing:1.5px;
+}
+
+.holo-chart{
+  width:100%;
+  height:260px;             /* grand graphique */
+}
+
+/* KPI rail */
+.holo-kpi{
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+  gap:12px;
+}
+.holo-kpi .k{
+  display:block;
+  text-align:center;
+  padding:10px 0;
+  border:1px solid #00d0ff55;
+  border-radius:8px;
+  backdrop-filter:blur(6px);
+  font-weight:600;
+  font-size:14px;
+}
+.k.neon{color:#00e5ff;}
+.k.done{color:#2ecc71;}
+
+/* Chips filtre */
+.holo-filter{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.chip{
+  background:#1d222f;
+  border:1px solid #00d0ff55;
+  color:#9aa0b5;
+  padding:4px 12px;
+  border-radius:20px;
+  font-size:12px;
+  cursor:pointer;
+  transition:.2s;
+}
+.chip.sel,
+.chip:hover{
+  background:#00d0ff;
+  color:#14171f;
+}
+
+/* Responsive : passe en dessous sur mobile */
+@media(max-width:900px){
+  .holo-console{flex:1 1 100%;margin-top:24px}
+}
+
+.holo-chart{
+  width:100%;
+  height:260px;          /* ou 300‑400px si tu veux plus grand */
+}
+
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:ital,wght@0,400;0,500;1,400&display=swap');
+/* ───────────────────────────────────────────────────────────
+   CONTENEUR PRINCIPAL : plein écran, sans colonnes gauches
+─────────────────────────────────────────────────────────── */
+/* Décalage à gauche pour le titre INJURY STAT */
+.section-title-injury {
+  margin-left: -25rem; /* ajuste cette valeur selon ton besoin */
+}
+
+/* Même décalage pour la barre de boutons */
+.injury-buttons {
+  margin-left: -25rem; /* même ajustement que pour le titre */
+
+}
+
+
+.tab-content-injury {
+  width: 100vw;
+  max-width: none;
+  padding: 2rem;
+  margin: 0;
+  background: #070d1b;
+  font-family: 'Orbitron', ;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+/* ───────────────────────────────────────────────────────────
+   SUPPRESSION DU SPLIT GAUCHE/DROITE
+─────────────────────────────────────────────────────────── */
+.injury-split {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* ───────────────────────────────────────────────────────────
+   DASHBOARD ENTIÈRE LARGEUR
+─────────────────────────────────────────────────────────── */
+.statoverview-card-full {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 2rem;
+  padding: 2rem;
+  background: linear-gradient(145deg,#0a0f1c,#0d1324);
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0,240,255,0.3);
+  margin-left: -10px;
+}
+
+/* TITRE */
+.statoverview-header h2 {
+  margin: 0 0 2rem;
+  color: #00f0ff;
+  text-align: center;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+}
+
+/* ───────────────────────────────────────────────────────────
+   GRID : 2 COLS POUR LES DEUX PREMIERS, LIGNE ENTIÈRE POUR LE 3ᵉ
+─────────────────────────────────────────────────────────── */
+.statoverview-charts-full {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: auto;
+  gap: 2rem;
+}
+
+/* CHAQUE GRAPHIQUE */
+.statoverview-charts-full .statoverview-chart {
+  background: #0b0f1a;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 20px #00f0ff33, 0 0 20px #00f0ff33;
+  transition: transform 0.3s;
+  width: 100%;
+  height: 500px;
+}
+.statoverview-charts-full .statoverview-chart:hover {
+  transform: scale(1.02);
+}
+
+/* LE 3ᵉ GRAPHIQUE PREND TOUTE LA LARGEUR */
+.statoverview-charts-full .line-style {
+  grid-column: 1 / -1;
+  height: 600px;
+}
+
+/* BORDURES NÉON SELON TYPE */
+.radar-style { border: 4px solid #3498db; }
+.pie-style   { border: 4px solid #9b59b6; }
+.line-style  { border: 4px solid #2ecc71; }
+
+/* ───────────────────────────────────────────────────────────
+   BOUTONS NÉON
+─────────────────────────────────────────────────────────── */
+.injury-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.btn-primary-injury,
+.btn-secondary-injury {
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 0.6rem;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary-injury {
+  background: linear-gradient(135deg,#00bfff,#00f0ff);
+  color: #000;
+  box-shadow: 0 0 10px #00bfff88;
+}
+.btn-primary-injury:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00f0ff;
+}
+.btn-secondary-injury {
+  background: linear-gradient(135deg,#9b59b6,#ff1493);
+  color: #fff;
+  box-shadow: 0 0 10px #ff1493aa;
+}
+.btn-secondary-injury:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff1493;
+}
+
+/* ───────────────────────────────────────────────────────────
+   MODALES SLIDE-IN
+─────────────────────────────────────────────────────────── */
+.injury-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+.injury-modal {
+  background: #1c1f26;
+  width: 80%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow: auto;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 0 30px rgba(57,255,20,0.5);
+  animation: slideInRight 0.4s ease-out both;
+  position: relative;
+}
+.injury-modal-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: none; border: none;
+  font-size: 1.6rem;
+  color: #39FF14;
+  text-shadow: 0 0 8px #39FF14;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.injury-modal-close:hover {
+  transform: scale(1.2);
+}
+
+/* CARTES DANS LA MODALE */
+.injury-history-grid-modal {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+.inj-card-history {
+  background: rgba(10,15,28,0.9);
+  padding: 1rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 0 15px rgba(0,255,255,0.2);
+}
+.row-injury {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.row-injury strong {
+  color: #00f0ff;
+}
+
+
+
+.stats-container {
+  position: relative;
+  width: 100%;
+  height: 150px; /* donne une hauteur fixe pour contenir les deux cercles */
+  margin-top: -5rem;
+  top: 0px; /* Légèrement plus bas de 10% de l'écran */
+}
+
+.stats-floating {
+  position: relative; /* TRÈS IMPORTANT pour que left et right fonctionnent */
+  width: 100%;
+  height: 100%;
+}
+
+/* Cercle gauche */
+.stat-item.left {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  width: 140px;
+  text-align: center;
+}
+
+/* Cercle droit */
+.stat-item.right {
+  position: absolute;
+  top: 0;
+  right: 500px;
+  width: 140px;
+  text-align: center;
+}
+
+.stat-circle {
+  background: rgba(0, 240, 255, 0.1);
+  border: 2px solid #00f0ff;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px auto;
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: bold;
+  color: #00f0ff;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #ccc;
+}
+
+
+
+/** Health record css  */
+
+
+/* ─── Thème général ─── */
+.tab-content-health {
+  background: #070d1b;
+  color: #e0e0e0;
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* ─── Titre et header ─── */
+.attributes-header .section-title-health,
+.analytics-title {
+  color: #00ffdd; /* vert-bleu néon */
+  text-shadow: 0 0 8px #00ffcc;
+}
+
+/* ─── Bouton principal « Voir les détails » ─── */
+.btn-primary-health {
+  background: linear-gradient(135deg, #00ffdd, #00ccff); /* vert-bleu → cyan */
+  color: #0a0a0a;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(0, 255, 221, 0.6);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary-health:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 255, 221, 0.9);
+}
+
+/* ─── Chart containers ─── */
+.chart {
+  background: #0b0f1a;
+  border-radius: 0.8rem;
+  box-shadow: inset 0 0 20px rgba(0, 255, 221, 0.3), 0 0 20px rgba(0, 255, 221, 0.3);
+  margin-bottom: 1rem;
+}
+
+/* Appliquer un contour rose sur les gros camemberts ou gauge multi-anneaux */
+.chart.large {
+  border: 3px solid #ff69b4; /* rose vif */
+}
+
+
+
+
+
+
+
+
+/* ─── Modal Détails HealthRecord ─── */
+.health-modal-overlay {
+  background: rgba(0,0,0,0.8);
+}
+
+.health-modal {
+  background: #1c1f26;
+  border: 2px solid #ff69b4; /* rose vif */
+  box-shadow: 0 0 30px rgba(255,105,180,0.5);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+/* Bouton fermer en rose */
+.modal-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #ff69b4;
+  text-shadow: 0 0 8px #ff69b4;
+  transition: transform 0.2s;
+}
+.modal-close:hover {
+  transform: scale(1.2);
+}
+
+/* Texte de la modal */
+.modal-title {
+  color: #00ffdd; /* vert-bleu */
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Séparateur visuel */
+.separator-health {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, #00ffdd, #ff69b4);
+  margin: 2rem 0;
+}
+
+
+.health-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+}
+.health-modal {
+  background: #1c1f26;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 90%; max-width: 600px;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 0 30px rgba(0,255,255,0.4);
+  animation: slideInRight 0.4s ease-out both;
+}
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem;
+  background: none; border: none; font-size: 1.5rem;
+  color: #39FF14; cursor: pointer;
+  text-shadow: 0 0 8px #39FF14;
+}
+.health-card-modal {
+  background: rgba(10,15,28,0.9);
+  border-radius: 0.8rem; padding: 1rem;
+  box-shadow: 0 0 15px rgba(0,255,255,0.2);
+}
+.row-health {
+  display: flex; justify-content: space-between;
+  margin-bottom: 0.5rem;
+  color: #fff; font-family: 'Orbitron', sans-serif;
+}
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+
+
+/* ─── Dashboard plein écran ─── */
+.health-analytics-dashboard {
+  width: 100vw;
+  height: calc(100vh - 4rem);
+  padding: 1rem;
+  background: #070d1b;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+}
+
+.analytics-title h1 {
+  margin: 0 0 1rem;
+  font-size: 2rem;  /* Taille du titre plus petite */
+  color: #00e5ff;
+  text-align: center;
+}
+
+/* Grille : 3 colonnes, 2 rangées */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  gap: 1rem;  /* Réduit l'espace entre les éléments */
+  width: 100%;
+  flex: 1;
+}
+
+/* ─── Carte Score + Statut ─── */
+.stat-card {
+  grid-column: span 2;    /* occupe 2 colonnes */
+  display: flex;
+  gap: 1rem;  /* Réduit l'espace entre les éléments dans la carte */
+  padding: 1rem;
+  background: #0b0f1a;
+  border-radius: 0.75rem;  /* Réduit l'arrondi pour un effet plus compact */
+  box-shadow: inset 0 0 30px #00e5ff33, 0 0 20px #00e5ff33;
+  min-height: 300px;   /* Limite la hauteur */
+}
+
+/* Score Santé → gros gauge mais limité */
+.global-gauge {
+  flex: 1;
+  min-height: 250px;  /* réduit la hauteur */
+}
+
+/* Pie Statut → un peu plus petit */
+.pie-small {
+  flex: 1;
+  min-height: 200px;  /* Limite la taille du pie */
+}
+
+/* ─── Mini-jauges ─── */
+.chart {
+  background: #0b0f1a;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 30px #00e5ff33, 0 0 20px #00e5ff33;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mini-jauges (petits graphes) */
+.gauge-mini {
+  min-height: 200px;  /* plus compact */
+}
+
+/* Responsive : une colonne sur mobile */
+@media (max-width: 1024px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+  .stat-card {
+    flex-direction: column;
+  }
+  .global-gauge, .pie-small, .gauge-mini {
+    min-height: 200px;
+  }
+}
+
+
+/* Taille compacte pour certains charts */
+.chart.small-chart {
+  /* On fixe une hauteur plus petite */
+  height: 200px !important;
+  min-height: 180px !important;
+  /* On compacte aussi l’ombre / bordure si besoin */
+  box-shadow: inset 0 0 10px rgba(255,105,180,0.3),
+              0 0 10px rgba(39,255,20,0.3);
+}
+
+/* Ajustement de la grille pour mieux répartir */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+/* Pour les charts “normal” restants */
+.chart {
+  height: calc(50vh - 4rem);
+}
