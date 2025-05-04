@@ -122,6 +122,9 @@ import * as echarts from 'echarts';
 
 
 import { AskQuestionComponent } from './matches/ask-question/ask-question.component';
+
+import { MatchesStatsComponent } from './matches/matches-stats/matches-stats.component';
+import { StatsChartsComponent } from './matches/stats-charts/stats-charts.component';
 import { ClubDetailComponent } from './components/Clubhouse/club-detail/club-detail.component';
 import { PlayersByClubComponent } from './components/Clubhouse/players-by-club/players-by-club.component';
 import { PublicClubsComponent } from './components/Clubhouse/public-clubs/public-clubs.component';
@@ -195,6 +198,9 @@ import { PlotlyModule } from 'angular-plotly.js';
 
 
     HealthDashboardComponent,
+          AskQuestionComponent,
+          MatchesStatsComponent,
+          StatsChartsComponent,
 
     PdfManagerComponent,
     ComparePlayersComponent,
@@ -227,6 +233,7 @@ import { PlotlyModule } from 'angular-plotly.js';
     PublicClubsComponent,
     PublicClubPlayersComponent,
     PublicPlayerQrComponent,
+
     TacticstatestiqueComponent
     
   ],

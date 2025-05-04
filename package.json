@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "angularx-qrcode": "^19.0.0",
+    "chart.js": "^4.4.9"
+  }
+}

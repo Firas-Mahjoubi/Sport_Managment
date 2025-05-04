@@ -25,5 +25,15 @@ public interface GoalRepo extends JpaRepository<Goal,Long> {
             @Param("firstName") String firstName,
             @Param("lastName") String lastName,
             @Param("teamName") String teamName);
+    @Query("""
+SELECT g FROM Goal g
+JOIN g.match m
+JOIN m.teams t
+JOIN t.club c
+JOIN c.league l
+WHERE l.id = :leagueId
+""")
+    List<Goal> findGoalsByLeagueId(@Param("leagueId") Long leagueId);
+
 
 }
