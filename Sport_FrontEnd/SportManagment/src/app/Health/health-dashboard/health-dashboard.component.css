@@ -339,7 +339,7 @@
   border-radius: 20px;
   text-align: center;
   color: white;
-  transform: rotateY(calc(var(--i) * 60deg)) translateZ(600px);
+  transform: rotateY(calc(var(--i) * 51.43deg)) translateZ(600px);
   transition: transform 0.5s, opacity 0.5s;
   box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
   padding: 20px;

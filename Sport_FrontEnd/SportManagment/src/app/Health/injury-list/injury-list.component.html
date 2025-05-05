@@ -1,5 +1,5 @@
 <a [routerLink]="['/health/injury/add']" class="btn-add-health">
-  ➕ Ajouter Blessures
+  ➕ Add Injury
 </a>
 
 <!-- 🔲 Arrière-plan sombre -->
@@ -15,40 +15,39 @@
 </div>
 
 <div class="container injury-container mt-4">
-  <h2 class="title">🏥 Liste des Blessures</h2>
+  <h2 class="title">🏥 Injury List</h2>
 
- <!-- 🔍 Filtrage -->
-<div class="row mb-3">
-  <div class="col-md-6">
-    <input
-      type="text"
-      class="form-control search-input"
-      [(ngModel)]="searchPlayer"
-      (input)="filterInjuries()"
-      placeholder="🔍 Rechercher par nom ou prénom du joueur">
+  <!-- 🔍 Filtrage -->
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <input
+        type="text"
+        class="form-control search-input"
+        [(ngModel)]="searchPlayer"
+        (input)="filterInjuries()"
+        placeholder="🔍 Search by player's first or last name">
+    </div>
+
+    <div class="col-md-4">
+      <select
+        class="form-select player-select"
+        [(ngModel)]="selectedPlayer"
+        (change)="filterInjuries()">
+        <option value="all">👥 All Players</option>
+        <option *ngFor="let player of players" [value]="player.id">
+          {{ player.firstName }} {{ player.lastName }}
+        </option>
+      </select>
+    </div>
   </div>
-
-  <div class="col-md-4">
-    <select
-      class="form-select player-select"
-      [(ngModel)]="selectedPlayer"
-      (change)="filterInjuries()">
-      <option value="all">👥 Tous les joueurs</option>
-      <option *ngFor="let player of players" [value]="player.id">
-        {{ player.firstName }} {{ player.lastName }}
-      </option>
-    </select>
-  </div>
-</div>
-
 
   <!-- 🏥 Tableau -->
   <table class="table table-striped table-hover injury-table">
     <thead>
       <tr>
-        <th>👤 Joueur</th>
+        <th>👤 Player</th>
         <th>🩹 Type</th>
-        <th>⚠️ Gravité</th>
+        <th>⚠️ Severity</th>
         <th>🔄 Status</th>
         <th>⚙️ Actions</th>
       </tr>
@@ -60,7 +59,7 @@
           {{ injury.player.firstName }} {{ injury.player.lastName }}
         </td>
         <ng-template #noPlayer>
-          <td class="text-muted">Aucun joueur</td>
+          <td class="text-muted">No Player</td>
         </ng-template>
 
         <td>{{ injury.type }}</td>
@@ -68,78 +67,74 @@
         <td>{{ injury.status }}</td>
         <td>
           <a [routerLink]="['/health/injury/show', injury.id]" class="btn btn-view btn-sm">
-            🔍 Voir
+            🔍 View
           </a>
           <a [routerLink]="['/health/injury/edit', injury.id]" class="btn btn-edit btn-sm">
-            ✏️ Modifier
+            ✏️ Edit
           </a>
           <button
             (click)="deleteInjury(injury)"
             class="btn btn-delete btn-sm"
             [disabled]="injury.status !== 'GUERIE'">
-            🗑️ Supprimer
+            🗑️ Delete
           </button>
         </td>
       </tr>
     </tbody>
   </table>
 
+  <!-- 🔮 Pagination Futuriste Avancée -->
+  <div *ngIf="totalPages > 1" class="futuristic-pagination mt-4">
+    <button
+      class="page-button prev"
+      [disabled]="currentPage === 1"
+      (click)="changePage(currentPage - 1)">
+      «
+    </button>
 
-<!-- 🔮 Pagination Futuriste Avancée -->
-<div *ngIf="totalPages > 1" class="futuristic-pagination mt-4">
-  <button
-    class="page-button prev"
-    [disabled]="currentPage === 1"
-    (click)="changePage(currentPage - 1)">
-    «
-  </button>
+    <div class="page-indicators">
+      <!-- Always show first page -->
+      <span
+        class="page-circle"
+        [class.active]="currentPage === 1"
+        (click)="changePage(1)">
+        1
+      </span>
 
-  <div class="page-indicators">
-    <!-- Always show first page -->
-    <span
-      class="page-circle"
-      [class.active]="currentPage === 1"
-      (click)="changePage(1)">
-      1
-    </span>
+      <!-- Show ... if currentPage > 4 -->
+      <span *ngIf="currentPage > 4" class="dots">...</span>
 
-    <!-- Show ... if currentPage > 4 -->
-    <span *ngIf="currentPage > 4" class="dots">...</span>
+      <!-- Dynamic middle pages -->
+      <span
+        *ngFor="let page of visiblePages()"
+        class="page-circle"
+        [class.active]="currentPage === page"
+        (click)="changePage(page)">
+        {{ page }}
+      </span>
 
-    <!-- Dynamic middle pages -->
-    <span
-      *ngFor="let page of visiblePages()"
-      class="page-circle"
-      [class.active]="currentPage === page"
-      (click)="changePage(page)">
-      {{ page }}
-    </span>
+      <!-- Show ... if currentPage < totalPages - 3 -->
+      <span *ngIf="currentPage < totalPages - 3" class="dots">...</span>
 
-    <!-- Show ... if currentPage < totalPages - 3 -->
-    <span *ngIf="currentPage < totalPages - 3" class="dots">...</span>
+      <!-- Always show last page -->
+      <span
+        class="page-circle"
+        [class.active]="currentPage === totalPages"
+        (click)="changePage(totalPages)">
+        {{ totalPages }}
+      </span>
+    </div>
 
-    <!-- Always show last page -->
-    <span
-      class="page-circle"
-      [class.active]="currentPage === totalPages"
-      (click)="changePage(totalPages)">
-      {{ totalPages }}
-    </span>
+    <button
+      class="page-button next"
+      [disabled]="currentPage === totalPages"
+      (click)="changePage(currentPage + 1)">
+      »
+    </button>
   </div>
-
-  <button
-    class="page-button next"
-    [disabled]="currentPage === totalPages"
-    (click)="changePage(currentPage + 1)">
-    »
-  </button>
-</div>
-
-
-
 </div>
 
 <!-- 🔙 Retour -->
 <a [routerLink]="['/health-dashboard']" class="btn-back-health">
-  ⬅️ Retour au Tableau de Santé
+  ⬅️ Back to Health Dashboard
 </a>

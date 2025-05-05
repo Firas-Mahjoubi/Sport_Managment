@@ -1,4 +1,4 @@
-<!-- 🌌 Arrière-plan avec une image -->
+<!-- 🌌 Background with an image -->
 <div style="
   position: fixed;
   top: 0;
@@ -10,9 +10,9 @@
   z-index: -1;">
 </div>
 
-<!-- 📦 Formulaire d'édition -->
+<!-- 📦 Edit Form -->
 <div class="container mt-4">
-  <h2 class="text-center">Modifier une Blessure</h2>
+  <h2 class="text-center">Edit Injury</h2>
   <form [formGroup]="injuryForm" (ngSubmit)="onSubmit()">
     <div class="mb-3">
       <label>Date</label>
@@ -27,7 +27,7 @@
     </div>
 
     <div class="mb-3">
-      <label>Gravité</label>
+      <label>Severity</label>
       <select class="form-select" formControlName="severity">
         <option *ngFor="let s of severities" [value]="s">{{ s }}</option>
       </select>
@@ -41,7 +41,7 @@
     </div>
 
     <div class="mb-3">
-      <label>Joueur</label>
+      <label>Player</label>
       <select class="form-select" formControlName="player">
         <option *ngFor="let player of players" [value]="player.id">
           {{ player.firstName }} {{ player.lastName }}
@@ -49,7 +49,7 @@
       </select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
-    <a [routerLink]="['/health/injury']" class="btn btn-secondary">Annuler</a>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a [routerLink]="['/health/injury']" class="btn btn-secondary">Cancel</a>
   </form>
 </div>
