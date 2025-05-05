@@ -231,6 +231,7 @@ import { PlotlyModule } from 'angular-plotly.js';
 
     ExerciceDashboardComponent,
 
+
     
 
     ClubFormComponent,
@@ -275,8 +276,10 @@ import { PlotlyModule } from 'angular-plotly.js';
    
     
 
+
     QRCodeModule ,
     NgChartsModule,
+
 
 
     MatDialogModule,
