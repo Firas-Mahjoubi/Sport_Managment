@@ -234,7 +234,7 @@ import { PlotlyModule } from 'angular-plotly.js';
     PublicClubPlayersComponent,
     PublicPlayerQrComponent,
 
-    TacticstatestiqueComponent
+    TacticstatestiqueComponent,
     
   ],
   imports: [
