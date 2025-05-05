@@ -14,13 +14,11 @@ import com.example.sport_backend.ServiceInterface.TrainingGround.ItrainingGround
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -164,6 +162,16 @@ public class TrainingGroundServiceIMPL implements ItrainingGroundService {
                 .orElseThrow(() -> new RuntimeException("Exercice not found"));
     }
 
+    public Map<String, Object> getDashboardStats() {
+        Map<String, Object> stats = new HashMap<>();
 
+        stats.put("totalExercises", exerciceRepositories.count());
+        stats.put("totalSessions", trainingSessionRepositories.count());
+        stats.put("averageAttendingPlayers", trainingSessionRepositories.getAverageAttendingPlayers());
+        stats.put("topUsedExercises", exerciceRepositories.getTopUsedExercises(PageRequest.of(0, 5)));
+        stats.put("upcomingSessions", trainingSessionRepositories.findUpcomingSessions(PageRequest.of(0, 3)));
+
+        return stats;
+    }
 
 }

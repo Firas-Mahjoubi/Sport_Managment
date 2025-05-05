@@ -36,6 +36,7 @@
     "axios": "^1.9.0",
     "babel-loader": "^10.0.0",
     "bootstrap": "^5.3.3",
+
     "chart.js": "^3.9.1",
     "css-loader": "^7.1.2",
     "echarts": "^5.6.0",
@@ -44,8 +45,9 @@
     "html2pdf.js": "^0.10.3",
     "jspdf": "^3.0.1",
     "ng-charts": "^1.0.0-alpha",
-    "ng2-charts": "^8.0.0",
+    "ng2-charts": "^4.1.1",
     "ngx-echarts": "^19.0.0",
+
     "ngx-editor": "^16.0.0",
     "ngx-qrcode2": "^9.0.0",
     "qrcode": "^1.5.4",

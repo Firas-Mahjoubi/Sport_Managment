@@ -77,6 +77,11 @@ getSortedPlayers(field: string, direction: string = 'asc'): Observable<Player[]>
   return this.http.get<Player[]>(`${this.apiUrl}/sorted?field=${field}&direction=${direction}`);
 }
 
+//alerte 
+getTeamRosterAlerts(): Observable<any[]> {
+  return this.http.get<any[]>('http://localhost:8088/players/alerts/team-roster');
+}
+
 
 
   addPlayer(player: PlayerRequest): Observable<any> {
