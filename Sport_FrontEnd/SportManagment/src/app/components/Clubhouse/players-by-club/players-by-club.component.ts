@@ -4,7 +4,8 @@ import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   selector: 'app-players-by-club',
-  templateUrl: './players-by-club.component.html'
+  templateUrl: './players-by-club.component.html',
+  styleUrls: ['./players-by-club.component.css']
 })
 export class PlayersByClubComponent implements OnInit {
   players: any[] = [];

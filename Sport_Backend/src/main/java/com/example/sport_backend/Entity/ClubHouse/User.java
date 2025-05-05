@@ -41,11 +41,13 @@ public class User implements UserDetails {
     String phoneNumber;
     boolean verified;
     String verificationToken;
-    @Enumerated(EnumType.STRING)
-    Role role;
-
     @ManyToOne
-    Team team;
+    @JoinColumn(name = "team_id")
+    private Team team;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore

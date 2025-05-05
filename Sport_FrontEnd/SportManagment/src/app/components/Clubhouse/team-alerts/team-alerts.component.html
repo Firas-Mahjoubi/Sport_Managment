@@ -1,0 +1,163 @@
+
+<app-admin-header></app-admin-header>
+<br><br><br>
+
+
+
+<!-- Improved Team Roster Alerts Component -->
+<div class="container my-4">
+  <!-- Component Header with Stats Summary -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0 fw-bold text-primary">
+      <i class="fas fa-users-cog me-2"></i>Team Roster Alerts
+    </h2>
+    <div class="d-flex" style="gap: 1.5rem;">
+      <div class="text-center">
+        <span class="d-block h4 mb-0 fw-bold text-danger">{{getDangerAlertsCount()}}</span>
+        <span class="text-muted small">Missing Teams</span>
+      </div>
+      <div class="text-center">
+        <span class="d-block h4 mb-0 fw-bold text-warning">{{getWarningAlertsCount()}}</span>
+        <span class="text-muted small">Incomplete</span>
+      </div>
+      <div class="text-center">
+        <span class="d-block h4 mb-0 fw-bold text-success">{{getHealthyTeamsCount()}}</span>
+        <span class="text-muted small">Complete</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="card shadow-sm border-0 mb-4">
+    <div class="card-body p-5 text-center">
+      <div class="spinner-border text-primary mb-3" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="text-muted mb-0">Loading team roster data...</p>
+    </div>
+  </div>
+
+  <!-- Empty State with Animation -->
+  <div *ngIf="!loading && alerts.length === 0" class="card shadow-sm border-0 mb-4">
+    <div class="card-body p-5">
+      <div class="text-center">
+        <div class="mb-4">
+          <div class="bg-success-subtle p-4 rounded-circle d-inline-flex mb-2">
+            <i class="fas fa-clipboard-check text-success fa-3x"></i>
+          </div>
+          <h4 class="text-success mt-3 mb-2">All Teams Are Ready</h4>
+          <p class="text-muted mb-4">Every team has a complete roster with sufficient players</p>
+          <button class="btn btn-outline-primary" (click)="refreshData()">
+            <i class="fas fa-sync-alt me-2"></i>Refresh Data
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team Alerts Card -->
+  <div *ngIf="!loading && alerts.length > 0" class="card shadow-sm border-0 mb-4">
+    <!-- Filter & Actions Header -->
+    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap" style="gap: 0.5rem;">
+     
+      <div class="d-flex" style="gap: 0.5rem;">
+        <select class="form-select" [(ngModel)]="filterBySeverity">
+          <option value="all">All Statuses</option>
+          <option value="danger">Missing Players</option>
+          <option value="warning">Incomplete Roster</option>
+        </select>
+        <button class="btn btn-primary" (click)="refreshData()">
+          <i class="fas fa-sync-alt me-1"></i> Refresh
+        </button>
+      </div>
+    </div>
+
+    <!-- Alerts Table -->
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr class="bg-light">
+            <th class="px-4 py-3">Team</th>
+            <th class="px-4 py-3">Club</th>
+            <th class="px-4 py-3 text-center">Players</th>
+            <th class="px-4 py-3 text-center">Status</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let alert of filteredAlerts" 
+              [ngClass]="{'border-start border-5 border-danger': alert.severity === 'danger', 
+                         'border-start border-5 border-warning': alert.severity === 'warning'}">
+            <td class="px-4 py-3">
+              <div class="d-flex align-items-center">
+                <span class="me-2" 
+                      [ngClass]="{'text-danger': alert.severity === 'danger', 
+                                 'text-warning': alert.severity === 'warning'}">
+                  <i *ngIf="alert.severity === 'danger'" class="fas fa-exclamation-circle"></i>
+                  <i *ngIf="alert.severity === 'warning'" class="fas fa-exclamation-triangle"></i>
+                </span>
+                <div>
+                  <div class="fw-bold">{{ alert.teamName }}</div>
+                  <div class="text-muted small">ID: {{ getTeamId(alert) }}</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3">{{ alert.clubName }}</td>
+            <td class="px-4 py-3 text-center">
+              <div class="position-relative d-inline-block">
+                <span class="badge rounded-pill px-3 py-2" 
+                     [ngClass]="{'bg-danger': alert.severity === 'danger', 
+                                'bg-warning text-dark': alert.severity === 'warning'}">
+                  {{ alert.playerCount }}
+                </span>
+                <span class="position-absolute top-0 start-100 translate-middle badge bg-primary rounded-pill">
+                  {{ getRequiredPlayers(alert) }}
+                  <span class="visually-hidden">required players</span>
+                </span>
+              </div>
+            </td>
+            <td class="px-4 py-3 text-center">
+              <span *ngIf="alert.severity === 'danger'" 
+                    class="badge bg-danger-subtle text-danger px-3 py-2 fw-normal">
+                <i class="fas fa-times-circle me-1"></i> No Players
+              </span>
+              <span *ngIf="alert.severity === 'warning'" 
+                    class="badge bg-warning-subtle text-warning px-3 py-2 fw-normal">
+                <i class="fas fa-user-minus me-1"></i> Incomplete Roster
+              </span>
+            </td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="card-footer bg-white py-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="text-muted small">
+          Showing <span class="fw-bold">{{ filteredAlerts.length }}</span> of <span class="fw-bold">{{ alerts.length }}</span> teams with alerts
+        </div>
+        <nav aria-label="Team alerts pagination">
+          <ul class="pagination pagination-sm mb-0">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

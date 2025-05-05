@@ -72,7 +72,16 @@ downloadClubsCsv() {
 downloadClubPdf(id: number) {
   return this.http.get(`http://localhost:8088/clubs/export/pdf/${id}`, { responseType: 'blob' });
 }
+///////////
+/*getClubsByCoachId(userId: number) {
+  return this.http.get<Club[]>(`http://localhost:8088/api/clubs/byCoach/${userId}`);
+}*/
+///
+getClubsByCoach(userId: number): Observable<Club[]> {
+  return this.http.get<Club[]>(`${this.apiUrl}/byCoach/${userId}`);
+}
 
-  
+
+
   
 }

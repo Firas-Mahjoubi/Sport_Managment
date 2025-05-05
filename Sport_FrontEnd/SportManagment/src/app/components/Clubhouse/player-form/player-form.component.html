@@ -1,5 +1,10 @@
 
 <app-admin-sidebar></app-admin-sidebar>
+<app-admin-header></app-admin-header>
+<br>
+<br>
+<br>
+
 <div class="container d-flex justify-content-center align-items-center my-5">
   <div class="card player-card shadow-lg rounded-3 border-0" style="width: 800px; background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);">
     <div class="card-header bg-transparent border-0 py-4">
@@ -44,10 +49,17 @@
             <div class="form-floating">
               <select id="position" class="form-select rounded-pill border-1 border-primary" 
                       [(ngModel)]="player.position" name="position" required>
-                <option value="attacker">Attacker</option>
-                <option value="medium">Medium</option>
-                <option value="defender">Defender</option>
-                <option value="goalkeeper">Goalkeeper</option>
+                <option value="LW">LW</option>
+                <option value="RW">RW</option>
+                <option value="ST">ST</option>
+                <option value="CM1">CM1</option>
+                <option value="CM2">CM2</option>
+                <option value="CM3">CM3</option>
+                <option value="CB1">CB1</option> 
+                <option value="CB2">CB2</option>
+                <option value="LB">LB</option>
+                <option value="RB">RB</option>
+                <option value="GK">GK</option>
               </select>
               <label for="position" class="ms-3 text-muted">Position</label>
             </div>

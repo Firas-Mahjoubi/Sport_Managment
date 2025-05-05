@@ -20,12 +20,12 @@ import java.util.List;
 @CrossOrigin("*")
 public class TeamController {
     @Autowired
-private ITeamService iTeamService;
+    private ITeamService iTeamService;
 
     private final TeamRepositories teamRepo;
     private final ClubRepo clubRepo;
 
-@GetMapping("/getallteams")
+    @GetMapping("/getallteams")
     public List<Team> getAllTeams() {
         return iTeamService.getAllTeams();
     }
@@ -36,7 +36,7 @@ private ITeamService iTeamService;
     }
 
     @PostMapping("/addteam")
-    public ResponseEntity<Team> addTeam(@ModelAttribute TeamRequest teamRequest) {
+    public ResponseEntity<Team> addTeam(@RequestBody TeamRequest teamRequest) {
         Club club = clubRepo.findById(teamRequest.getClubId())
                 .orElseThrow(() -> new EntityNotFoundException("Club not found"));
 
@@ -47,6 +47,9 @@ private ITeamService iTeamService;
 
         return ResponseEntity.ok(teamRepo.save(team));
     }
+
+
+
 
     @DeleteMapping("/delete/{id}")
     public void deleteTeam(@PathVariable Long id) {

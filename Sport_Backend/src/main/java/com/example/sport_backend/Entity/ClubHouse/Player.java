@@ -19,11 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @Entity
-
-
-
 @Builder
-
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,10 +35,6 @@ public class Player {
     Integer playerNumber;
     String performanceStats;
 
-
-    String image;
-
-
     @Transient
     private String teamName;
 
@@ -54,13 +46,13 @@ public class Player {
     @Lob
     byte[] imageUrl;
 
-
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
     @ManyToOne()
     private Club club;
 
+    String image;
 
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "player")

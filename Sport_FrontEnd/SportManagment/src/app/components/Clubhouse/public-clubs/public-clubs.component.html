@@ -1,66 +1,74 @@
+<app-header></app-header>
+<br>
+<br>
+<br>
+
 <div class="container mt-5">
-    <!-- Titre principal -->
-    <h2 class="section-title text-center mb-5">🏆 Our Clubs</h2>
   
-    <!-- 🔎 Input de recherche -->
-    <div class="d-flex justify-content-center mb-4">
+  
+  <div class="clubs-container">
+    <!-- Input de recherche -->
+    <div class="search-bar-container text-center mb-4">
       <input
         type="text"
-        class="form-control w-50"
+        class="form-control search-input"
         [(ngModel)]="searchKeyword"
         (input)="searchClubs()"
-        placeholder="Rechercher un club par nom ou lieu..." />
+        placeholder="Search by club name or location..." />
     </div>
   
+    <!-- Bouton Export -->
+    <div class="text-center mb-5">
+      <button class="btn btn-success" (click)="exportClubsCsv()">
+        <i class="fas fa-file-download"></i> Export Club to CSV
+      </button>
+    </div>
 
-    <!-- 📥 Bouton Export -->
-  <div class="text-center my-4">
-    <button class="btn btn-success" (click)="exportClubsCsv()">
-      📥 Export Clubs to CSV
-    </button>
-  </div>
-
-    <!-- Affichage conditionnel -->
+    <!-- Liste des clubs -->
     <div *ngIf="clubs.length > 0; else noClubsFound">
-      <!-- ✅ Liste des clubs -->
       <div class="row g-4">
         <div *ngFor="let club of clubs" class="col-md-4">
-          <div class="elite-card shadow-lg rounded-4 overflow-hidden hover-effect">
-            <div class="card-header-gradient position-relative">
-              <div class="image-wrapper">
-                <img [src]="club.imageUrl ? 'http://localhost:8088/clubs/image/' + club.id : 'assets/default-club.png'" 
-                     alt="Club Logo" 
-                     class="club-logo rounded-3 mx-auto"
-                     (error)="club.imageUrl = 'assets/default-club.png'">
+          <div class="club-card shadow rounded">
+            <div class="club-header">
+              <div class="text-center">
+                <img 
+                  [src]="club.imageUrl" 
+                  alt="Club Logo" 
+                  class="club-logo"
+                  onerror="this.src='assets/default-club.png'">
               </div>
             </div>
   
-            <div class="card-body text-center pt-4 pb-3 px-4">
-              <h3 class="club-name mb-3">{{ club.name }}</h3>
-  
-              <button class="btn btn-premium" (click)="viewPlayers(club.id)">
-                <i class="fas fa-users me-2"></i>View Players
-              </button>
-
-              <button class="btn btn-outline-primary mt-2" (click)="exportClubPdf(club.id)">
-                📄 Export Club PDF
-              </button>
+            <div class="club-body text-center">
+              <h3 class="club-name">{{club.name}}</h3>
               
-
+              <div class="club-actions">
+                <button class="btn btn-primary" (click)="viewPlayers(club.id)">
+                  <i class="fas fa-users"></i> View Players
+                </button>
+                
+                <button class="btn btn-outline-primary mt-2" (click)="exportClubPdf(club.id)">
+                  <i class="fas fa-file-pdf"></i> Export PDF
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   
-    <!-- 🔴 Template affiché si aucun club trouvé -->
+    <!-- Template si aucun club trouvé -->
     <ng-template #noClubsFound>
-        <div class="text-center mt-5 animate__animated animate__fadeIn">
-          <i class="fas fa-frown fa-5x text-muted mb-3"></i>
-          <h4 class="text-muted">No matching club found.</h4>
-            <p class="text-secondary">Try adjusting your search or checking the spelling.</p>
-
-        </div>
-      </ng-template>
+      <div class="text-center mt-5">
+        <i class="fas fa-search fa-4x text-muted"></i>
+        <h4 class="mt-3 text-muted">No matching clubs found</h4>
+        <p class="text-secondary">Try adjusting your search criteria or check the spelling</p>
+        <button class="btn btn-primary mt-3" (click)="searchKeyword = ''; searchClubs()">
+          <i class="fas fa-redo"></i> Reset Search
+        </button>
+      </div>
+    </ng-template>
   </div>
-  
+</div>
+
+<app-footer></app-footer>
