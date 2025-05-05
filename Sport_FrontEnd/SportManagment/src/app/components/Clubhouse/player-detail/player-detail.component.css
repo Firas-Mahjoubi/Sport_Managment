@@ -1,0 +1,58 @@
+/* Taille d'image réduite + styles opaques */
+.player-avatar {
+    width: 100px !important;
+    height: 100px !important;
+    object-fit: cover;
+    border: 3px solid #ffffff;
+    background-color: #f8f9fa; /* Fond de secours */
+}
+
+.card-header-gradient {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: 10px; /* Ajusté pour la nouvelle taille */
+    right: 10px;  /* Ajusté pour la nouvelle taille */
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    background-color: #e74c3c; /* Rouge opaque */
+}
+
+.status-indicator.active {
+    background-color: #2ecc71; /* Vert opaque */
+}
+
+.player-name {
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: #2c3e50; /* ✅ Texte foncé bien visible sur fond clair */
+    text-shadow: none; /* Tu peux garder ou ajuster ça */
+  }
+
+
+.section-title {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
+}
+
+.info-card {
+    transition: transform 0.3s ease;
+    border: 1px solid #d4eaff; /* Bleu clair opaque */
+    background-color: #ffffff;
+}
+
+.back-button {
+    background-color: #3498db; /* Bleu opaque */
+    color: #ffffff;
+    border: 2px solid #2c3e50;
+}
+
+.status-badge {
+    background-color: #e3f2fd; /* Bleu très clair opaque */
+    color: #2c3e50;
+}

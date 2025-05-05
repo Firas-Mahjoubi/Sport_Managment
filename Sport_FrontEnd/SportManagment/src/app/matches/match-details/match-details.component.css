@@ -7,6 +7,29 @@
   .navbar{
     margin-bottom: 80px;
   }
+  .predictions-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .home-prediction, .away-prediction {
+    width: 48%;
+  }
+
+  .home-prediction {
+    text-align: left;
+
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .away-prediction {
+    text-align: right;
+
+    padding: 10px;
+    border-radius: 5px;
+  }
 
   .league-header {
     display: flex;

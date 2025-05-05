@@ -17,7 +17,7 @@ public interface IHealthService {
      void deleteHealthRecord(Long id);
     HealthRecord createHealthRecord(HealthRecord healthRecord, Long playerId); // ✅ Ajout de playerId
 
-
+    HealthRecord findByPlayerId(Long playerId);
 
 
 }

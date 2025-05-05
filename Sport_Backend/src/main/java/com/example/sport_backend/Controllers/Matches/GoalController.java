@@ -2,6 +2,7 @@ package com.example.sport_backend.Controllers.Matches;
 
 import com.example.sport_backend.Entity.Matchs.Goal;
 import com.example.sport_backend.Entity.Matchs.GoalResponseDTO;
+import com.example.sport_backend.Entity.Matchs.PlayerStatsDto;
 import com.example.sport_backend.ServiceImpl.Matches.GoalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,12 @@ public class GoalController {
     public ResponseEntity<List<GoalResponseDTO>> getGoalsForMatch(@PathVariable Long matchId) {
         List<GoalResponseDTO> goals = goalService.getGoalsForMatch(matchId);
         return ResponseEntity.ok(goals);
+    }
+
+    @GetMapping("/topscorer/{leagueId}")
+    public ResponseEntity<PlayerStatsDto> getTopScorer(@PathVariable Long leagueId) {
+        PlayerStatsDto result = goalService.getTopScorerInLeague(leagueId);
+        return ResponseEntity.ok(result);
     }
 
     @DeleteMapping("/deleteGoal/{goalId}")

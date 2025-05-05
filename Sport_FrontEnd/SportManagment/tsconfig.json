@@ -16,6 +16,8 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,  // Ensure this is also set to true
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,

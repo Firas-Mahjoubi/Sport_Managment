@@ -1,0 +1,50 @@
+.player-card {
+  transition: transform 0.3s ease;
+}
+
+.player-card:hover {
+  transform: translateY(-5px);
+}
+
+.form-title {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.form-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #0d6efd;
+  border-radius: 2px;
+}
+
+.custom-file-upload {
+  transition: all 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background: rgba(13, 110, 253, 0.05) !important;
+  border-color: #0d6efd !important;
+}
+
+.form-control:focus, .form-select:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  border-color: #0d6efd !important;
+}
+
+.rounded-pill {
+  border-radius: 50rem !important;
+}
+
+.border-dashed {
+  border-style: dashed !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

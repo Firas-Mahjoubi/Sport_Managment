@@ -5,7 +5,6 @@ import { Player } from '../models/player';
 import { Injury } from '../models/injury';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-injury-list',
   templateUrl: './injury-list.component.html',
@@ -14,37 +13,55 @@ import { Router } from '@angular/router';
 export class InjuryListComponent implements OnInit {
   injuries: Injury[] = [];
   filteredInjuries: Injury[] = [];
+  paginatedInjuries: Injury[] = [];
+
   players: Player[] = [];
   searchText: string = '';
   selectedPlayer: string = 'all';
 
+  searchPlayer: string = ''; // nouveau champ
 
 
+  // Pagination
+  currentPage: number = 1;
+  itemsPerPage: number = 8;
+  totalPages: number = 1;
 
-
-
-  // 🔥 Émet un événement lorsqu'une blessure est archivée
   @Output() injuryArchived: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private injuryService: InjuryService, private playerService: PlayerService,  private router: Router) {}
+  constructor(
+    private injuryService: InjuryService,
+    private playerService: PlayerService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadInjuries();
     this.loadPlayers();
   }
 
-  /**
-   * Charge la liste des blessures depuis le backend
-   */
   loadInjuries(): void {
     this.injuryService.getInjuries().subscribe((data: Injury[]) => {
       this.injuries = data;
-      this.filteredInjuries = data;
-      console.log("🚀 Blessures récupérées :", this.injuries); // 🔍 Vérifie les données
+      this.filterInjuries(); // Initialise aussi les données filtrées + paginées
+      console.log("🚀 Blessures récupérées :", this.injuries);
     });
   }
 
-  
+
+  visiblePages(): number[] {
+    const pages: number[] = [];
+    const start = Math.max(2, this.currentPage - 2);
+    const end = Math.min(this.totalPages - 1, this.currentPage + 2);
+
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+
+    return pages;
+  }
+
+
   loadPlayers(): void {
     this.playerService.getPlayers().subscribe((data: Player[]) => {
       this.players = data;
@@ -52,22 +69,41 @@ export class InjuryListComponent implements OnInit {
     });
   }
 
-
   filterInjuries(): void {
     this.filteredInjuries = this.injuries.filter(injury => {
-      const matchesSearch = injury.type.toLowerCase().includes(this.searchText.toLowerCase()) ||
-                            injury.description.toLowerCase().includes(this.searchText.toLowerCase());
+      const matchesPlayerName =
+        injury.player &&
+        (injury.player.firstName.toLowerCase().includes(this.searchPlayer.toLowerCase()) ||
+         injury.player.lastName.toLowerCase().includes(this.searchPlayer.toLowerCase()));
 
-      const matchesPlayer = this.selectedPlayer === 'all' || injury.player?.id === +this.selectedPlayer;
+      const matchesPlayerId = this.selectedPlayer === 'all' || injury.player?.id === +this.selectedPlayer;
 
-      return matchesSearch && matchesPlayer;
+      return matchesPlayerName && matchesPlayerId;
     });
+
+    this.totalPages = Math.ceil(this.filteredInjuries.length / this.itemsPerPage);
+    this.currentPage = 1;
+    this.updatePaginatedInjuries();
+  }
+  /**
+   * Met à jour les blessures affichées selon la page
+   */
+  updatePaginatedInjuries(): void {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedInjuries = this.filteredInjuries.slice(start, end);
   }
 
   /**
-   * Archive et supprime une blessure si elle est guérie
-   * @param injury Blessure à archiver
+   * Change la page actuelle
    */
+  changePage(page: number): void {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.updatePaginatedInjuries();
+
+  }
+
   deleteInjury(injury: Injury): void {
     if (!injury.id) {
       console.error("❌ Erreur : L'ID de la blessure est manquant !");
@@ -85,9 +121,9 @@ export class InjuryListComponent implements OnInit {
         next: (response) => {
           console.log("✅ Blessure archivée :", response);
           alert(response.message || "Blessure archivée avec succès !");
-          this.loadInjuries(); // Recharge la liste après suppression
-          this.injuryArchived.emit(); // Notifie que l'archivage est fait
-          this.router.navigate(['/health/injury/archived']); // 🔄 Redirection a
+          this.loadInjuries();
+          this.injuryArchived.emit();
+          this.router.navigate(['/health/injury/archived']);
         },
         error: (err) => {
           console.error("❌ Erreur lors de l'archivage", err);
@@ -96,9 +132,4 @@ export class InjuryListComponent implements OnInit {
       });
     }
   }
-
-
-
-
-
 }

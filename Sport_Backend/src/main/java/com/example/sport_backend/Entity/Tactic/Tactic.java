@@ -56,4 +56,20 @@ public class Tactic {
     @JoinColumn(name = "user_id", nullable = false) // Assuming user is required for each tactic
     @JsonIgnore
     private User user;
+
+    public static double calculateFormationPercentage(String formation, List<Tactic> tactics) {
+        long totalTactics = tactics.size();
+        long formationCount = tactics.stream()
+                .filter(tactic -> tactic.getFormation().equals(formation))
+                .count();
+        return (double) formationCount / totalTactics * 100;
+    }
+    public static double calculateTrainingFocusPercentage(TrainingFocus focus, List<Tactic> tactics) {
+        long totalTactics = tactics.size();
+        long focusCount = tactics.stream()
+                .filter(tactic -> tactic.getTrainingFocus().equals(focus))
+                .count();
+        return (double) focusCount / totalTactics * 100;
+    }
+
 }
