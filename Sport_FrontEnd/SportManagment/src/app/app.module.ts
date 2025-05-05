@@ -223,7 +223,7 @@ import { PlotlyModule } from 'angular-plotly.js';
     HealthDashboardComponent,
     AiChatComponent,
     AdminDashboardComponent,
-    ExerciceDashboardComponent
+    ExerciceDashboardComponent,
     
 
     ClubFormComponent,
@@ -268,7 +268,7 @@ import { PlotlyModule } from 'angular-plotly.js';
    
     
 
-    QRCodeModule ,
+    QRCodeModule,
 
 
     MatDialogModule,
