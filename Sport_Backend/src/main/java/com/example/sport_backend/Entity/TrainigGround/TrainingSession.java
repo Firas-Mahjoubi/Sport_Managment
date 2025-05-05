@@ -36,6 +36,7 @@ public class TrainingSession {
     String intensity;  // Low, Medium, High
     @Nullable
     String category;   // Attacking, Tactical, Physical
+
     LocalDate date;
     @NotBlank()
     String startTime;  // Change from LocalDateTime to String
