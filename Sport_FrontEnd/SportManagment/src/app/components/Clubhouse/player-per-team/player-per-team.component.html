@@ -1,0 +1,150 @@
+<app-admin-header></app-admin-header>
+<br><br><br>
+
+<div class="dashboard-container">
+
+  <div class="card main-card">
+    <div class="card-header bg-gradient">
+      <h3 class="text-center mb-0">
+        <i class="fas fa-chart-bar me-2"></i> Player Statistics by Team
+      </h3>
+    </div>
+
+    <div class="card-body">
+
+      <!-- ✅ Bouton Export PDF global -->
+      <div class="text-end mb-3">
+        <button class="btn btn-outline-primary" (click)="generateFullPdf()">
+          📄 Export Full Report 
+        </button>
+      </div>
+
+      <!-- Filtres & Affichage -->
+      <div class="filters-container mb-4">
+        <div class="row align-items-center">
+          <div class="col-md-9">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn"
+                [ngClass]="{'btn-danger': viewMode === 'chart', 'btn-outline-primary': viewMode !== 'chart'}"
+                (click)="setViewMode('chart')">GRAPH VIEW</button>
+              <button type="button" class="btn"
+                [ngClass]="{'btn-primary': viewMode === 'table', 'btn-outline-primary': viewMode !== 'table'}"
+                (click)="setViewMode('table')">TABLE VIEW</button>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <select class="form-select" [(ngModel)]="selectedClub" (change)="filterByClub()">
+              <option value="all">All clubs</option>
+              <option *ngFor="let club of uniqueClubs" [value]="club">{{ club }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✅ Zone complète à exporter -->
+      <div id="full-stats-export">
+
+        <!-- Graphique -->
+        <div class="chart-container" *ngIf="viewMode === 'chart' || true">
+          <canvas baseChart
+            [datasets]="barChartDataSet"
+            [labels]="barChartLabels"
+            [type]="barChartType"
+            [legend]="true"
+            [options]="chartOptions">
+          </canvas>
+        </div>
+
+        <!-- Résumé des stats -->
+        <div class="stats-summary mt-4">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="info-card bg-light">
+                <div class="info-card-header">Total Teams</div>
+                <div class="info-card-value">{{ filteredStats.length }}</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="info-card bg-light">
+                <div class="info-card-header">Total Players</div>
+                <div class="info-card-value">{{ getTotalPlayers() }}</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="info-card bg-light">
+                <div class="info-card-header">Average per Team</div>
+                <div class="info-card-value">{{ getAveragePlayers() | number:'1.1-1' }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tableau -->
+        <div class="table-responsive mt-4">
+          <h5 class="section-title">
+            <i class="fas fa-list me-2"></i>Statistics Details
+          </h5>
+          <table class="table table-hover table-striped table-bordered">
+            <thead class="table-primary">
+              <tr>
+                <th (click)="sortData('teamName')">
+                  Category
+                  <i class="fas"
+                    [ngClass]="{'fa-sort-up': sortColumn === 'teamName' && sortDirection === 'asc',
+                                'fa-sort-down': sortColumn === 'teamName' && sortDirection === 'desc',
+                                'fa-sort': sortColumn !== 'teamName'}"></i>
+                </th>
+                <th (click)="sortData('clubName')">
+                  Club
+                  <i class="fas"
+                    [ngClass]="{'fa-sort-up': sortColumn === 'clubName' && sortDirection === 'asc',
+                                'fa-sort-down': sortColumn === 'clubName' && sortDirection === 'desc',
+                                'fa-sort': sortColumn !== 'clubName'}"></i>
+                </th>
+                <th class="text-center" (click)="sortData('playerCount')">
+                  Number of Players
+                  <i class="fas"
+                    [ngClass]="{'fa-sort-up': sortColumn === 'playerCount' && sortDirection === 'asc',
+                                'fa-sort-down': sortColumn === 'playerCount' && sortDirection === 'desc',
+                                'fa-sort': sortColumn !== 'playerCount'}"></i>
+                </th>
+                <th class="text-center">Proportion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of filteredStats" [ngClass]="{'highlight-row': item.playerCount > getAveragePlayers()}">
+                <td>{{ item.teamName }}</td>
+                <td>
+                  <span class="badge rounded-pill"
+                    [ngStyle]="{'background-color': getClubColor(item.clubName)}">
+                    {{ item.clubName }}
+                  </span>
+                </td>
+                <td class="text-center">{{ item.playerCount }}</td>
+                <td class="text-center">
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar"
+                      [ngStyle]="{'width': (item.playerCount / getMaxPlayers() * 100) + '%'}"
+                      [attr.aria-valuenow]="item.playerCount"
+                      aria-valuemin="0" [attr.aria-valuemax]="getMaxPlayers()">
+                      {{ (item.playerCount / getTotalPlayers() * 100) | number:'1.1-1' }}%
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot class="table-secondary">
+              <tr>
+                <td colspan="2" class="text-end fw-bold">Total</td>
+                <td class="text-center fw-bold">{{ getTotalPlayers() }}</td>
+                <td class="text-center fw-bold">100%</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+      </div> <!-- end full-stats-export -->
+
+    </div>
+  </div>
+</div>

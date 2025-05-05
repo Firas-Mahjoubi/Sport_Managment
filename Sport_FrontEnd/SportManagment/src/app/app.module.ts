@@ -86,6 +86,9 @@ import { LeagueListComponent }from  './components/Clubhouse/league-list/league-l
 import { PlayerListComponent }from  './components/Clubhouse/player-list/player-list.component';
 import { PlayerDetailComponent } from './components/Clubhouse/player-detail/player-detail.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { PlayersPerTeamComponent } from './components/Clubhouse/player-per-team/player-per-team.component';
+import { TeamAlertsComponent } from './components/Clubhouse/team-alerts/team-alerts.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
@@ -213,6 +216,8 @@ import { PlotlyModule } from 'angular-plotly.js';
     StatistiqueComponent,
 
           AskQuestionComponent,
+          PlayersPerTeamComponent,
+          TeamAlertsComponent,
 
 
 
@@ -223,7 +228,9 @@ import { PlotlyModule } from 'angular-plotly.js';
     HealthDashboardComponent,
     AiChatComponent,
     AdminDashboardComponent,
+
     ExerciceDashboardComponent
+
     
 
     ClubFormComponent,
@@ -269,6 +276,7 @@ import { PlotlyModule } from 'angular-plotly.js';
     
 
     QRCodeModule ,
+    NgChartsModule,
 
 
     MatDialogModule,

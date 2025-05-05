@@ -12,4 +12,8 @@ public interface ClubRepo extends JpaRepository<Club,Long> {
     @Query("SELECT c FROM Club c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(c.location) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Club> searchClubsByKeyword(@Param("keyword") String keyword);
 
+
+
+
+
 }

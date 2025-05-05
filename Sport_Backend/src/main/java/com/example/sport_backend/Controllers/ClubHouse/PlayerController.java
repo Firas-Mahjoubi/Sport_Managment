@@ -1,9 +1,10 @@
 package com.example.sport_backend.Controllers.ClubHouse;
 
+import com.example.sport_backend.payload.TeamAlertDTO;
+import com.example.sport_backend.payload.TeamPlayerCountDTO;
 import com.example.sport_backend.Entity.ClubHouse.Player;
 import com.example.sport_backend.Entity.ClubHouse.PlayerRequest;
 import com.example.sport_backend.Repositories.ClubHouse.PlayerRepo;
-import com.example.sport_backend.ServiceImpl.ClubHouse.PlayerServiceIMPL;
 import com.example.sport_backend.ServiceInterface.ClubHouse.IPlayerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,5 +74,18 @@ public class PlayerController {
         return iPlayerService.getSortedPlayers(field, direction);
     }
 
+    @GetMapping("/players-per-team")
+    public List<TeamPlayerCountDTO> getPlayersPerTeam() {
+        return iPlayerService.getPlayerCountsPerTeam();
+    }
+
+    @GetMapping("/alerts/team-roster")
+    public List<TeamAlertDTO> getTeamAlerts() {
+        return iPlayerService.getTeamRosterAlerts();
+    }
+
+
+
+    ///////////////////////////////////
 
 }

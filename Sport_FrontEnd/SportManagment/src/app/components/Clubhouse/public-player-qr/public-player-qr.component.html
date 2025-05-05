@@ -1,28 +1,54 @@
-<div *ngIf="player" class="container mt-5 text-center">
-    <h2 class="mb-4">{{ player.firstName }} {{ player.lastName }}</h2>
-  
-    <!-- 🎯 QR Code qui contient directement les infos -->
-    <h5>📜 Scan to See Player Information</h5>
-    <qrcode 
+<app-header></app-header>
+<br>
+<br>
+<br>
+<div class="qr-container container py-5 mt-4">
+  <div *ngIf="player" class="qr-card">
+    <!-- En-tête du joueur -->
+    <div class="player-header">
+      <div class="player-number-badge">#{{ player.playerNumber }}</div>
+      <h2 class="player-fullname">{{ player.firstName }} {{ player.lastName }}</h2>
+      <div class="player-position">{{ player.position }}</div>
+    </div>
     
-      [qrdata]="playerDataForQR" 
-      [width]="250" 
-      [errorCorrectionLevel]="'M'">
-    </qrcode>
-  
-    <!-- 🔵 Retour -->
-    <div class="mt-4">
-      <button routerLink="/public-club-players" class="btn btn-primary">
-        Back to Players
-      </button>
+    <!-- Section QR Code -->
+    <div class="qr-section">
+      <h5 class="qr-title">
+        <span class="qr-icon">📱</span> Scan for Player Information
+      </h5>
+      
+      <div class="qr-frame" #qrCode>
+        <qrcode 
+          [qrdata]="playerDataForQR" 
+          [width]="280" 
+          [errorCorrectionLevel]="'M'">
+        </qrcode>
+      </div>
+      
+      <p class="qr-instruction">Use your smartphone camera to scan this code</p>
     </div>
 
-
-    <div class="mt-4">
-        <button (click)="downloadQRCode()" class="btn btn-success mt-3">
-            Download QR Code
-          </button>
-          
-      </div>
-  </div>
+    <!-- Actions -->
+    <div class="action-buttons">
+      <button (click)="downloadQRCode()" class="download-button">
+        <span class="button-icon">⬇️</span> Download QR Code
+      </button>
+      
+      <button routerLink="/public-club-players/{{clubId}}" class="back-button">
+        <span class="button-icon">←</span> Back to Players
+      </button>
+    </div>
+    
+    
   
+  <!-- Loader pendant le chargement -->
+  <div *ngIf="!player" class="loading-container">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-3">Loading player information...</p>
+  </div>
+</div>
+<br>
+<br>
+<br>

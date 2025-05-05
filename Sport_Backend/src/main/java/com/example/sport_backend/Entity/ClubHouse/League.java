@@ -21,6 +21,6 @@ public class League {
     String logourl;
     String nation;
     @OneToMany(mappedBy = "league")
-            @JsonIgnore
+    @JsonIgnore
     List<Club> clubs;
 }

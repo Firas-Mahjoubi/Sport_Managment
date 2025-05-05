@@ -99,6 +99,8 @@ import { PublicClubsComponent } from './components/Clubhouse/public-clubs/public
 import { PublicClubPlayersComponent } from './components/Clubhouse/public-club-players/public-club-players.component';
 import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr/public-player-qr.component';
 import { TacticstatestiqueComponent } from './tactics/tacticstatestique/tacticstatestique.component';
+import { PlayersPerTeamComponent } from './components/Clubhouse/player-per-team/player-per-team.component';
+import { TeamAlertsComponent } from './components/Clubhouse/team-alerts/team-alerts.component';
 ////////////
 
 
@@ -137,6 +139,7 @@ const routes: Routes = [
     //---------------------Backoffice-training-Ground ------------------------//
 
     { path: 'dashex', component: BackofficeAddExerciceComponent },
+
     { path: 'dash-ex', component: ExerciceDashboardComponent },
     
   //---------------------------------------------//
@@ -179,6 +182,8 @@ const routes: Routes = [
 { path: 'clubs-public', component: PublicClubsComponent },
 { path: 'public-club-players/:id', component: PublicClubPlayersComponent },
 { path: 'public-player-qr/:id', component: PublicPlayerQrComponent },
+{ path: 'players-stats', component: PlayersPerTeamComponent },
+{ path: 'team-alerts', component: TeamAlertsComponent },
 
 
 

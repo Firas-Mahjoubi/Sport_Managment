@@ -1,0 +1,98 @@
+/* Team Roster Alerts Component Styles */
+
+.card {
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+
+.badge {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* Custom border styles for the table rows */
+.border-danger {
+  border-left-color: #dc3545 !important;
+}
+
+.border-warning {
+  border-left-color: #ffc107 !important;
+}
+
+/* Animation for the empty state */
+.fas.fa-clipboard-check {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Status badge styling */
+.badge.bg-danger-subtle {
+  background-color: rgba(220, 53, 69, 0.1) !important;
+}
+
+.badge.bg-warning-subtle {
+  background-color: rgba(255, 193, 7, 0.1) !important;
+}
+
+/* Custom hover effect for action buttons */
+.btn-group .btn {
+  transition: all 0.2s;
+}
+
+.btn-group .btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Make the table rows more interactive */
+.table tbody tr {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(13, 110, 253, 0.04);
+}
+
+/* Improve the search input */
+.input-group .form-control:focus {
+  box-shadow: none;
+  border-color: #ced4da;
+}
+
+.input-group .input-group-text {
+  color: #6c757d;
+}
+
+/* Custom animation for loading spinner */
+.spinner-border {
+  animation-duration: 1s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .d-flex.justify-content-between {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .card-header .d-flex {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+}

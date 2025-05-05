@@ -1,93 +1,101 @@
-/* Custom CSS */
+/* Simple Public Clubs Component CSS */
 .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    letter-spacing: 1px;
-    color: #fff;
-    position: relative;
-  }
-  
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(90deg, #3498db 0%, #2c3e50 100%);
-  }
-  
-  .elite-card {
-    border: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
-  }
-  
-  .hover-effect:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.12) !important;
-  }
-  
-  .card-header-gradient {
-    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-    padding: 2rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.section-title:after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db 0%, #2c3e50 100%);
+  border-radius: 2px;
+}
+
+.clubs-container {
+  padding: 2rem 0;
+}
+
+.search-input {
+  max-width: 500px;
+  margin: 0 auto;
+  height: 50px;
+  border-radius: 25px;
+  padding-left: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+.club-card {
+  height: 100%;
+  background: #fff;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.club-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.club-header {
+  background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+  padding: 2rem;
+}
+
+.club-logo {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  border: 3px solid white;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.club-body {
+  padding: 1.5rem;
+}
+
+.club-name {
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: #2c3e50;
+  margin-bottom: 1.2rem;
+}
+
+.club-actions {
+  margin-top: 1rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+}
+
+.btn-outline-primary {
+  color: #3498db;
+  border-color: #3498db;
+  background: transparent;
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
   }
   
   .club-logo {
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-    border: 3px solid white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    background: white;
+    width: 120px;
+    height: 120px;
   }
-  
-  .image-wrapper {
-    position: relative;
-    z-index: 1;
-  }
-  
-  .club-name {
-    font-weight: 600;
-    font-size: 1.4rem;
-    color: #2c3e50;
-    letter-spacing: -0.5px;
-  }
-  
-  .btn-premium {
-    background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
-    color: white !important;
-    border: none;
-    border-radius: 30px;
-    padding: 12px 30px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .btn-premium:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
-  }
-  
-  .btn-premium::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      120deg,
-      transparent,
-      rgba(255, 255, 255, 0.3),
-      transparent
-    );
-    transition: 0.5s;
-  }
-  
-  .btn-premium:hover::before {
-    left: 100%;
-  }
+}
