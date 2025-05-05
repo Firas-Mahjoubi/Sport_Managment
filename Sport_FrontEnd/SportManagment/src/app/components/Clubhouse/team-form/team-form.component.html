@@ -1,5 +1,8 @@
 <app-admin-sidebar></app-admin-sidebar>
-
+<app-admin-header></app-admin-header>
+<br>
+<br>
+<br>
 <div class="container-fluid bg-light-blue py-6">
   <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6 col-xl-5">
@@ -12,6 +15,7 @@
 
         <div class="card-body px-5 py-4">
           <form (ngSubmit)="saveTeam()" #teamForm="ngForm" class="needs-validation" novalidate>
+            
             <!-- NameClub Field -->
             <div class="form-group mb-4">
               <label for="name" class="form-label small text-uppercase text-muted fw-bold">
@@ -34,6 +38,32 @@
               <div *ngIf="teamForm.controls['name']?.invalid && teamForm.controls['name']?.touched" 
                    class="text-danger small mt-2">
                 <i class="bi bi-exclamation-circle me-2"></i>Club name is required
+              </div>
+            </div>
+
+            <!-- Club Selector -->
+            <div class="form-group mb-4">
+              <label for="clubId" class="form-label small text-uppercase text-muted fw-bold">
+                <i class="bi bi-people-fill me-2"></i>Select Club
+              </label>
+              <div class="input-group input-group-lg border-rounded">
+                <span class="input-group-text bg-transparent border-end-0">
+                  <i class="bi bi-shield text-primary"></i>
+                </span>
+                <select 
+                  id="clubId" 
+                  class="form-select border-start-0 ps-2" 
+                  [(ngModel)]="team.clubId" 
+                  name="clubId" 
+                  required
+                >
+                  <option value="" disabled selected>Select a club</option>
+                  <option *ngFor="let club of clubs" [value]="club.id">{{ club.name }}</option>
+                </select>
+              </div>
+              <div *ngIf="teamForm.controls['clubId']?.invalid && teamForm.controls['clubId']?.touched" 
+                   class="text-danger small mt-2">
+                <i class="bi bi-exclamation-circle me-2"></i>Please select a club
               </div>
             </div>
 
@@ -76,6 +106,7 @@
                 <i class="bi bi-arrow-right-short ms-2"></i>
               </button>
             </div>
+
           </form>
         </div>
       </div>

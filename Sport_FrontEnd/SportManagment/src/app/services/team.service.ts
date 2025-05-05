@@ -6,7 +6,7 @@ export interface Team {
   id?: number;
   name: string;
   categories: string; // pas category
-  clubId: number;
+  clubId: '';
   
 }
 

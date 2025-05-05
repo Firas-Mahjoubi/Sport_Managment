@@ -1,12 +1,11 @@
 ::ng-deep .content-wrapper {
-    margin-left: 250px; /* adapte à la largeur réelle de ta sidebar */
-    padding: 2rem;
+  margin-left: 250px; /* adapte à la largeur réelle de ta sidebar */
+  padding: 2rem;
+}
+
+@media (max-width: 992px) {
+  ::ng-deep .content-wrapper {
+    margin-left: 0;
+    padding: 1rem;
   }
-  
-  @media (max-width: 992px) {
-    ::ng-deep .content-wrapper {
-      margin-left: 0;
-      padding: 1rem;
-    }
-  }
-  
+}

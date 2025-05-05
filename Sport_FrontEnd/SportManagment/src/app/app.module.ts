@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -22,6 +23,7 @@ import { ExerciseFormComponent } from './components/exercise-form/exercise-form.
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
 import { ExerciseDetailComponent } from './components/exercise-detail/exercise-detail.component';
+
 //---------------------------------------------//
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
 import { InjuryEditComponent } from './Health/injury-edit/injury-edit.component';
@@ -84,6 +86,9 @@ import { LeagueListComponent }from  './components/Clubhouse/league-list/league-l
 import { PlayerListComponent }from  './components/Clubhouse/player-list/player-list.component';
 import { PlayerDetailComponent } from './components/Clubhouse/player-detail/player-detail.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { PlayersPerTeamComponent } from './components/Clubhouse/player-per-team/player-per-team.component';
+import { TeamAlertsComponent } from './components/Clubhouse/team-alerts/team-alerts.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
@@ -133,6 +138,8 @@ import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr
 
 import { AiChatComponent } from './tactics/ai-chat/ai-chat.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+
+
 import { TacticstatestiqueComponent } from './tactics/tacticstatestique/tacticstatestique.component';
 import { PlotlyModule } from 'angular-plotly.js';
 
@@ -208,6 +215,8 @@ import { PlotlyModule } from 'angular-plotly.js';
     StatistiqueComponent,
 
           AskQuestionComponent,
+          PlayersPerTeamComponent,
+          TeamAlertsComponent,
 
 
 
@@ -218,6 +227,7 @@ import { PlotlyModule } from 'angular-plotly.js';
     HealthDashboardComponent,
     AiChatComponent,
     AdminDashboardComponent,
+    
 
     ClubFormComponent,
     ClubListComponent,
@@ -248,7 +258,7 @@ import { PlotlyModule } from 'angular-plotly.js';
     RouterModule,
     CommonModule,
     FontAwesomeModule,
-
+    
     MatTableModule,
     MatIconModule,
     MatButtonModule,
@@ -258,9 +268,11 @@ import { PlotlyModule } from 'angular-plotly.js';
 
     MatProgressBarModule,
     MatDividerModule,
-
+   
+    
 
     QRCodeModule ,
+    NgChartsModule,
 
 
     MatDialogModule,
@@ -268,6 +280,7 @@ import { PlotlyModule } from 'angular-plotly.js';
     MatNativeDateModule,
     MatInputModule,
     MatFormFieldModule,
+    
      CommonModule,
         CommonModule,
         FormsModule,
@@ -280,6 +293,9 @@ import { PlotlyModule } from 'angular-plotly.js';
         MatFormFieldModule, // ✅ Required for mat-form-field
         MatSelectModule, // ✅ Required for mat-select
         MatToolbarModule,
+
+        
+
     MatTooltipModule,
 
    NgxEchartsModule.forRoot({ echarts })
