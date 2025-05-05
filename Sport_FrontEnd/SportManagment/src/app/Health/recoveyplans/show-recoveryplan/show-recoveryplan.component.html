@@ -5,7 +5,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: url('assets/player.jpg') no-repeat center center/cover;
+  background: url('/assets/player.jpg') no-repeat center center/cover;
   filter: brightness(0.3);
   z-index: -1;">
 </div>
@@ -35,7 +35,12 @@
       <p><strong>⚠️ Concerned Injury:</strong> {{ recoveryPlan.injury.description }}</p>
     </mat-card-content>
 
+<<<<<<< HEAD
     <!-- 🔙 Back Button -->
+=======
+
+    <!-- 🔙 Bouton Retour -->
+>>>>>>> 42b8868a065243f10bd6715f5b2f2ec0259ab56b
     <mat-card-actions>
       <button mat-button color="primary" [routerLink]="['/list-recoveryplan', recoveryPlan.injury.player.id]">
         ⬅️ Back to List

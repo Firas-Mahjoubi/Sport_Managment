@@ -1,0 +1,18 @@
+<div class="chat-window" *ngIf="isChatOpen">
+    <div class="chat-header">
+      <span>AI Chat</span>
+      <button (click)="closeChat()">X</button> <!-- Close Button -->
+    </div>
+  
+    <div class="chat-content">
+      <div *ngFor="let message of messages">
+        <div class="message" [ngClass]="message.sender">{{ message.text }}</div>
+      </div>
+    </div>
+  
+    <div class="chat-input">
+      <input [(ngModel)]="userMessage" (keyup.enter)="sendMessage()" placeholder="Type your message..." />
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+  

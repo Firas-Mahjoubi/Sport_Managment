@@ -1,0 +1,173 @@
+/* TITRE PREMIUM */
+::ng-deep .elite-title {
+  font-size: 2.5rem;
+  letter-spacing: 1.5px;
+  color: #2c3e50;
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+::ng-deep .elite-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(90deg, #d4af37 0%, #a2854e 100%);
+}
+
+/* ✅ CORRECTION : wrapper pour décaler le contenu à droite de la sidebar */
+::ng-deep .content-wrapper {
+  margin-left: 250px; /* adapte si ta sidebar est plus ou moins large */
+  padding: 2rem;
+  padding-top: 5rem;
+}
+
+/* TABLE CONTAINER PREMIUM */
+::ng-deep .luxury-table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: #ffffff;
+  border: 2px solid #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* TABLE LUXURY */
+::ng-deep .table-luxury {
+  width: 100%;
+  min-width: 1000px;
+  table-layout: auto;
+}
+
+/* HEADERS PREMIUM */
+::ng-deep .table-header-gold {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: #d4af37 !important;
+  font-size: 1.1rem;
+}
+
+::ng-deep .table-header-gold th {
+  padding: 1.5rem;
+  vertical-align: middle;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* LIGNE DE TABLEAU */
+::ng-deep .luxury-row {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 2px solid #f8f9fa;
+}
+
+::ng-deep .luxury-row:hover {
+  background: #f8f9fa;
+  transform: scale(1.005);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+}
+
+/* LOGO CLUB */
+::ng-deep .club-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* CELLULES TABLEAU */
+::ng-deep .table-luxury td,
+::ng-deep .table-luxury th {
+  text-align: center;
+  vertical-align: middle;
+  padding: 1rem;
+  white-space: nowrap;
+}
+
+/* BOUTONS ACTIONS */
+::ng-deep .btn-luxury {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+::ng-deep .btn-edit {
+  color: #d4af37;
+  border: 1px solid #d4af37;
+}
+
+::ng-deep .btn-edit:hover {
+  background: #d4af37;
+  color: #bb2424;
+}
+
+::ng-deep .btn-view {
+  background: rgba(46, 204, 113, 0.1);
+  color: #2ecc71;
+}
+
+::ng-deep .btn-view:hover {
+  background: #2ecc71;
+  color: white;
+}
+
+::ng-deep .btn-delete {
+  color: #c82333;
+  border: 1px solid #c82333;
+}
+
+::ng-deep .btn-delete:hover {
+  background: #c82333;
+  color: white;
+}
+
+/* TEXTE COLONNES */
+::ng-deep .club-name {
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: #2d2d2d;
+  font-size: 1.1rem;
+}
+
+::ng-deep .location-badge {
+  background: rgba(212, 175, 55, 0.1);
+  padding: 5px 15px;
+  border-radius: 20px;
+  color: #2d2d2d;
+}
+
+::ng-deep .foundation-year {
+  color: #d4af37;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 992px) {
+  ::ng-deep .content-wrapper {
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  ::ng-deep .luxury-table-container {
+    overflow-x: auto;
+  }
+
+  ::ng-deep .table-luxury {
+    display: block;
+    width: 100%;
+  }
+
+  ::ng-deep .table-luxury th,
+  ::ng-deep .table-luxury td {
+    white-space: nowrap;
+  }
+}

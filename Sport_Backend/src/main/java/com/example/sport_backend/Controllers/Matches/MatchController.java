@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,16 @@ public class MatchController {
 
 
         return matchService.generateSeasonMatches(league, LocalDate.now());
+    }
+    @GetMapping("/ask")
+    public ResponseEntity<String> queryRag(@RequestParam String question) {
+        try {
+            String response = matchService.runPythonScript(question);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error running Python script: " + e.getMessage());
+        }
     }
     @GetMapping("/get-matches-by-game-week")
     public ResponseEntity<Map<String, List<MatchResponseDto>>> getMatchesByGameWeek(@RequestParam int gameWeek) {

@@ -1,13 +1,14 @@
 <div class="navbar">
-<app-matches-navbar></app-matches-navbar>
+  <app-matches-navbar></app-matches-navbar>
 </div>
 
 <!-- Gameweek Slider Container -->
 <div class="gameweek-container">
   <app-gameweek-slider (gameWeekSelected)="onGameWeekSelected($event)"></app-gameweek-slider>
 </div>
+
 <!-- Matches Container -->
-<div *ngFor="let league of leagues" class="matches-container">
+<div *ngFor="let league of paginatedLeagues" class="matches-container">
   <div class="league-header">
     <img [src]="league.logourl" alt="{{ league.name }}" class="league-logo">
     <div class="league-info">
@@ -32,7 +33,14 @@
     </div>
   </div>
 </div>
-<div class ="footer">
-<app-matches-footer></app-matches-footer>
-  </div>
 
+<!-- Pagination Controls -->
+<div class="pagination-controls">
+  <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage * leaguesPerPage >= leagues.length">Next</button>
+</div>
+
+<div class="footer">
+  <app-matches-footer></app-matches-footer>
+</div>

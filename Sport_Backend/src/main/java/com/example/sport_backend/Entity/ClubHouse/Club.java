@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @Entity
+@Builder
 public class Club {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -22,11 +23,25 @@ public class Club {
     String location;
     String stadiumName;
     LocalDate foundationYear;
-    String clubLogo;
+    String leagues;
+
+
+
+    @Lob
+    byte[] imageUrl;
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY)
     @JsonIgnore
 
     List<Team>teams;
     @ManyToOne
     League league;
+
+
+    @OneToMany(mappedBy = "club")
+    @JsonIgnore
+    private List<Player> players;
+
+
+
+
 }

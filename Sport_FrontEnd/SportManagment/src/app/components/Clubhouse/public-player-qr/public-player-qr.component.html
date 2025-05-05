@@ -1,0 +1,28 @@
+<div *ngIf="player" class="container mt-5 text-center">
+    <h2 class="mb-4">{{ player.firstName }} {{ player.lastName }}</h2>
+  
+    <!-- 🎯 QR Code qui contient directement les infos -->
+    <h5>📜 Scan to See Player Information</h5>
+    <qrcode 
+    
+      [qrdata]="playerDataForQR" 
+      [width]="250" 
+      [errorCorrectionLevel]="'M'">
+    </qrcode>
+  
+    <!-- 🔵 Retour -->
+    <div class="mt-4">
+      <button routerLink="/public-club-players" class="btn btn-primary">
+        Back to Players
+      </button>
+    </div>
+
+
+    <div class="mt-4">
+        <button (click)="downloadQRCode()" class="btn btn-success mt-3">
+            Download QR Code
+          </button>
+          
+      </div>
+  </div>
+  

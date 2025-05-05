@@ -13,6 +13,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -57,6 +60,41 @@ public class matchService {
 
         return matches;
     }
+    public String runPythonScript(String question) throws Exception {
+        // Build the command to run the Python script
+        ProcessBuilder processBuilder = new ProcessBuilder(
+                "python",
+                "C:\\Users\\ASUS\\Desktop\\ragModel\\query.py",
+                question
+        );
+
+        processBuilder.redirectErrorStream(true); // Merge stdout and stderr
+        Process process = processBuilder.start();
+
+        // Read the output from the Python script
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        String lastLine = null; // To store the last meaningful output line
+
+        while ((line = reader.readLine()) != null) {
+            if (!line.trim().isEmpty()) {
+                lastLine = line; // Update lastLine whenever a non-empty line is read
+            }
+        }
+
+        int exitCode = process.waitFor();
+        if (exitCode != 0) {
+            throw new RuntimeException("Python script exited with code: " + exitCode);
+        }
+
+        if (lastLine == null) {
+            throw new RuntimeException("No valid response received from Python script.");
+        }
+
+        return lastLine.trim();
+    }
+
+
     public Map<String, List<MatchResponseDto>> getMatchesByGameWeek(int gameWeek) {
         String currentSeason = determineSeason(LocalDate.now()); // Determine current season dynamically
 

@@ -21,6 +21,7 @@ import { TrainingSessionFormComponent } from './components/training-session-form
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { TrainingSessionViewComponent } from './components/training-session-view/training-session-view.component';
+import { ExerciseDetailComponent } from './components/exercise-detail/exercise-detail.component';
 //---------------------------------------------//
 import { InjuryAddComponent } from './Health/injury-add/injury-add.component';
 import { InjuryEditComponent } from './Health/injury-edit/injury-edit.component';
@@ -66,14 +67,27 @@ import { MatchesNavbarComponent } from './matches/matches-navbar/matches-navbar.
 import { MatchesFooterComponent } from './matches/matches-footer/matches-footer.component';
 import { AdminSubstitutionComponent } from './matches/admin-substitution/admin-substitution.component';
 
+
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 
+//maram
+import { ClubFormComponent } from './components/Clubhouse/club-form/club-form.component';
+import { ClubListComponent } from './components/Clubhouse/club-list/club-list.component';
+import { PlayerFormComponent }from  './components/Clubhouse/player-form/player-form.component';
+import { TeamFormComponent }from  './components/Clubhouse/team-form/team-form.component';
+import { TeamListComponent }from  './components/Clubhouse/team-list/team-list.component';
+import { LeagueFormComponent }from  './components/Clubhouse/league-form/league-form.component';
+import { LeagueListComponent }from  './components/Clubhouse/league-list/league-list.component';
+import { PlayerListComponent }from  './components/Clubhouse/player-list/player-list.component';
+import { PlayerDetailComponent } from './components/Clubhouse/player-detail/player-detail.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 import { HealthDashboardComponent } from './Health/health-dashboard/health-dashboard.component';
+
 
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
@@ -90,7 +104,9 @@ import { TacticListComponent } from './tactics/tactic-list/tactic-list.component
 import { TacticFormComponent } from './tactics/tactic-form/tactic-form.component';
 import { TacticFolderComponent } from './tactics/tactic-folder/tactic-folder.component';
 import { CreateTacticDialogComponent } from './tactics/create-tactic-dialog/create-tactic-dialog.component';
+import { TacticBoardComponent } from './tactics/tactic-board/tactic-board.component';
 import { SessionDetailsComponent } from './AdvancedPlanning/session-details/session-details.component';
+
 import { PdfManagerComponent } from './Health/pdf-manager/pdf-manager.component';
 import { ComparePlayersComponent } from './Health/compare-players/compare-players.component';
 import { PlayerTerrainSelectorComponent } from './Health/player-terrain-selector/player-terrain-selector.component';
@@ -102,6 +118,19 @@ import * as echarts from 'echarts';
 
 
 
+
+
+import { AskQuestionComponent } from './matches/ask-question/ask-question.component';
+import { ClubDetailComponent } from './components/Clubhouse/club-detail/club-detail.component';
+import { PlayersByClubComponent } from './components/Clubhouse/players-by-club/players-by-club.component';
+import { PublicClubsComponent } from './components/Clubhouse/public-clubs/public-clubs.component';
+import { PublicClubPlayersComponent } from './components/Clubhouse/public-club-players/public-club-players.component';
+import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr/public-player-qr.component';
+
+import { AiChatComponent } from './tactics/ai-chat/ai-chat.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { TacticstatestiqueComponent } from './tactics/tacticstatestique/tacticstatestique.component';
+import { PlotlyModule } from 'angular-plotly.js';
 
 
 
@@ -131,7 +160,7 @@ import * as echarts from 'echarts';
     AddHealthrecordComponent,
     EditHealthrecordComponent,
     ShowHealthrecordComponent,
-
+    ExerciseDetailComponent,
     HeaderComponent,
     FooterComponent,
     HomeComponent,
@@ -165,14 +194,40 @@ import * as echarts from 'echarts';
 
 
     HealthDashboardComponent,
+
     PdfManagerComponent,
     ComparePlayersComponent,
     PlayerTerrainSelectorComponent,
     StatistiqueComponent,
 
+          AskQuestionComponent,
 
 
 
+
+
+    TacticBoardComponent,
+    SessionDetailsComponent,
+    HealthDashboardComponent,
+    AiChatComponent,
+    AdminDashboardComponent,
+
+    ClubFormComponent,
+    ClubListComponent,
+    LeagueFormComponent,
+    LeagueListComponent,
+    PlayerListComponent,
+    PlayerFormComponent,
+    TeamFormComponent,
+    TeamListComponent,
+    PlayerDetailComponent,
+    ClubDetailComponent,
+    PlayersByClubComponent,
+    PublicClubsComponent,
+    PublicClubPlayersComponent,
+    PublicPlayerQrComponent,
+    TacticstatestiqueComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -196,11 +251,16 @@ import * as echarts from 'echarts';
     MatProgressBarModule,
     MatDividerModule,
 
+
+    QRCodeModule ,
+
+
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
     MatFormFieldModule,
+
     FormsModule,
     ReactiveFormsModule,
     MatMenuModule,
@@ -209,6 +269,20 @@ import * as echarts from 'echarts';
     NgxEchartsModule.forRoot({ echarts })
 
 
+
+
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatInputModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatFormFieldModule, // ✅ Required for mat-form-field
+    MatSelectModule, // ✅ Required for mat-select
+    MatToolbarModule,
+    
 
 
   ],
