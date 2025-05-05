@@ -229,7 +229,7 @@ import { PlotlyModule } from 'angular-plotly.js';
     AiChatComponent,
     AdminDashboardComponent,
 
-    ExerciceDashboardComponent
+    ExerciceDashboardComponent,
 
     
 
@@ -248,7 +248,7 @@ import { PlotlyModule } from 'angular-plotly.js';
     PublicClubPlayersComponent,
     PublicPlayerQrComponent,
 
-    TacticstatestiqueComponent
+    TacticstatestiqueComponent,
     
   ],
   imports: [
