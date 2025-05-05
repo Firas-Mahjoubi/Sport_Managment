@@ -1,4 +1,4 @@
-<!-- 🌌 Arrière-plan avec une image -->
+<!-- 🌌 Background with an image -->
 <div style="
   position: fixed;
   top: 0;
@@ -10,36 +10,40 @@
   z-index: -1;">
 </div>
 
-<!-- 🏥 Conteneur principal -->
+<!-- 🏥 Main container -->
 <div class="recovery-plan-container">
   <mat-card *ngIf="recoveryPlan" class="recovery-card">
-    <mat-card-title>🏥 Plan de Récupération #{{ recoveryPlan.id }}</mat-card-title>
+    <mat-card-title>🏥 Recovery Plan #{{ recoveryPlan.id }}</mat-card-title>
     <mat-divider></mat-divider>
 
     <mat-card-content>
-      <p><strong>📝 Description :</strong> {{ recoveryPlan.planDescription }}</p>
-      <p><strong>📅 Date de début :</strong> {{ recoveryPlan.startDate | date: 'dd/MM/yyyy' }}</p>
-      <p><strong>📆 Date estimée de fin :</strong> {{ recoveryPlan.estimatedEndDate | date: 'dd/MM/yyyy' }}</p>
-      <p><strong>✅ Date réelle de fin :</strong> {{ recoveryPlan.actualEndDate ? (recoveryPlan.actualEndDate | date: 'dd/MM/yyyy') : 'Non renseignée' }}</p>
-      <p><strong>📊 Progression :</strong> {{ recoveryPlan.progress }}%</p>
+      <p><strong>📝 Description:</strong> {{ recoveryPlan.planDescription }}</p>
+      <p><strong>📅 Start Date:</strong> {{ recoveryPlan.startDate | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>📆 Estimated End Date:</strong> {{ recoveryPlan.estimatedEndDate | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>✅ Actual End Date:</strong> {{ recoveryPlan.actualEndDate ? (recoveryPlan.actualEndDate | date: 'dd/MM/yyyy') : 'Not provided' }}</p>
+      <p><strong>📊 Progress:</strong> {{ recoveryPlan.progress }}%</p>
 
-      <!-- 🔥 Barre de progression -->
+      <!-- 🔥 Progress bar -->
       <mat-progress-bar mode="determinate" [value]="recoveryPlan.progress"></mat-progress-bar>
 
-      <p><strong>📅 Fréquence des séances :</strong> {{ recoveryPlan.sessionFrequency }} / semaine</p>
-      <p><strong>⏳ Durée de chaque séance :</strong> {{ recoveryPlan.sessionDuration }} minutes</p>
-      <p><strong>🛠️ Type de plan :</strong> {{ recoveryPlan.planType }}</p>
-      <p><strong>🔄 Prochaine revue :</strong> {{ recoveryPlan.nextReviewDate | date: 'dd/MM/yyyy' }}</p>
-      <p><strong>📝 Ajustements :</strong> {{ recoveryPlan.adjustments }}</p>
-      <p><strong>📌 Statut :</strong> {{ recoveryPlan.planStatus }}</p>
-      <p><strong>⚠️ Blessure concernée :</strong> {{ recoveryPlan.injury.description }}</p>
+      <p><strong>📅 Session Frequency:</strong> {{ recoveryPlan.sessionFrequency }} / week</p>
+      <p><strong>⏳ Duration of Each Session:</strong> {{ recoveryPlan.sessionDuration }} minutes</p>
+      <p><strong>🛠️ Plan Type:</strong> {{ recoveryPlan.planType }}</p>
+      <p><strong>🔄 Next Review:</strong> {{ recoveryPlan.nextReviewDate | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>📝 Adjustments:</strong> {{ recoveryPlan.adjustments }}</p>
+      <p><strong>📌 Status:</strong> {{ recoveryPlan.planStatus }}</p>
+      <p><strong>⚠️ Concerned Injury:</strong> {{ recoveryPlan.injury.description }}</p>
     </mat-card-content>
 
+<<<<<<< HEAD
+    <!-- 🔙 Back Button -->
+=======
 
     <!-- 🔙 Bouton Retour -->
+>>>>>>> 42b8868a065243f10bd6715f5b2f2ec0259ab56b
     <mat-card-actions>
       <button mat-button color="primary" [routerLink]="['/list-recoveryplan', recoveryPlan.injury.player.id]">
-        ⬅️ Retour à la liste
+        ⬅️ Back to List
       </button>
     </mat-card-actions>
   </mat-card>

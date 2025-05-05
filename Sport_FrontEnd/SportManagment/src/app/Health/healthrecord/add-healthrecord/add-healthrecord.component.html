@@ -1,4 +1,4 @@
-<!-- 🌌 Arrière-plan avec une image -->
+<!-- 🌌 Background with an image -->
 <div style="
   position: fixed;
   top: 0;
@@ -10,15 +10,15 @@
   z-index: -1;">
 </div>
 
-<!-- 📦 Formulaire d'ajout -->
+<!-- 📦 Add Form -->
 <div class="form-container">
-  <h2 class="form-title">➕ Ajouter un Health Record</h2>
+  <h2 class="form-title">➕ Add a Health Record</h2>
 
   <form [formGroup]="addForm" (ngSubmit)="onSubmit()" class="healthrecord-form">
     <div class="form-row">
-      <!-- Joueur -->
+      <!-- Player -->
       <div class="form-group">
-        <label for="player">👤 Joueur :</label>
+        <label for="player">👤 Player:</label>
         <select class="form-control" formControlName="player" (change)="updateName()">
           <option *ngFor="let player of players" [ngValue]="player">
             {{ player.firstName }} {{ player.lastName }}
@@ -30,7 +30,7 @@
     <div class="form-row">
       <!-- Date -->
       <div class="form-group">
-        <label for="date">📅 Date :</label>
+        <label for="date">📅 Date:</label>
         <input type="date" class="form-control" formControlName="date">
       </div>
     </div>
@@ -38,7 +38,7 @@
     <div class="form-row">
       <!-- Fatigue -->
       <div class="form-group">
-        <label for="fatigue">😴 Fatigue :</label>
+        <label for="fatigue">😴 Fatigue:</label>
         <select class="form-control" formControlName="fatigue">
           <option *ngFor="let f of Fatigue | keyvalue" [value]="f.value">{{ f.value }}</option>
         </select>
@@ -46,9 +46,9 @@
     </div>
 
     <div class="form-row">
-      <!-- État Physique -->
+      <!-- Physical Condition -->
       <div class="form-group">
-        <label for="etatPhysique">💪 État Physique :</label>
+        <label for="etatPhysique">💪 Physical Condition:</label>
         <select class="form-control" formControlName="etatPhysique">
           <option *ngFor="let e of EtatPhysique | keyvalue" [value]="e.value">{{ e.value }}</option>
         </select>
@@ -56,9 +56,9 @@
     </div>
 
     <div class="form-row">
-      <!-- Douleurs Musculaires -->
+      <!-- Muscle Pain -->
       <div class="form-group">
-        <label for="douleursMusculaires">⚡ Douleurs Musculaires :</label>
+        <label for="douleursMusculaires">⚡ Muscle Pain:</label>
         <select class="form-control" formControlName="douleursMusculaires">
           <option *ngFor="let d of DouleursMusculaires | keyvalue" [value]="d.value">{{ d.value }}</option>
         </select>
@@ -66,9 +66,9 @@
     </div>
 
     <div class="form-row">
-      <!-- Intensité -->
+      <!-- Intensity -->
       <div class="form-group">
-        <label for="intensite">🔥 Intensité :</label>
+        <label for="intensite">🔥 Intensity:</label>
         <select class="form-control" formControlName="intensite">
           <option *ngFor="let i of Intensite | keyvalue" [value]="i.value">{{ i.value }}</option>
         </select>
@@ -76,27 +76,27 @@
     </div>
 
     <div class="form-row">
-      <!-- Statut du joueur -->
+      <!-- Player Status -->
       <div class="form-group">
-        <label for="statusJoueur">🚦 Statut du Joueur :</label>
+        <label for="statusJoueur">🚦 Player Status:</label>
         <select class="form-control" formControlName="statusJoueur">
           <option *ngFor="let s of StatusJoueur | keyvalue" [value]="s.value">{{ s.value }}</option>
         </select>
       </div>
     </div>
-    
-    <!-- Commentaire (pleine largeur) -->
+
+    <!-- Comment (full width) -->
     <div class="form-group">
-      <label for="commentaire">📝 Commentaire :</label>
+      <label for="commentaire">📝 Comment:</label>
       <textarea class="form-control" formControlName="commentaire"></textarea>
     </div>
 
-    <!-- Boutons -->
+    <!-- Buttons -->
     <div class="form-buttons">
       <button type="submit" [disabled]="addForm.invalid" class="submit-btn">
-        ✅ Ajouter
+        ✅ Add
       </button>
-      <a [routerLink]="['/health/health-records']" class="cancel-btn">❌ Annuler</a>
+      <a [routerLink]="['/health/health-records']" class="cancel-btn">❌ Cancel</a>
     </div>
   </form>
 </div>

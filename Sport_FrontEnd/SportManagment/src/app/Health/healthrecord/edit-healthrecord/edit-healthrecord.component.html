@@ -1,4 +1,4 @@
-<!-- 🌌 Arrière-plan avec une image -->
+<!-- 🌌 Background with an image -->
 <div style="
   position: fixed;
   top: 0;
@@ -11,11 +11,11 @@
 </div>
 
 <div class="form-container">
-  <h4 class="form-title">✏️ Modifier un Health Record</h4>
+  <h4 class="form-title">✏️ Edit a Health Record</h4>
   <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
     <div class="form-row">
       <div class="form-group">
-        <label>Nom</label>
+        <label>Name</label>
         <input type="text" class="form-control" formControlName="name">
       </div>
       <div class="form-group">
@@ -32,7 +32,7 @@
         </select>
       </div>
       <div class="form-group">
-        <label>État Physique</label>
+        <label>Physical Condition</label>
         <select class="form-control" formControlName="etatPhysique">
           <option *ngFor="let etat of etatPhysiqueEnum" [value]="etat">{{ etat }}</option>
         </select>
@@ -41,13 +41,13 @@
 
     <div class="form-row">
       <div class="form-group">
-        <label>Douleurs Musculaires</label>
+        <label>Muscle Pain</label>
         <select class="form-control" formControlName="douleursMusculaires">
           <option *ngFor="let douleur of douleursEnum" [value]="douleur">{{ douleur }}</option>
         </select>
       </div>
       <div class="form-group">
-        <label>Intensité</label>
+        <label>Intensity</label>
         <select class="form-control" formControlName="intensite">
           <option *ngFor="let intens of intensiteEnum" [value]="intens">{{ intens }}</option>
         </select>
@@ -55,22 +55,22 @@
     </div>
 
     <div class="form-group">
-      <label>Statut Joueur</label>
+      <label>Player Status</label>
       <select class="form-control" formControlName="statusJoueur">
-        <option value="ACTIF">Actif</option>
-        <option value="BLESSE">Blessé</option>
-        <option value="REPOS">Repos</option>
+        <option value="ACTIF">Active</option>
+        <option value="BLESSE">Injured</option>
+        <option value="REPOS">Rest</option>
       </select>
     </div>
 
     <div class="form-group">
-      <label>Commentaire</label>
+      <label>Comment</label>
       <textarea class="form-control" rows="3" formControlName="commentaire"></textarea>
     </div>
 
     <div class="form-buttons">
-      <button type="submit" class="submit-btn" [disabled]="editForm.invalid">💾 Enregistrer</button>
-      <a routerLink="/health/health-records" class="cancel-btn">❌ Annuler</a>
+      <button type="submit" class="submit-btn" [disabled]="editForm.invalid">💾 Save</button>
+      <a routerLink="/health/health-records" class="cancel-btn">❌ Cancel</a>
     </div>
   </form>
 </div>

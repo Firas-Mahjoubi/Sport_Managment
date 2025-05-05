@@ -1,4 +1,4 @@
-<!-- 🌌 Arrière-plan avec une image -->
+<!-- 🌌 Background with an image -->
 <div style="
   position: fixed;
   top: 0;
@@ -11,38 +11,38 @@
 </div>
 
 <div class="container mt-4">
-  <h2 class="text-center">🩹 Détails de la Blessure</h2>
+  <h2 class="text-center">🩹 Injury Details</h2>
 
-  <!-- 🔙 Bouton Retour vers la liste -->
+  <!-- 🔙 Back button to the list -->
   <div class="text-left">
     <a routerLink="/health/injury" class="btn btn-back">
-      ⬅️ Retour à la Liste des Blessures
+      ⬅️ Back to Injury List
     </a>
   </div>
 
-  <!-- 🕒 Affichage du chargement -->
+  <!-- 🕒 Loading display -->
   <div *ngIf="loading" class="text-center">
-    <p>⏳ Chargement...</p>
+    <p>⏳ Loading...</p>
   </div>
 
-  <!-- ❌ Erreur si la blessure n'existe pas -->
+  <!-- ❌ Error if injury doesn't exist -->
   <div *ngIf="errorMessage" class="alert alert-danger">
     {{ errorMessage }}
   </div>
 
-  <!-- ✅ Affichage des détails -->
+  <!-- ✅ Injury details display -->
   <div *ngIf="injury" class="card">
     <div class="card-body">
       <h5 class="card-title">Type: {{ injury.type }}</h5>
-      <p class="card-text"><strong>Joueur :</strong> {{ injury.player.firstName }} {{ injury.player.lastName }}</p>
-      <p class="card-text"><strong>Gravité :</strong> {{ injury.severity }}</p>
-      <p class="card-text"><strong>Status :</strong> {{ injury.status }}</p>
-      <p class="card-text"><strong>Description :</strong> {{ injury.description }}</p>
-      <p class="card-text"><strong>Date de la blessure :</strong> {{ injury.date | date:'dd/MM/yyyy' }}</p>
+      <p class="card-text"><strong>Player:</strong> {{ injury.player.firstName }} {{ injury.player.lastName }}</p>
+      <p class="card-text"><strong>Severity:</strong> {{ injury.severity }}</p>
+      <p class="card-text"><strong>Status:</strong> {{ injury.status }}</p>
+      <p class="card-text"><strong>Description:</strong> {{ injury.description }}</p>
+      <p class="card-text"><strong>Injury Date:</strong> {{ injury.date | date:'dd/MM/yyyy' }}</p>
 
-      <!-- 🔙 Bouton Retour au Dashboard Santé -->
+      <!-- 🔙 Back button to Health Dashboard -->
       <a routerLink="/health-dashboard" class="btn btn-primary">
-        🔙 Retour au Tableau de Santé
+        🔙 Back to Health Dashboard
       </a>
     </div>
   </div>

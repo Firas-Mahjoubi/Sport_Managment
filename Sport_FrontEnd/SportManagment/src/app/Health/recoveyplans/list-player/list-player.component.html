@@ -1,5 +1,9 @@
+<<<<<<< HEAD
+<!-- 🌌 Background with an image -->
+=======
 <!-- 🌌 Arrière-plan avec une image -->
 
+>>>>>>> 42b8868a065243f10bd6715f5b2f2ec0259ab56b
 <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: url('assets/player.jpg') no-repeat center center/cover; filter: brightness(0.4); z-index: -1;"></div>
 
 <div style="
@@ -15,28 +19,27 @@
 
 
 <div class="container player-container mt-4">
-  <h2 class="title">⚽ Liste des Joueurs</h2>
-  <!-- Champ de recherche -->
+  <h2 class="title">⚽ Players List</h2>
+  <!-- Search field -->
 
-<input
-type="text"
-class="form-control mb-3"
-placeholder="🔍 Rechercher par nom de famille"
-[(ngModel)]="searchTerm"
-(input)="filterPlayers()"
-/>
+  <input
+    type="text"
+    class="form-control mb-3"
+    placeholder="🔍 Search by last name"
+    [(ngModel)]="searchTerm"
+    (input)="filterPlayers()"
+  />
 
-
-  <!-- Table des joueurs -->
+  <!-- Players table -->
   <table class="table table-striped table-hover player-table">
     <thead>
       <tr>
         <th>#</th>
-        <th>👤 Nom</th>
-        <th>🏆 Prénom</th>
+        <th>👤 Last Name</th>
+        <th>🏆 First Name</th>
         <th>📌 Position</th>
-        <th>🎽 Numéro</th>
-        <th>✅ Sélection</th>
+        <th>🎽 Number</th>
+        <th>✅ Select</th>
       </tr>
     </thead>
     <tbody>
@@ -48,14 +51,14 @@ placeholder="🔍 Rechercher par nom de famille"
         <td>{{ player.playerNumber }}</td>
         <td>
           <button class="btn btn-select btn-sm" (click)="selectPlayer(player)">
-            ✅ Sélectionner
+            ✅ Select
           </button>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <!-- 🔮 Pagination Futuriste -->
+  <!-- 🔮 Futuristic Pagination -->
   <div *ngIf="totalPages > 1" class="futuristic-pagination mt-4">
     <button
       class="page-button prev"
@@ -65,7 +68,7 @@ placeholder="🔍 Rechercher par nom de famille"
     </button>
 
     <div class="page-indicators">
-      <!-- Toujours afficher la première page -->
+      <!-- Always display the first page -->
       <span
         class="page-circle"
         [class.active]="currentPage === 1"
@@ -73,10 +76,10 @@ placeholder="🔍 Rechercher par nom de famille"
         1
       </span>
 
-      <!-- Afficher ... si currentPage > 4 -->
+      <!-- Display ... if currentPage > 4 -->
       <span *ngIf="currentPage > 4" class="dots">...</span>
 
-      <!-- Pages dynamiques du milieu -->
+      <!-- Dynamic middle pages -->
       <span
         *ngFor="let page of visiblePagesNumbers()"
         class="page-circle"
@@ -85,10 +88,10 @@ placeholder="🔍 Rechercher par nom de famille"
         {{ page }}
       </span>
 
-      <!-- Afficher ... si currentPage < totalPages - 3 -->
+      <!-- Display ... if currentPage < totalPages - 3 -->
       <span *ngIf="currentPage < totalPages - 3" class="dots">...</span>
 
-      <!-- Toujours afficher la dernière page -->
+      <!-- Always display the last page -->
       <span
         class="page-circle"
         [class.active]="currentPage === totalPages"
@@ -106,15 +109,15 @@ placeholder="🔍 Rechercher par nom de famille"
   </div>
 </div>
 
-<!-- 🔘 Boutons en bas -->
+<!-- 🔘 Bottom buttons -->
 <div class="bottom-buttons">
-  <!-- 🔙 Bouton Retour au Tableau de Santé -->
+  <!-- 🔙 Back to Health Dashboard button -->
   <a [routerLink]="['/health-dashboard']" class="btn-back-health">
-    ⬅️ Retour au Tableau de Santé
+    ⬅️ Back to Health Dashboard
   </a>
 
-  <!-- 🏥 Bouton Voir Recovery Plan -->
+  <!-- 🏥 View Recovery Plan button -->
   <button class="btn btn-recovery" (click)="viewRecoveryPlans()">
-    🏥 Voir Recovery Plan
+    🏥 View Recovery Plan
   </button>
 </div>
