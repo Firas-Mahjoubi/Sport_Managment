@@ -229,7 +229,7 @@ import { PlotlyModule } from 'angular-plotly.js';
     AiChatComponent,
     AdminDashboardComponent,
 
-    ExerciceDashboardComponent
+    ExerciceDashboardComponent,
 
     
 

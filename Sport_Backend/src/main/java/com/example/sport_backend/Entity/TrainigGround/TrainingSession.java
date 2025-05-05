@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import javax.annotation.Nullable;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,11 +33,9 @@ public class TrainingSession {
     @NotBlank(message = "Le nom est obligatoire")
     @Size(min = 3, message = "Le nom doit contenir au moins 3 caractères")
     String name;
-    @NotBlank()
     String intensity;  // Low, Medium, High
-    @NotBlank()
+    @Nullable
     String category;   // Attacking, Tactical, Physical
-    @NotBlank()
     LocalDate date;
     @NotBlank()
     String startTime;  // Change from LocalDateTime to String
@@ -63,7 +62,7 @@ public class TrainingSession {
             inverseJoinColumns = @JoinColumn(name = "player_id")
     )
     private Set<Player> players = new HashSet<>();
-
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "training_session_exercises",
