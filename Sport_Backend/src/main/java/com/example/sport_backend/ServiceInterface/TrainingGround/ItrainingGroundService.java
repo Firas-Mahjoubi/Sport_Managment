@@ -6,6 +6,7 @@ import com.example.sport_backend.Entity.TrainigGround.Tag;
 import com.example.sport_backend.Entity.TrainigGround.TrainingSession;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public interface ItrainingGroundService {
@@ -41,5 +42,6 @@ public interface ItrainingGroundService {
 
     public void deleteMedia(Long id);
     Exercice findById(Long id);
+    public Map<String, Object> getDashboardStats();
 
 }

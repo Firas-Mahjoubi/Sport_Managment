@@ -1,33 +1,54 @@
-<div class="row">
-    <div class="col-xl-3 col-lg-4 col-md-6 mb-4" *ngFor="let player of players">
-      <div class="card card-hover shadow-lg h-100 border-0">
-        <div class="card-image-container position-relative overflow-hidden">
-          <img [src]="'http://localhost:8088/players/image/' + player.id" 
-               alt="Player Image" 
-               class="card-img-top img-fluid hover-zoom"
-               style="height: 300px; object-fit: cover; transition: transform 0.3s ease;">
-          <div class="position-absolute bottom-0 start-0 end-0 p-3 gradient-overlay"></div>
-        </div>
-        <div class="card-body text-center p-4 bg-dark text-light">
-          <div class="mb-3">
-            <span class="badge bg-primary fs-6 fw-normal position-absolute top-0 start-50 translate-middle px-4 py-2" 
-                  style="margin-top: -20px; letter-spacing: 1px;">
-              #{{ player.playerNumber }}
-            </span>
-          </div>
-          <h3 class="card-title mb-2 fs-2 fw-bold text-uppercase" style="letter-spacing: 1px;">
-            {{ player.firstName }} 
-            <span class="d-block">{{ player.lastName }}</span>
-          </h3>
-          <p class="card-text fs-5 text-primary mb-3 fw-medium">{{ player.position }}</p>
-          
-        </div>
-        <button class="btn btn-info" [routerLink]="['/public-player-qr', player.id]">
-            View QR Code
-          </button>
-          
-          
+<app-header></app-header>
+<br>
+<br>
+
+<div class="container mt-5 py-5">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h2 class="text-center fw-bold text-uppercase">Nos Joueurs</h2>
+      <div class="text-center mb-4">
+        <div class="divider-custom"></div>
       </div>
     </div>
   </div>
   
+  <div class="players-grid">
+    <div class="grid-item" *ngFor="let player of players; let i = index" [ngStyle]="{'animation-delay': i * 0.1 + 's'}">
+      <div class="card-player">
+        <div class="card-inner">
+          <!-- Image du joueur -->
+          <div class="player-media">
+            <img 
+              [src]="'http://localhost:8088/players/image/' + player.id"
+              alt="{{ player.firstName }} {{ player.lastName }}"
+              class="player-image"
+              (error)="player.imageUrl = 'assets/default-player.png'">
+          </div>
+
+          <!-- Corps de la carte -->
+          <div class="card-body">
+            <!-- Badge numéro -->
+            <div class="player-number">#{{ player.playerNumber }}</div>
+
+            <!-- Nom -->
+            <h5 class="player-name">
+              {{ player.firstName }} {{ player.lastName }}
+            </h5>
+
+            <!-- Poste -->
+            <div class="player-position">
+              {{ player.position }}
+            </div>
+
+            <!-- Bouton QR Code -->
+            <button class="qr-button" [routerLink]="['/public-player-qr', player.id]">
+              <span>View QR Code</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

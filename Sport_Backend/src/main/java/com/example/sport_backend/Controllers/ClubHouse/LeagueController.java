@@ -15,7 +15,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 
 public class LeagueController {
-   @Autowired
+    @Autowired
     private ILeagueService iLeagueService;
 
 
