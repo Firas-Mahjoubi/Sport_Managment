@@ -1,4 +1,4 @@
-<!-- 🌌 Arrière-plan avec une image -->
+<!-- 🌌 Background with an image -->
 <div style="
   position: fixed;
   top: 0;
@@ -10,20 +10,20 @@
   z-index: -1;">
 </div>
 
-<!-- 📦 Conteneur du formulaire -->
+<!-- 📦 Form container -->
 <div class="recovery-plan-add-container">
-  <h2 class="form-title">➕ Créer un Plan de Récupération</h2>
+  <h2 class="form-title">➕ Create a Recovery Plan</h2>
 
   <form [formGroup]="recoveryPlanForm" (ngSubmit)="submit()" class="recovery-plan-form">
     <div>
-      <label>Blessure concernée:</label>
+      <label>Injury concerned:</label>
       <select formControlName="injuryId" required class="form-control">
         <option *ngFor="let injury of injuries" [value]="injury.id">
           {{ injury.description }} ({{ injury.date }})
         </option>
       </select>
       <small *ngIf="recoveryPlanForm.controls['injuryId'].invalid && recoveryPlanForm.controls['injuryId'].touched" class="text-danger">
-        ⚠ Sélectionnez une blessure.
+        ⚠ Select an injury.
       </small>
     </div>
 
@@ -31,58 +31,58 @@
       <label>Description:</label>
       <input type="text" formControlName="planDescription" required class="form-control">
       <small *ngIf="recoveryPlanForm.controls['planDescription'].invalid && recoveryPlanForm.controls['planDescription'].touched" class="text-danger">
-        ⚠ Ce champ est requis.
+        ⚠ This field is required.
       </small>
     </div>
 
     <div>
-      <label>Début:</label>
+      <label>Start:</label>
       <input type="date" formControlName="startDate" (change)="validateDates()" required class="form-control">
     </div>
 
     <div>
-      <label>Fin estimée:</label>
+      <label>Estimated End:</label>
       <input type="date" formControlName="estimatedEndDate" (change)="validateDates()" required class="form-control">
       <small *ngIf="dateError" class="text-danger">
-        ⚠ La date de fin ne peut pas être avant la date de début.
+        ⚠ The end date cannot be before the start date.
       </small>
     </div>
 
     <div>
-      <label>Progression (%):</label>
+      <label>Progress (%):</label>
       <input type="range" formControlName="progress" min="0" max="100" step="1" (input)="updateProgress($event)" class="form-control">
       <span>{{ progressValue }}%</span>
     </div>
 
     <div>
-      <label>Fréquence des séances (par semaine):</label>
+      <label>Session Frequency (per week):</label>
       <input type="number" formControlName="sessionFrequency" min="1" required class="form-control">
     </div>
 
     <div>
-      <label>Durée d'une séance (minutes):</label>
+      <label>Session Duration (minutes):</label>
       <input type="number" formControlName="sessionDuration" min="1" required class="form-control">
     </div>
 
     <div>
-      <label>Type de Plan:</label>
+      <label>Plan Type:</label>
       <select formControlName="planType" required class="form-control">
         <option *ngFor="let type of planTypes" [value]="type">{{ type }}</option>
       </select>
     </div>
 
     <div>
-      <label>Date de la prochaine révision:</label>
+      <label>Next Review Date:</label>
       <input type="date" formControlName="nextReviewDate" required class="form-control">
     </div>
 
     <div>
-      <label>Ajustements:</label>
+      <label>Adjustments:</label>
       <textarea formControlName="adjustments" rows="3" class="form-control"></textarea>
     </div>
 
     <div>
-      <label>Statut:</label>
+      <label>Status:</label>
       <select formControlName="planStatus" required class="form-control">
         <option *ngFor="let status of planStatuses" [value]="status">{{ status }}</option>
       </select>
@@ -90,10 +90,10 @@
 
     <div class="form-buttons">
       <button type="submit" [disabled]="recoveryPlanForm.invalid || dateError" class="submit-btn">
-        ✅ Enregistrer
+        ✅ Save
       </button>
       <a [routerLink]="['/list-player']" class="cancel-btn">
-        ❌ Annuler
+        ❌ Cancel
       </a>
     </div>
   </form>

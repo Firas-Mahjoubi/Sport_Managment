@@ -1,6 +1,6 @@
 <!-- Grand Titre -->
 <div class="main-title">
-  <h1>  -------------------------------------------Gestion Médicale d'Équipe-----------------------------------------------</h1>
+  <h1>  -----------------------------------------Team Medical Management---------------------------------------------</h1>
 </div>
 
 <!-- 1) Note Globale -->
@@ -14,7 +14,7 @@
 <div class="futuristic-field">
   <div class="goal left-goal"></div>
   <div class="goal right-goal"></div>
-  <button (click)="resetFormation()" class="reset-btn">Réinitialiser</button>
+  <button (click)="resetFormation()" class="reset-btn">Reset</button>
 
   <!-- Slots joueurs -->
   <div *ngFor="let pos of positions"
@@ -133,6 +133,6 @@
 <!-- Bouton retour -->
 <div class="bottom-buttons">
   <a [routerLink]="['/health-dashboard']" class="btn-back-health">
-    ⬅️ Retour au Tableau de Santé
+    ⬅️ Back to Health Dashboard
   </a>
 </div>

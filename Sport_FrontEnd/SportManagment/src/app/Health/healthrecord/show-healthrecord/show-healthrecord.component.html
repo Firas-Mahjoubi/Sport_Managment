@@ -11,18 +11,18 @@
 </div>
 
 <div class="container mt-4">
-  <h2 class="text-center">🏥 Détails du Dossier de Santé</h2>
+  <h2 class="text-center">🏥 Health Record Details</h2>
 
   <!-- 🔙 Bouton Retour -->
   <div class="text-left">
     <a routerLink="/health/health-records" class="btn btn-back">
-      ⬅️ Retour à la Liste des Dossiers de Santé
+      ⬅️ Back to Health Records List
     </a>
   </div>
 
   <!-- ⏳ Affichage du chargement -->
   <div *ngIf="loading" class="text-center">
-    <p>⏳ Chargement...</p>
+    <p>⏳ Loading...</p>
   </div>
 
   <!-- ❌ Erreur si le health record n'existe pas -->
@@ -33,18 +33,18 @@
   <!-- ✅ Affichage des détails -->
   <div *ngIf="healthRecord" class="card">
     <div class="card-body">
-      <h5 class="card-title">Nom: {{ healthRecord.name }}</h5>
-      <p class="card-text"><strong>Date :</strong> {{ healthRecord.date | date:'dd/MM/yyyy' }}</p>
-      <p class="card-text"><strong>Fatigue :</strong> {{ healthRecord.fatigue }}</p>
-      <p class="card-text"><strong>État Physique :</strong> {{ healthRecord.etatPhysique }}</p>
-      <p class="card-text"><strong>Douleurs Musculaires :</strong> {{ healthRecord.douleursMusculaires }}</p>
-      <p class="card-text"><strong>Intensité :</strong> {{ healthRecord.intensite }}</p>
-      <p class="card-text"><strong>Statut du Joueur :</strong> {{ healthRecord.statusJoueur }}</p>
-      <p class="card-text"><strong>Commentaire :</strong> {{ healthRecord.commentaire }}</p>
+      <h5 class="card-title">Name: {{ healthRecord.name }}</h5>
+      <p class="card-text"><strong>Date:</strong> {{ healthRecord.date | date:'dd/MM/yyyy' }}</p>
+      <p class="card-text"><strong>Fatigue:</strong> {{ healthRecord.fatigue }}</p>
+      <p class="card-text"><strong>Physical Condition:</strong> {{ healthRecord.etatPhysique }}</p>
+      <p class="card-text"><strong>Muscle Pain:</strong> {{ healthRecord.douleursMusculaires }}</p>
+      <p class="card-text"><strong>Intensity:</strong> {{ healthRecord.intensite }}</p>
+      <p class="card-text"><strong>Player Status:</strong> {{ healthRecord.statusJoueur }}</p>
+      <p class="card-text"><strong>Comment:</strong> {{ healthRecord.commentaire }}</p>
 
       <!-- 🔙 Bouton Retour au Dashboard Santé -->
       <a routerLink="/health-dashboard" class="btn btn-primary">
-        🔙 Retour au Tableau de Santé
+        🔙 Back to Health Dashboard
       </a>
     </div>
   </div>

@@ -1,4 +1,4 @@
-<!-- 🌌 Arrière-plan -->
+<!-- 🌌 Background -->
 <div style="
   position: fixed;
   top: 0;
@@ -10,15 +10,15 @@
   z-index: -1;">
 </div>
 
-<!-- 📦 Conteneur du formulaire -->
+<!-- 📦 Form container -->
 <div class="form-container">
-  <h4 class="form-title">✏️ Modifier le Plan de Récupération</h4>
+  <h4 class="form-title">✏️ Edit Recovery Plan</h4>
 
   <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="recovery-plan-form">
 
-    <!-- 🔹 Blessure concernée -->
+    <!-- 🔹 Injury concerned -->
     <div class="form-group">
-      <label>Blessure concernée:</label>
+      <label>Injury concerned:</label>
       <input type="text" [value]="editForm.get('injuryId')?.value" disabled class="form-control">
     </div>
 
@@ -29,70 +29,66 @@
     </div>
 
     <div class="form-row">
-      <!-- 🔹 Date de début -->
+      <!-- 🔹 Start date -->
       <div class="form-group">
-        <label>Début:</label>
+        <label>Start:</label>
         <input type="date" formControlName="startDate" (change)="validateDates()" required class="form-control">
       </div>
 
-      <!-- 🔹 Date de fin estimée -->
+      <!-- 🔹 Estimated end date -->
       <div class="form-group">
-        <label>Fin estimée:</label>
+        <label>Estimated End:</label>
         <input type="date" formControlName="estimatedEndDate" (change)="validateDates()" required class="form-control">
         <small *ngIf="dateError" class="text-danger">
-          ⚠ La date de fin ne peut pas être avant la date de début.
+          ⚠ The end date cannot be before the start date.
         </small>
       </div>
     </div>
 
-    <!-- 🔹 Progression -->
+    <!-- 🔹 Progress -->
     <div class="form-group">
-      <label>Progression (%):</label>
+      <label>Progress (%):</label>
       <input type="range" formControlName="progress" min="0" max="100" step="1" (input)="updateProgress($event)" class="form-control">
       <span>{{ progressValue }}%</span>
     </div>
 
     <div class="form-row">
-      <!-- 🔹 Fréquence des séances -->
+      <!-- 🔹 Session frequency -->
       <div class="form-group">
-        <label>Fréquence des séances:</label>
+        <label>Session Frequency:</label>
         <input type="number" formControlName="sessionFrequency" min="1" required class="form-control">
       </div>
 
-      <!-- 🔹 Durée d'une séance -->
+      <!-- 🔹 Session duration -->
       <div class="form-group">
-        <label>Durée d'une séance (min):</label>
+        <label>Session Duration (min):</label>
         <input type="number" formControlName="sessionDuration" min="1" required class="form-control">
       </div>
     </div>
 
     <div class="form-row">
-      <!-- 🔹 Type de Plan -->
-
-
-      <!-- 🔹 Prochaine révision -->
+      <!-- 🔹 Next review -->
       <div class="form-group">
-        <label>Prochaine révision:</label>
+        <label>Next Review:</label>
         <input type="date" formControlName="nextReviewDate" required class="form-control">
       </div>
     </div>
 
-    <!-- 🔹 Ajustements -->
+    <!-- 🔹 Adjustments -->
     <div class="form-group">
-      <label>Ajustements:</label>
+      <label>Adjustments:</label>
       <textarea formControlName="adjustments" rows="3" class="form-control"></textarea>
     </div>
 
-    <!-- 🔹 Statut -->
-    
+    <!-- 🔹 Status -->
 
-    <!-- 🔘 Boutons -->
+    <!-- 🔘 Buttons -->
     <div class="form-buttons">
       <button type="submit" [disabled]="editForm.invalid || dateError" class="submit-btn">
-        ✅ Mettre à jour
+        ✅ Update
       </button>
       <a routerLink="/list-recoveryplan/:playerId" class="cancel-btn">
-        ❌ Annuler
+        ❌ Cancel
       </a>
     </div>
 

@@ -1,10 +1,10 @@
-<!-- 🌌 Arrière-plan avec une image en HTML -->
+<!-- 🌌 Background with an image in HTML -->
 <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: url('/assets/health.jpg') no-repeat center center/cover; filter: brightness(0.4); z-index: -1;"></div>
 
 <div class="container healthrecord-container mt-4">
-  <h2 class="title">🏥 Liste des Health Records</h2>
+  <h2 class="title">🏥 Health Records List</h2>
 
-  <!-- 🔍 Filtrage des records -->
+  <!-- 🔍 Filtering records -->
   <div class="row mb-3">
     <div class="col-md-6">
       <input
@@ -12,12 +12,12 @@
         class="form-control search-input"
         [(ngModel)]="searchTerm"
         (input)="filterRecords()"
-        placeholder="🔎 Rechercher...">
+        placeholder="🔎 Search...">
     </div>
 
     <div class="col-md-4">
       <select class="form-select player-select" [(ngModel)]="selectedPlayer" (change)="filterRecords()">
-        <option value="all">👥 Tous les joueurs</option>
+        <option value="all">👥 All Players</option>
         <option *ngFor="let player of players" [value]="player.id">
           {{ player.firstName }} {{ player.lastName }}
         </option>
@@ -25,17 +25,17 @@
     </div>
   </div>
 
-  <!-- 🏥 Tableau des Health Records -->
+  <!-- 🏥 Health Records Table -->
   <table class="table table-striped table-hover healthrecord-table">
     <thead>
       <tr>
-        <th>👤 Joueur</th>
+        <th>👤 Player</th>
         <th>📅 Date</th>
         <th>⚡ Fatigue</th>
-        <th>🏃‍♂️ État Physique</th>
-        <th>🤕 Douleurs</th>
-        <th>🔥 Intensité</th>
-        <th>📌 Statut</th>
+        <th>🏃‍♂️ Physical Condition</th>
+        <th>🤕 Pain</th>
+        <th>🔥 Intensity</th>
+        <th>📌 Status</th>
         <th>⚙️ Actions</th>
       </tr>
     </thead>
@@ -44,29 +44,30 @@
         <td>{{ record.name }}</td>
         <td>{{ record.date | date:'dd/MM/yyyy' }}</td>
         <td>
-          <span class="badge bg-success" *ngIf="record.fatigue === 'FAIBLE'">Faible</span>
-          <span class="badge bg-warning" *ngIf="record.fatigue === 'MOYENNE'">Moyenne</span>
-          <span class="badge bg-danger" *ngIf="record.fatigue === 'ELEVEE'">Élevée</span>
+          <span class="badge bg-success" *ngIf="record.fatigue === 'FAIBLE'">Low</span>
+          <span class="badge bg-warning" *ngIf="record.fatigue === 'MOYENNE'">Medium</span>
+          <span class="badge bg-danger" *ngIf="record.fatigue === 'ELEVEE'">High</span>
         </td>
         <td>{{ record.etatPhysique }}</td>
         <td>{{ record.douleursMusculaires }}</td>
         <td>{{ record.intensite }}</td>
         <td>
-          <span class="badge bg-success" *ngIf="record.statusJoueur === 'ACTIF'">Actif</span>
-          <span class="badge bg-danger" *ngIf="record.statusJoueur === 'BLESSE'">Blessé</span>
-          <span class="badge bg-secondary" *ngIf="record.statusJoueur === 'REPOS'">Repos</span>
+          <span class="badge bg-success" *ngIf="record.statusJoueur === 'ACTIF'">Active</span>
+          <span class="badge bg-danger" *ngIf="record.statusJoueur === 'BLESSE'">Injured</span>
+          <span class="badge bg-secondary" *ngIf="record.statusJoueur === 'REPOS'">Rest</span>
         </td>
         <td>
-          <a [routerLink]="['/health/health-records/show', record.id]" class="btn btn-view btn-sm">🔍 Voir</a>
-          <a [routerLink]="['/health/health-records/edit', record.id]" class="btn btn-edit btn-sm">✏️ Modifier</a>
-          <button (click)="deleteHealthRecord(record.id)" class="btn btn-delete btn-sm">🗑️ Supprimer</button>
+          <a [routerLink]="['/health/health-records/show', record.id]" class="btn btn-view btn-sm">🔍 View</a>
+          <a [routerLink]="['/health/health-records/edit', record.id]" class="btn btn-edit btn-sm">✏️ Edit</a>
+          <button (click)="deleteHealthRecord(record.id)" class="btn btn-delete btn-sm">🗑️ Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
-<!-- 🔮 Pagination Futuriste Avancée pour Health Record -->
+
+<!-- 🔮 Advanced Futuristic Pagination for Health Record -->
 <div *ngIf="totalPages > 1" class="futuristic-pagination mt-4">
-  <!-- Bouton Précédent -->
+  <!-- Previous Button -->
   <button
     class="page-button prev"
     [disabled]="currentPage === 1"
@@ -75,7 +76,7 @@
   </button>
 
   <div class="page-indicators">
-    <!-- Toujours afficher la première page -->
+    <!-- Always show first page -->
     <span
       class="page-circle"
       [class.active]="currentPage === 1"
@@ -83,10 +84,10 @@
       1
     </span>
 
-    <!-- Afficher ... si currentPage > 4 -->
+    <!-- Show ... if currentPage > 4 -->
     <span *ngIf="currentPage > 4" class="dots">...</span>
 
-    <!-- Pages dynamiques du milieu -->
+    <!-- Middle dynamic pages -->
     <span
       *ngFor="let page of visiblePages()"
       class="page-circle"
@@ -95,10 +96,10 @@
       {{ page }}
     </span>
 
-    <!-- Afficher ... si currentPage < totalPages - 3 -->
+    <!-- Show ... if currentPage < totalPages - 3 -->
     <span *ngIf="currentPage < totalPages - 3" class="dots">...</span>
 
-    <!-- Toujours afficher la dernière page -->
+    <!-- Always show last page -->
     <span
       class="page-circle"
       [class.active]="currentPage === totalPages"
@@ -107,7 +108,7 @@
     </span>
   </div>
 
-  <!-- Bouton Suivant -->
+  <!-- Next Button -->
   <button
     class="page-button next"
     [disabled]="currentPage === totalPages"
@@ -116,10 +117,14 @@
   </button>
 </div>
 
-
 </div>
 
-<!-- 🔙 Bouton Retour au Tableau de Santé -->
+<!-- 🔙 Back Button to Health Dashboard -->
 <a [routerLink]="['/health-dashboard']" class="btn-back-health">
-  ⬅️ Retour au Tableau de Santé
+  ⬅️ Back to Health Dashboard
+</a>
+
+<!-- ➕ Add Health Record Button -->
+<a [routerLink]="['/health/health-records/add']" class="btn-add-health">
+  ➕ Add a Health Record
 </a>
