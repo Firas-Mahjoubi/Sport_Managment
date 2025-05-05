@@ -81,6 +81,7 @@ import {StatsChartsComponent} from "./matches/stats-charts/stats-charts.componen
 
 
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { ExerciceDashboardComponent } from './exercice-dashboard/exercice-dashboard.component';
 
 //maram
 import { ClubFormComponent } from './components/Clubhouse/club-form/club-form.component';
@@ -138,6 +139,8 @@ const routes: Routes = [
     //---------------------Backoffice-training-Ground ------------------------//
 
     { path: 'dashex', component: BackofficeAddExerciceComponent },
+
+    { path: 'dash-ex', component: ExerciceDashboardComponent },
     
   //---------------------------------------------//
 

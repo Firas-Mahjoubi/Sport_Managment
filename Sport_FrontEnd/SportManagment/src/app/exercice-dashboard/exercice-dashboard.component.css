@@ -1,0 +1,88 @@
+/* Main Content Layout */
+.main-content {
+    margin-left: 300px; /* Adjust if your sidebar width is different */
+    padding: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    min-height: 100vh;
+    margin-top: 70px;   
+  }
+  
+  /* Stats Cards Grid */
+  .stats-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  
+  .card {
+    flex: 1;
+    min-width: 220px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .card h4 {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    font-size: 26px;
+    font-weight: bold;
+    color: #2e7d32;
+    margin: 0;
+  }
+  
+  /* Section Titles */
+  h3 {
+    margin-top: 40px;
+    margin-bottom: 16px;
+    font-size: 22px;
+    color: #333;
+  }
+  
+  /* List Styles */
+  .exercise-list,
+  .upcoming-sessions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .exercise-list li,
+  .upcoming-sessions li {
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    font-size: 16px;
+  }
+  
+  .exercise-list strong,
+  .upcoming-sessions strong {
+    color: #1976d2;
+  }
+  
+  /* Chart */
+  canvas#statsChart {
+    max-width: 600px;
+    margin: 0 auto;
+    display: block;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+  }
+  

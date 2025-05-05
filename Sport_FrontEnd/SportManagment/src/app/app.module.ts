@@ -139,6 +139,7 @@ import { PublicPlayerQrComponent } from './components/Clubhouse/public-player-qr
 import { AiChatComponent } from './tactics/ai-chat/ai-chat.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
+import { ExerciceDashboardComponent } from './exercice-dashboard/exercice-dashboard.component';
 
 import { TacticstatestiqueComponent } from './tactics/tacticstatestique/tacticstatestique.component';
 import { PlotlyModule } from 'angular-plotly.js';
@@ -227,6 +228,9 @@ import { PlotlyModule } from 'angular-plotly.js';
     HealthDashboardComponent,
     AiChatComponent,
     AdminDashboardComponent,
+
+    ExerciceDashboardComponent
+
     
 
     ClubFormComponent,
